@@ -1,0 +1,9 @@
+/dts-v1/;
+/plugin/;
+
+#include "monaco-idp-v2.1.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Monaco Aon IDP V2.1";
+	qcom,board-id = <0x020122 0x0>;
+};

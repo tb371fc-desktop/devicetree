@@ -1,0 +1,122 @@
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/clock/qcom,gcc-monaco.h>
+#include <dt-bindings/interconnect/qcom,monaco.h>
+#include <dt-bindings/regulator/qcom,rpm-smd-regulator.h>
+#include "camera/monaco-camera.dtsi"
+#include "camera/monaco-camera-sensor-idp.dtsi"
+
+#include "monaco-idp-v1-common.dtsi"
+#include "monaco-audio-overlay.dtsi"
+#include <dt-bindings/iio/qcom,spmi-adc5-gen3-pm5100.h>
+#include <dt-bindings/iio/qti_power_supply_iio.h>
+
+&soc {
+	msm_vidc: qcom,vidc@5a00000 {
+		status = "ok";
+		qcom,allowed-clock-rates = <133330000>;
+	};
+};
+
+&sdhc_1 {
+	status = "ok";
+
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&sdc1_on>;
+	pinctrl-1 = <&sdc1_off>;
+
+	vdd-supply = <&L25A>;
+	qcom,vdd-voltage-level = <3080000 3080000>;
+	qcom,vdd-current-level = <0 250000>;
+
+	vdd-io-supply = <&L15A>;
+	qcom,vdd-io-always-on;
+	qcom,vdd-io-lpm-sup;
+	qcom,vdd-io-voltage-level = <1800000 1800000>;
+	qcom,vdd-io-current-level = <0 250000>;
+};
+
+&soc {
+	bluetooth: bt_wcn3990 {
+		compatible = "qcom,wcn3990";
+		//qcom,bt-sw-ctrl-gpio = <&tlmm 69 GPIO_ACTIVE_HIGH>;
+		qcom,bt-vdd-io-supply = <&L17A>;  /* IO */
+		qcom,bt-vdd-core-supply = <&L13A>; /* RFA */
+		qcom,bt-vdd-pa-supply = <&L26A>; /* CH0 */
+		qcom,bt-vdd-xtal-supply = <&L14A>; /* XO */
+
+		qcom,bt-vdd-io-config = <1800000 1800000 1 0>;
+		qcom,bt-vdd-core-config = <1304000 1304000 1 0>;
+		qcom,bt-vdd-pa-config = <3000000 3304000 1 0>;
+		qcom,bt-vdd-xtal-config = <1800000 1800000 1 0>;
+		status = "ok";
+	};
+};
+
+&qupv3_se5_4uart {
+	status = "ok";
+};
+
+&soc {
+	monaco_batterydata: qcom,battery-data {
+		qcom,batt-id-range-pct = <15>;
+		#include "qbg-battery-profile-alium-860-89032-0000-3600mAh.dtsi"
+		#include "qbg-battery-profile-qrd-zwd-520mAh.dtsi"
+	};
+};
+
+&pm5100_qbg {
+	status = "ok";
+	qcom,battery-data = <&monaco_batterydata>;
+	#io-channel-cells = <1>;
+	io-channels = <&pm5100_adc PM5100_ADC5_GEN3_BATT_THM_100K_PU>,
+		      <&pm5100_adc PM5100_ADC5_GEN3_BAT_ID_100K_PU>;
+	io-channel-names = "batt-temp",
+			   "batt-id";
+	qcom,vbat-cutoff-mv = <3100>;
+	qcom,ibat-cutoff-ma = <150>;
+	qcom,vph-min-mv = <2500>;
+	qcom,iterm-ma = <100>;
+};
+
+&pm5100_charger {
+	#io-channel-cells = <1>;
+	io-channels = <&pm5100_adc PM5100_ADC5_GEN3_USB_SNS_V_16>,
+		      <&pm5100_adc PM5100_ADC5_GEN3_USB_IN_I>,
+		      <&pm5100_adc PM5100_ADC5_GEN3_CHG_TEMP>,
+		      <&pm5100_adc PM5100_ADC5_GEN3_DIE_TEMP>,
+		      <&pm5100_adc PM5100_ADC5_GEN3_VPH_PWR>,
+		      <&pm5100_qbg PSY_IIO_RESISTANCE_ID>,
+		      <&pm5100_qbg PSY_IIO_VOLTAGE_NOW>,
+		      <&pm5100_qbg PSY_IIO_TEMP>,
+		      <&pm5100_qbg PSY_IIO_CAPACITY>,
+		      <&pm5100_qbg PSY_IIO_VOLTAGE_OCV>,
+		      <&pm5100_qbg PSY_IIO_VOLTAGE_AVG>,
+		      <&pm5100_qbg PSY_IIO_DEBUG_BATTERY>,
+		      <&pm5100_qbg PSY_IIO_CURRENT_NOW>,
+		      <&pm5100_qbg PSY_IIO_VOLTAGE_MAX>,
+		      <&pm5100_qbg PSY_IIO_CHARGE_FULL>,
+		      <&pm5100_qbg PSY_IIO_CHARGE_COUNTER>,
+		      <&pm5100_qbg PSY_IIO_CYCLE_COUNT>,
+		      <&pm5100_qbg PSY_IIO_CHARGE_FULL_DESIGN>,
+		      <&pm5100_qbg PSY_IIO_TIME_TO_FULL_NOW>;
+
+	io-channel-names = "usb_in_voltage",
+			   "usb_in_current",
+			   "chg_temp",
+			   "die_temp",
+			   "vph_voltage",
+			   "resistance_id",
+			   "voltage_now",
+			   "temp",
+			   "capacity",
+			   "voltage_ocv",
+			   "voltage_avg",
+			   "debug_battery",
+			   "current_now",
+			   "voltage_max",
+			   "charge_full",
+			   "charge_counter",
+			   "cycle_count",
+			   "charge_full_design",
+			   "time_to_full_now";
+};

@@ -1,0 +1,11 @@
+/dts-v1/;
+
+#include "qrb2210-rb1.dtsi"
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include "qrb2210-rb1-idp.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. QRB2210 RB1";
+	compatible = "qcom,scuba-iot";
+	qcom,board-id = <34 0>;
+};
