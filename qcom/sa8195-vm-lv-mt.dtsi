@@ -16,21 +16,21 @@
 #include "display/quin-vm-display-lv.dtsi"
 
 &usb0 {
-	status = "ok";
+	status = "disabled";
 };
 
 &usb2_phy0 {
-	status = "ok";
+	status = "disabled";
 };
 
 &qupv3_se13_4uart {
-	status = "ok";
+	status = "disabled";
 };
 
 &pcie0_msi {
-	status = "ok";
+	status = "disabled";
 };
 
 &pcie0 {
-	status = "ok";
+	status = "disabled";
 };

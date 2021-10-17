@@ -179,8 +179,7 @@
 		"Digital Mic3", "MIC BIAS1",
 		"IN1_HPHL", "HPHL_OUT",
 		"IN2_HPHR", "HPHR_OUT",
-		"SpkrRight WSA_IN", "EAR",
-		"SpkrLeft WSA_IN", "LO",
+		"SpkrMono WSA_IN", "LO",
 		"TX SWR_INPUT", "VA_TX_SWR_CLK",
 		"TX SWR_INPUT", "ADC1_OUTPUT",
 		"TX SWR_INPUT", "ADC2_OUTPUT",
@@ -214,13 +213,9 @@
 	nvmem-cells = <&adsp_variant>;
 	nvmem-cell-names = "adsp_variant";
 	asoc-codec  = <&stub_codec>, <&bolero>,
-			<&rouleur_codec>, <&wsa881x_i2c_e>,
-			<&wsa881x_i2c_f>;
+			<&rouleur_codec>, <&wsa881x_i2c_e>;
 	asoc-codec-names = "msm-stub-codec.1", "bolero_codec",
-			"rouleur_codec", "wsa-codec0",
-			"wsa-codec1";
-	qcom,wsa-max-devs = <2>;
-	qcom,codec-max-aux-devs = <0>;
+			"rouleur_codec", "wsa-codec0";
 	qcom,msm_audio_ssr_devs = <&audio_apr>, <&q6core>, <&bolero>,
 				  <&lpi_tlmm>;
 };
@@ -233,27 +228,12 @@
 		clocks = <&wsa881x_analog_clk 0>;
 		qcom,wsa-analog-clk-gpio = <&wsa881x_analog_clk_gpio>;
 		qcom,wsa-analog-reset-gpio = <&wsa881x_analog_reset_gpio>;
-		qcom,wsa-prefix = "SpkrLeft";
+		qcom,wsa-prefix = "SpkrMono";
 	};
 
 	wsa881x_i2c_44: wsa881x-i2c-codec@44 {
 		compatible = "qcom,wsa881x-i2c-codec";
 		reg = <0x044>;
-	};
-
-	wsa881x_i2c_f: wsa881x-i2c-codec@f {
-		compatible = "qcom,wsa881x-i2c-codec";
-		reg = <0x0f>;
-		clock-names = "wsa_mclk";
-		clocks = <&wsa881x_analog_clk 0>;
-		qcom,wsa-analog-clk-gpio = <&wsa881x_analog_clk_gpio>;
-		qcom,wsa-analog-reset-gpio = <&wsa881x_analog_reset_gpio>;
-		qcom,wsa-prefix = "SpkrRight";
-	};
-
-	wsa881x_i2c_45: wsa881x-i2c-codec@45 {
-		compatible = "qcom,wsa881x-i2c-codec";
-		reg = <0x045>;
 	};
 };
 

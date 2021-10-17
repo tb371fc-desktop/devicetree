@@ -2,8 +2,10 @@ qcom,qbg-battery-profile-qrd-zwd-520mAh {
 	qcom,battery-type = "QRD_ZWD_520MAH";
 	qcom,batt-id-kohm = <33>;
 	qcom,capacity = <503>;
+	qcom,battery-beta = <4250>;
+	qcom,battery-therm-kohm = <100>;
 	qcom,max-voltage-uv = <4350000>;
-	qcom,fastchg-current-ma = <520>;
+	qcom,fastchg-current-ma = <1040>;
 	qcom,checksum = <4295719>; /*@5, 0.005V, 4% */
 	qcom,soh-range = <0 100>;
 	/* Nominal_Impedance in 10nohm @ SOC 50% 25C* 0:fresh cell, 1: aged cell */
@@ -16,6 +18,23 @@ qcom,qbg-battery-profile-qrd-zwd-520mAh {
 	qcom,recharge-vflt-delta =<50>;
 	/* Termination current (in mA) in recharge */
 	qcom,recharge-iterm-ma = <10>;
+
+	qcom,jeita-fcc-ranges = <0  150 156000
+				151 420 1040000
+				421 450 520000>;
+
+	qcom,jeita-fv-ranges = <0   150 4300000
+				151 420 4350000
+				421 450 4300000>;
+
+	/* COOL = 15 DegC, WARM = 42 DegC */
+	qcom,jeita-soft-thresholds = <0x27c1 0x1444>;
+	/* COLD = 0 DegC, HOT = 45 DegC */
+	qcom,jeita-hard-thresholds = <0x3257 0x128c>;
+	/* COOL = 18 DegC, WARM = 39 DegC*/
+	qcom,jeita-soft-hys-thresholds = <0x256e 0x161b>;
+	qcom,jeita-soft-fcc-ua = <156000 520000>;
+	qcom,jeita-soft-fv-uv = <4300000 4300000>;
 
 	qcom,bp-c-table-0 {
 		qcom,temperature = <25>;

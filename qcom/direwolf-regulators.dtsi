@@ -777,3 +777,17 @@
 		regulator-enable-ramp-delay = <5>;
 	};
 };
+
+&qupv3_se12_i2c {
+	VDD_GFX_LEVEL: max20411-regulator@39 {
+		reg = <0x39>;
+		compatible = "maxim,max20411";
+		regulator-name = "max20411-vout";
+		regulator-min-microvolt = <500000>;
+		regulator-max-microvolt = <968750>;
+		proxy-supply = <&VDD_GFX_LEVEL>;
+		qcom,proxy-consumer-enable;
+		qcom,proxy-consumer-voltage = <825000 968750>;
+		status = "disabled";
+	};
+};

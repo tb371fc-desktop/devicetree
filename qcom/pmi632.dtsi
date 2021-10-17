@@ -319,7 +319,7 @@
 		};
 
 		pmi632_qg: qpnp,qg {
-			compatible = "qcom,qpnp-qg";
+			compatible = "qcom,pmi632-qg";
 			#address-cells = <1>;
 			#size-cells = <0>;
 

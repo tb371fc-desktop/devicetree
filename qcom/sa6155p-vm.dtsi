@@ -5,7 +5,7 @@
 / {
 	model = "Qualcomm Technologies, Inc. SA6155P Virtual Machine";
 	qcom,msm-name = "SA6155P";
-	qcom,msm-id = <377 0x0>;
+	qcom,msm-id = <377 0x10000>;
 
 	aliases {
 		hsuart0 = &qupv3_se7_4uart;

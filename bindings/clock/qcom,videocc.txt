@@ -15,6 +15,7 @@ Required properties :
 			"qcom,sm6150-videocc"
 			"qcom,sa6155-videocc"
 			"qcom,direwolf-videocc"
+			"qcom,direwolf-videocc-v2"
 
 - reg : shall contain base register location and length
 - #clock-cells : from common clock binding, shall contain 1.

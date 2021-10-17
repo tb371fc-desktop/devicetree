@@ -13,4 +13,5 @@
 	asoc-codec-names = "cc_codec";
 	qcom,quat-mi2s-gpios = <&cc_quat_mi2s_gpios>;
 	qcom,pri-mi2s-gpios = <&cc_pri_mi2s_gpios>;
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>;
 };

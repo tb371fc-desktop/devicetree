@@ -482,6 +482,36 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 
+			qcom,speed-bin = <91>;
+
+			qcom,initial-pwrlevel = <0>;
+			qcom,ca-target-pwrlevel = <0>;
+
+			/* SVS */
+			qcom,gpu-pwrlevel@0 {
+				reg = <0>;
+				qcom,gpu-freq = <435000000>;
+				qcom,level = <RPMH_REGULATOR_LEVEL_SVS>;
+				qcom,bus-freq = <7>;
+				qcom,bus-min = <5>;
+				qcom,bus-max = <8>;
+			};
+
+			/* XO */
+			qcom,gpu-pwrlevel@1 {
+				reg = <1>;
+				qcom,gpu-freq = <0>;
+				qcom,level = <RPMH_REGULATOR_LEVEL_RETENTION>;
+				qcom,bus-freq = <0>;
+				qcom,bus-min = <0>;
+				qcom,bus-max = <0>;
+			};
+		};
+
+		qcom,gpu-pwrlevels-6 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
 			qcom,speed-bin = <73>;
 
 			qcom,initial-pwrlevel = <0>;
@@ -515,3 +545,125 @@
 };
 
 #include "sa6155-audio.dtsi"
+
+&thermal_zones {
+	cpuss-0-step {
+		trips {
+			cpu45-config {
+				temperature = <115000>;
+			};
+		};
+	};
+
+	cpuss-1-step {
+		trips {
+			cpu23-config {
+				temperature = <115000>;
+			};
+		};
+	};
+
+	cpuss-2-step {
+		trips {
+			cpu01-config {
+				temperature = <115000>;
+			};
+		};
+	};
+
+	cpu-1-0-step {
+		trips {
+			cpu6-0-config {
+				temperature = <115000>;
+			};
+		};
+	};
+
+	cpu-1-1-step {
+		trips {
+			cpu6-1-config {
+				temperature = <115000>;
+			};
+		};
+	};
+
+	cpu-1-2-step {
+		trips {
+			cpu7-0-config {
+				temperature = <115000>;
+			};
+		};
+	};
+
+	cpu-1-3-step {
+		trips {
+			cpu7-1-config {
+				temperature = <115000>;
+			};
+		};
+	};
+
+	gpu-step {
+		trips {
+			gpu-trip {
+				temperature = <105000>;
+			};
+
+			gpu-cx-mon {
+				temperature = <110000>;
+			};
+		};
+	};
+
+	q6-hvx-step {
+		trips {
+			q6-hvx-trip1 {
+				temperature = <105000>;
+			};
+
+			q6-hvx-cx-mon {
+				temperature = <110000>;
+			};
+		};
+	};
+
+	mdm-core-step {
+		trips {
+			mdm-core-cx-mon {
+				temperature = <110000>;
+			};
+		};
+	};
+
+	camera-step {
+		trips {
+			camera-cx-mon {
+				temperature = <110000>;
+			};
+		};
+	};
+
+	wlan-step {
+		trips {
+			wlan-cx-mon {
+				temperature = <110000>;
+			};
+		};
+	};
+
+	display-step {
+		trips {
+			display-cx-mon {
+				temperature = <110000>;
+			};
+		};
+	};
+
+	video-step {
+		trips {
+			video-cx-mon {
+				temperature = <110000>;
+			};
+		};
+	};
+};

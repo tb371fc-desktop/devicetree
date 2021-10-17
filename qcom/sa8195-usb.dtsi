@@ -57,6 +57,7 @@
 			snps,has-lpm-erratum;
 			snps,hird-threshold = /bits/ 8 <0x0>;
 			snps,is-utmi-l1-suspend;
+			snps,usb2-gadget-lpm-disable;
 			maximum-speed = "high-speed";
 			dr_mode = "otg";
 		};
@@ -174,6 +175,7 @@
 			snps,has-lpm-erratum;
 			snps,hird-threshold = /bits/ 8 <0x0>;
 			snps,is-utmi-l1-suspend;
+			snps,usb2-gadget-lpm-disable;
 			maximum-speed = "high-speed";
 			dr_mode = "otg";
 		};
@@ -248,7 +250,7 @@
 
 		dwc3@a400000 {
 			compatible = "snps,dwc3";
-			reg = <0x0a400000 0xcd00>;
+			reg = <0x0a400000 0xd941>;
 			interrupts = <GIC_SPI 654 IRQ_TYPE_LEVEL_HIGH>;
 			usb-phy = <&usb2_phy2>, <&usb_qmp_phy0>,
 				<&usb2_phy3>, <&usb_qmp_phy1>;
@@ -261,7 +263,8 @@
 			snps,dis-u1-entry-quirk;
 			snps,dis-u2-entry-quirk;
 			snps,dis_u3_susphy_quirk;
-			maximum-speed = "super-speed-plus";
+			snps,force-gen1;
+			maximum-speed = "super-speed";
 			dr_mode = "host";
 		};
 	};

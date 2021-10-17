@@ -26,3 +26,23 @@
 				"misc", "vbmeta";
 	};
 };
+
+&usb2 {
+	status = "okay";
+};
+
+&usb2_phy2 {
+	status = "okay";
+};
+
+&usb2_phy3 {
+	status = "okay";
+};
+
+&usb2_phy4 {
+	status = "okay";
+};
+
+&usb2_phy5 {
+	status = "okay";
+};

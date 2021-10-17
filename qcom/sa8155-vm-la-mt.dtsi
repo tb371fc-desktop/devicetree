@@ -12,14 +12,34 @@
 		compatible = "qcom,blkdev-rename";
 		actual-dev = "vda", "vdb", "vdc",
 				"vdd", "vde", "vdf",
-				"vdg", "vdh", "vdj";
+				"vdg", "vdh", "vdi";
 		rename-dev = "system", "userdata", "vendor",
 				"persist", "modem", "bluetooth",
 				"misc", "vbmeta";
-		rename-dev-ab = "super", "userdata", "vbmeta_system_a",
+		rename-dev-ab = "super", "userdata", "metadata",
 				"persist", "modem_a", "bluetooth_a",
-				"misc", "vbmeta_a", "metadata";
+				"misc", "vbmeta_a", "vbmeta_b";
 	};
 
 	/delete-node/ cpus;
+};
+
+&usb0 {
+	status = "ok";
+};
+
+&usb2_phy0 {
+	status = "ok";
+};
+
+&qupv3_se13_4uart {
+	status = "ok";
+};
+
+&pcie0_msi {
+	status = "ok";
+};
+
+&pcie0 {
+	status = "ok";
 };

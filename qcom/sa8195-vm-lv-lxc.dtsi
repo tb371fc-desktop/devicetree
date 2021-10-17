@@ -7,9 +7,25 @@
 		reg = <0x0 0xa0000000 0x0 0x20000000>;
 		label = "pmem_shared_mem";
 	};
+
+	secure_display_memory: secure_display_region {
+		compatible = "shared-dma-pool";
+		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
+		no-map;
+		alignment = <0x0 0x400000>;
+		size = <0x0 0x0a000000>;
+	};
 };
 
 #include "display/quin-vm-display-lxc.dtsi"
+
+&msm_ion {
+	qcom,ion-heap@10 {
+		reg = <ION_SECURE_DISPLAY_HEAP_ID>;
+		memory-region = <&secure_display_memory>;
+		qcom,ion-heap-type = "HYP_CMA";
+	};
+};
 
 &usb0 {
 	status = "ok";

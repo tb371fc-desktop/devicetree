@@ -191,3 +191,23 @@
 &usb3 {
 	extcon = <&usb3_extcon>;
 };
+
+&qnand_1 {
+	status = "ok";
+};
+
+&spi_6 {
+	status = "okay";
+};
+
+&i2c_5 {
+	status = "okay";
+};
+
+&blsp1_uart4_hs {
+	status = "okay";
+};
+
+&blsp1_uart1_hs {
+	status = "okay";
+};

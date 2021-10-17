@@ -167,14 +167,14 @@
 		#size-cells = <2>;
 		ranges;
 
-		hyp_region: hyp_region@45700000 {
+		deepsleep_region: deepsleep_region@45700000 {
 			no-map;
-			reg = <0x0 0x45700000 0x0 0x600000>;
+			reg = <0x0 0x45700000 0x0 0x400000>;
 		};
 
-		rpmbackup_mem: rpmbackup_mem@45D00000 {
+		hyp_region: hyp_region@45B00000 {
 			no-map;
-			reg = <0x0 0x45D00000 0x0 0x100000>;
+			reg = <0x0 0x45B00000 0x0 0x300000>;
 		};
 
 		xbl_aop_mem: xbl_aop_mem@45e00000 {
@@ -192,44 +192,49 @@
 			reg = <0x0 0x46000000 0x0 0x200000>;
 		};
 
+		wlan_msa_mem: wlan_msa_region@46200000 {
+			no-map;
+			reg = <0x0 0x46200000 0x0 0x100000>;
+		};
+
 		pil_modem_mem: modem_region@4ab00000 {
 			no-map;
-			reg = <0x0 0x4ab00000 0x0 0x6900000>;
+			reg = <0x0 0x4ab00000 0x0 0x5E00000>;
 		};
 
-		pil_video_mem: pil_video_region@51400000 {
+		pil_video_mem: pil_video_region@50900000 {
 			no-map;
-			reg = <0x0 0x51400000 0x0 0x500000>;
+			reg = <0x0 0x50900000 0x0 0x500000>;
 		};
 
-		wlan_msa_mem: wlan_msa_region@51900000 {
+		pil_adsp_mem: adsp_regions@50E00000 {
 			no-map;
-			reg = <0x0 0x51900000 0x0 0x100000>;
+			reg = <0x0 0x50E00000 0x0 0x1900000>;
 		};
 
-		pil_adsp_mem: adsp_regions@51a00000 {
+		pil_ipa_fw_mem: ips_fw_region@52700000 {
 			no-map;
-			reg = <0x0 0x51a00000 0x0 0x1c00000>;
+			reg = <0x0 0x52700000 0x0 0x10000>;
 		};
 
-		pil_ipa_fw_mem: ips_fw_region@53600000 {
+		pil_ipa_gsi_mem: ipa_gsi_region@52710000 {
 			no-map;
-			reg = <0x0 0x53600000 0x0 0x10000>;
+			reg = <0x0 0x52710000 0x0 0x5000>;
 		};
 
-		pil_ipa_gsi_mem: ipa_gsi_region@53610000 {
+		pil_gpu_mem: gpu_region@52715000 {
 			no-map;
-			reg = <0x0 0x53610000 0x0 0x5000>;
+			reg = <0x0 0x52715000 0x0 0x2000>;
 		};
 
-		pil_gpu_mem: gpu_region@53615000 {
+		stats_region: stats_region@60000000 {
 			no-map;
-			reg = <0x0 0x53615000 0x0 0x2000>;
+			reg = <0x0 0x60000000 0x0 0x100000>;
 		};
 
-		removed_region: removed_region@60000000 {
+		removed_region: removed_region@60100000 {
 			no-map;
-			reg = <0x0 0x60000000 0x0 0x1f00000>;
+			reg = <0x0 0x60100000 0x0 0x1E00000>;
 		};
 
 		dump_mem: mem_dump_region {
@@ -1450,14 +1455,12 @@ qcom,msm-adsprpc-mem {
 			qcom,glinkpkt-edge = "slate";
 			qcom,glinkpkt-ch-name = "display-ctrl";
 			qcom,glinkpkt-dev-name = "glink_pkt_slate_display_ctrl";
-			qcom,glinkpkt-enable-ch-close;
 		};
 
 		qcom,glinkpkt-slate-display-data {
 			qcom,glinkpkt-edge = "slate";
 			qcom,glinkpkt-ch-name = "display-data";
 			qcom,glinkpkt-dev-name = "glink_pkt_slate_display_data";
-			qcom,glinkpkt-enable-ch-close;
 		};
 
 		qcom,glinkpkt-slate-ssc-usta {
@@ -1613,6 +1616,12 @@ qcom,msm-adsprpc-mem {
 			qcom,glinkpkt-dev-name = "slate_adsp_data";
 			qcom,glinkpkt-fragmented-read;
 		};
+
+		qcom,glinkpkt-haptics-offload-ctrl {
+			qcom,glinkpkt-edge = "slate";
+			qcom,glinkpkt-ch-name = "slate-haptics-offload";
+			qcom,glinkpkt-dev-name = "glinkpkt_slate_haptics_offload";
+		};
 	};
 
 	qcom,smp2p-modem {
@@ -1677,22 +1686,41 @@ qcom,msm-adsprpc-mem {
 			#interrupt-cells = <2>;
 		};
 
-		sleepstate_smp2p_out: sleepstate-out {
+		sleepstate_smp2p_out_sensor: sleepstate-out-sensor {
 			qcom,entry-name = "sleepstate";
 			#qcom,smem-state-cells = <1>;
 		};
 
-		sleepstate_smp2p_in: qcom,sleepstate-in {
+		sleepstate_smp2p_in_sensor: qcom,sleepstate-in-sensor {
 			qcom,entry-name = "sleepstate_see";
+			interrupt-controller;
+			#interrupt-cells = <2>;
+		};
+
+		sleepstate_smp2p_out_ult: sleepstate-out-ult {
+			qcom,entry-name = "sleepstate_ult";
+			#qcom,smem-state-cells = <1>;
+		};
+
+		sleepstate_smp2p_in_ult: qcom,sleepstate-in-ult {
+			qcom,entry-name = "sleepstate_ult_in";
 			interrupt-controller;
 			#interrupt-cells = <2>;
 		};
 	};
 
-	qcom,smp2p_sleepstate {
+	qcom,smp2p_sleepstate_sensor {
 		compatible = "qcom,smp2p-sleepstate";
-		qcom,smem-states = <&sleepstate_smp2p_out 0>;
-		interrupt-parent = <&sleepstate_smp2p_in>;
+		qcom,smem-states = <&sleepstate_smp2p_out_sensor 0>;
+		interrupt-parent = <&sleepstate_smp2p_in_sensor>;
+		interrupts = <0 0>;
+		interrupt-names = "smp2p-sleepstate-in";
+	};
+
+	qcom,smp2p_sleepstate_ult {
+		compatible = "qcom,smp2p-sleepstate";
+		qcom,smem-states = <&sleepstate_smp2p_out_ult 0>;
+		interrupt-parent = <&sleepstate_smp2p_in_ult>;
 		interrupts = <0 0>;
 		interrupt-names = "smp2p-sleepstate-in";
 	};
@@ -2002,7 +2030,7 @@ qcom,msm-adsprpc-mem {
 
 		/* SVS2 */
 		qcom,svs2 =
-		<80000 2720000 80000 560000 80000 120000>;
+		<80000 2160000 80000 560000 80000 120000>;
 
 		/* SVS */
 		qcom,svs =
@@ -2159,7 +2187,7 @@ qcom,msm-adsprpc-mem {
 		parade,core {
 			parade,name = "pt_core";
 
-			parade,irq_gpio = <&tlmm 13 0x2008>;
+			parade,irq_gpio = <&tlmm 13 0x00>;
 			parade,rst_gpio = <&tlmm 12 0x00>;
 			parade,hid_desc_register = <1>;
 			/*
@@ -2171,7 +2199,7 @@ qcom,msm-adsprpc-mem {
 			 * PT_CORE_FLAG_SKIP_RUNTIME = 0x20
 			 * PT_CORE_FLAG_SKIP_RESUME = 0x40
 			 */
-			parade,flags = <4>;
+			parade,flags = <6>;
 			/* PT_CORE_EWG_NONE */
 			parade,easy_wakeup_gesture = <0>;
 			/* 0:AUTO 1:PIP1_ONLY 2:PIP2_CAPABLE*/

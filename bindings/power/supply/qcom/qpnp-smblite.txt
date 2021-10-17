@@ -197,6 +197,12 @@ Charger specific properties:
   Definition: Specifies the step size of each step of FCC stepper algorithm.
 		If left unspecified, the default value is 100mA.
 
+- qcom,fc-step-start-ua
+  Usage:     optional
+  Value type: <u32>
+  Definition: Specifies the initial current of FCC stepper algorithm.
+		If left unspecified, the default value is 500mA.
+
 - qcom,concurrency-mode-enable
  Usage:      optional
  Value type: bool
@@ -208,6 +214,16 @@ Charger specific properties:
  Value type: bool
  Definition: Boolean flag to determine if FG is running on different processor.
 		Its supported only on PM5100, By default this feature is disabled.
+
+- qcom,float-option
+  Usage:      optional
+  Value type: <u32>
+  Definition: Configures how the charger behaves when a float charger is
+	      detected by APSD.
+	        1 - Treat as a DCP.
+	        2 - Treat as a SDP.
+	        3 - Disable charging.
+	        4 - Suspend USB input.
 
 =================================================
 Second Level Nodes - SMBLITE Charger Peripherals

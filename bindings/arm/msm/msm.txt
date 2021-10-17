@@ -116,6 +116,9 @@ SoCs:
 - DIREWOLF
   compatible = "qcom,direwolf"
 
+- LEMANS
+  compatible = "qcom,lemans"
+
 Generic board variants:
 
 - CDP device:
@@ -314,3 +317,6 @@ compatible = "qcom,direwolf-ivi-adp-star"
 compatible = "qcom,direwolf-adas"
 compatible = "qcom,direwolf-adas-rumi"
 compatible = "qcom,direwolf-adas-adp-star"
+compatible = "qcom,lemans-rumi"
+compatible = "qcom,lemans-adp-air"
+compatible = "qcom,lemans-adp-star"

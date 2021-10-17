@@ -1,1 +1,11 @@
 #include "monaco.dtsi"
+
+/ {
+	reserved-memory {
+		/delete-node/deepsleep_region@45700000;
+	};
+};
+
+&removed_region {
+	reg = <0x0 0x61000000 0x0 0x0B00000>;
+};

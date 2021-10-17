@@ -847,7 +847,7 @@
 			clock-output-names = "scc_pll_out_aux";
 			clocks = <&scc_pll>;
 			clock-mult = <1>;
-			clock-div = <2>;
+			clock-div = <3>;
 			#clock-cells = <0>;
 		};
 	};
@@ -947,6 +947,46 @@
 	mem_dump {
 		compatible = "qcom,mem-dump";
 		memory-region = <&dump_mem>;
+
+		c0_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x0>;
+		};
+
+		c100_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x1>;
+		};
+
+		c200_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x2>;
+		};
+
+		c300_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x3>;
+		};
+
+		c400_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x4>;
+		};
+
+		c500_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x5>;
+		};
+
+		c600_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x6>;
+		};
+
+		c700_context {
+			qcom,dump-size = <0x800>;
+			qcom,dump-id = <0x7>;
+		};
 
 		rpmh {
 			qcom,dump-size = <0x2000000>;
@@ -1538,9 +1578,6 @@
 		status = "disabled";
 	};
 
-	thermal_zones: thermal-zones {
-	};
-
 	ufshc_mem: ufshc@1d84000 {
 		compatible = "qcom,ufshc";
 		reg = <0x1d84000 0x3000>,
@@ -2063,6 +2100,11 @@
 		 };
 	};
 
+	qcom,hlos_sleep_state {
+		compatible = "qcom,smp2p-hlos_sleep_state";
+		qcom,smem-states = <&hlos_sleep_state_out 0>;
+	};
+
 	qcom,smp2p-adsp {
 		compatible = "qcom,smp2p";
 		qcom,smem = <443>, <429>;
@@ -2101,6 +2143,11 @@
 			qcom,entry-name = "rdbg";
 			interrupt-controller;
 			#interrupt-cells = <2>;
+		};
+
+		hlos_sleep_state_out: hlos_sleep_state-out {
+			qcom,entry-name = "hlos_sleep_state";
+			#qcom,smem-state-cells = <1>;
 		};
 	};
 

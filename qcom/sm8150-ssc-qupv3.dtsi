@@ -10,6 +10,10 @@
 		qcom,msm-bus,vectors-bus-ids =
 			<MASTER_SENSORS_AHB SLAVE_EBI1>;
 		iommus = <&apps_smmu 0x4e3 0x0>;
+		qcom,subsys-name = "slpi";
+		clock-names = "corex", "core2x";
+		clocks = <&scc SCC_QUPV3_CORE_CLK>,
+			<&scc SCC_QUPV3_2XCORE_CLK>;
 		qcom,iommu-dma-addr-pool = <0x40000000 0xc0000000>;
 		qcom,iommu-dma = "fastmap";
 		status = "disabled";

@@ -34,3 +34,7 @@
 &pcie0 {
 	status = "ok";
 };
+
+&cnss_pcie {
+	status = "disabled";
+};

@@ -164,11 +164,24 @@
 		nvmem-cells = <&restart_reason>;
 		nvmem-cell-names = "restart_reason";
 	};
+
+	monaco_batterydata: qcom,battery-data {
+		qcom,batt-id-range-pct = <15>;
+		#include "qbg-battery-profile-alium-860-89032-0000-3600mAh.dtsi"
+		#include "qbg-battery-profile-qrd-zwd-520mAh.dtsi"
+	};
 };
 
 &pm5100_charger {
 	status = "okay";
+	qcom,battery-data = <&monaco_batterydata>;
 	dpdm-supply = <&usb2_phy0>;
 	qcom,auto-recharge-soc = <98>;
 	qcom,suspend-input-on-debug-batt;
+	qcom,chg-term-src = <1>;
+	qcom,chg-term-current-ma = <(-20)>;
+	qcom,fcc-stepping-enable;
+	qcom,fcc-step-delay-ms = <100>;
+	qcom,fcc-step-size-ua = <100000>;
+	qcom,fcc-step-start-ua = <500000>;
 };

@@ -27,6 +27,19 @@
 		compatible = "qcom,slate-daemon";
 	};
 
+	qcom,audio-cc-ipc-platform {
+		compatible = "qcom,audio-cc-ipc-platform";
+		cc_codec: qcom,cc-codec {
+			compatible = "qcom,cc-codec";
+			qcom,service-id = <3>;
+			qcom,channel-name = "custom_cc_apps";
+			qcom,src-domain-id = <3>;
+			qcom,dst-domain-id = <6>;
+			qcom,src-port = <3>;
+			qcom,dst-port = <0x0F>;
+		};
+	};
+
 	qcom,glink-slatecom-xprt-slate {
 		compatible = "qcom,glink-slatecom-xprt";
 		label = "slate";
@@ -38,6 +51,11 @@
 
 		qcom,glink-slatecom-ctrl {
 			qcom,glink-channels = "slate-ctrl";
+			qcom,intents = <0x0C 1>;
+		};
+
+		qcom,glink-slate-rsb {
+			qcom,glink-channels = "slate-rsb-ctl";
 			qcom,intents = <0x0C 1>;
 		};
 
@@ -179,16 +197,6 @@
 			qcom,intents = <0x2000 2>;
 			reg = <GPR_DOMAIN_CC_DSP>;
 			cdev_name = "nongpr_channel";
-
-			cc_codec: qcom,cc-codec {
-				compatible = "qcom,cc-codec";
-				qcom,service-id = <3>;
-				qcom,channel-name = "custom_cc_apps";
-				qcom,src-domain-id = <3>;
-				qcom,dst-domain-id = <6>;
-				qcom,src-port = <3>;
-				qcom,dst-port = <0x0F>;
-			};
 		};
 	};
 
@@ -219,7 +227,7 @@
 
 	qcom,slatersb-rpmsg {
 		compatible = "qcom,slatersb-rpmsg";
-		qcom,glink-channels = "RSB_CTRL";
+		qcom,glink-channels = "slate-rsb-ctl";
 		qcom,glinkpkt-edge = "slate";
 		intents = <0x200 1>;
 	};

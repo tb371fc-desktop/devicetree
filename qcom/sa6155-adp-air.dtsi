@@ -23,12 +23,12 @@
 		vdd-min-voltage = <1800000>;
 		vdd-max-voltage = <1900000>;
 		interrupt-parent = <&tlmm>;
-		interrupts = <22 4>;
+		interrupts = <122 4>;
 		st,drdy-int-pin= <1>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&sensor_int1_default>;
 		sensor_int1_default: sensor_int1_default {
-			pins = "gpio22";
+			pins = "gpio122";
 			drive-strength = <16>;
 			bias-pull-up;
 		};
