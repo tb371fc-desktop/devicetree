@@ -1661,3 +1661,6 @@
 &qupv3_se3_4uart {
 	status = "ok";
 };
+
+#include "camera/qrb2210-rb1-camera.dtsi"
+#include "camera/qrb2210-rb1-camera-sensor-idp.dtsi"

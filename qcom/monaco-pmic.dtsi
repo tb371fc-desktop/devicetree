@@ -17,7 +17,7 @@
 		sde_dsi_active: sde_dsi_active {
 			pinconf {
 				pins = "gpio1", "gpio2";
-				function = "PMIC_GPIO_FUNC_NORMAL";
+				function = "normal";
 				qcom,drive-strength = <PMIC_GPIO_STRENGTH_HIGH>;
 				bias-disable;
 				output-high;
@@ -27,7 +27,7 @@
 		sde_dsi_suspend: sde_dsi_suspend {
 			pinconf {
 				pins = "gpio1", "gpio2";
-				function = "PMIC_GPIO_FUNC_NORMAL";
+				function = "normal";
 				qcom,drive-strength = <PMIC_GPIO_STRENGTH_LOW>;
 				bias-pull-down;
 				output-low;

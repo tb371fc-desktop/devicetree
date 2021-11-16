@@ -1,6 +1,7 @@
 #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/iio/qti_power_supply_iio.h>
+#include <dt-bindings/clock/qcom,rpmcc.h>
 
 #include "pm6350.dtsi"
 #include "pm7250b.dtsi"
@@ -191,6 +192,17 @@
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
 			};
+		};
+
+		pm6150l_clkdiv: clock-controller@5b00 {
+			compatible = "qcom,spmi-clkdiv";
+			reg = <0x5b00>;
+			#clock-cells = <1>;
+			qcom,num-clkdivs = <1>;
+			clock-output-names = "pm6150l_div_clk1";
+			clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>;
+			clock-names = "xo";
+			status = "disabled";
 		};
 	};
 };

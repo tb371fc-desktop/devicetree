@@ -1,4 +1,3 @@
-#include <dt-bindings/clock/qcom,rpmcc.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/iio/qcom,spmi-vadc.h>
 #include <dt-bindings/spmi/spmi.h>
@@ -91,17 +90,6 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 			#thermal-sensor-cells = <1>;
-		};
-
-		pm6150l_clkdiv: clock-controller@5b00 {
-			compatible = "qcom,spmi-clkdiv";
-			reg = <0x5b00>;
-			#clock-cells = <1>;
-			qcom,num-clkdivs = <1>;
-			clock-output-names = "pm6150l_div_clk1";
-			clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>;
-			clock-names = "xo";
-			status = "disabled";
 		};
 
 		pm6150l_gpios: pinctrl@c000 {

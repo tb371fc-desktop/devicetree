@@ -62,13 +62,21 @@
 	qcom,battery-data = <&monaco_batterydata>;
 	#io-channel-cells = <1>;
 	io-channels = <&pm5100_adc PM5100_ADC5_GEN3_BATT_THM_100K_PU>,
-		      <&pm5100_adc PM5100_ADC5_GEN3_BAT_ID_100K_PU>;
+		      <&pm5100_adc PM5100_ADC5_GEN3_BAT_ID_100K_PU>,
+		      <&pm5100_charger PSY_IIO_CHARGE_DONE>,
+		      <&pm5100_charger PSY_IIO_RECHARGE_SOC>,
+		      <&pm5100_charger PSY_IIO_FORCE_RECHARGE>,
+		      <&pm5100_charger PSY_IIO_SYS_SOC>;
 	io-channel-names = "batt-temp",
-			   "batt-id";
+			   "batt-id",
+			   "charge_done",
+			   "recharge_soc",
+			   "force_recharge",
+			   "sys_soc";
 	qcom,vbat-cutoff-mv = <3100>;
-	qcom,ibat-cutoff-ma = <150>;
+	qcom,ibat-cutoff-ma = <10>;
 	qcom,vph-min-mv = <2500>;
-	qcom,iterm-ma = <100>;
+	qcom,iterm-ma = <20>;
 };
 
 &pm5100_charger {

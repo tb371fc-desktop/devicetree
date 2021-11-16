@@ -14,17 +14,6 @@
 		pci-domain3 = &pcie3; /* PCIe3 domain */
 		pci-domain4 = &pcie4; /* PCIe4 domain */
 	};
-
-	firmware:firmware {
-		android {
-			/delete-property/ boot_devices;
-			fstab {
-				vendor {
-					fsmgr_flags = "wait";
-				};
-			};
-		};
-	};
 };
 
 &soc {
@@ -188,10 +177,6 @@
 		qcom,no-qrng-config;
 		clocks = <&dummycc RPMH_HWKM_CLK>;
 		clock-names = "km_clk_src";
-	};
-
-	cpu_pmu: cpu-pmu {
-		compatible = "arm,armv8-pmuv3";
 	};
 
 	qtee_shmbridge {
@@ -496,6 +481,7 @@
 #include "direwolf-vm-usb.dtsi"
 #include "direwolf-vm-pcie.dtsi"
 #include "direwolf-cnss.dtsi"
+#include "direwolf-vm-ufs.dtsi"
 
 &qupv3_0 {
 	/delete-property/ qcom,msm-bus,num-paths;
@@ -510,4 +496,8 @@
 &qupv3_2 {
 	/delete-property/ qcom,msm-bus,num-paths;
 	/delete-property/ qcom,msm-bus,vectors-bus-ids;
+};
+
+&cpu_pmu {
+	interrupts = <GIC_PPI 7 IRQ_TYPE_LEVEL_LOW>;
 };

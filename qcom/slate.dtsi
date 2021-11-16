@@ -27,7 +27,7 @@
 		compatible = "qcom,slate-daemon";
 	};
 
-	qcom,audio-cc-ipc-platform {
+	audio_cc_ipc_platform: qcom,audio-cc-ipc-platform {
 		compatible = "qcom,audio-cc-ipc-platform";
 		cc_codec: qcom,cc-codec {
 			compatible = "qcom,cc-codec";

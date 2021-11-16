@@ -7,3 +7,11 @@
 	compatible = "qcom,direwolf-ivi", "qcom,direwolf";
 	qcom,msm-id = <460 0x20000>;
 };
+
+&gpucc {
+	compatible = "qcom,direwolf-gpucc-v2", "syscon";
+};
+
+&videocc {
+	compatible = "qcom,direwolf-videocc-v2", "syscon";
+};

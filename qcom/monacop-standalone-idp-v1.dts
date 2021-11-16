@@ -1,6 +1,6 @@
 /dts-v1/;
 
-#include "monacop-1gb.dtsi"
+#include "monacop-standalone.dtsi"
 #include "monaco-standalone-idp-v1.dtsi"
 
 / {

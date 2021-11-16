@@ -738,10 +738,6 @@
 		clocks = <&gcc GCC_PRNG_AHB_CLK>;
 		clock-names = "km_clk_src";
 	};
-
-	cpu_pmu: cpu-pmu {
-		compatible = "arm,armv8-pmuv3";
-	};
 };
 
 &regulator {

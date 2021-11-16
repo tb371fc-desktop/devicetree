@@ -23,6 +23,12 @@
 		status = "disabled";
 	};
 
+	gcc_pcie_0_gdsc: qcom,gdsc@1a9004 {
+		compatible = "regulator-fixed";
+		regulator-name = "gcc_pcie_0_gdsc";
+		status = "disabled";
+	};
+
 	gcc_pcie_0_tunnel_gdsc: qcom,gdsc@1a4004 {
 		compatible = "qcom,gdsc";
 		reg = <0x1a4004 0x4>;
@@ -32,6 +38,12 @@
 		qcom,collapse-vote = <&gcc_apcs_gdsc_vote_ctrl 0>;
 		qcom,retain-regs;
 		regulator-name = "gcc_pcie_0_tunnel_gdsc";
+		status = "disabled";
+	};
+
+	gcc_pcie_1_gdsc: qcom,gdsc@177004 {
+		compatible = "regulator-fixed";
+		regulator-name = "gcc_pcie_1_gdsc";
 		status = "disabled";
 	};
 
@@ -120,6 +132,12 @@
 		reg = <0x177004 0x4>;
 		qcom,retain-regs;
 		regulator-name = "gcc_ufs_phy_gdsc";
+		status = "disabled";
+	};
+
+	gcc_usb20_prim_gdsc: qcom,gdsc@11c004 {
+		compatible = "regulator-fixed";
+		regulator-name = "gcc_usb20_prim_gdsc";
 		status = "disabled";
 	};
 

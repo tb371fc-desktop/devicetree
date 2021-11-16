@@ -328,5 +328,11 @@
 			qcom,dump-id = <0xe8>;
 		};
 	};
+
+	cpu_pmu: cpu-pmu {
+		compatible = "arm,armv8-pmuv3";
+		qcom,irq-is-percpu;
+		interrupts = <GIC_PPI 5 IRQ_TYPE_LEVEL_HIGH>;
+	};
 };
 

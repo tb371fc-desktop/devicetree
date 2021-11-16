@@ -1385,7 +1385,6 @@
 	};
 
 	compute_noc: interconnect@9800000 {
-		reg = <0x9800000 0x40000>;
 		compatible = "qcom,scshrike-compute_noc";
 		#interconnect-cells = <1>;
 		qcom,bcm-voter-names = "hlos";

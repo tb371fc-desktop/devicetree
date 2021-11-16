@@ -167,9 +167,14 @@
 		#size-cells = <2>;
 		ranges;
 
-		deepsleep_region: deepsleep_region@45700000 {
+		oda_region: oda_region@45700000 {
 			no-map;
-			reg = <0x0 0x45700000 0x0 0x400000>;
+			reg = <0x0 0x45700000 0x0 0x300000>;
+		};
+
+		deepsleep_region: deepsleep_region@45A00000 {
+			no-map;
+			reg = <0x0 0x45A00000 0x0 0x100000>;
 		};
 
 		hyp_region: hyp_region@45B00000 {
@@ -179,7 +184,7 @@
 
 		xbl_aop_mem: xbl_aop_mem@45e00000 {
 			no-map;
-			reg = <0x0 0x45e00000 0x0 0x110000>;
+			reg = <0x0 0x45e00000 0x0 0x11A000>;
 		};
 
 		sec_apps_mem: sec_apps_region@45fff000 {
@@ -852,13 +857,15 @@
 				<&adsp_smp2p_in 0 0>,
 				<&adsp_smp2p_in 2 0>,
 				<&adsp_smp2p_in 1 0>,
-				<&adsp_smp2p_in 3 0>;
+				<&adsp_smp2p_in 3 0>,
+				<&adsp_smp2p_in 9 0>;
 
 		interrupt-names = "qcom,wdog",
 				"qcom,err-fatal",
 				"qcom,proxy-unvote",
 				"qcom,err-ready",
-				"qcom,stop-ack";
+				"qcom,stop-ack",
+				"qcom,dsentry-ack";
 
 		/* Outputs to lpass */
 		qcom,smem-states = <&adsp_smp2p_out 0>;
@@ -895,14 +902,16 @@
 			<&modem_smp2p_in 2 0>,
 			<&modem_smp2p_in 1 0>,
 			<&modem_smp2p_in 3 0>,
-			<&modem_smp2p_in 7 0>;
+			<&modem_smp2p_in 7 0>,
+			<&modem_smp2p_in 9 0>;
 
 		interrupt-names = "qcom,wdog",
 			"qcom,err-fatal",
 			"qcom,proxy-unvote",
 			"qcom,err-ready",
 			"qcom,stop-ack",
-			"qcom,shutdown-ack";
+			"qcom,shutdown-ack",
+			"qcom,dsentry-ack";
 
 		/* Outputs to mss */
 		qcom,smem-states = <&modem_smp2p_out 0>;
@@ -933,12 +942,12 @@
 		qcom,iommu-dma-addr-pool = <0xa0000000 0x10000000>;
 		qcom,iommu-geometry = <0xa0000000 0x10010000>;
 		vdd-cx-mx-supply = <&L8A>;
-		qcom,vdd-cx-mx-config = <640000 640000>;
+		qcom,vdd-cx-mx-config = <640000 640000 1>;
 		vdd-1.8-xo-supply = <&L14A>;
 		vdd-1.3-rfa-supply = <&L13A>;
-		qcom,vdd-1.3-rfa-config = <1304000 1304000>;
+		qcom,vdd-1.3-rfa-config = <1304000 1304000 1>;
 		vdd-3.3-ch0-supply = <&L26A>;
-		qcom,vdd-3.3-ch0-config = <3304000 3304000>;
+		qcom,vdd-3.3-ch0-config = <3304000 3304000 1>;
 		qcom,smp2p_map_wlan_1_in {
 			interrupts-extended = <&smp2p_wlan_1_in 0 0>,
 					      <&smp2p_wlan_1_in 1 0>;
@@ -1061,16 +1070,16 @@
 	ddr_bw_opp_table: ddr-bw-opp-table {
 		compatible = "operating-points-v2";
 		BW_OPP_ENTRY(  200, 4); /*  762 MB/s */ /* Low SVS */
-		/* BW_OPP_ENTRY(  300, 4); */ /* 1144 MB/s */ /* Low SVS */
-		/* BW_OPP_ENTRY(  451, 4); */ /* 1720 MB/s */ /* Low SVS */
+		BW_OPP_ENTRY(  300, 4); /* 1144 MB/s */ /* Low SVS */
+		BW_OPP_ENTRY(  451, 4); /* 1720 MB/s */ /* Low SVS */
 		BW_OPP_ENTRY(  547, 4); /* 2086 MB/s */ /* Low SVS */
 		BW_OPP_ENTRY(  681, 4); /* 2597 MB/s */ /* Low SVS */
 		BW_OPP_ENTRY(  768, 4); /* 2929 MB/s */ /* SVS     */
 		BW_OPP_ENTRY( 1017, 4); /* 3879 MB/s */ /* SVS     */
 		BW_OPP_ENTRY( 1353, 4); /* 5161 MB/s */ /* SVS     */
-		/* BW_OPP_ENTRY( 1555, 4); */ /* 5931 MB/s */ /* Nominal */
+		BW_OPP_ENTRY( 1555, 4); /* 5931 MB/s */ /* Nominal */
 		BW_OPP_ENTRY( 1804, 4); /* 6881 MB/s */ /* Nominal */
-		/* BW_OPP_ENTRY( 2092, 4); */ /* 7980 MB/s */ /* Turbo   */
+		BW_OPP_ENTRY( 2092, 4); /* 7980 MB/s */ /* Turbo   */
 	};
 
 	cpu_cpu_ddr_bw: qcom,cpu-cpu-ddr-bw {
@@ -1900,6 +1909,7 @@ qcom,msm-adsprpc-mem {
 
 		qcom,devfreq,freq-table = <50000000 200000000>;
 		qcom,scaling-lower-bus-speed-mode = "DDR52";
+		qcom,restore-after-cx-collapse;
 
 		mmc-ddr-1_8v;
 		mmc-hs200-1_8v;
@@ -2187,7 +2197,7 @@ qcom,msm-adsprpc-mem {
 		parade,core {
 			parade,name = "pt_core";
 
-			parade,irq_gpio = <&tlmm 13 0x00>;
+			parade,irq_gpio = <&tlmm 13 0x2008>;
 			parade,rst_gpio = <&tlmm 12 0x00>;
 			parade,hid_desc_register = <1>;
 			/*
@@ -2201,11 +2211,14 @@ qcom,msm-adsprpc-mem {
 			 */
 			parade,flags = <6>;
 			/* PT_CORE_EWG_NONE */
-			parade,easy_wakeup_gesture = <0>;
+			parade,easy_wakeup_gesture = <1>;
 			/* 0:AUTO 1:PIP1_ONLY 2:PIP2_CAPABLE*/
 			parade,config_dut_generation = <1>;
 			/* 0:False 1:True*/
 			parade,watchdog_force_stop = <0>;
+			panel = <&dsi_rm69090_amoled_cmd
+				 &dsi_rm69090_amoled_vid
+				 &dsi_rm6d030_amoled_cmd>;
 			/*
 			 * PT_PANEL_ID_DISABLE = 0x00
 			 * PT_PANEL_ID_BY_BL  = 0x01

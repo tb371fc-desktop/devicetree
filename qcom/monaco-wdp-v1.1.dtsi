@@ -1,2 +1,2 @@
-#include "monaco-idp-v1.1.dtsi"
-#include "monaco-wdp.dtsi"
+#include "monaco-camera-v1.1.dtsi"
+#include "monaco-wdp-v1.dtsi"
