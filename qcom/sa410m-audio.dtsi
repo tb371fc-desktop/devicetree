@@ -1,5 +1,5 @@
 #include <dt-bindings/clock/qcom,audio-ext-clk.h>
-#include "qrb2210-rb1-msm-audio-lpass.dtsi"
+#include "sa410m-audio-lpass.dtsi"
 
 &msm_audio_ion {
 	iommus = <&apps_smmu 0x01c1 0x0>;
@@ -19,7 +19,7 @@
 	};
 };
 
-#include "qrb2210-rb1-lpi.dtsi"
+#include "sa410m-lpi.dtsi"
 
 &q6core {
 	cdc_dmic01_gpios: cdc_dmic01_pinctrl {
@@ -58,10 +58,10 @@
 			    &tx_swr_data2_active>;
 		pinctrl-1 = <&tx_swr_clk_sleep &tx_swr_data1_sleep
 			    &tx_swr_data2_sleep>;
-		qcom,lpi-gpios;
 		qcom,chip-wakeup-reg = <0x003ca064>;
 		qcom,chip-wakeup-maskbit = <0>;
 		qcom,chip-wakeup-default-val = <0x1>;
+		qcom,lpi-gpios;
 		#gpio-cells = <0>;
 	};
 
@@ -99,30 +99,18 @@
 &q6core {
 	scuba_snd: sound {
 		compatible = "qcom,bengal-asoc-snd";
-		qcom,mi2s-audio-intf = <0>;
-		qcom,auxpcm-audio-intf = <0>;
-		qcom,tdm-audio-intf = <0>;
-		qcom,wcn-btfm = <0>;
-		qcom,afe-rxtx-lb = <0>;
 
 		asoc-platform = <&pcm0>, <&pcm1>, <&pcm2>, <&voip>, <&voice>,
-				<&loopback>, <&compress>, <&hostless>,
-				<&afe>, <&lsm>, <&routing>, <&compr>,
-				<&pcm_noirq>;
+				<&loopback>, <&hostless>,
+				<&afe>, <&lsm>, <&routing>;
 		asoc-platform-names = "msm-pcm-dsp.0", "msm-pcm-dsp.1",
 				"msm-pcm-dsp.2", "msm-voip-dsp",
-				"msm-pcm-voice", "msm-pcm-loopback",
-				"msm-compress-dsp", "msm-pcm-hostless",
+				"msm-pcm-voice", "msm-pcm-loopback", "msm-pcm-hostless",
 				"msm-pcm-afe", "msm-lsm-client",
-				"msm-pcm-routing", "msm-compr-dsp",
-				"msm-pcm-dsp-noirq";
-		asoc-cpu = <&dai_mi2s0_rx>, <&dai_mi2s0_tx>,
-				<&dai_mi2s1_rx>, <&dai_mi2s1_tx>,
-				<&dai_mi2s2_rx>, <&dai_mi2s2_tx>,
-				<&dai_mi2s3_rx>, <&dai_mi2s3_tx>,
+				"msm-pcm-routing";
+		asoc-cpu = <&dai_mi2s0>, <&dai_mi2s1>,
 				<&dai_pri_auxpcm>,
-				<&dai_sec_auxpcm>, <&dai_tert_auxpcm>,
-				<&dai_quat_auxpcm>,
+				<&dai_sec_auxpcm>,
 				<&afe_pcm_rx>, <&afe_pcm_tx>, <&afe_proxy_rx>,
 				<&afe_proxy_tx>, <&incall_record_rx>,
 				<&incall_record_tx>, <&incall_music_rx>,
@@ -131,8 +119,6 @@
 				<&sb_7_rx>, <&sb_7_tx>, <&sb_8_tx>,
 				<&dai_pri_tdm_rx_0>, <&dai_pri_tdm_tx_0>,
 				<&dai_sec_tdm_rx_0>, <&dai_sec_tdm_tx_0>,
-				<&dai_tert_tdm_rx_0>, <&dai_tert_tdm_tx_0>,
-				<&dai_quat_tdm_rx_0>, <&dai_quat_tdm_tx_0>,
 				<&va_cdc_dma_0_tx>, <&va_cdc_dma_1_tx>,
 				<&va_cdc_dma_2_tx>,
 				<&rx_cdc_dma_0_rx>, <&tx_cdc_dma_0_tx>,
@@ -140,16 +126,10 @@
 				<&rx_cdc_dma_2_rx>, <&tx_cdc_dma_2_tx>,
 				<&rx_cdc_dma_3_rx>, <&tx_cdc_dma_3_tx>,
 				<&rx_cdc_dma_4_rx>, <&tx_cdc_dma_4_tx>,
-				<&rx_cdc_dma_5_rx>, <&tx_cdc_dma_5_tx>,
-				<&rx_cdc_dma_6_rx>, <&rx_cdc_dma_7_rx>,
 				<&afe_loopback_tx>;
 		asoc-cpu-names = "msm-dai-q6-mi2s.0", "msm-dai-q6-mi2s.1",
-				"msm-dai-q6-mi2s.2", "msm-dai-q6-mi2s.3",
-				"msm-dai-q6-mi2s.4", "msm-dai-q6-mi2s.5",
-				"msm-dai-q6-mi2s.6", "msm-dai-q6-mi2s.7",
 				"msm-dai-q6-auxpcm.1",
-				"msm-dai-q6-auxpcm.2", "msm-dai-q6-auxpcm.3",
-				"msm-dai-q6-auxpcm.4", "msm-dai-q6-dev.224",
+				"msm-dai-q6-auxpcm.2", "msm-dai-q6-dev.224",
 				"msm-dai-q6-dev.225", "msm-dai-q6-dev.241",
 				"msm-dai-q6-dev.240", "msm-dai-q6-dev.32771",
 				"msm-dai-q6-dev.32772", "msm-dai-q6-dev.32773",
@@ -159,8 +139,6 @@
 				"msm-dai-q6-dev.16401",
 				"msm-dai-q6-tdm.36864", "msm-dai-q6-tdm.36865",
 				"msm-dai-q6-tdm.36880", "msm-dai-q6-tdm.36881",
-				"msm-dai-q6-tdm.36896", "msm-dai-q6-tdm.36897",
-				"msm-dai-q6-tdm.36912", "msm-dai-q6-tdm.36913",
 				"msm-dai-cdc-dma-dev.45089",
 				"msm-dai-cdc-dma-dev.45091",
 				"msm-dai-cdc-dma-dev.45093",
@@ -174,10 +152,6 @@
 				"msm-dai-cdc-dma-dev.45111",
 				"msm-dai-cdc-dma-dev.45112",
 				"msm-dai-cdc-dma-dev.45113",
-				"msm-dai-cdc-dma-dev.45114",
-				"msm-dai-cdc-dma-dev.45115",
-				"msm-dai-cdc-dma-dev.45116",
-				"msm-dai-cdc-dma-dev.45118",
 				"msm-dai-q6-dev.24577";
 		fsa4480-i2c-handle = <&fsa4480>;
 	};

@@ -104,7 +104,6 @@
 
 
 		dma-coherent;
-		iommu-map = <0x0 &virt_smmuv3 0x20000 0x10000>;
 
 		qcom,boot-option = <0x1>;
 		qcom,aux-clk-freq = <20>; /* 19.2 MHz */
@@ -324,7 +323,6 @@
 
 
 		dma-coherent;
-		iommu-map = <0x0 &virt_smmuv3 0x30000 0x10000>;
 
 		qcom,boot-option = <0x1>;
 		qcom,aux-clk-freq = <20>; /* 19.2 MHz */
@@ -544,7 +542,6 @@
 
 
 		dma-coherent;
-		iommu-map = <0x0 &virt_smmuv3 0x40000 0x10000>;
 
 		qcom,boot-option = <0x1>;
 		qcom,aux-clk-freq = <20>; /* 19.2 MHz */
@@ -762,7 +759,6 @@
 				"pcie_phy_nocsr_com_phy_reset";
 
 		dma-coherent;
-		iommu-map = <0x0 &virt_smmuv3 0x50000 0x10000>;
 
 		qcom,boot-option = <0x1>;
 		qcom,aux-clk-freq = <20>; /* 19.2 MHz */
@@ -988,7 +984,6 @@
 				"pcie_phy_nocsr_com_phy_reset";
 
 		dma-coherent;
-		iommu-map = <0x0 &virt_smmuv3 0x60000 0x10000>;
 
 		qcom,boot-option = <0x1>;
 		qcom,aux-clk-freq = <20>; /* 19.2 MHz */

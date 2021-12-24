@@ -74,6 +74,15 @@ properties:
     $ref: /schemas/types.yaml#/definitions/uint32
     description: Resistance of the battery connector in mOhms.
 
+  nvmem-cell-names:
+    $ref: /schemas/types.yaml#/definitions/string-array
+    description: The nvmem cell device name of the SDAM register used to store
+	the qbg debug mask.
+
+  nvmem-cells:
+    $ref: /schemas/types.yaml#/definitions/phandle-array
+    description: Phandle of the nvmem cell device used to store the qbg debug mask.
+
 required:
   - compatible
   - reg
@@ -104,6 +113,8 @@ examples:
           interrupts = <0x0 0x76 0x1 IRQ_TYPE_EDGE_RISING>;
           qcom,num-data-sdams = <6>;
           qcom,sdam-base = <0x7600>;
+          nvmem-cell-names = "qbg_debug_mask_low", "qbg_debug_mask_high";
+          nvmem-cells = <&qbg_debug_mask_low>, <&qbg_debug_mask_high>;
         };
       };
     };

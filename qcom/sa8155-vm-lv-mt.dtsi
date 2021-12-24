@@ -34,3 +34,7 @@
 &qupv3_se13_4uart {
 	status = "disabled";
 };
+
+&cnss_pcie {
+	status = "disabled";
+};

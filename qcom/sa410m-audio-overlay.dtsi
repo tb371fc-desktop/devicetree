@@ -8,8 +8,8 @@
 	qcom,bolero-version = <5>;
 	bolero-clk-rsc-mngr {
 		compatible = "qcom,bolero-clk-rsc-mngr";
-		qcom,fs-gen-sequence = <0x3000 0x1 0x1>, <0x3004 0x3 0x3>,
-					<0x3004 0x3 0x1>, <0x3080 0x2 0x2>;
+		qcom,fs-gen-sequence = <0x3000 0x1 0x1>,
+					<0x3004 0x1 0x1>, <0x3080 0x2 0x2>;
 	qcom,rx_mclk_mode_muxsel = <0x0a5640d8>;
 	qcom,va_mclk_mode_muxsel = <0x0a7a0000>;
 	clock-names = "tx_core_clk", "tx_npl_clk", "rx_core_clk", "rx_npl_clk",
@@ -159,9 +159,6 @@
 &scuba_snd {
 	qcom,model = "bengal-scubaidp-snd-card";
 	qcom,msm-mi2s-master = <1>, <1>, <1>, <1>;
-	qcom,wcn-btfm = <1>;
-	qcom,va-bolero-codec = <1>;
-	qcom,rxtx-bolero-codec = <1>;
 	qcom,audio-routing =
 		"AMIC1", "Analog Mic1",
 		"Analog Mic1","MIC BIAS1",
@@ -204,7 +201,6 @@
 		"VA DMIC3", "VA MIC BIAS1",
 		"VA SWR_INPUT", "ADC1_OUTPUT",
 		"VA SWR_INPUT", "ADC2_OUTPUT";
-
 	qcom,msm-mbhc-hphl-swh = <1>;
 	qcom,msm-mbhc-gnd-swh = <1>;
 	qcom,cdc-dmic01-gpios = <&cdc_dmic01_gpios>;
@@ -212,10 +208,12 @@
 
 	nvmem-cells = <&adsp_variant>;
 	nvmem-cell-names = "adsp_variant";
-	asoc-codec  = <&stub_codec>, <&bolero>,
-			<&rouleur_codec>, <&wsa881x_i2c_e>;
-	asoc-codec-names = "msm-stub-codec.1", "bolero_codec",
-			"rouleur_codec", "wsa-codec0";
+	asoc-codec  = <&stub_codec>, <&bolero>, <&rouleur_codec>, <&wsa881x_i2c_e>;
+	asoc-codec-names = "msm-stub-codec.1", "bolero_codec", "rouleur_codec", "wsa-codec0";
+	qcom,wsa-max-devs = <1>;
+	qcom,wsa-devs = <&wsa881x_i2c_e>;
+	qcom,wsa-aux-dev-prefix = "SpkrMono";
+	qcom,codec-max-aux-devs = <0>;
 	qcom,msm_audio_ssr_devs = <&audio_apr>, <&q6core>, <&bolero>,
 				  <&lpi_tlmm>;
 };
@@ -290,7 +288,7 @@
 		compatible = "qcom,audio-ref-clk";
 		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK>;
 		qcom,codec-lpass-ext-clk-freq = <19200000>;
-		qcom,codec-lpass-clk-id = <0x307>;
+		qcom,codec-lpass-clk-id = <0x30B>;
 		#clock-cells = <1>;
 	};
 
@@ -298,7 +296,7 @@
 		compatible = "qcom,audio-ref-clk";
 		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_8>;
 		qcom,codec-lpass-ext-clk-freq = <19200000>;
-		qcom,codec-lpass-clk-id = <0x308>;
+		qcom,codec-lpass-clk-id = <0x310>;
 		#clock-cells = <1>;
 	};
 };

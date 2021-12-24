@@ -217,7 +217,7 @@
 		qcom,msm-cpudai-tdm-sync-src = <0>;
 		qcom,msm-cpudai-tdm-data-out = <0>;
 		qcom,msm-cpudai-tdm-invert-sync = <0>;
-		qcom,msm-cpudai-tdm-data-delay = <0>;
+		qcom,msm-cpudai-tdm-data-delay = <1>;
 		qcom,msm-cpudai-tdm-clk-attribute = /bits/ 16 <1>;
 		dai_tert_tdm_tx_0: qcom,msm-dai-q6-tdm-tert-tx-0 {
 			compatible = "qcom,msm-dai-q6-tdm";

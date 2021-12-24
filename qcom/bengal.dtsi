@@ -20,12 +20,13 @@
 / {
 	model = "Qualcomm Technologies, Inc. BENGAL";
 	compatible = "qcom,bengal";
-	qcom,msm-id = <417 0x10000>, <444 0x10000>;
+	qcom,msm-id =  <523 0x10000>;
 	interrupt-parent = <&intc>;
 
 	#address-cells = <2>;
 	#size-cells = <2>;
 	memory { device_type = "memory"; reg = <0 0 0 0>; };
+
 	reserved_memory: reserved-memory { };
 
 	mem-offline {
@@ -43,6 +44,7 @@
 		swr0 = &swr0;
 		swr1 = &swr1;
 	};
+
 	firmware: firmware {};
 
 	cpus {
@@ -1604,7 +1606,7 @@
 
 		sleep_clk: sleep_clk {
 			compatible = "fixed-clock";
-			clock-frequency = <32764>;
+			clock-frequency = <32000>;
 			clock-output-names = "sleep_clk";
 			#clock-cells = <0>;
 		};
@@ -1642,9 +1644,13 @@
 		compatible = "qcom,bengal-dispcc", "syscon";
 		reg = <0x05f00000 0x20000>;
 		reg-names = "cc_base";
-		clock-names = "cfg_ahb_clk";
-		clocks = <&gcc GCC_DISP_AHB_CLK>;
 		vdd_cx-supply = <&VDD_CX_LEVEL>;
+		clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>,
+			 <&rpmcc RPM_SMD_XO_A_CLK_SRC>,
+			 <&gcc GCC_DISP_GPLL0_DIV_CLK_SRC>,
+			 <&sleep_clk>;
+		clock-names = "bi_tcxo", "bi_tcxo_ao",
+				"gcc_disp_gpll0_div_clk_src", "sleep_clk";
 		#clock-cells = <1>;
 		#reset-cells = <1>;
 	};
@@ -1655,7 +1661,8 @@
 		reg-names = "cc_base";
 		vdd_cx-supply = <&VDD_CX_LEVEL>;
 		vdd_mx-supply = <&VDD_MX_LEVEL>;
-		/*qcom,gpu_cc_gx_gfx3d_clk_src-opp-handle = <&msm_gpu>;*/
+		clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>, <&gcc GPLL0>;
+		clock-names = "bi_tcxo", "gpll0_out_main";
 		#clock-cells = <1>;
 		#reset-cells = <1>;
 	};
@@ -1674,6 +1681,7 @@
 		compatible = "qcom,bengal-debugcc";
 		qcom,gcc = <&gcc>;
 		qcom,dispcc = <&dispcc>;
+		qcom,gpucc = <&gpucc>;
 		qcom,mccc = <&mccc_debug>;
 		qcom,cpucc = <&cpucc_debug>;
 		clock-names = "xo_clk_src";
@@ -2598,12 +2606,12 @@
 	};
 };
 
-#include "qrb4210-rb2-gdsc.dtsi"
-#include "qrb4210-rb2-usb.dtsi"
-#include "qrb4210-rb2-ion.dtsi"
-#include "qrb4210-rb2-vidc.dtsi"
-#include "qrb4210-rb2-gpu.dtsi"
-#include "qrb4210-rb2-coresight.dtsi"
+#include "bengal-gdsc.dtsi"
+#include "bengal-usb.dtsi"
+#include "bengal-ion.dtsi"
+#include "bengal-vidc.dtsi"
+#include "bengal-gpu.dtsi"
+#include "bengal-coresight.dtsi"
 #include "pmi632.dtsi"
 #include "pm6125.dtsi"
 
@@ -2659,14 +2667,14 @@
 	status = "ok";
 };
 
-#include "msm-arm-smmu-qrb4210-rb2.dtsi"
+#include "msm-arm-smmu-bengal.dtsi"
 #include "pm6125-rpm-regulator.dtsi"
-#include "qrb4210-rb2-regulator.dtsi"
-#include "qrb4210-rb2-pm.dtsi"
-#include "qrb4210-rb2-pinctrl.dtsi"
-#include "qrb4210-rb2-qupv3.dtsi"
-#include "qrb4210-rb2-audio.dtsi"
-#include "qrb4210-rb2-audio-overlay.dtsi"
+#include "bengal-regulator.dtsi"
+#include "bengal-pm.dtsi"
+#include "bengal-pinctrl.dtsi"
+#include "bengal-qupv3.dtsi"
+#include "bengal-audio.dtsi"
+#include "bengal-audio-overlay.dtsi"
 
 &qupv3_se1_i2c {
 	status = "ok";
@@ -2692,7 +2700,7 @@
 };
 
 &L2P {
-	regulator-max-microvolt = <1056000>;
+	regulator-max-microvolt = <1200000>;
 	qcom,min-dropout-voltage = <100000>;
 };
 
@@ -2892,5 +2900,7 @@
 	};
 };
 
-#include "qrb4210-rb2-thermal.dtsi"
+#include "bengal-thermal.dtsi"
 #include "msm-rdbg.dtsi"
+#include "camera/bengal-camera.dtsi"
+#include "camera/bengal-camera-sensor-idp.dtsi"

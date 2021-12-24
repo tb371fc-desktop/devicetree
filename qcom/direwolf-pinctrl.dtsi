@@ -2042,6 +2042,36 @@
 		};
 	};
 
+	cnss_pins: cnss_pins {
+		cnss_wlan_en_active: cnss_wlan_en_active {
+			mux {
+				pins = "gpio125";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio125";
+				drive-strength = <16>;
+				output-high;
+				bias-pull-up;
+			};
+		};
+
+		cnss_wlan_en_sleep: cnss_wlan_en_sleep {
+			mux {
+				pins = "gpio125";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio125";
+				drive-strength = <2>;
+				output-low;
+				bias-pull-down;
+			};
+		};
+	};
+
 	bt_en_active: bt_en_active {
 		mux {
 			pins = "gpio126";
@@ -2745,6 +2775,36 @@
 			pins = "gpio17";
 			bias-pull-down; /* PULL DOWN */
 			drive-strength = <2>; /* 2 MA */
+		};
+	};
+
+	usb0_phy_ps: usb0_phy_ps {
+		usb3phy0_portselect_default: usb3phy0_portselect_default {
+			mux {
+				pins = "gpio166";
+				function = "usb0_phy";
+			};
+
+			config {
+				pins = "gpio166";
+				bias-disable;
+				drive-strength = <2>;
+			};
+		};
+	};
+
+	usb1_phy_ps: usb1_phy_ps {
+		usb3phy1_portselect_default: usb3phy1_portselect_default {
+			mux {
+				pins = "gpio49";
+				function = "usb1_phy";
+			};
+
+			config {
+				pins = "gpio49";
+				bias-disable;
+				drive-strength = <2>;
+			};
 		};
 	};
 };

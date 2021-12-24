@@ -1352,6 +1352,14 @@
 		qcom,bcm-voters = <&apps_bcm_voter>;
 	};
 
+	compute_noc: interconnect@1716000 {
+		reg = <0x1716008 0x10>;
+		compatible = "qcom,scshrike-compute_noc";
+		#interconnect-cells = <1>;
+		qcom,bcm-voter-names = "hlos";
+		qcom,bcm-voters = <&apps_bcm_voter>;
+	};
+
 	mmss_noc: interconnet@1740000 {
 		reg = <0x1740000 0x1C100>;
 		compatible = "qcom,scshrike-mmss_noc";
@@ -1384,13 +1392,6 @@
 		qcom,bcm-voters = <&apps_bcm_voter>, <&disp_bcm_voter>;
 	};
 
-	compute_noc: interconnect@9800000 {
-		compatible = "qcom,scshrike-compute_noc";
-		#interconnect-cells = <1>;
-		qcom,bcm-voter-names = "hlos";
-		qcom,bcm-voters = <&apps_bcm_voter>;
-	};
-
 	qmp_aop: qcom,qmp-aop@c300000 {
 		compatible = "qcom,qmp-mbox";
 		reg = <0xc300000 0x1000>, <0x17c0000C 0x4>;
@@ -1410,6 +1411,12 @@
 		mboxes = <&qmp_aop 0>;
 		mbox-names = "qdss_clk";
 		#clock-cells = <1>;
+	};
+
+	ddr_bwprofiler {
+		compatible = "qcom,ddr_bwprofiler";
+		clocks = <&aopcc QDSS_CLK>;
+		clock-names = "qdss_clk";
 	};
 
 	gcc: clock-controller@100000 {
@@ -1482,7 +1489,7 @@
 		clocks = <&gcc GCC_VIDEO_AHB_CLK>,
 			<&rpmhcc RPMH_CXO_CLK>;
 		clock-names =
-			"cfg_ahb_clk",
+			"iface",
 			"bi_tcxo";
 		#clock-cells = <1>;
 		#reset-cells = <1>;

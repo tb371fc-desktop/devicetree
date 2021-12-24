@@ -5,16 +5,6 @@
 	};
 };
 
-#include "display/quin-vm-display-la.dtsi"
-
-&usb0 {
-	status = "okay";
-};
-
-&usb2_phy0 {
-	status = "okay";
-};
-
 / {
 	rename_blk: rename_blk {
 		compatible = "qcom,blkdev-rename";
@@ -25,6 +15,25 @@
 				"persist", "modem", "bluetooth",
 				"misc", "vbmeta";
 	};
+};
+
+#include "display/quin-vm-display-la.dtsi"
+#include "direwolf-cnss.dtsi"
+
+&usb0 {
+	status = "okay";
+};
+
+&usb2_phy0 {
+	status = "okay";
+};
+
+&pcie4 {
+	status = "okay";
+};
+
+&pcie4_msi_snps {
+	status = "okay";
 };
 
 &usb2 {

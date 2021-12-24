@@ -279,6 +279,12 @@
 		#clock-cells = <0>;
 	};
 
+	rpmh_cxo_clk: rpmh_cxo_clk {
+		compatible = "qcom,dummycc";
+		clock-output-names = "bi_tcxo";
+		#clock-cells = <0>;
+	};
+
 	emac_ctrl_fe: emac_ctrl_drv@0x1d000000 {
 		compatible = "virtio,mmio";
 		reg =<0x1d000000 0x1000>;
@@ -480,7 +486,6 @@
 #include "direwolf-vm-audio.dtsi"
 #include "direwolf-vm-usb.dtsi"
 #include "direwolf-vm-pcie.dtsi"
-#include "direwolf-cnss.dtsi"
 #include "direwolf-vm-ufs.dtsi"
 
 &qupv3_0 {

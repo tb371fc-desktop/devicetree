@@ -173,6 +173,19 @@ Charger specific properties:
 		This is only applicable to certain PMICs like PMI632 which
 		has SCHGM_FLASH peripheral.
 
+- nvmem-cell-names
+  Usage:      optional
+  Value type: <string>
+  Definition: The nvmem cell device name of the SDAM register used to store
+		the charger debug mask. It must be "charger_debug_mask".
+
+- nvmem-cells
+  Usage:      optional
+  Value type: <phandle>
+  Definition: Phandle of the nvmem cell device used to store the charger debug
+		mask. Please refer to nvmem bindings as described in
+		bindings/nvmem/nvmem.txt.
+
 - qcom,fcc-stepping-enable
   Usage:      optional
   Value type: bool
@@ -255,6 +268,9 @@ pm2250_charger: qcom,qpnp-smblite {
 	#address-cells = <1>;
 	#size-cells = <1>;
 	#cooling-cells = <2>;
+
+	nvmem-cell-names = "charger_debug_mask";
+	nvmem-cells = <&charger_debug_mask>;
 
 	qcom,pmic-revid = <&pm2250_revid>;
 	qcom,chgr@1000 {

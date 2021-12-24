@@ -1626,10 +1626,23 @@ qcom,msm-adsprpc-mem {
 			qcom,glinkpkt-fragmented-read;
 		};
 
+		qcom,glinkpkt-slate-tme-data {
+			qcom,glinkpkt-edge = "slate";
+			qcom,glinkpkt-ch-name = "LOGPROXY_SLATE_TME_DATA";
+			qcom,glinkpkt-dev-name = "slate_tme_log";
+			qcom,glinkpkt-fragmented-read;
+		};
+
 		qcom,glinkpkt-haptics-offload-ctrl {
 			qcom,glinkpkt-edge = "slate";
 			qcom,glinkpkt-ch-name = "slate-haptics-offload";
 			qcom,glinkpkt-dev-name = "glinkpkt_slate_haptics_offload";
+		};
+
+		qcom,glinkpkt-slate-ux-ctl {
+			qcom,glinkpkt-edge = "slate";
+			qcom,glinkpkt-ch-name = "slate-ux-ctl";
+			qcom,glinkpkt-dev-name = "glink_pkt_slate_ux_ctl";
 		};
 	};
 
@@ -2029,30 +2042,31 @@ qcom,msm-adsprpc-mem {
 		clocks = <&rpmcc RPM_SMD_IPA_CLK>;
 		clock-names = "core_clk";
 		qcom,interconnect,num-cases = <5>;
-		qcom,interconnect,num-paths = <3>;
-		interconnects = <&system_noc MASTER_IPA &bimc SLAVE_EBI_CH0>,
+		qcom,interconnect,num-paths = <4>;
+		interconnects = <&system_noc MASTER_IPA &system_noc SNOC_BIMC_SLV>,
+				<&bimc SNOC_BIMC_MAS &bimc SLAVE_EBI_CH0>,
 				<&system_noc MASTER_IPA &system_noc SLAVE_OCIMEM>,
 				<&bimc MASTER_AMPSS_M0 &config_noc SLAVE_IPA_CFG>;
-		interconnect-names = "ipa_to_ebi1", "ipa_to_imem", "appss_to_ipa";
+		interconnect-names = "ipa_to_llcc", "llcc_to_ebi1", "ipa_to_imem", "appss_to_ipa";
 		/* No vote */
 		qcom,no-vote =
-		<0 0 0 0 0 0>;
+		<0 0 0 0 0 0 0 0>;
 
 		/* SVS2 */
 		qcom,svs2 =
-		<80000 2160000 80000 560000 80000 120000>;
+		<80000 590000 80000 2160000 80000 560000 80000 120000>;
 
 		/* SVS */
 		qcom,svs =
-		<80000 5414000 80000 920000 80000 180000>;
+		<80000 800000 80000 5414000 80000 920000 80000 180000>;
 
 		/* NOMINAL */
 		qcom,nominal =
-		<206000 7200000 206000 1560000 206000 380000>;
+		<206000 1500000 206000 7200000 206000 1560000 206000 380000>;
 
 		/* TURBO */
 		qcom,turbo =
-		<206000 8500000 206000 1880000 206000 520000>;
+		<206000 1800000 206000 8500000 206000 1880000 206000 520000>;
 		qcom,bus-vector-names =
 			"MIN", "SVS2", "SVS", "NOMINAL", "TURBO";
 		qcom,throughput-threshold = <310 600 1000>;

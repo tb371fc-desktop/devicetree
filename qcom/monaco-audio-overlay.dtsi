@@ -278,6 +278,8 @@
 &monaco_snd {
 	qcom,model = "monaco-idp-snd-card";
 	qcom,msm-mi2s-master = <1>, <1>, <1>, <1>;
+	qcom,mi2s-audio-intf = <1>;
+	qcom,tdm-audio-intf = <0>;
 	qcom,wcn-btfm = <1>;
 	qcom,va-bolero-codec = <1>;
 	qcom,audio-routing =

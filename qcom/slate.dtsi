@@ -29,6 +29,7 @@
 
 	audio_cc_ipc_platform: qcom,audio-cc-ipc-platform {
 		compatible = "qcom,audio-cc-ipc-platform";
+		qcom,glink-cc-ipc = <&audio_ipc>, <&audio_ipc1>;
 		cc_codec: qcom,cc-codec {
 			compatible = "qcom,cc-codec";
 			qcom,service-id = <3>;
@@ -51,6 +52,11 @@
 
 		qcom,glink-slatecom-ctrl {
 			qcom,glink-channels = "slate-ctrl";
+			qcom,intents = <0x0C 1>;
+		};
+
+		qcom,glink-slate-ux-ctl {
+			qcom,glink-channels = "slate-ux-ctl";
 			qcom,intents = <0x0C 1>;
 		};
 

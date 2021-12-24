@@ -661,6 +661,7 @@
 		reg-names = "funnel-base";
 
 		coresight-name = "coresight-funnel-gfx";
+		status = "disabled";
 
 		clocks = <&aopcc QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -2198,6 +2199,7 @@
 
 		clocks = <&aopcc QDSS_CLK>;
 		clock-names = "apb_pclk";
+		status = "disabled";
 	};
 
 	cti_cpu2: cti@7220000 {

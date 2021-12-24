@@ -2,6 +2,7 @@
 /plugin/;
 
 #include "direwolf-adp-common.dtsi"
+#include "display/direwolf-sde-display-adp-star.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. DirewolfAU IVI V2 ADP-STAR";

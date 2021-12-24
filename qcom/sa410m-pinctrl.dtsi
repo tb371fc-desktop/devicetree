@@ -36,6 +36,38 @@
 				};
 			};
 		};
+
+		/* WSA speaker reset pin1 */
+		spkr_1_sd_n {
+			spkr_1_sd_n_sleep: spkr_1_sd_n_sleep {
+				mux {
+					pins = "gpio106";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio106";
+					drive-strength = <2>;   /* 2 mA */
+					bias-pull-down;
+					input-enable;
+				};
+			};
+
+			spkr_1_sd_n_active: spkr_1_sd_n_active {
+				mux {
+					pins = "gpio106";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio106";
+					drive-strength = <16>;   /* 16 mA */
+					bias-disable;
+					output-high;
+				};
+			};
+		};
+
 		/* SDC pin type */
 		sdc1_on: sdc1_on {
 			clk {

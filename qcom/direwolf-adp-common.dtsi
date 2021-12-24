@@ -1,5 +1,6 @@
 #include <dt-bindings/gpio/gpio.h>
 #include "direwolf-cnss.dtsi"
+#include "direwolf-cnss-dual.dtsi"
 
 &soc {
 
@@ -140,4 +141,12 @@
  */
 &gcc {
 	qcom,critical-devices = <&qupv3_se12_i2c>;
+};
+
+&cnss_pcie0 {
+	status = "ok";
+};
+
+&cnss_pcie2 {
+	status = "ok";
 };

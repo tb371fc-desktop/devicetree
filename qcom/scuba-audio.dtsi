@@ -1,25 +1,34 @@
 #include <dt-bindings/clock/qcom,audio-ext-clk.h>
 #include "msm-audio-lpass.dtsi"
 
-&soc {
-	spf_core_platform: spf_core_platform {
-		compatible = "qcom,spf-core-platform";
-	};
+&msm_audio_ion {
+	iommus = <&apps_smmu 0x01c1 0x0>;
+	qcom,smmu-sid-mask = /bits/ 64 <0xf>;
+};
 
-	audio_pkt_core_platform: qcom,audio-pkt-core-platform {
-		compatible = "qcom,audio-pkt-core-platform";
+&audio_apr {
+	q6core: qcom,q6core-audio {
+		compatible = "qcom,q6core-audio";
+
+		lpass_audio_hw_vote: vote_lpass_audio_hw {
+			compatible = "qcom,audio-ref-clk";
+			qcom,codec-ext-clk-src = <AUDIO_LPASS_AUDIO_HW_VOTE>;
+			#clock-cells = <1>;
+		};
+
 	};
 };
 
 #include "scuba-lpi.dtsi"
 
-&spf_core_platform {
+&q6core {
 	cdc_dmic01_gpios: cdc_dmic01_pinctrl {
 		compatible = "qcom,msm-cdc-pinctrl";
 		pinctrl-names = "aud_active", "aud_sleep";
 		pinctrl-0 = <&cdc_dmic01_clk_active &cdc_dmic01_data_active>;
 		pinctrl-1 = <&cdc_dmic01_clk_sleep &cdc_dmic01_data_sleep>;
 		qcom,lpi-gpios;
+		#gpio-cells = <0>;
 	};
 
 	cdc_dmic23_gpios: cdc_dmic23_pinctrl {
@@ -28,6 +37,7 @@
 		pinctrl-0 = <&cdc_dmic23_clk_active &cdc_dmic23_data_active>;
 		pinctrl-1 = <&cdc_dmic23_clk_sleep &cdc_dmic23_data_sleep>;
 		qcom,lpi-gpios;
+		#gpio-cells = <0>;
 	};
 
 	rx_swr_gpios: rx_swr_clk_data_pinctrl {
@@ -38,6 +48,7 @@
 		pinctrl-1 = <&rx_swr_clk_sleep &rx_swr_data_sleep
 				&rx_swr_data1_sleep>;
 		qcom,lpi-gpios;
+		#gpio-cells = <0>;
 	};
 
 	va_swr_gpios: va_swr_clk_data_pinctrl {
@@ -51,6 +62,7 @@
 		qcom,chip-wakeup-reg = <0x003ca064>;
 		qcom,chip-wakeup-maskbit = <0>;
 		qcom,chip-wakeup-default-val = <0x1>;
+		#gpio-cells = <0>;
 	};
 
 	wsa881x_analog_clk_gpio: msm_cdc_pinctrl@18 {
@@ -59,8 +71,11 @@
 		pinctrl-0 = <&wsa_mclk_active>;
 		pinctrl-1 = <&wsa_mclk_sleep>;
 		qcom,lpi-gpios;
+		#gpio-cells = <0>;
 	};
+};
 
+&q6core {
 	bolero: bolero-cdc {
 		compatible = "qcom,bolero-codec";
 		clock-names = "lpass_audio_hw_vote";
@@ -79,11 +94,12 @@
 			};
 		};
 	};
+};
 
+&q6core {
 	scuba_snd: sound {
 		compatible = "qcom,bengal-asoc-snd";
 		qcom,mi2s-audio-intf = <0>;
-		qcom,cc-va-intf-enable = <0>;
 		qcom,auxpcm-audio-intf = <0>;
 		qcom,tdm-audio-intf = <0>;
 		qcom,wcn-btfm = <0>;
@@ -111,7 +127,6 @@
 				<&afe_proxy_tx>, <&incall_record_rx>,
 				<&incall_record_tx>, <&incall_music_rx>,
 				<&incall_music_2_rx>,
-				<&proxy_rx>, <&proxy_tx>,
 				<&usb_audio_rx>, <&usb_audio_tx>,
 				<&sb_7_rx>, <&sb_7_tx>, <&sb_8_tx>,
 				<&dai_pri_tdm_rx_0>, <&dai_pri_tdm_tx_0>,
@@ -139,7 +154,6 @@
 				"msm-dai-q6-dev.240", "msm-dai-q6-dev.32771",
 				"msm-dai-q6-dev.32772", "msm-dai-q6-dev.32773",
 				"msm-dai-q6-dev.32770",
-				"msm-dai-q6-dev.8194", "msm-dai-q6-dev.8195",
 				"msm-dai-q6-dev.28672", "msm-dai-q6-dev.28673",
 				"msm-dai-q6-dev.16398", "msm-dai-q6-dev.16399",
 				"msm-dai-q6-dev.16401",
@@ -167,11 +181,6 @@
 				"msm-dai-q6-dev.24577";
 		fsa4480-i2c-handle = <&fsa4480>;
 	};
-};
-
-&msm_audio_ion {
-	iommus = <&apps_smmu 0x01c1 0x0>;
-	qcom,smmu-sid-mask = /bits/ 64 <0xf>;
 };
 
 &qupv3_se1_i2c {

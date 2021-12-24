@@ -143,13 +143,13 @@
 		spkr_1_sd_n {
 			spkr_1_sd_n_sleep: spkr_1_sd_n_sleep {
 				mux {
-					pins = "gpio42";
+					pins = "gpio106";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio42";
-					drive-strength = <2>;   /* 2 mA */
+					pins = "gpio106";
+					drive-strength = <2>; /* 2 mA */
 					bias-pull-down;
 					input-enable;
 				};
@@ -157,13 +157,13 @@
 
 			spkr_1_sd_n_active: spkr_1_sd_n_active {
 				mux {
-					pins = "gpio42";
+					pins = "gpio106";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio42";
-					drive-strength = <16>;   /* 16 mA */
+					pins = "gpio106";
+					drive-strength = <16>; /* 16 mA */
 					bias-disable;
 					output-high;
 				};
@@ -885,8 +885,36 @@
 			};
 		};
 
-		cam_sensor_rear0_reset_active: cam_sensor_rear0_reset_active {
-			/* RESET0 */
+		cam_sensor_mclk3_active: cam_sensor_mclk3_active {
+			/* MCLK 3*/
+			mux {
+				pins = "gpio28";
+				function = "cam_mclk";
+			};
+
+			config {
+				pins = "gpio28";
+				bias-disable; /* No PULL */
+				drive-strength = <2>; /* 2 MA */
+			};
+		};
+
+		cam_sensor_mclk3_suspend: cam_sensor_mclk3_suspend {
+			/* MCLK 3*/
+			mux {
+				pins = "gpio28";
+				function = "cam_mclk";
+			};
+
+			config {
+				pins = "gpio28";
+				bias-pull-down; /* PULL DOWN */
+				drive-strength = <2>; /* 2 MA */
+			};
+		};
+
+		cam_sensor_active_rst0: cam_sensor_active_rst0 {
+			/* CAM0A RESET */
 			mux {
 				pins = "gpio18";
 				function = "gpio";
@@ -899,8 +927,8 @@
 			};
 		};
 
-		cam_sensor_rear0_reset_suspend: cam_sensor_rear0_reset_suspend {
-			/* RESET0 */
+		cam_sensor_suspend_rst0: cam_sensor_suspend_rst0 {
+			/* CAM0A RESET */
 			mux {
 				pins = "gpio18";
 				function = "gpio";
@@ -944,8 +972,8 @@
 		};
 
 
-		cam_sensor_front0_reset_active: cam_sensor_front0_reset_active {
-			/* RESET0 */
+		cam_sensor_active_rst1: cam_sensor_active_rst1 {
+			/* CAM1 RESET */
 			mux {
 				pins = "gpio24";
 				function = "gpio";
@@ -958,8 +986,8 @@
 			};
 		};
 
-		cam_sensor_front0_reset_suspend: cam_sensor_front0_reset_suspend {
-			/* RESET0 */
+		cam_sensor_suspend_rst1: cam_sensor_suspend_rst1 {
+			/* CAM1 RESET */
 			mux {
 				pins = "gpio24";
 				function = "gpio";
@@ -967,6 +995,35 @@
 
 			config {
 				pins = "gpio24";
+				bias-pull-down; /* PULL DOWN */
+				drive-strength = <2>; /* 2 MA */
+				output-low;
+			};
+		};
+
+		cam_sensor_active_rst2: cam_sensor_active_rst2 {
+			/* CAM0B RESET */
+			mux {
+				pins = "gpio44";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio44";
+				bias-disable; /* No PULL */
+				drive-strength = <2>; /* 2 MA */
+			};
+		};
+
+		cam_sensor_suspend_rst2: cam_sensor_suspend_rst2 {
+			/* CAM0B RESET */
+			mux {
+				pins = "gpio44";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio44";
 				bias-pull-down; /* PULL DOWN */
 				drive-strength = <2>; /* 2 MA */
 				output-low;

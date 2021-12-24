@@ -1,5 +1,5 @@
 #include <dt-bindings/clock/qcom,audio-ext-clk.h>
-#include "qrb4210-rb2-msm-audio-lpass.dtsi"
+#include "msm-audio-lpass.dtsi"
 
 &msm_audio_ion {
 	iommus = <&apps_smmu 0x01c1 0x0>;
@@ -18,7 +18,7 @@
 	};
 };
 
-#include "qrb4210-rb2-lpi.dtsi"
+#include "bengal-lpi.dtsi"
 
 &q6core {
 	cdc_dmic01_gpios: cdc_dmic01_pinctrl {

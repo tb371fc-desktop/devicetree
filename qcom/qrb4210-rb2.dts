@@ -1,10 +1,10 @@
 /dts-v1/;
 
-#include "qrb4210-rb2.dtsi"
-#include "qrb4210-rb2-qrd.dtsi"
+#include "bengal.dtsi"
+#include "bengal-idp.dtsi"
 
 / {
-	model = "Qualcomm Technologies, Inc. QRB4210 RB2";
-	compatible = "qcom,bengal", "qcom,qrd";
-	qcom,board-id = <0x1000B 0>;
+	model = "Qualcomm Technologies, Inc. BENGAL IDP";
+	compatible = "qcom,bengal";
+	qcom,board-id =  <0x22 0>;
 };

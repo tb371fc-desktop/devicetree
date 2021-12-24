@@ -63,7 +63,7 @@
 				100000000>;
 
 		clocks = <&gcc GCC_PCIE_2A_PIPE_CLK>,
-			<&dummycc RPMH_CXO_CLK>,
+			<&rpmh_cxo_clk>,
 			<&gcc GCC_PCIE_2A_AUX_CLK>,
 			<&gcc GCC_PCIE_2A_CFG_AHB_CLK>,
 			<&gcc GCC_PCIE_2A_MSTR_AXI_CLK>,
@@ -73,6 +73,7 @@
 			<&gcc GCC_PCIE2A_PHY_RCHNG_CLK>,
 			<&gcc GCC_DDRSS_PCIE_SF_TBU_CLK>,
 			<&gcc GCC_AGGRE_NOC_PCIE_4_AXI_CLK>,
+			<&gcc GCC_PCIE_2A_PIPE_CLK_SRC>,
 			<&pcie_2a_pipe_clk>,
 			<&gcc GCC_AGGRE_NOC_PCIE_SOUTH_SF_AXI_CLK>,
 			<&gcc GCC_PCIE_2A_PIPEDIV2_CLK>;
@@ -83,7 +84,7 @@
 				"pcie_0_ldo", "pcie_0_slv_q2a_axi_clk",
 				"pcie_phy_refgen_clk",
 				"pcie_ddrss_sf_tbu_clk",
-				"pcie_aggre_noc_4_axi_clk",
+				"pcie_aggre_noc_4_axi_clk", "pcie_pipe_clk_mux",
 				"pcie_pipe_clk_ext_src",
 				"pcie_aggre_noc_south_sf_axi_clk", "pcie_0_pipediv2_clk";
 
@@ -281,7 +282,7 @@
 				100000000>;
 
 		clocks = <&gcc GCC_PCIE_2B_PIPE_CLK>,
-			<&dummycc RPMH_CXO_CLK>,
+			<&rpmh_cxo_clk>,
 			<&gcc GCC_PCIE_2B_AUX_CLK>,
 			<&gcc GCC_PCIE_2B_CFG_AHB_CLK>,
 			<&gcc GCC_PCIE_2B_MSTR_AXI_CLK>,
@@ -291,6 +292,7 @@
 			<&gcc GCC_PCIE2B_PHY_RCHNG_CLK>,
 			<&gcc GCC_DDRSS_PCIE_SF_TBU_CLK>,
 			<&gcc GCC_AGGRE_NOC_PCIE_4_AXI_CLK>,
+			<&gcc GCC_PCIE_2B_PIPE_CLK_SRC>,
 			<&pcie_2b_pipe_clk>,
 			<&gcc GCC_AGGRE_NOC_PCIE_SOUTH_SF_AXI_CLK>,
 			<&gcc GCC_PCIE_2B_PIPEDIV2_CLK>;
@@ -301,7 +303,7 @@
 				"pcie_1_ldo", "pcie_1_slv_q2a_axi_clk",
 				"pcie_phy_refgen_clk",
 				"pcie_ddrss_sf_tbu_clk",
-				"pcie_aggre_noc_4_axi_clk",
+				"pcie_aggre_noc_4_axi_clk", "pcie_pipe_clk_mux",
 				"pcie_pipe_clk_ext_src",
 				"pcie_aggre_noc_south_sf_axi_clk", "pcie_1_pipediv2_clk";
 
@@ -499,7 +501,7 @@
 				100000000>;
 
 		clocks = <&gcc GCC_PCIE_3A_PIPE_CLK>,
-			<&dummycc RPMH_CXO_CLK>,
+			<&rpmh_cxo_clk>,
 			<&gcc GCC_PCIE_3A_AUX_CLK>,
 			<&gcc GCC_PCIE_3A_CFG_AHB_CLK>,
 			<&gcc GCC_PCIE_3A_MSTR_AXI_CLK>,
@@ -509,6 +511,7 @@
 			<&gcc GCC_PCIE3A_PHY_RCHNG_CLK>,
 			<&gcc GCC_DDRSS_PCIE_SF_TBU_CLK>,
 			<&gcc GCC_AGGRE_NOC_PCIE_4_AXI_CLK>,
+			<&gcc GCC_PCIE_3A_PIPE_CLK_SRC>,
 			<&pcie_3a_pipe_clk>,
 			<&gcc GCC_AGGRE_NOC_PCIE_SOUTH_SF_AXI_CLK>,
 			<&gcc GCC_PCIE_3A_PIPEDIV2_CLK>;
@@ -519,7 +522,7 @@
 				"pcie_2_ldo", "pcie_2_slv_q2a_axi_clk",
 				"pcie_phy_refgen_clk",
 				"pcie_ddrss_sf_tbu_clk",
-				"pcie_aggre_noc_4_axi_clk",
+				"pcie_aggre_noc_4_axi_clk", "pcie_pipe_clk_mux",
 				"pcie_pipe_clk_ext_src",
 				"pcie_aggre_noc_south_sf_axi_clk", "pcie_2_pipediv2_clk";
 
@@ -716,7 +719,7 @@
 				100000000>;
 
 		clocks = <&gcc GCC_PCIE_3B_PIPE_CLK>,
-			<&dummycc RPMH_CXO_CLK>,
+			<&rpmh_cxo_clk>,
 			<&gcc GCC_PCIE_3B_AUX_CLK>,
 			<&gcc GCC_PCIE_3B_CFG_AHB_CLK>,
 			<&gcc GCC_PCIE_3B_MSTR_AXI_CLK>,
@@ -726,6 +729,7 @@
 			<&gcc GCC_PCIE3B_PHY_RCHNG_CLK>,
 			<&gcc GCC_DDRSS_PCIE_SF_TBU_CLK>,
 			<&gcc GCC_AGGRE_NOC_PCIE_4_AXI_CLK>,
+			<&gcc GCC_PCIE_3B_PIPE_CLK_SRC>,
 			<&pcie_3b_pipe_clk>,
 			<&gcc GCC_AGGRE_NOC_PCIE_SOUTH_SF_AXI_CLK>,
 			<&gcc GCC_PCIE_3B_PIPEDIV2_CLK>;
@@ -736,7 +740,7 @@
 				"pcie_3_ldo", "pcie_3_slv_q2a_axi_clk",
 				"pcie_phy_refgen_clk",
 				"pcie_ddrss_sf_tbu_clk",
-				"pcie_aggre_noc_4_axi_clk",
+				"pcie_aggre_noc_4_axi_clk", "pcie_pipe_clk_mux",
 				"pcie_pipe_clk_ext_src",
 				"pcie_aggre_noc_south_sf_axi_clk", "pcie_3_pipediv2_clk";
 
@@ -937,7 +941,7 @@
 				100000000>;
 
 		clocks = <&gcc GCC_PCIE_4_PIPE_CLK>,
-			<&dummycc RPMH_CXO_CLK>,
+			<&rpmh_cxo_clk>,
 			<&gcc GCC_PCIE_4_AUX_CLK>,
 			<&gcc GCC_PCIE_4_CFG_AHB_CLK>,
 			<&gcc GCC_PCIE_4_MSTR_AXI_CLK>,
@@ -947,6 +951,7 @@
 			<&gcc GCC_PCIE4_PHY_RCHNG_CLK>,
 			<&gcc GCC_DDRSS_PCIE_SF_TBU_CLK>,
 			<&gcc GCC_AGGRE_NOC_PCIE_4_AXI_CLK>,
+			<&gcc GCC_PCIE_4_PIPE_CLK_SRC>,
 			<&pcie_4_pipe_clk>,
 			<&gcc GCC_AGGRE_NOC_PCIE_SOUTH_SF_AXI_CLK>,
 			<&gcc GCC_CNOC_PCIE4_QX_CLK>,
@@ -958,7 +963,7 @@
 				"pcie_4_ldo", "pcie_4_slv_q2a_axi_clk",
 				"pcie_phy_refgen_clk",
 				"pcie_ddrss_sf_tbu_clk",
-				"pcie_aggre_noc_4_axi_clk",
+				"pcie_aggre_noc_4_axi_clk", "pcie_pipe_clk_mux",
 				"pcie_pipe_clk_ext_src",
 				"pcie_aggre_noc_south_sf_axi_clk", "pcie_cnoc_4_qx",
 				"pcie_4_pipediv2_clk";

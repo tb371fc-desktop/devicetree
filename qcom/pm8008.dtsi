@@ -106,7 +106,7 @@ pm8008_9: qcom,pm8008@9 {
 			qcom,hpm-min-load = <0>;
 		};
 
-		L6P: qcom,pm8008-l6@4400 {
+		L6P: qcom,pm8008-l6@4500 {
 			reg = <0x4500>;
 			regulator-name = "pm8008_l6";
 			regulator-min-microvolt = <1500000>;
@@ -115,7 +115,7 @@ pm8008_9: qcom,pm8008@9 {
 			qcom,hpm-min-load = <0>;
 		};
 
-		L7P: qcom,pm8008-l7@4400 {
+		L7P: qcom,pm8008-l7@4600 {
 			reg = <0x4600>;
 			regulator-name = "pm8008_l7";
 			regulator-min-microvolt = <1500000>;

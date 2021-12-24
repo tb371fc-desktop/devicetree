@@ -1730,6 +1730,7 @@
 
 		clocks = <&aopcc QDSS_CLK>;
 		clock-names = "apb_pclk";
+		status = "disabled";
 	};
 
 	cti_cpu2: cti@7220000 {
@@ -1877,6 +1878,7 @@
 		reg-names = "cti-base";
 
 		coresight-name = "coresight-cti-titan";
+		status = "disabled";
 
 		clocks = <&aopcc QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1889,6 +1891,7 @@
 		reg-names = "cti-base";
 
 		coresight-name = "coresight-cti-venus-arm9";
+		status = "disabled";
 
 		clocks = <&aopcc QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -2509,6 +2512,7 @@
 		reg-names = "tpdm-base";
 
 		coresight-name = "coresight-tpdm-ddr";
+		status = "disabled";
 
 		clocks = <&aopcc QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -2573,6 +2577,7 @@
 		reg-names = "tpdm-base";
 
 		coresight-name = "coresight-tpdm-vsense";
+		status = "disabled";
 
 		clocks = <&aopcc QDSS_CLK>;
 		clock-names = "apb_pclk";

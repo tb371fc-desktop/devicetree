@@ -365,36 +365,47 @@
 		status = "disabled";
 	};
 
+	/* VIDEO_CC GDSCs */
 	video_cc_mvs0_gdsc: qcom,gdsc@abf0d18 {
 		compatible = "qcom,gdsc";
 		reg = <0xabf0d18 0x4>;
 		regulator-name = "video_cc_mvs0_gdsc";
+		qcom,gds-timeout = <500>;
+		clock-names = "ahb_clk";
+		clocks = <&gcc GCC_VIDEO_AHB_CLK>;
+		qcom,support-hw-trigger;
 		qcom,retain-regs;
-		status = "disabled";
 	};
 
 	video_cc_mvs0c_gdsc: qcom,gdsc@abf0bf8 {
 		compatible = "qcom,gdsc";
 		reg = <0xabf0bf8 0x4>;
 		regulator-name = "video_cc_mvs0c_gdsc";
+		qcom,gds-timeout = <500>;
+		clock-names = "ahb_clk";
+		clocks = <&gcc GCC_VIDEO_AHB_CLK>;
 		qcom,retain-regs;
-		status = "disabled";
 	};
 
 	video_cc_mvs1_gdsc: qcom,gdsc@abf0d98 {
 		compatible = "qcom,gdsc";
 		reg = <0xabf0d98 0x4>;
 		regulator-name = "video_cc_mvs1_gdsc";
+		qcom,gds-timeout = <500>;
+		clock-names = "ahb_clk";
+		clocks = <&gcc GCC_VIDEO_AHB_CLK>;
+		qcom,support-hw-trigger;
 		qcom,retain-regs;
-		status = "disabled";
 	};
 
 	video_cc_mvs1c_gdsc: qcom,gdsc@abf0c98 {
 		compatible = "qcom,gdsc";
 		reg = <0xabf0c98 0x4>;
 		regulator-name = "video_cc_mvs1c_gdsc";
+		qcom,gds-timeout = <500>;
+		clock-names = "ahb_clk";
+		clocks = <&gcc GCC_VIDEO_AHB_CLK>;
 		qcom,retain-regs;
-		status = "disabled";
 	};
 
 	/* GPU_CC GDSCs */

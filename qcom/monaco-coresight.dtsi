@@ -1441,6 +1441,9 @@
 
 		interrupts = <GIC_SPI 429 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "byte-cntr-irq";
+		qcom,sw-usb;
+		qcom,iommu-dma = "bypass";
+		qcom,iommu-dma-addr-pool = <0x0 0xffc00000>;
 
 		in-ports {
 			port {

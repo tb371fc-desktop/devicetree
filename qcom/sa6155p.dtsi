@@ -14,6 +14,13 @@
 	};
 };
 
+&reserved_memory {
+	uefi_log: uefi_log@9241C000 {
+		reg = <0x0 0x9241C000 0x0 0x10000>;
+		label = "uefi_log";
+	};
+};
+
 /* Delete second instance of pm6155 definitions for APQ version */
 &spmi_bus {
 	/delete-node/ qcom,pm6155@4;
@@ -175,11 +182,13 @@
 /* GPU power level overrides */
 &msm_gpu {
 	/*
-	 * Speed-bin zero is default speed bin.
-	 * For rest of the speed bins, speed-bin value
-	 * is calulated as FMAX/4.8 MHz round up to zero
-	 * decimal places.
+	 * For auto chipsets, qcom,gpu-speed-bin gives the feature id number
+	 * which would be  matched against value of "qcom,speed-bin" to pick
+	 * the corresponding speedbin number for a SKU.
 	 */
+	/delete-property/qcom,gpu-speed-bin;
+	/* Read feature id bits to get speedbin number */
+	qcom,gpu-speed-bin = <0x130 0xf00000 20>;
 
 	/delete-node/qcom,gpu-pwrlevel-bins;
 	qcom,gpu-pwrlevel-bins {
@@ -262,7 +271,7 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 
-			qcom,speed-bin = <177>;
+			qcom,speed-bin = <3>;
 
 			qcom,initial-pwrlevel = <4>;
 			qcom,ca-target-pwrlevel = <3>;
@@ -332,24 +341,34 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 
-			qcom,speed-bin = <156>;
+			qcom,speed-bin = <4>;
 
-			qcom,initial-pwrlevel = <3>;
-			qcom,ca-target-pwrlevel = <2>;
+			qcom,initial-pwrlevel = <4>;
+			qcom,ca-target-pwrlevel = <3>;
 
-			/* NOM L1 */
+			/* TURBO */
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
-				qcom,gpu-freq = <745000000>;
-				qcom,level = <RPMH_REGULATOR_LEVEL_NOM_L1>;
+				qcom,gpu-freq = <845000000>;
+				qcom,level = <RPMH_REGULATOR_LEVEL_TURBO>;
 				qcom,bus-freq = <11>;
 				qcom,bus-min = <10>;
 				qcom,bus-max = <11>;
 			};
 
-			/* NOM */
+			/* NOM L1 */
 			qcom,gpu-pwrlevel@1 {
 				reg = <1>;
+				qcom,gpu-freq = <745000000>;
+				qcom,level = <RPMH_REGULATOR_LEVEL_NOM_L1>;
+				qcom,bus-freq = <10>;
+				qcom,bus-min = <9>;
+				qcom,bus-max = <11>;
+			};
+
+			/* NOM */
+			qcom,gpu-pwrlevel@2 {
+				reg = <2>;
 				qcom,gpu-freq = <650000000>;
 				qcom,level = <RPMH_REGULATOR_LEVEL_NOM>;
 				qcom,bus-freq = <9>;
@@ -358,8 +377,8 @@
 			};
 
 			/* SVS L1 */
-			qcom,gpu-pwrlevel@2 {
-				reg = <2>;
+			qcom,gpu-pwrlevel@3 {
+				reg = <3>;
 				qcom,gpu-freq = <500000000>;
 				qcom,level = <RPMH_REGULATOR_LEVEL_SVS_L1>;
 				qcom,bus-freq = <8>;
@@ -368,8 +387,8 @@
 			};
 
 			/* SVS */
-			qcom,gpu-pwrlevel@3 {
-				reg = <3>;
+			qcom,gpu-pwrlevel@4 {
+				reg = <4>;
 				qcom,gpu-freq = <435000000>;
 				qcom,level = <RPMH_REGULATOR_LEVEL_SVS>;
 				qcom,bus-freq = <7>;
@@ -378,8 +397,8 @@
 			};
 
 			/* XO */
-			qcom,gpu-pwrlevel@4 {
-				reg = <4>;
+			qcom,gpu-pwrlevel@5 {
+				reg = <5>;
 				qcom,gpu-freq = <0>;
 				qcom,level = <RPMH_REGULATOR_LEVEL_RETENTION>;
 				qcom,bus-freq = <0>;
@@ -392,7 +411,7 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 
-			qcom,speed-bin = <136>;
+			qcom,speed-bin = <5>;
 
 			qcom,initial-pwrlevel = <2>;
 			qcom,ca-target-pwrlevel = <1>;
@@ -442,7 +461,7 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 
-			qcom,speed-bin = <105>;
+			qcom,speed-bin = <6>;
 
 			qcom,initial-pwrlevel = <1>;
 			qcom,ca-target-pwrlevel = <0>;
@@ -482,7 +501,7 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 
-			qcom,speed-bin = <91>;
+			qcom,speed-bin = <7>;
 
 			qcom,initial-pwrlevel = <0>;
 			qcom,ca-target-pwrlevel = <0>;
@@ -491,36 +510,6 @@
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
 				qcom,gpu-freq = <435000000>;
-				qcom,level = <RPMH_REGULATOR_LEVEL_SVS>;
-				qcom,bus-freq = <7>;
-				qcom,bus-min = <5>;
-				qcom,bus-max = <8>;
-			};
-
-			/* XO */
-			qcom,gpu-pwrlevel@1 {
-				reg = <1>;
-				qcom,gpu-freq = <0>;
-				qcom,level = <RPMH_REGULATOR_LEVEL_RETENTION>;
-				qcom,bus-freq = <0>;
-				qcom,bus-min = <0>;
-				qcom,bus-max = <0>;
-			};
-		};
-
-		qcom,gpu-pwrlevels-6 {
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			qcom,speed-bin = <73>;
-
-			qcom,initial-pwrlevel = <0>;
-			qcom,ca-target-pwrlevel = <0>;
-
-			/* SVS */
-			qcom,gpu-pwrlevel@0 {
-				reg = <0>;
-				qcom,gpu-freq = <350000000>;
 				qcom,level = <RPMH_REGULATOR_LEVEL_SVS>;
 				qcom,bus-freq = <7>;
 				qcom,bus-min = <5>;

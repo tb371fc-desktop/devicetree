@@ -327,8 +327,13 @@ dtb-$(CONFIG_ARCH_MONACO) += monaco-rumi.dtb \
 	monacop-wdp-v1.1.dtb
 endif
 
-dtb-$(CONFIG_ARCH_SCUBA) += qrb2210-rb1.dtb \
+ifneq ($(CONFIG_ARCH_SA410M),y)
+	dtb-$(CONFIG_ARCH_SCUBA) += \
+				qrb2210-rb1.dtb
+else
+	dtb-$(CONFIG_ARCH_SA410M) += \
 				sa410m.dtb
+endif
 
 dtb-$(CONFIG_ARCH_BENGAL) += qrb4210-rb2.dtb
 
@@ -344,13 +349,17 @@ else
 		sa8155-adp-star-overlay.dtbo \
 		sa8155p-adp-star-overlay.dtbo \
 		sa8155-v2-adp-air-overlay.dtbo \
-		sa8155p-v2-adp-air-overlay.dtbo
+		sa8155p-v2-adp-air-overlay.dtbo \
+		sa8155-v2-adp-pcie-ep-air-overlay.dtbo \
+		sa8155p-v2-adp-pcie-ep-air-overlay.dtbo
 endif
 
 sa8155-adp-star-overlay.dtbo-base := sa8155.dtb sa8155-v2.dtb
 sa8155p-adp-star-overlay.dtbo-base := sa8155p.dtb sa8155p-v2.dtb sa8155p-iot-v2.dtb
 sa8155-v2-adp-air-overlay.dtbo-base := sa8155.dtb sa8155-v2.dtb
 sa8155p-v2-adp-air-overlay.dtbo-base := sa8155p.dtb sa8155p-v2.dtb sa8155p-iot-v2.dtb
+sa8155-v2-adp-pcie-ep-air-overlay.dtbo-base := sa8155.dtb sa8155-v2.dtb
+sa8155p-v2-adp-pcie-ep-air-overlay.dtbo-base := sa8155p.dtb sa8155p-v2.dtb
 sa8155-adp-star-lxc-overlay.dtbo-base := sa8155.dtb sa8155-v2.dtb
 sa8155p-adp-star-lxc-overlay.dtbo-base := sa8155p.dtb sa8155p-v2.dtb
 sa8155-v2-adp-air-lxc-overlay.dtbo-base := sa8155.dtb sa8155-v2.dtb
@@ -362,6 +371,8 @@ dtb-$(CONFIG_ARCH_SA8155)       += sa8155-adp-star.dtb \
 	sa8155p-v2-adp-star.dtb \
 	sa8155-v2-adp-air.dtb \
 	sa8155p-v2-adp-air.dtb \
+	sa8155-v2-adp-pcie-ep-air.dtb \
+	sa8155p-v2-adp-pcie-ep-air.dtb \
 	sa8155p-iot-v2-adp-star.dtb \
 	sa8155p-iot-v2-adp-air.dtb
 endif
@@ -509,18 +520,21 @@ dtb-$(CONFIG_QTI_QUIN_GVM) += sa8155-vm-la.dtb \
 
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 	dtbo-$(CONFIG_ARCH_DIREWOLF) += direwolf-ivi-rumi-overlay.dtbo \
+		direwolf-ivi-adp-air-overlay.dtbo \
 		direwolf-ivi-adp-star-overlay.dtbo \
 		direwolf-ivi-adp-star-overlay-v2.dtbo \
 		direwolf-adas-rumi-overlay.dtbo \
 		direwolf-adas-adp-star-overlay.dtbo
 
 direwolf-ivi-rumi-overlay.dtbo-base := direwolf-ivi.dtb
+direwolf-ivi-adp-air-overlay.dtbo-base := direwolf-ivi.dtb
 direwolf-ivi-adp-star-overlay.dtbo-base := direwolf-ivi.dtb
 direwolf-ivi-adp-star-overlay-v2.dtbo-base := direwolf-ivi-v2.dtb
 direwolf-adas-rumi-overlay.dtbo-base := direwolf-adas.dtb
 direwolf-adas-adp-star-overlay.dtbo-base := direwolf-adas.dtb
 else
 dtb-$(CONFIG_ARCH_DIREWOLF) += direwolf-ivi-rumi.dtb \
+	direwolf-ivi-adp-air.dtb \
 	direwolf-ivi-adp-star.dtb \
 	direwolf-ivi-adp-star-v2.dtb \
 	direwolf-adas-rumi.dtb \

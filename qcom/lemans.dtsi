@@ -4,6 +4,8 @@
 #include <dt-bindings/clock/qcom,gcc-lemans.h>
 #include <dt-bindings/clock/qcom,gpucc-lemans.h>
 #include <dt-bindings/clock/qcom,videocc-lemans.h>
+#include <dt-bindings/interconnect/qcom,epss-l3.h>
+#include <dt-bindings/interconnect/qcom,lemans.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 
 / {
@@ -15,6 +17,8 @@
 	#address-cells = <2>;
 	#size-cells = <2>;
 	memory { device_type = "memory"; reg = <0 0 0 0>; };
+
+	reserved_memory: reserved-memory { };
 
 	chosen: chosen { };
 
@@ -205,6 +209,153 @@
 				};
 			};
 		};
+	};
+};
+
+&reserved_memory {
+	#address-cells = <2>;
+	#size-cells = <2>;
+	ranges;
+
+	sail_mem: sail_region@80000000 {
+		no-map;
+		reg = <0x0 0x80000000 0x0 0x10000000>;
+	};
+
+	hyp_mem: hyp_region@90000000 {
+		no-map;
+		reg = <0x0 0x90000000 0x0 0x600000>;
+	};
+
+	xbl_boot: xbl_boot_region@90600000 {
+		no-map;
+		reg = <0x0 0x90600000 0x0 0x200000>;
+	};
+
+	xbl_aop_mem: xbl_aop_region@90800000 {
+		no-map;
+		reg = <0x0 0x90800000 0x0 0x60000>;
+	};
+
+	cmd_db: reserved-memory@90860000 {
+		compatible = "qcom,cmd-db";
+		no-map;
+		reg = <0x0 0x90860000 0x0 0x20000>;
+	};
+
+	uefi_log: uefi_log_region@908B0000 {
+		no-map;
+		reg = <0x0 0x908B0000 0x0 0x10000>;
+	};
+
+	reserved_0: reserved_0_region@908F0000 {
+		no-map;
+		reg = <0x0 0x908F0000 0x0 0xF000>;
+	};
+
+	secdata: secdata_region@908FF000 {
+		no-map;
+		reg = <0x0 0x908FF000 0x0 0x1000>;
+	};
+
+	smem_mem: smem_mem_region@90900000 {
+		no-map;
+		reg = <0x0 0x90900000 0x0 0x200000>;
+	};
+
+	cpucp_fw: cpucp_fw_region@90B00000 {
+		no-map;
+		reg = <0x0 0x90B00000 0x0 0x100000>;
+	};
+
+	lpass_ml: lpass_ml_region@0x93B00000 {
+		no-map;
+		reg = <0x0 0x93B00000 0x0 0xF00000>;
+	};
+
+	adsp_rpc: adsp_rpc_remote_heap@0x94A00000 {
+		no-map;
+		reg = <0x0 0x94A00000 0x0 0x800000>;
+	};
+
+	pil_camera_mem: pil_camera_region@95200000 {
+		no-map;
+		reg = <0x0 0x95200000 0x0 0x500000>;
+	};
+
+	pil_video_mem: pil_video_region@95700000 {
+		no-map;
+		reg = <0x0 0x95700000 0x0 0x500000>;
+	};
+
+	pil_adsp_mem: pil_adsp_region@95C00000 {
+		no-map;
+		reg = <0x0 0x95C00000 0x0 0x1E00000>;
+	};
+
+	pil_gdsp0_mem: pil_gdsp0_region@97A00000 {
+		no-map;
+		reg = <0x0 0x97A00000 0x0 0x1e00000>;
+	};
+
+	pil_gdsp1_mem: pil_gdsp1_region@99800000 {
+		no-map;
+		reg = <0x0 0x99800000 0x0 0x1e00000>;
+	};
+
+	pil_cdsp0_mem: pil_cdsp0_region@9B600000 {
+		no-map;
+		reg = <0x0 0x9B600000 0x0 0x1e00000>;
+	};
+
+	pil_gpu_mem: pil_gpu_region@9D400000 {
+		no-map;
+		reg = <0x0 0x9D400000 0x0 0x2000>;
+	};
+
+	pil_reserved_mem: pil_reserved_region@9D500000 {
+		no-map;
+		reg = <0x0 0x9D500000 0x0 0x300000>;
+	};
+
+	pil_cdsp1_mem: pil_cdsp1_region@9D800000 {
+		no-map;
+		reg = <0x0 0x9D800000 0x0 0x1E00000>;
+	};
+
+	pil_cvp_mem: pil_cvp_region@9F600000 {
+		no-map;
+		reg = <0x0 0x9F600000 0x0 0x700000>;
+	};
+
+	uefi_mem: uefi_mem_region@AF000000 {
+		no-map;
+		reg = <0x0 0xAF000000 0x0 0x1000000>;
+	};
+
+	hyp_tz_mem: hyp_tz_mem_region@BEB00000 {
+		no-map;
+		reg = <0x0 0xBEB00000 0x0 0x11500000>;
+	};
+
+	tz_stat_mem: adsp_rpc_mem_region@D0000000 {
+		no-map;
+		reg = <0x0 0xD0000000 0x0 0x100000>;
+	};
+
+	pIMEM: pIMEM_vault_mem_region@D0100000 {
+		no-map;
+		reg = <0x0 0xD0100000 0x0 0x5000000>;
+	};
+
+	  /* global autoconfigured region for contiguous allocations */
+	linux,cma {
+		compatible = "shared-dma-pool";
+		alloc-ranges = <0x0 0x00000000 0x0 0xdfffffff>;
+		reusable;
+		alignment = <0x0 0x400000>;
+		size = <0x0 0x2000000>;
+		linux,cma-default;
 	};
 };
 
@@ -452,9 +603,95 @@
 		#clock-cells = <1>;
 		#reset-cells = <1>;
 	};
+
+	tlmm: pinctrl@f000000 {
+		compatible = "qcom,lemans-pinctrl";
+		reg = <0xf000000 0x1000000>;
+		interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		interrupt-controller;
+		#interrupt-cells = <2>;
+	};
+
+	clk_virt: interconnect@0 {
+		compatible = "qcom,lemans-clk_virt";
+		#interconnect-cells = <1>;
+	};
+
+	mc_virt: interconnect@1 {
+		compatible = "qcom,lemans-mc_virt";
+		#interconnect-cells = <1>;
+	};
+
+	config_noc: interconnect@014C0000 {
+		compatible = "qcom,lemans-config_noc";
+		reg = <0x014C0000 0x25400>;
+		#interconnect-cells = <1>;
+	};
+
+	system_noc: interconnect@01680000 {
+		compatible = "qcom,lemans-system_noc";
+		reg = <0x01680000 0x1B200>;
+		#interconnect-cells = <1>;
+	};
+
+	aggre1_noc:interconnect@016C0000 {
+		compatible = "qcom,lemans-aggre1_noc";
+		reg = <0x016C0000 0xE080>;
+		#interconnect-cells = <1>;
+	};
+
+	aggre2_noc: interconnect@01700000 {
+		compatible = "qcom,lemans-aggre2_noc";
+		reg = <0x01700000 0xD400>;
+		#interconnect-cells = <1>;
+	};
+
+	mmss_noc: interconnect@017A0000 {
+		compatible = "qcom,lemans-mmss_noc";
+		reg = <0x017A0000 0x40000>;
+		#interconnect-cells = <1>;
+	};
+
+	lpass_ag_noc: interconnect@03C40000 {
+		compatible = "qcom,lemans-lpass_ag_noc";
+		reg = <0x3C40000 0x17200>;
+		#interconnect-cells = <1>;
+	};
+
+	dc_noc: interconnect@090E0000 {
+		compatible = "qcom,lemans-dc_noc";
+		reg = <0x090E0000 0x5080>;
+		#interconnect-cells = <1>;
+	};
+
+	gem_noc: interconnect@09100000 {
+		compatible = "qcom,lemans-gem_noc";
+		reg = <0x09100000 0xF6080>;
+		#interconnect-cells = <1>;
+	};
+
+	nspa_noc: interconnect@260C0000 {
+		compatible = "qcom,lemans-nspa_noc";
+		reg = <0x260C0000 0x15080>;
+		#interconnect-cells = <1>;
+	};
+
+	nspb_noc: interconnect@2A0C0000 {
+		compatible = "qcom,lemans-nspb_noc";
+		reg = <0x2A0C0000 0x15080>;
+		#interconnect-cells = <1>;
+	};
+
+	epss_l3_cpu: l3_cpu@18590000 {
+		compatible = "lahaina-epss-l3-cpu";
+		#interconnect-cells = <1>;
+	};
 };
 
 #include "direwolf-gdsc.dtsi"
+#include "lemans-pinctrl.dtsi"
 
 &cam_cc_titan_top_gdsc {
 	compatible = "regulator-fixed";
@@ -623,3 +860,5 @@
 	reg = <0xabf8074 0x4>;
 	status = "ok";
 };
+
+#include "lemans-stub-regulator.dtsi"

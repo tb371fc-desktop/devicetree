@@ -279,6 +279,24 @@
 				reg = <0x48 0x1>;
 				bits = <1 7>;
 			};
+
+			charger_debug_mask: debug@94 {
+				reg = <0x94 0x1>;
+			};
+
+			qbg_debug_mask_low: debug@96 {
+				reg = <0x96 0x1>;
+			};
+
+			qbg_debug_mask_high: debug@97 {
+				reg = <0x97 0x1>;
+			};
+
+		};
+
+		pm5100_sdam_7: sdam@7600 {
+			compatible = "qcom,spmi-sdam";
+			reg = <0x7600>;
 		};
 
 		pm5100_sdam_23: sdam@8600 {
