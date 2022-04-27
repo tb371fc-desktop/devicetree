@@ -308,6 +308,16 @@
 			reg = <0x7600>;
 		};
 
+		pm5100_sdam_22: sdam@8500 {
+			compatible = "qcom,spmi-sdam";
+			reg = <0x8500>;
+
+			/* GPS demod state */
+			skip_esr_state: demod@46 {
+				reg = <0x46 0x1>;
+			};
+		};
+
 		pm5100_sdam_23: sdam@8600 {
 			compatible = "qcom,spmi-sdam";
 			reg = <0x8600>;

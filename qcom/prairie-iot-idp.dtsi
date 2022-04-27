@@ -4,6 +4,7 @@
 #include "display/sm6150-sde-display.dtsi"
 #include <dt-bindings/clock/qcom,gcc-sm6150.h>
 #include <dt-bindings/iio/qti_power_supply_iio.h>
+#include "camera/sm6150-camera-sensor-idp.dtsi"
 
 &qupv3_se3_i2c {
 	#address-cells = <1>;
@@ -24,6 +25,43 @@
 			power-source = <0>;
 		};
 	};
+
+	cam_sensor_dvdd {
+		cam_sensor_dvdd_default: cam_sensor_dvdd_default {
+			pins = "gpio3";
+			function = "normal";
+			output-low;
+			power-source = <0>;
+		};
+	};
+
+	cam_sensor_1_vana {
+		cam_sensor_1_vana_default: cam_sensor_1_vana_default {
+			pins = "gpio8";
+			function = "normal";
+			output-low;
+			power-source = <0>;
+		};
+	};
+
+	cam_sensor_0_vana {
+		cam_sensor_0_vana_default: cam_sensor_0_vana_default {
+			pins = "gpio9";
+			function = "normal";
+			output-low;
+			power-source = <0>;
+		};
+	};
+
+	cam_sensor_1_2_vana {
+		cam_sensor_1_2_vana_default: cam_sensor_1_2_vana_default {
+			pins = "gpio4";
+			function = "normal";
+			output-low;
+			power-source = <0>;
+		};
+	};
+
 };
 
 &soc {
@@ -137,6 +175,10 @@
 };
 
 &qupv3_se7_4uart {
+	status = "ok";
+};
+
+&flash_led {
 	status = "ok";
 };
 
@@ -272,6 +314,7 @@
 };
 
 &pm6150_qg {
+	qcom,battery-data = <&mtp_batterydata>;
 	qcom,qg-iterm-ma = <100>;
 	qcom,hold-soc-while-full;
 	qcom,linearize-soc;
@@ -288,6 +331,8 @@
 		<&pm6150_vadc ADC5_AMUX_THM4_100K_PU>,
 		<&pm6150_vadc ADC5_SBUx>,
 		<&pm6150_vadc ADC5_VPH_PWR>,
+		<&pm6150_qg PSY_IIO_CHARGE_FULL>,
+		<&pm6150_qg PSY_IIO_CHARGE_FULL_DESIGN>,
 		<&pm6150_qg PSY_IIO_RESISTANCE_ID>,
 		<&pm6150_qg PSY_IIO_VOLTAGE_NOW>,
 		<&pm6150_qg PSY_IIO_TEMP>,
@@ -309,6 +354,8 @@
 		"conn_temp",
 		"sbux_res",
 		"vph_voltage",
+		"charge_full",
+		"charge_full_design",
 		"resistance_id",
 		"voltage_now",
 		"temp",
@@ -323,7 +370,7 @@
 		"charge_counter",
 		"cycle_count",
 		"time_to_full_now";
-	qcom,batteryless-platform;
+	qcom,battery-data = <&mtp_batterydata>;
 	qcom,auto-recharge-soc = <98>;
 	qcom,step-charging-enable;
 	qcom,sw-jeita-enable;

@@ -276,8 +276,7 @@
 				compatible = "android,fstab";
 				vendor {
 					compatible = "android,vendor";
-					dev = "/dev/block/platform/soc
-						/1d84000.ufshc/by-name/vendor";
+					dev = "/dev/block/platform/soc/1d84000.ufshc/by-name/vendor";
 					type = "ext4";
 					mnt_flags = "ro,barrier=1,discard";
 					fsmgr_flags = "wait,slotselect,avb";
@@ -1569,6 +1568,7 @@
 		qcom,bus-vector-names = "MIN",
 					"MAX";
 		qcom,instance-type = "ufs";
+		qcom,num-fde-slots = <31>;
 	};
 
 	ufsphy_mem: ufsphy_mem@1d87000 {
@@ -2407,6 +2407,7 @@
 		qcom,bus-vector-names = "MIN",
 					"MAX";
 		qcom,instance-type = "sdcc";
+		qcom,num-fde-slots = <31>;
 	};
 
 	sdhc_1: sdhci@7c4000 {

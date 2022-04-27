@@ -739,6 +739,9 @@
 		compatible = "lahaina-epss-l3-cpu";
 		#interconnect-cells = <1>;
 	};
+
+	thermal_zones: thermal-zones {
+	};
 };
 
 #include "direwolf-gdsc.dtsi"
@@ -915,3 +918,4 @@
 };
 
 #include "lemans-stub-regulator.dtsi"
+#include "lemans-thermal.dtsi"
