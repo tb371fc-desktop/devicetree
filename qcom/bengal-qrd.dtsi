@@ -3,9 +3,183 @@
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/iio/qti_power_supply_iio.h>
 
+#include "display/bengal-sde.dtsi"
+#include "display/bengal-sde-display-qrd.dtsi"
+
+&qupv3_se0_i2c {
+	status = "ok";
+
+	ioexp20: i2c0gpio-expander@20 {
+		#gpio-cells = <2>;
+		compatible = "semtech,sx1508q";
+		reg = <0x20>;
+		gpio-controller;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&sx1508_cam0a_strobe_active
+				&sx1508_cam0b_strobe_active
+				&sx1508_cam0b_spare_active>;
+
+		sx1508_cam0a_strobe_active: sx1508_cam0a_strobe_active {
+			pins = "gpio0";
+			bias-disable;
+			output-high;
+		};
+
+		sx1508_cam0b_strobe_active: sx1508_cam0b_strobe_active {
+			pins = "gpio3";
+			bias-disable;
+			output-high;
+		};
+
+		sx1508_cam0b_spare_active: sx1508_cam0b_spare_active {
+			pins = "gpio4";
+			bias-disable;
+			output-high;
+		};
+	};
+
+	ioexp21: i2c0gpio-expander@21 {
+		#gpio-cells = <2>;
+		compatible = "semtech,sx1508q";
+		reg = <0x21>;
+		gpio-controller;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&sx1508_lcd0_vsn_active
+				&sx1508_cam1_pwdn_active>;
+
+		sx1508_lcd0_vsn_active: sx1508_lcd0_vsn_active {
+			pins = "gpio1";
+			bias-disable;
+			output-high;
+		};
+
+		sx1508_lcd0_vsn_sleep: sx1508_lcd0_vsn_sleep {
+			pins = "gpio1";
+			bias-disable;
+			output-low;
+		};
+
+		sx1508_cam1_pwdn_active: sx1508_cam1_pwdn_active {
+			pins = "gpio4";
+			bias-disable;
+			output-high;
+		};
+	};
+
+	ioexp22: i2c0gpio-expander@22 {
+		#gpio-cells = <2>;
+		compatible = "semtech,sx1508q";
+		reg = <0x22>;
+		gpio-controller;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&sx1508_lcd0_vsp_active>;
+
+		sx1508_lcd0_vsp_active: sx1508_lcd0_vsp_active {
+			pins = "gpio7";
+			bias-disable;
+			output-high;
+		};
+
+		sx1508_lcd0_vsp_sleep: sx1508_lcd0_vsp_sleep {
+			pins = "gpio7";
+			bias-disable;
+			output-low;
+		};
+	};
+
+	ioexp23: i2c0gpio-expander@23 {
+		#gpio-cells = <2>;
+		compatible = "semtech,sx1508q";
+		reg = <0x23>;
+		gpio-controller;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&sx1508_cam1_strobe_active
+				&sx1508_cam2_strobe_active
+				&sx1508_cam2_pwdn_active
+				&sx1508_gmsl_power_active>;
+
+		sx1508_cam1_strobe_active: sx1508_cam1_strobe_active {
+			pins = "gpio2";
+			bias-disable;
+			output-high;
+		};
+
+		sx1508_cam2_strobe_active: sx1508_cam2_strobe_active {
+			pins = "gpio3";
+			bias-disable;
+			output-high;
+		};
+
+		sx1508_cam2_pwdn_active: sx1508_cam2_pwdn_active {
+			pins = "gpio5";
+			bias-disable;
+			output-high;
+		};
+
+		sx1508_gmsl_power_active: sx1508_gmsl_power_active {
+			pins = "gpio7";
+			bias-disable;
+			output-high;
+		};
+	};
+};
+
 &qupv3_se1_i2c {
 	status = "ok";
 	#include "smb1355.dtsi"
+};
+
+&qupv3_se2_i2c {
+	status = "ok";
+
+	pinctrl-0 = <&qupv3_se2_i2c_active &lt9611_level_shift_active>;
+	pinctrl-1 = <&qupv3_se2_i2c_sleep &lt9611_level_shift_sleep>;
+
+	lt9611: lt,lt9611@2b {
+		compatible = "lt,lt9611uxc";
+		reg = <0x2b>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <46 0>;
+		interrupt-names = "lt_irq";
+		lt,irq-gpio = <&tlmm 46 0>;
+		lt,reset-gpio = <&tlmm 41 0>;
+		instance_id = <0>;
+		lt,non-pluggable;
+		lt,preferred-mode = "1920x1080";
+
+		lt,customize-modes {
+			lt,customize-mode-id@0 {
+				lt,mode-h-active = <1920>;
+				lt,mode-h-front-porch = <88>;
+				lt,mode-h-pulse-width = <44>;
+				lt,mode-h-back-porch = <148>;
+				lt,mode-h-active-high;
+				lt,mode-v-active = <1080>;
+				lt,mode-v-front-porch = <4>;
+				lt,mode-v-pulse-width = <5>;
+				lt,mode-v-back-porch = <36>;
+				lt,mode-v-active-high;
+				lt,mode-refresh-rate = <60>;
+				lt,mode-clock-in-khz = <148500>;
+			};
+		};
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+				lt9611_in: endpoint {
+					remote-endpoint = <&ext_dsi_out>;
+				};
+			};
+		};
+	};
 };
 
 &soc {
@@ -194,6 +368,7 @@
 	};
 
 	fan0: pwm-fan {
+		status = "disabled";
 		compatible = "pwm-fan";
 		pwms = <&pm6125_pwm 0 100000>;
 		cooling-levels = <0 32 64 128 170 230 255>;
@@ -218,6 +393,42 @@
 		spi-max-frequency = <10000000>;
 		gpio-controller;
 		status = "okay";
+	};
+};
+
+&qupv3_se1_i2c {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	qcom,clk-freq-out = <400000>;
+
+	sx1508q: ch_io_expander@22 {
+		compatible = "semtech,sx1508q";
+		reg = <0x22>;
+		#gpio-cells = <2>;
+		#interrupt-cells = <2>;
+		gpio-controller;
+	};
+};
+
+&qupv3_se2_i2c {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	qcom,clk-freq-out = <400000>;
+
+	ch101_0: ch101_0@45 {
+		compatible = "invensense,ch101";
+		reg = <0x45>;
+		rst-gpios = <&tlmm 111 GPIO_ACTIVE_HIGH>;
+		rtc_rst-gpios = <&tlmm 80 GPIO_ACTIVE_HIGH>;
+		prg-gpios = <0 1 2 3 4 5>;
+		int-gpios = <&tlmm 83 GPIO_ACTIVE_HIGH>,
+				<&tlmm 84 GPIO_ACTIVE_HIGH>,
+				<&tlmm 85 GPIO_ACTIVE_HIGH>,
+				<&tlmm 34 GPIO_ACTIVE_HIGH>,
+				<&tlmm 35 GPIO_ACTIVE_HIGH>,
+				<&tlmm 36 GPIO_ACTIVE_HIGH>;
 	};
 };
 
@@ -295,5 +506,19 @@
 &thermal_zones {
 	quiet-therm-step {
 		status = "ok";
+	};
+};
+
+&sde_dsi {
+	ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		port@0 {
+			reg = <0>;
+			ext_dsi_out: endpoint {
+				remote-endpoint = <&lt9611_in>;
+			};
+		};
 	};
 };
