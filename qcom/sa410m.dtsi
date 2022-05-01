@@ -255,6 +255,14 @@
 		label = "disp_rdump_region";
 	};
 
+	user_contig_mem: user_contig_region {
+		compatible = "shared-dma-pool";
+		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
+		reusable;
+		alignment = <0x0 0x400000>;
+		size = <0x0 0x1000000>;
+	};
+
 	qseecom_mem: qseecom_region {
 		compatible = "shared-dma-pool";
 		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
@@ -1510,7 +1518,7 @@
 #include "sa410m-pinctrl.dtsi"
 #include "pm2250-rpm-regulator.dtsi"
 #include "scuba-regulator.dtsi"
-#include "scuba-ion.dtsi"
+#include "sa410m-ion.dtsi"
 #include "msm-arm-smmu-scuba.dtsi"
 #include "sa410m-gdsc.dtsi"
 #include "sa410m-qupv3.dtsi"
@@ -1518,12 +1526,7 @@
 #include "sa410m-audio.dtsi"
 #include "sa410m-audio-overlay.dtsi"
 #include "scuba-pm.dtsi"
-
-&soc {
-	qcom,ion {
-		/delete-node/ qcom,ion-heap@26;
-	};
-};
+#include "scuba-coresight.dtsi"
 
 &qupv3_se4_2uart {
 	status = "ok";
@@ -1589,6 +1592,10 @@
 			<&pm2250_vadc ADC5_CHG_TEMP>;
 	io-channel-names = "usb_in_voltage",
 			"chg_temp";
+};
+
+&tmc_etr {
+	qcom,iommu-dma = "bypass";
 };
 
 #include "msm-arm-smmu-scuba.dtsi"

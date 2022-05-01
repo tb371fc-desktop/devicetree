@@ -16,15 +16,20 @@
 			actual-dev = "vda", "vdb", "vdc",
 					"vdd", "vde", "vdf",
 					"vdg", "vdh", "vdi",
-					"vdj", "vdk";
+					"vdj", "vdk", "vdl";
 			rename-dev = "system", "userdata", "vendor",
 					"persist", "modem", "bluetooth",
-					"misc", "vbmeta", "boot", "dtbo";
+					"misc", "vbmeta", "boot", "dtbo",
+					"dsp";
 			rename-dev-ab = "super", "userdata", "metadata",
 					"persist", "modem_a", "bluetooth_a",
 					"misc", "vbmeta_a", "vbmeta_b",
-					"boot", "dtbo";
+					"boot_a", "dtbo_a", "dsp_a";
 		};
+	};
+
+	chosen {
+		bootargs = "rcupdate.rcu_expedited=1 rcu_nocbs=0-7 cgroup.memory=nokmem,nosocket androidboot.usbcontroller=a600000.dwc3";
 	};
 };
 

@@ -1,5 +1,5 @@
 &hab {
-	vmid = <3>;
+	vmid = <5>;
 };
 
 &reserved_memory {
@@ -18,14 +18,15 @@
 			actual-dev = "vda", "vdb", "vdc",
 					"vdd", "vde", "vdf",
 					"vdg", "vdh", "vdi",
-					"vdj", "vdk";
+					"vdj", "vdk", "vdl";
 			rename-dev = "system", "userdata", "vendor",
 					"persist", "modem", "bluetooth",
-					"misc", "vbmeta", "boot", "dtbo";
+					"misc", "vbmeta", "boot", "dtbo",
+					"dsp";
 			rename-dev-ab = "super", "userdata", "metadata",
 					"persist", "modem_a", "bluetooth_a",
 					"misc", "vbmeta_a", "vbmeta_b",
-					"boot", "dtbo";
+					"boot_a", "dtbo_a", "dsp_a";
 		};
 
 		rename_net: rename_net {
@@ -34,7 +35,14 @@
 			rename-dev = "eth1";
 		};
 	};
+
+	chosen {
+		bootargs = "rcupdate.rcu_expedited=1 rcu_nocbs=0-7 cgroup.memory=nokmem,nosocket androidboot.usbcontroller=a800000.dwc3";
+	};
 };
+
+#include "display/quin-vm-display-la1.dtsi"
+
 
 &qcom_rng_ee4 {
 	status = "okay";

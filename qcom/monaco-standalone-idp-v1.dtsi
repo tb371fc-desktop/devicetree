@@ -51,6 +51,10 @@
 	};
 };
 
+&icnss {
+	qcom,rf_subtype = <1>;
+};
+
 &qupv3_se5_4uart {
 	status = "ok";
 };

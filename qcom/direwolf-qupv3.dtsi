@@ -493,6 +493,7 @@
 		pinctrl-0 = <&qupv3_se0_i2c_active>;
 		pinctrl-1 = <&qupv3_se0_i2c_sleep>;
 		qcom,wrapper-core = <&qupv3_0>;
+		qcom,rtl_se;
 		status = "disabled";
 	};
 
@@ -824,6 +825,7 @@
 		pinctrl-0 = <&qupv3_se8_i2c_active>;
 		pinctrl-1 = <&qupv3_se8_i2c_sleep>;
 		qcom,wrapper-core = <&qupv3_1>;
+		qcom,rtl_se;
 		status = "disabled";
 	};
 
@@ -860,6 +862,7 @@
 		pinctrl-0 = <&qupv3_se9_i2c_active>;
 		pinctrl-1 = <&qupv3_se9_i2c_sleep>;
 		qcom,wrapper-core = <&qupv3_1>;
+		qcom,rtl_se;
 		status = "disabled";
 	};
 
@@ -896,6 +899,7 @@
 		pinctrl-0 = <&qupv3_se10_i2c_active>;
 		pinctrl-1 = <&qupv3_se10_i2c_sleep>;
 		qcom,wrapper-core = <&qupv3_1>;
+		qcom,rtl_se;
 		status = "disabled";
 	};
 
@@ -948,6 +952,7 @@
 		pinctrl-0 = <&qupv3_se11_i2c_active>;
 		pinctrl-1 = <&qupv3_se11_i2c_sleep>;
 		qcom,wrapper-core = <&qupv3_1>;
+		qcom,rtl_se;
 		status = "disabled";
 	};
 
@@ -984,6 +989,7 @@
 		pinctrl-0 = <&qupv3_se12_i2c_active>;
 		pinctrl-1 = <&qupv3_se12_i2c_sleep>;
 		qcom,wrapper-core = <&qupv3_1>;
+		qcom,rtl_se;
 		status = "disabled";
 	};
 
@@ -1020,6 +1026,7 @@
 		pinctrl-0 = <&qupv3_se13_i2c_active>;
 		pinctrl-1 = <&qupv3_se13_i2c_sleep>;
 		qcom,wrapper-core = <&qupv3_1>;
+		qcom,rtl_se;
 		status = "disabled";
 	};
 
@@ -1077,6 +1084,7 @@
 		pinctrl-0 = <&qupv3_se14_i2c_active>;
 		pinctrl-1 = <&qupv3_se14_i2c_sleep>;
 		qcom,wrapper-core = <&qupv3_1>;
+		qcom,rtl_se;
 		status = "disabled";
 	};
 
@@ -1113,6 +1121,7 @@
 		pinctrl-0 = <&qupv3_se15_i2c_active>;
 		pinctrl-1 = <&qupv3_se15_i2c_sleep>;
 		qcom,wrapper-core = <&qupv3_1>;
+		qcom,rtl_se;
 		status = "disabled";
 	};
 
