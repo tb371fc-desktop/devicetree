@@ -2207,7 +2207,6 @@ qcom,msm-adsprpc-mem {
 
 &gpu_cx_gdsc {
 	parent-supply = <&VDD_CX_LEVEL>;
-	qcom,need-pm-op;
 	status = "ok";
 };
 

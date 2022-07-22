@@ -1,4 +1,4 @@
-#include "monaco-standalone.dtsi"
+#include "monaco-standalone-1gb.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. MonacoP";

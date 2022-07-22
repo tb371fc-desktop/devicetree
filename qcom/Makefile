@@ -282,11 +282,11 @@ dtbo-$(CONFIG_ARCH_MONACO) +=    \
 	monaco-wdp-v1.1-overlay.dtbo
 
 monaco-rumi-overlay.dtbo-base := monaco.dtb
-monaco-standalone-idp-v1-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb
-monaco-standalone-idp-v2-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb
-monaco-standalone-idp-v3-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb
-monacop-standalone-idp-v1-overlay.dtbo-base := monaco-standalone.dtb
-monaco-standalone-atp-v1-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb
+monaco-standalone-idp-v1-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb monaco-standalone-1gb.dtb monacop-standalone-1gb.dtb
+monaco-standalone-idp-v2-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb monaco-standalone-1gb.dtb monacop-standalone-1gb.dtb
+monaco-standalone-idp-v3-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb monaco-standalone-1gb.dtb monacop-standalone-1gb.dtb
+monacop-standalone-idp-v1-overlay.dtbo-base := monaco-standalone-1gb.dtb monaco.dtb
+monaco-standalone-atp-v1-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb monaco-standalone-1gb.dtb monacop-standalone-1gb.dtb
 monaco-idp-v1-overlay.dtbo-base := monaco.dtb monacop.dtb
 monaco-idp-v2-overlay.dtbo-base := monaco.dtb monacop.dtb
 monaco-idp-v3-overlay.dtbo-base := monaco.dtb monacop.dtb
@@ -294,7 +294,7 @@ monaco-idp-v1.1-overlay.dtbo-base := monaco.dtb monacop.dtb
 monaco-idp-v2.1-overlay.dtbo-base := monaco.dtb
 monaco-idp-v3.1-overlay.dtbo-base := monaco.dtb
 monaco-atp-v1-overlay.dtbo-base := monaco.dtb monacop.dtb
-monaco-standalone-wdp-v1-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb
+monaco-standalone-wdp-v1-overlay.dtbo-base := monaco-standalone.dtb monacop-standalone.dtb monaco-standalone-1gb.dtb monacop-standalone-1gb.dtb
 monaco-wdp-v1-overlay.dtbo-base := monaco.dtb monacop.dtb
 monaco-wdp-v1.1-overlay.dtbo-base := monaco.dtb monacop.dtb
 
@@ -584,7 +584,8 @@ ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 	direwolf-vm-la-overlay.dtbo \
 	direwolf-vm-la1-mt-overlay.dtbo \
 	direwolf-vm-lv-mt-overlay.dtbo \
-	direwolf-vm-lv-overlay.dtbo
+	direwolf-vm-lv-overlay.dtbo \
+	lemans-vm-lv-overlay.dtbo
 
 sa8155-vm-la-overlay.dtbo-base := sa8155-vm-la.dtb
 sa8155-vm-lv-overlay.dtbo-base := sa8155-vm-lv.dtb
@@ -601,6 +602,7 @@ direwolf-vm-la-overlay.dtbo-base := direwolf-vm-la.dtb
 direwolf-vm-la1-mt-overlay.dtbo-base := direwolf-vm-la1-mt.dtb
 direwolf-vm-lv-mt-overlay.dtbo-base := direwolf-vm-lv-mt.dtb
 direwolf-vm-lv-overlay.dtbo-base := direwolf-vm-lv.dtb
+lemans-vm-lv-overlay.dtbo-base := lemans-vm-lv.dtb
 else
 dtb-$(CONFIG_QTI_QUIN_GVM) += sa8155-vm-la.dtb \
 	sa8155-vm-lv.dtb \
@@ -617,7 +619,8 @@ dtb-$(CONFIG_QTI_QUIN_GVM) += sa8155-vm-la.dtb \
 	direwolf-vm-la.dtb \
 	direwolf-vm-la-mt.dtb \
 	direwolf-vm-la1-mt.dtb \
-	direwolf-vm-lv-mt.dtb
+	direwolf-vm-lv-mt.dtb \
+	lemans-vm-lv.dtb
 endif
 
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
@@ -656,19 +659,25 @@ ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 	dtbo-$(CONFIG_ARCH_LEMANS) += lemans-rumi-overlay.dtbo \
 		lemans-adas-high-adp-air-overlay.dtbo \
 		lemans-adas-high-adp-star-overlay.dtbo \
+		lemans-adas-high-qam-star-overlay.dtbo \
 		lemans-ivi-adp-air-overlay.dtbo \
+		lemans-ivi-qam-star-overlay.dtbo \
 		lemans-ivi-adp-star-overlay.dtbo
 
 lemans-rumi-overlay.dtbo-base	:= lemans-adas-high.dtb
 lemans-adas-high-adp-air-overlay.dtbo-base	:= lemans-adas-high.dtb
 lemans-adas-high-adp-star-overlay.dtbo-base	:= lemans-adas-high.dtb
+lemans-adas-high-qam-star-overlay.dtbo-base	:= lemans-adas-high.dtb
 lemans-ivi-adp-air-overlay.dtbo-base	:= lemans-ivi.dtb
 lemans-ivi-adp-star-overlay.dtbo-base	:= lemans-ivi.dtb
+lemans-ivi-qam-star-overlay.dtbo-base	:= lemans-ivi.dtb
 else
 dtb-$(CONFIG_ARCH_LEMANS) += lemans-rumi.dtb \
 	lemans-adas-high-adp-air.dtb \
 	lemans-adas-high-adp-star.dtb \
+	lemans-adas-high-qam-star.dtb \
 	lemans-ivi-adp-air.dtb \
+	lemans-ivi-qam-star.dtb \
 	lemans-ivi-adp-star.dtb
 endif
 
