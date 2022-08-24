@@ -1665,6 +1665,18 @@ qcom,msm-adsprpc-mem {
 			qcom,glinkpkt-ch-name = "slate_bt_app";
 			qcom,glinkpkt-dev-name = "glink_pkt_slate_bt_app";
 		};
+
+		qcom,glinkpkt-dcf-bt-ctrl {
+			qcom,glinkpkt-edge = "slate";
+			qcom,glinkpkt-ch-name = "dcf_bt_ctrl";
+			qcom,glinkpkt-dev-name = "glink_pkt_dcf_bt_ctrl";
+			};
+
+		qcom,glinkpkt-dcf-bt-data {
+			qcom,glinkpkt-edge = "slate";
+			qcom,glinkpkt-ch-name = "dcf_bt_data";
+			qcom,glinkpkt-dev-name = "glink_pkt_dcf_bt_data";
+			};
 	};
 
 	qcom,smp2p-modem {

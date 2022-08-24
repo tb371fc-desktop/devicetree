@@ -3,6 +3,14 @@
 		reg = <0x1 0x6a500000 0x0 0x51400000>;
 		label = "pmem_shared_mem";
 	};
+
+	secure_display_memory: secure_display_region {
+		compatible = "shared-dma-pool";
+		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
+		reusable;
+		alignment = <0x0 0x400000>;
+		size = <0x0 0x05000000>;
+	};
 };
 
 #include "display/quin-vm-display-la.dtsi"
@@ -41,7 +49,19 @@
 	status = "okay";
 };
 
+&usb_qmp_dp_phy0 {
+	status = "okay";
+};
+
 &usb2 {
+	status = "okay";
+};
+
+&usb_qmp_phy0 {
+	status = "okay";
+};
+
+&usb_qmp_phy1 {
 	status = "okay";
 };
 

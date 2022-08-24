@@ -19,6 +19,10 @@
 	status = "okay";
 };
 
+&usb_qmp_dp_phy1 {
+	status = "okay";
+};
+
 &pcie0 {
 	status = "okay";
 };
@@ -37,4 +41,8 @@
 
 &qupv3_2 {
 	status = "disabled";
+};
+
+&qcom_rng_ee3 {
+	status = "okay";
 };

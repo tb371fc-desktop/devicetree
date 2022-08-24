@@ -53,7 +53,6 @@
 		pci-domain1 = &pcie1; /* PCIe1 domain */
 		pci-domain2 = &pcie2; /* PCIe2 domain */
 		serial0 = &qupv3_se2_2uart; /* RUMI */
-		mhi-netdev0 = &mhi_netdev_0;
 		hsuart0 = &qupv3_se6_4uart;
 	};
 
@@ -577,7 +576,7 @@
 
 		mailbox_mem: mailbox_region {
 			compatible = "shared-dma-pool";
-			no-map;
+			reusable;
 			alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
 			alignment = <0x0 0x400000>;
 			size = <0x0 0x20000>;
@@ -4620,6 +4619,10 @@
 		compatible = "qcom,msm-ssc-sensors";
 		status = "ok";
 		qcom,firmware-name = "slpi";
+	};
+
+	qtee_shmbridge {
+		compatible = "qcom,tee-shared-memory-bridge";
 	};
 
 	qcom_smcinvoke: smcinvoke@87900000 {

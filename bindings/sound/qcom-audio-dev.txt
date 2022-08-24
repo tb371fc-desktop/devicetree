@@ -3021,7 +3021,7 @@ Example:
 		qcom,msm_audio_ssr_devs = <&audio_apr>, <&q6core>;
 	};
 
-* SPF ASoC Machine driver
+* SPF SA8295 GVM ASoC Machine driver
 
 Required properties:
 - compatible : "qcom,gvm-auto-spf-asoc-snd-adp-star" for auto adp codec.
@@ -3041,3 +3041,47 @@ Example:
             asoc-codec-names = "msm-stub-codec.1";
     };
 
+* SPF SA8155 GVM ASoC Machine driver
+
+Required properties:
+- compatible : "qcom,8155-spf-asoc-snd-adp-star" for auto adp codec.
+- qcom,model : The user-visible name of this sound card.
+- asoc-codec: This is phandle list containing the references to codec dai device
+	      nodes that are used as part of the sound card dai-links.
+- asoc-codec-names: This property contains list of codec dai names. The order of the
+		    codec dai names should match to that of the phandle order given
+		    in "asoc-codec".
+
+Example:
+
+    spf_snd_8155: spf-sound-adp-star {
+            compatible = "qcom,8155-spf-asoc-snd-adp-star";
+            qcom,model = "gvmauto-8155-snd-card";
+            asoc-codec = <&stub_codec>;
+            asoc-codec-names = "msm-stub-codec.1";
+    };
+
+* SPF SA8255 ASoC Machine driver
+
+Required properties:
+- compatible : "qcom,sa8255-asoc-snd-adp-star" for auto adp codec.
+- qcom,model : The user-visible name of this sound card.
+- asoc-codec: This is phandle list containing the references to codec dai device
+        nodes that are used as part of the sound card dai-links.
+- asoc-codec-names: This property contains list of codec dai names. The order of the
+        codec dai names should match to that of the phandle order given
+        in "asoc-codec".
+
+Optional properties:
+- qcom,mi2s-audio-intf : Property to specify if MI2S interface is used for the target
+- qcom,auxpcm-audio-intf : Property to specify if AUX PCM interface is used for the target
+- qcom,msm-mi2s-master : List of master/slave configuration for MI2S interfaces
+
+Example:
+
+    spf_snd_8255: spf-sound-adp-star {
+            compatible = "qcom,sa8255-asoc-snd-adp-star";
+            qcom,model = "sa8255-adp-star-snd-card";
+            asoc-codec = <&stub_codec>;
+            asoc-codec-names = "msm-stub-codec.1";
+    };

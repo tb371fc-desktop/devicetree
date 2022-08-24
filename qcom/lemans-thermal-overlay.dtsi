@@ -1,6 +1,16 @@
 #include <dt-bindings/thermal/thermal_qti.h>
 
 &thermal_zones {
+	pm8775_1_tz {
+		cooling-maps {
+			pm8775_1_gpu {
+				trip = <&pm8775_1_trip0>;
+				cooling-device = <&msm_gpu THERMAL_MAX_LIMIT
+							THERMAL_MAX_LIMIT>;
+			};
+		};
+	};
+
 	pm8775_2_tz {
 		cooling-maps {
 			pm8775_2_cdsp0 {

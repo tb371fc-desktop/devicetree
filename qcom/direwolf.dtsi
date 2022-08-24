@@ -3138,6 +3138,11 @@
 		compatible = "qcom,secure-buffer";
 		qcom,vmid-cp-camera-preview-ro;
 	};
+
+	qcom,sps {
+		compatible = "qcom,msm-sps-4k";
+		qcom,pipe-attr-ee;
+	};
 };
 
 #include "direwolf-gpu.dtsi"

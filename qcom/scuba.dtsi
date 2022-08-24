@@ -624,7 +624,6 @@
 
 		no-sd;
 		no-sdio;
-		max-frequency = <192000000>;
 
 		qcom,devfreq,freq-table = <50000000 200000000>;
 		qcom,scaling-lower-bus-speed-mode = "DDR52";

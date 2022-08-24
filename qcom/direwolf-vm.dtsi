@@ -352,6 +352,7 @@
 		qcom,qsee-ce-hw-instance = <0>;
 		qcom,disk-encrypt-pipe-pair = <2>;
 		qcom,no-clock-support;
+		qcom,commonlib-loaded-by-hostvm;
 		qcom,qsee-reentrancy-support = <2>;
 	};
 

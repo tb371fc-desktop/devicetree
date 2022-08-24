@@ -1,0 +1,7 @@
+/dts-v1/;
+
+/ {
+	model = "Qualcomm Technologies, Inc. kona-7230 IOT RB5";
+	compatible = "qcom,kona-iot", "qcom,kona", "qcom,iot";
+	qcom,board-id = <11 3>;
+};

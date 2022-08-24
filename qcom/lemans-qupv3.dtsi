@@ -7,7 +7,7 @@
 		qcom,msm-bus,vectors-bus-ids =
 			<MASTER_QUP_CORE_0 SLAVE_QUP_CORE_0>,
 			<MASTER_QUP_0 SLAVE_EBI1>;
-		iommus = <&apps_smmu 0x417 0x0>;
+		iommus = <&apps_smmu 0x403 0x0>;
 		qcom,iommu-dma-addr-pool = <0x40000000 0x10000000>;
 		qcom,iommu-geometry = <0x40000000 0x10000000>;
 		qcom,iommu-dma = "fastmap";
@@ -22,7 +22,7 @@
 		qcom,msm-bus,vectors-bus-ids =
 			<MASTER_QUP_CORE_1 SLAVE_QUP_CORE_1>,
 			<MASTER_QUP_1 SLAVE_EBI1>;
-		iommus = <&apps_smmu 0x457 0x0>;
+		iommus = <&apps_smmu 0x443 0x0>;
 		qcom,iommu-dma-addr-pool = <0x40000000 0x10000000>;
 		qcom,iommu-geometry = <0x40000000 0x10000000>;
 		qcom,iommu-dma = "fastmap";
@@ -37,7 +37,7 @@
 		qcom,msm-bus,vectors-bus-ids =
 			<MASTER_QUP_CORE_2 SLAVE_QUP_CORE_2>,
 			<MASTER_QUP_2 SLAVE_EBI1>;
-		iommus = <&apps_smmu 0x5b7 0x0>;
+		iommus = <&apps_smmu 0x5a3 0x0>;
 		qcom,iommu-dma-addr-pool = <0x40000000 0x10000000>;
 		qcom,iommu-geometry = <0x40000000 0x10000000>;
 		qcom,iommu-dma = "fastmap";
@@ -52,7 +52,7 @@
 		qcom,msm-bus,vectors-bus-ids =
 			<MASTER_QUP_CORE_3 SLAVE_QUP_CORE_3>,
 			<MASTER_QUP_3 SLAVE_EBI1>;
-		iommus = <&apps_smmu 0x57 0x0>;
+		iommus = <&apps_smmu 0x43 0x0>;
 		qcom,iommu-dma-addr-pool = <0x40000000 0x10000000>;
 		qcom,iommu-geometry = <0x40000000 0x10000000>;
 		qcom,iommu-dma = "fastmap";

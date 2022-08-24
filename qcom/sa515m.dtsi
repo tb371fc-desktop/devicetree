@@ -2,10 +2,14 @@
 #include <dt-bindings/clock/qcom,rpmh.h>
 #include <dt-bindings/interconnect/qcom,icc.h>
 #include <dt-bindings/interconnect/qcom,sdx55.h>
+#include <dt-bindings/clock/qcom,apsscc-sdxlemur.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 #include <dt-bindings/soc/qcom,rpmh-rsc.h>
 #include <dt-bindings/gpio/gpio.h>
+
+#define MHZ_TO_MBPS(mhz, w) ((mhz * 1000000 * w) / (1024 * 1024))
+#define BW_OPP_ENTRY(mhz, w) opp-mhz {opp-hz = /bits/ 64 <MHZ_TO_MBPS(mhz, w)>;}
 
 / {
 	#address-cells = <1>;
@@ -156,6 +160,53 @@
 	psci {
 		compatible = "arm,psci-1.0";
 		method = "smc";
+	};
+
+	msm_cpufreq: qcom,msm-cpufreq {
+		compatible = "qcom,msm-cpufreq";
+		clocks = <&apsscc APCS_MUX_CLK>;
+		clock-names = "cpu0_clk";
+
+		qcom,cpufreq-table-0 =
+				<  153600 >,
+				<  300000 >,
+				<  345600 >,
+				<  576000 >,
+				<  1094400 >,
+				<  1555200 >;
+	};
+
+	ddr_bw_opp_table: ddr-bw-opp-table {
+		compatible = "operating-points-v2";
+		BW_OPP_ENTRY( 100, 4); /*  381 MB/s */
+		BW_OPP_ENTRY( 200, 4); /*  762 MB/s */
+		BW_OPP_ENTRY( 300, 4); /* 1144 MB/s */
+		BW_OPP_ENTRY( 451, 4); /* 1720 MB/s */
+		BW_OPP_ENTRY( 547, 4); /* 2086 MB/s */
+		BW_OPP_ENTRY( 681, 4); /* 2597 MB/s */
+		BW_OPP_ENTRY( 768, 4); /* 2929 MB/s */
+		BW_OPP_ENTRY(1017, 4); /* 3879 MB/s */
+		BW_OPP_ENTRY(1353, 4); /* 5161 MB/s */
+		BW_OPP_ENTRY(1555, 4); /* 5931 MB/s */
+		BW_OPP_ENTRY(1804, 4); /* 6881 MB/s */
+	};
+
+	cpubw: qcom,cpubw {
+		compatible = "qcom,devfreq-icc";
+		governor = "cpufreq";
+		interconnects = <&mc_virt MASTER_LLCC &mc_virt SLAVE_EBI1>;
+		qcom,active-only;
+		operating-points-v2 = <&ddr_bw_opp_table>;
+	};
+
+	devfreq-cpufreq {
+		cpubw-cpufreq {
+			target-dev = <&cpubw>;
+			cpu-to-dev-map =
+				<  576000 MHZ_TO_MBPS( 300, 4) >,
+				< 1497600 MHZ_TO_MBPS(1017, 4) >,
+				< 1555200 MHZ_TO_MBPS(1804, 4) >;
+		};
 	};
 
 	apps_rsc: rsc@17830000 {
@@ -456,6 +507,30 @@
 		qcom,rtb-size = <0x100000>;
 	};
 
+	keepalive_opp_table: keepalive-opp-table {
+		compatible = "operating-points-v2";
+		opp-1 {
+			opp-hz = /bits/ 64 < 1 >;
+		};
+	};
+
+	snoc_pcnoc_keepalive: qcom,snoc_pcnoc_keepalive {
+		compatible = "qcom,devfreq-icc";
+		governor = "powersave";
+		interconnects = <&mem_noc MASTER_APPSS_PROC &system_noc SLAVE_IMEM_CFG>;
+		qcom,active-only;
+		status = "ok";
+		operating-points-v2 = <&keepalive_opp_table>;
+	};
+
+	ddr_keepalive: qcom,ddr_keepalive {
+		compatible = "qcom,devfreq-icc";
+		governor = "powersave";
+		interconnects = <&mem_noc MASTER_APPSS_PROC &mc_virt SLAVE_EBI1>;
+		qcom,active-only;
+		status = "ok";
+		operating-points-v2 = <&keepalive_opp_table>;
+	};
 
 	qnand_1: nand@1b00000 {
 		compatible = "qcom,msm-nand";
@@ -488,8 +563,8 @@
 		reg = <0x8804000 0x1000>;
 		reg-names = "hc_mem";
 
-		interrupts = <GIC_SPI 210 IRQ_TYPE_NONE>,
-			<GIC_SPI 227 IRQ_TYPE_NONE>;
+		interrupts = <GIC_SPI 210 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 227 IRQ_TYPE_LEVEL_HIGH>;
 		interrupt-names = "hc_irq", "pwr_irq";
 
 		bus-width = <4>;
@@ -607,6 +682,112 @@
 			qcom,dump-id = <0x102>;
 
 		};
+	};
+
+
+	qcom_tzlog: tz-log@0x1468f720 {
+		compatible = "qcom,tz-log";
+		reg = <0x1468f720 0x2000>;
+	};
+
+	qtee_shmbridge {
+		compatible = "qcom,tee-shared-memory-bridge";
+	};
+
+	qcom_rng: qrng@793000 {
+		compatible = "qcom,msm-rng";
+		reg = <0x793000 0x1000>;
+		qcom,no-qrng-config;
+		qcom,msm-bus,name = "msm-rng-noc";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+			<1 618 0 0>,    /* No vote */
+			<1 618 0 300000>;  /* 75 MHz */
+		qcom,no-clock-support;
+	};
+
+	qcom_crypto: qcrypto@1de0000 {
+		compatible = "qcom,qcrypto";
+		reg = <0x1de0000 0x20000>,
+			<0x1dc4000 0x24000>;
+		reg-names = "crypto-base","crypto-bam-base";
+		interrupts = <0 252 0>;
+		qcom,bam-pipe-pair = <2>;
+		qcom,ce-hw-instance = <0>;
+		qcom,ce-device = <0>;
+		qcom,bam-ee = <0>;
+		qcom,ce-hw-shared;
+		qcom,msm-bus,name = "qcrypto-noc";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<125 512 0 0>,
+				<125 512 393600 393600>;
+		qcom,use-sw-aes-cbc-ecb-ctr-algo;
+		qcom,use-sw-aes-xts-algo;
+		qcom,use-sw-aes-ccm-algo;
+		qcom,use-sw-aead-algo;
+		qcom,use-sw-ahash-algo;
+		qcom,use-sw-hmac-algo;
+		qcom,no-clock-support;
+		qcom,iommu-s1-enable;
+		interconnect-names = "data_path";
+		interconnects = <&system_noc MASTER_CRYPTO &mc_virt SLAVE_EBI1>;
+		iommus = <&apps_smmu 0x0064 0x0011>,
+			<&apps_smmu 0x0074 0x0011>;
+	};
+
+	qcom_cedev: qcedev@1de0000 {
+		compatible = "qcom,qcedev";
+		reg = <0x1de0000 0x20000>,
+			<0x1dc4000 0x24000>;
+		reg-names = "crypto-base","crypto-bam-base";
+		interrupts = <0 252 0>;
+		qcom,bam-pipe-pair = <3>;
+		qcom,ce-hw-instance = <0>;
+		qcom,ce-device = <0>;
+		qcom,bam-ee = <0>;
+		qcom,ce-hw-shared;
+		qcom,msm-bus,name = "qcedev-noc";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<125 512 0 0>,
+				<125 512 393600 393600>;
+		qcom,no-clock-support;
+		qcom,iommu-s1-enable;
+		interconnect-names = "data_path";
+		interconnects = <&system_noc MASTER_CRYPTO &mc_virt SLAVE_EBI1>;
+		iommus = <&apps_smmu 0x0066 0x0011>,
+			<&apps_smmu 0x0076 0x0011>;
+	};
+
+	qcom_seecom: qseecom@90000000 {
+		compatible = "qcom,qseecom";
+		reg = <0x90000000 0x500000>;
+		reg-names = "secapp-region";
+		memory-region = <&qseecom_mem>;
+		qcom,hlos-num-ce-hw-instances = <1>;
+		qcom,hlos-ce-hw-instance = <0>;
+		qcom,qsee-ce-hw-instance = <0>;
+		qcom,no-clock-support;
+		qcom,msm-bus,name = "qseecom-noc";
+		qcom,msm-bus,num-cases = <4>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+			<125 512 0 0>,
+			<125 512 20000 40000>,
+			<125 512 30000 80000>,
+			<125 512 40000 100000>;
+		qcom,qsee-reentrancy-support = <2>;
+	};
+
+	qcom_smcinvoke: smcinvoke@90000000 {
+		compatible = "qcom,smcinvoke";
+		qcom,support-legacy_smc;
+		reg = <0x90000000 0x500000>;
+		reg-names = "secapp-region";
 	};
 
 	tcsr_mutex_block: syscon@1f40000 {
@@ -960,26 +1141,25 @@
 			snps,dcb-algorithm;
 			snps,map-to-dma-channel = <0x0>;
 			snps,route-up;
-			snps,route-ptp;
-			snps,route-dcbcp;
+			snps,priority = <0x1>;
 		};
 
 		queue1 {
 			snps,dcb-algorithm;
 			snps,map-to-dma-channel = <0x1>;
-			snps,route-avcp;
-			snps,route-multi-broad;
+			snps,route-ptp;
 		};
 
 		queue2 {
 			snps,avb-algorithm;
 			snps,map-to-dma-channel = <0x2>;
+			snps,route-avcp;
 		};
 
 		queue3 {
 			snps,avb-algorithm;
 			snps,map-to-dma-channel = <0x3>;
-			snps,priority = <0x0C>;
+			snps,priority = <0xC>;
 		};
 	};
 
@@ -1023,6 +1203,8 @@
 			<&gcc GCC_ETH_PTP_CLK>,
 			<&gcc GCC_ETH_RGMII_CLK>;
 		clock-names = "stmmaceth", "pclk", "ptp_ref", "rgmii";
+		snps,ptp-ref-clk-rate = <230400000>;
+		snps,ptp-req-clk-rate = <57600000>;
 		interrupts-extended = <&intc 0 62 4>, <&intc 0 60 4>,
 			<&tlmm 90 2>, <&intc 0 290 1>, <&intc 0 291 1>;
 		interrupt-names = "macirq", "eth_lpi",
@@ -1067,6 +1249,7 @@
 			dll-clock-dis = <1>;
 			ddr-traffic-init-sel = <0>;
 			ddr-traffic-init-sw = <0>;
+			rgmii-tx-drv = <1>;
 			};
 		};
 };

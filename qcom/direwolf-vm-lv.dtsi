@@ -116,3 +116,7 @@
 &cnss_pcie2 {
 	status = "ok";
 };
+
+&qcom_rng_ee3 {
+	status = "okay";
+};

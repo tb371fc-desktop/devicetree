@@ -214,6 +214,16 @@
 			qcom,intents = <0xF2F8 1>;
 		};
 
+		qcom,glin-dcf-bt-ctrl {
+			qcom,glink-channels = "dcf_bt_ctrl";
+			qcom,intents = <0x50 1>;
+		};
+
+		qcom,glink-dcf-bt-data {
+			qcom,glink-channels = "dcf_bt_data";
+			qcom,intents = <0x100 1>;
+		};
+
 		audio_ipc: qcom,audio_cc_ipc {
 			compatible = "qcom,audio_cc_ipc";
 			qcom,glink-channels = "gpr_cc_apps";

@@ -18,6 +18,7 @@ Required properties:
                 "qcom,cnss-qca6490" for QCA6490 device
                 "qcom,cnss-kiwi" for KIWI device
                 "qcom,cnss-qca-converged" for converged QCA devices
+                "qcom,cnss-qcn9000" for QCN9000 device
   - wlan-en-gpio: WLAN_EN GPIO signal specified by the chip specifications
   - vdd-wlan-supply: phandle to the regulator device tree node
   - pinctrl-names: Names corresponding to the numbered pinctrl states

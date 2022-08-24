@@ -11,13 +11,13 @@
 				<3 COMP_L 0x1>, <3 COMP_R 0x2>,
 				<4 LO 0x1>, <5 DSD_L 0x1>,
 				<5 DSD_R 0x2>,
-				<7 SWRM_RX_PCM_IN 0x3>;
+				<7 SWRM_TX1_CH1 0x1>, <7 SWRM_TX1_CH2 0x2>;
 	};
 };
 
 &besbev_codec {
 		qcom,swr_ch_map = <0 SPKR_L 0x1 0 LO>,
-				<2 ADC1 0x1 0 SWRM_RX_PCM_IN>, <2 ADC2 0x2 0 SWRM_RX_PCM_IN>;
+				<2 ADC1 0x1 0 SWRM_TX1_CH1>, <2 ADC2 0x2 0 SWRM_TX1_CH2>;
 
 };
 

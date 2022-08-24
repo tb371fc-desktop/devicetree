@@ -1,0 +1,119 @@
+#include "msm-audio-lpass.dtsi"
+#include "msm-arm-smmu-lemans.dtsi"
+
+/ {
+	aliases {
+		i2c4 = &qupv3_se11_i2c;
+		spi16 = &qupv3_se16_spi;
+	};
+};
+
+&soc {
+	spf_core_platform: spf_core_platform {
+		compatible = "qcom,spf-core-platform";
+	};
+
+	audio_pkt_core_platform: audio-pkt-platform {
+		compatible = "qcom,audio-pkt-core-platform";
+	};
+};
+
+&spf_core_platform {
+	spf_msm_audio_ion: qcom,spf-msm-audio-ion {
+		compatible = "qcom,msm-audio-ion";
+		qcom,smmu-version = <2>;
+		qcom,smmu-enabled;
+		iommus = <&apps_smmu 0x3001 0x0>;
+		qcom,smmu-sid-mask = /bits/ 64 <0xf>;
+	};
+
+	spf_tdm_sec: qcom,spf-msm-dai-tdm-sec {
+		compatible = "qcom,msm-pcm-pinctrl";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&sec_tdm_sck_active &sec_tdm_ws_active
+					&sec_tdm_din_active &sec_tdm_dout_active>;
+		pinctrl-1 = <&sec_tdm_sck_sleep &sec_tdm_ws_sleep
+					&sec_tdm_din_sleep &sec_tdm_dout_sleep>;
+		#gpio-cells = <0>;
+	};
+
+	spf_tdm_tert: qcom,spf-msm-dai-tdm-tert {
+		compatible = "qcom,msm-pcm-pinctrl";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&tert_tdm_sck_active &tert_tdm_ws_active
+					&tert_tdm_din_active &tert_tdm_dout_active>;
+		pinctrl-1 = <&tert_tdm_sck_sleep &tert_tdm_ws_sleep
+					&tert_tdm_din_sleep &tert_tdm_dout_sleep>;
+		#gpio-cells = <0>;
+	};
+
+	spf_tdm_hsif0: qcom,spf-msm-dai-tdm-hsif0 {
+		compatible = "qcom,msm-pcm-pinctrl";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&hs0_i2s_sck_active &hs0_i2s_ws_active
+					&hs0_i2s_data0_active &hs0_i2s_data1_active>;
+		pinctrl-1 = <&hs0_i2s_sck_sleep &hs0_i2s_ws_sleep
+					&hs0_i2s_data0_sleep &hs0_i2s_data1_sleep>;
+		#gpio-cells = <0>;
+	};
+
+	spf_tdm_hsif1: qcom,spf-msm-dai-tdm-hsif1 {
+		compatible = "qcom,msm-pcm-pinctrl";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&hs1_i2s_sck_active &hs1_i2s_ws_active
+					&hs1_i2s_data0_active &hs1_i2s_data1_active>;
+		pinctrl-1 = <&hs1_i2s_sck_sleep &hs1_i2s_ws_sleep
+					&hs1_i2s_data0_sleep &hs1_i2s_data1_sleep>;
+		#gpio-cells = <0>;
+	};
+
+	spf_tdm_hsif2: qcom,spf-msm-dai-tdm-hsif2 {
+		compatible = "qcom,msm-pcm-pinctrl";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&hs2_i2s_sck_active &hs2_i2s_ws_active
+					&hs2_i2s_data0_active &hs2_i2s_data1_active>;
+		pinctrl-1 = <&hs2_i2s_sck_sleep &hs2_i2s_ws_sleep
+					&hs2_i2s_data0_sleep &hs2_i2s_data1_sleep>;
+		#gpio-cells = <0>;
+	};
+
+	spf_internal_mclk1: qcom,spf-msm-internal-mclk1 {
+		compatible = "qcom,msm-pcm-pinctrl";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&audio_internal_mclk1_active>;
+		pinctrl-1 = <&audio_internal_mclk1_sleep>;
+		#gpio-cells = <0>;
+	};
+
+	spf_snd_8255: spf-sound-adp-star {
+		compatible = "qcom,sa8255-asoc-snd-adp-star";
+		qcom,model = "sa8255-adp-star-snd-card";
+		qcom,mi2s-audio-intf;
+		qcom,auxpcm-audio-intf;
+		qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>;
+
+		qcom,sec-tdm-gpios = <&spf_tdm_sec>;
+		qcom,tert-tdm-gpios = <&spf_tdm_tert>;
+		qcom,hsif0-tdm-gpios = <&spf_tdm_hsif0>;
+		qcom,hsif1-tdm-gpios = <&spf_tdm_hsif1>;
+		qcom,hsif2-tdm-gpios = <&spf_tdm_hsif2>;
+		qcom,internal-mclk1-gpios = <&spf_internal_mclk1>;
+
+		asoc-codec = <&stub_codec>;
+		asoc-codec-names = "msm-stub-codec.1";
+	};
+};
+
+&qupv3_se11_i2c {
+	status = "ok";
+};
+
+&qupv3_se16_spi {
+	status = "ok";
+	spi_codec@0 {
+		compatible = "qcom,spi-msm-codec-slave";
+		reg = <0>;
+		spi-max-frequency = <10000000>;
+		spi-cpha;
+	};
+};

@@ -46,6 +46,7 @@ Required properties :
 			"qcom,bengal-gcc"
 			"qcom,lemans-gcc"
 			"qcom,gcc-sdx55"
+			"qcom,sdxpoorwills-gcc"
 
 - reg : shall contain base register location and length
 - vdd_cx-supply: The vdd_cx logic rail supply.

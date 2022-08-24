@@ -82,6 +82,10 @@
 	};
 };
 
+&msm_gpu {
+	#cooling-cells = <2>;
+};
+
 &cpufreq_hw {
 	qcom,cpu-isolation {
 		compatible = "qcom,cpu-isolate";
@@ -280,14 +284,14 @@
 	};
 
 	gpuss-0-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens0 5>;
 		trips {
 			gpuss0_config: gpuss0-config {
-				temperature = <110000>;
-				hysteresis = <10000>;
+				temperature = <105000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -297,17 +301,25 @@
 				type = "passive";
 			};
 		};
+
+		cooling-maps {
+			gpu0_cdev {
+				trip = <&gpuss0_config>;
+				cooling-device = <&msm_gpu THERMAL_NO_LIMIT
+							THERMAL_NO_LIMIT>;
+			};
+		};
 	};
 
 	gpuss-1-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens0 6>;
 		trips {
 			gpuss1_config: gpuss1-config {
-				temperature = <110000>;
-				hysteresis = <10000>;
+				temperature = <105000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -317,17 +329,25 @@
 				type = "passive";
 			};
 		};
+
+		cooling-maps {
+			gpu1_cdev {
+				trip = <&gpuss1_config>;
+				cooling-device = <&msm_gpu THERMAL_NO_LIMIT
+							THERMAL_NO_LIMIT>;
+			};
+		};
 	};
 
 	gpuss-2-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens0 7>;
 		trips {
 			gpuss2_config: gpuss2-config {
-				temperature = <110000>;
-				hysteresis = <10000>;
+				temperature = <105000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -335,6 +355,14 @@
 				temperature = <115000>;
 				hysteresis = <5000>;
 				type = "passive";
+			};
+		};
+
+		cooling-maps {
+			gpu2_cdev {
+				trip = <&gpuss2_config>;
+				cooling-device = <&msm_gpu THERMAL_NO_LIMIT
+							THERMAL_NO_LIMIT>;
 			};
 		};
 	};
@@ -448,14 +476,14 @@
 	};
 
 	gpuss-3-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens1 5>;
 		trips {
 			gpuss3_config: gpuss3-config {
-				temperature = <110000>;
-				hysteresis = <10000>;
+				temperature = <105000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -465,17 +493,25 @@
 				type = "passive";
 			};
 		};
+
+		cooling-maps {
+			gpu3_cdev {
+				trip = <&gpuss3_config>;
+				cooling-device = <&msm_gpu THERMAL_NO_LIMIT
+							THERMAL_NO_LIMIT>;
+			};
+		};
 	};
 
 	gpuss-4-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens1 6>;
 		trips {
 			gpuss4_config: gpuss4-config {
-				temperature = <110000>;
-				hysteresis = <10000>;
+				temperature = <105000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -485,17 +521,25 @@
 				type = "passive";
 			};
 		};
+
+		cooling-maps {
+			gpu4_cdev {
+				trip = <&gpuss4_config>;
+				cooling-device = <&msm_gpu THERMAL_NO_LIMIT
+							THERMAL_NO_LIMIT>;
+			};
+		};
 	};
 
 	gpuss-5-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens1 7>;
 		trips {
 			gpuss5_config: gpuss5-config {
-				temperature = <110000>;
-				hysteresis = <10000>;
+				temperature = <105000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -503,6 +547,14 @@
 				temperature = <115000>;
 				hysteresis = <5000>;
 				type = "passive";
+			};
+		};
+
+		cooling-maps {
+			gpu5_cdev {
+				trip = <&gpuss5_config>;
+				cooling-device = <&msm_gpu THERMAL_NO_LIMIT
+							THERMAL_NO_LIMIT>;
 			};
 		};
 	};
@@ -616,14 +668,14 @@
 	};
 
 	nsp-0-0-0-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens2 5>;
 		trips {
 			nsp000_config: nsp000-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -644,14 +696,14 @@
 	};
 
 	nsp-0-1-0-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens2 6>;
 		trips {
 			nsp010_config: nsp010-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -672,14 +724,14 @@
 	};
 
 	nsp-0-2-0-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens2 7>;
 		trips {
 			nsp020_config: nsp020-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -700,14 +752,14 @@
 	};
 
 	nsp-1-0-0-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens2 8>;
 		trips {
 			nsp100_config: nsp100-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -728,14 +780,14 @@
 	};
 
 	nsp-1-1-0-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens2 9>;
 		trips {
 			nsp110_config: nsp110-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -756,14 +808,14 @@
 	};
 
 	nsp-1-2-0-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens2 10>;
 		trips {
 			nsp120_config: nsp120-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -892,14 +944,14 @@
 	};
 
 	nsp-0-0-1-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens3 5>;
 		trips {
 			nsp001_config: nsp001-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -920,14 +972,14 @@
 	};
 
 	nsp-0-1-1-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens3 6>;
 		trips {
 			nsp011_config: nsp011-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -948,14 +1000,14 @@
 	};
 
 	nsp-0-2-1-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens3 7>;
 		trips {
 			nsp021_config: nsp021-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -976,14 +1028,14 @@
 	};
 
 	nsp-1-0-1-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens3 8>;
 		trips {
 			nsp101_config: nsp101-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -1004,14 +1056,14 @@
 	};
 
 	nsp-1-1-1-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens3 9>;
 		trips {
 			nsp111_config: nsp111-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
@@ -1032,14 +1084,14 @@
 	};
 
 	nsp-1-2-1-step {
-		polling-delay-passive = <0>;
+		polling-delay-passive = <10>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&tsens3 10>;
 		trips {
 			nsp121_config: nsp121-config {
 				temperature = <105000>;
-				hysteresis = <10000>;
+				hysteresis = <5000>;
 				type = "passive";
 			};
 
