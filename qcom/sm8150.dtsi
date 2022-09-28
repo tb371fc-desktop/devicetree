@@ -275,7 +275,9 @@
 		method = "smc";
 	};
 
-	chosen { };
+	chosen {
+		bootargs = "kpti=off";
+	};
 
 	soc: soc { };
 

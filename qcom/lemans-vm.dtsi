@@ -1,3 +1,4 @@
+#include <dt-bindings/clock/qcom,gcc-lemans.h>
 #include <dt-bindings/interconnect/qcom,lemans.h>
 #include "quin-vm-common.dtsi"
 
@@ -229,6 +230,13 @@
 		clock-output-names = "bi_tcxo";
 		#clock-cells = <0>;
 	};
+
+	msm_gpu_hyp: qcom,hgsl {
+		compatible = "qcom,hgsl";
+
+		/* TBD, complete doorbell */
+		db-off = <1>;
+	};
 };
 
 &regulator {
@@ -275,22 +283,40 @@
 	};
 };
 
-&gcc {
-	status = "disabled";
-};
+#include "lemans-pinctrl.dtsi"
+#include "lemans-qupv3.dtsi"
+#include "pm8775-vm.dtsi"
 
 &scc {
 	status = "disabled";
 };
 
+#include "lemans-vm-audio.dtsi"
+
 &hab {
 	vmid = <3>;
 };
 
-&spmi_bus {
-	status = "disabled";
+&qupv3_0 {
+	/delete-property/ qcom,msm-bus,num-paths;
+	/delete-property/ qcom,msm-bus,vectors-bus-ids;
+	qcom,iommu-dma = "bypass";
 };
 
-&wdog {
-	status = "disabled";
+&qupv3_1 {
+	/delete-property/ qcom,msm-bus,num-paths;
+	/delete-property/ qcom,msm-bus,vectors-bus-ids;
+	qcom,iommu-dma = "bypass";
+};
+
+&qupv3_2 {
+	/delete-property/ qcom,msm-bus,num-paths;
+	/delete-property/ qcom,msm-bus,vectors-bus-ids;
+	qcom,iommu-dma = "bypass";
+};
+
+&qupv3_3 {
+	/delete-property/ qcom,msm-bus,num-paths;
+	/delete-property/ qcom,msm-bus,vectors-bus-ids;
+	qcom,iommu-dma = "bypass";
 };

@@ -105,6 +105,8 @@
 		coresight-name = "coresight-tmc-etf";
 		coresight-ctis = <&cti0_swao &cti3_swao>;
 		coresight-csr = <&swao_csr>;
+		cti-reset-trig-num = <0>;
+		cti-flush-trig-num = <1>;
 		clocks = <&clock_aop QDSS_CLK>;
 		clock-names = "apb_pclk";
 
@@ -305,6 +307,8 @@
 
 		coresight-name = "coresight-tmc-etr";
 		coresight-ctis = <&cti0 &cti3_swao>;
+		cti-reset-trig-num = <0>;
+		cti-flush-trig-num = <3>;
 		coresight-csr = <&csr>;
 
 		clocks = <&clock_aop QDSS_CLK>;

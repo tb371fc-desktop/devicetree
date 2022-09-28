@@ -26,6 +26,8 @@ Required properties:
 			 on SM6150 chipset.
 			"qcom,ufs-phy-qmp-v4-waipio" for V4 ufs phy
 			 present on Lemans chipset.
+			"qcom,ufs-phy-qmp-v4-kona" for V4 ufs phy
+			 present on Kona chipset.
 
 - reg               : should contain PHY register address space (mandatory),
 - reg-names         : indicates various resources passed to driver (via reg proptery) by name.

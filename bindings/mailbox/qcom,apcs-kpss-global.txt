@@ -23,7 +23,7 @@ platforms.
 		    "qcom,sdxnightjar-apcs-gcc"
 		    "qcom,bengal-apcs-hmss-global"
 		    "qcom,sdxprairie-apcs-gcc"
-
+		    "qcom,sdxpoorwills-apcs-gcc"
 - reg:
 	Usage: required
 	Value type: <prop-encoded-array>

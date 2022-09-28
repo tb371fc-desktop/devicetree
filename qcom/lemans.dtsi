@@ -533,8 +533,19 @@
 	pdc: interrupt-controller@b220000 {
 		compatible = "qcom,lemans-pdc";
 		reg = <0xb220000 0x30000>, <0x17c000f0 0x60>;
-		qcom,pdc-ranges = <0 480 94>, <94 609 31>, <125 63 1>,
-				  <126 716 12>;
+		qcom,pdc-ranges = <0 480 40>, <40 140 14>, <54 263 1>,
+				  <55 306 4>, <59 312 3>, <62 374 2>,
+				  <64 434 2>, <66 438 2>, <70 520 1>,
+				  <73 523 1>, <118 568 6>, <124 609 3>,
+				  <159 638 1>, <160 720 3>, <169 728 30>,
+				  <199 416 2>, <201 449 1>, <202 89 1>,
+				  <203 451 1>, <204 462 1>, <205 264 1>,
+				  <206 579 1>, <207 653 1>, <208 656 1>,
+				  <209 659 1>, <210 122 1>, <211 699 1>,
+				  <212 705 1>, <213 450 1>, <214 643 2>,
+				  <216 646 5>, <221 390 5>, <226 700 2>,
+				  <228 440 1>, <229 663 1>, <230 524 2>,
+				  <232 612 3>, <235 723 5>;
 		#interrupt-cells = <2>;
 		interrupt-parent = <&intc>;
 		interrupt-controller;
@@ -2623,115 +2634,6 @@
 			vote = <44>;
 		};
 
-	};
-
-	mtl_rx_setup: rx-queues-config {
-		snps,rx-queues-to-use = <1>;
-		snps,rx-sched-sp;
-
-		queue0 {
-			snps,dcb-algorithm;
-			snps,map-to-dma-channel = <0x0>;
-			snps,route-up;
-			snps,priority = <0x1>;
-		};
-
-		queue1 {
-			snps,dcb-algorithm;
-			snps,map-to-dma-channel = <0x1>;
-			snps,route-ptp;
-		};
-
-		queue2 {
-			snps,avb-algorithm;
-			snps,map-to-dma-channel = <0x2>;
-			snps,route-avcp;
-		};
-
-		queue3 {
-			snps,avb-algorithm;
-			snps,map-to-dma-channel = <0x3>;
-			snps,priority = <0xC>;
-		};
-	};
-
-	mtl_tx_setup: tx-queues-config {
-		snps,tx-queues-to-use = <1>;
-		snps,tx-sched-sp;
-		queue0 {
-			snps,dcb-algorithm;
-		};
-
-		queue1 {
-			snps,dcb-algorithm;
-		};
-
-		queue2 {
-			snps,avb-algorithm;
-			snps,send_slope = <0x1000>;
-			snps,idle_slope = <0x1000>;
-			snps,high_credit = <0x3E800>;
-			snps,low_credit = <0xFFC18000>;
-		};
-
-		queue3 {
-			snps,avb-algorithm;
-			snps,send_slope = <0x1000>;
-			snps,idle_slope = <0x1000>;
-			snps,high_credit = <0x3E800>;
-			snps,low_credit = <0xFFC18000>;
-		};
-
-	};
-
-
-	ethqos_hw: qcom,ethernet@23040000 {
-		compatible = "qcom,stmmac-ethqos";
-		reg = <0x23040000 0x10000>,
-			<0x23056000 0x100>,
-			<0x08901000 0xE10>,
-			<0x23056100 0x100>;
-
-		reg-names = "stmmaceth", "rgmii","serdes","reseteth";
-		clocks = <&gcc GCC_EMAC0_AXI_CLK>,
-			<&gcc GCC_EMAC0_SLV_AHB_CLK>,
-			<&gcc GCC_EMAC0_PTP_CLK>,
-			<&gcc GCC_EMAC0_PHY_AUX_CLK>;
-		clock-names = "stmmaceth", "pclk", "ptp_ref", "phyaux";
-		snps,ptp-ref-clk-rate = <250000000>;
-		snps,ptp-req-clk-rate = <96000000>;
-		interrupts-extended = <&intc 0 946 4>, <&tlmm 7 2>;
-		qcom,arm-smmu;
-
-		interrupt-names = "macirq","phy-intr";
-
-		snps,tso;
-		snps,pbl = <32>;
-		rx-fifo-depth = <4096>;
-		tx-fifo-depth = <4096>;
-
-
-		qcom,phy-intr-redirect = <&tlmm 7 0>;
-
-		snps,mtl-rx-config = <&mtl_rx_setup>;
-		snps,mtl-tx-config = <&mtl_tx_setup>;
-
-		gdsc_emac-supply = <&gcc_emac0_gdsc>;
-
-		phy-mode = "sgmii";
-		snps,reset-delays-us = <0 11000 70000>;
-		pinctrl-names = "dev-emac-mdc",
-			"dev-emac-mdio";
-
-		pinctrl-0 = <&emac_mdc>;
-		pinctrl-1 = <&emac_mdio>;
-
-		ethqos_emb_smmu: ethqos_emb_smmu {
-			compatible = "qcom,emac-smmu-embedded";
-			iommus = <&apps_smmu 0x120 0xf>;
-			qcom,iommu-dma = "fastmap";
-			qcom,iommu-dma-addr-pool = <0x80000000 0x40000000>;
-		};
 	};
 
 	qcom,msm-adsprpc-mem {

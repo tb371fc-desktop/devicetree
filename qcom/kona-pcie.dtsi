@@ -51,16 +51,21 @@
 		qcom,vreg-0p9-voltage-level = <880000 880000 73500>;
 		qcom,vreg-cx-voltage-level = <RPMH_REGULATOR_LEVEL_MAX
 						RPMH_REGULATOR_LEVEL_NOM 0>;
-		qcom,bw-scale = <RPMH_REGULATOR_LEVEL_LOW_SVS 19200000
-				RPMH_REGULATOR_LEVEL_LOW_SVS 19200000
-				RPMH_REGULATOR_LEVEL_NOM 100000000>;
+		qcom,bw-scale = /* Gen1 */
+				<RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen2 */
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen3 */
+				RPMH_REGULATOR_LEVEL_NOM
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				100000000>;
 
-		qcom,msm-bus,name = "pcie0";
-		qcom,msm-bus,num-cases = <2>;
-		qcom,msm-bus,num-paths = <1>;
-		qcom,msm-bus,vectors-KBps =
-				<45 512 0 0>,
-				<45 512 500 800>;
+		interconnect-names = "icc_path";
+		interconnects = <&aggre2_noc MASTER_PCIE_0 &mc_virt SLAVE_EBI1>;
 
 		clocks = <&clock_gcc GCC_PCIE_0_PIPE_CLK>,
 			<&clock_rpmh RPMH_CXO_CLK>,
@@ -95,7 +100,7 @@
 		qcom,boot-option = <0x1>;
 		qcom,drv-supported;
 		qcom,drv-l1ss-timeout-us = <10000>; /* 10ms */
-		qcom,use-19p2mhz-aux-clk;
+		qcom,aux-clk-freq = <20>; /* 19.2 MHz */
 		qcom,no-l0s-supported;
 		qcom,l1-2-th-scale = <2>; /* 1us */
 		qcom,l1-2-th-value = <70>;
@@ -299,16 +304,21 @@
 		qcom,vreg-0p9-voltage-level = <880000 880000 98800>;
 		qcom,vreg-cx-voltage-level = <RPMH_REGULATOR_LEVEL_MAX
 						RPMH_REGULATOR_LEVEL_NOM 0>;
-		qcom,bw-scale = <RPMH_REGULATOR_LEVEL_LOW_SVS 19200000
-				RPMH_REGULATOR_LEVEL_LOW_SVS 19200000
-				RPMH_REGULATOR_LEVEL_NOM 100000000>;
+		qcom,bw-scale = /* Gen1 */
+				<RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen2 */
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen3 */
+				RPMH_REGULATOR_LEVEL_NOM
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				100000000>;
 
-		qcom,msm-bus,name = "pcie1";
-		qcom,msm-bus,num-cases = <2>;
-		qcom,msm-bus,num-paths = <1>;
-		qcom,msm-bus,vectors-KBps =
-				<100 512 0 0>,
-				<100 512 500 800>;
+		interconnect-names = "icc_path";
+		interconnects = <&aggre2_noc MASTER_PCIE_1 &mc_virt SLAVE_EBI1>;
 
 		clocks = <&clock_gcc GCC_PCIE_1_PIPE_CLK>,
 			<&clock_rpmh RPMH_CXO_CLK>,
@@ -342,7 +352,7 @@
 
 		qcom,boot-option = <0x1>;
 		qcom,drv-supported;
-		qcom,use-19p2mhz-aux-clk;
+		qcom,aux-clk-freq = <20>; /* 19.2 MHz */
 		qcom,no-l0s-supported;
 		qcom,slv-addr-space-size = <0x20000000>;
 		qcom,ep-latency = <10>;
@@ -579,16 +589,21 @@
 		qcom,vreg-0p9-voltage-level = <880000 880000 98800>;
 		qcom,vreg-cx-voltage-level = <RPMH_REGULATOR_LEVEL_MAX
 						RPMH_REGULATOR_LEVEL_NOM 0>;
-		qcom,bw-scale = <RPMH_REGULATOR_LEVEL_LOW_SVS 19200000
-				RPMH_REGULATOR_LEVEL_LOW_SVS 19200000
-				RPMH_REGULATOR_LEVEL_NOM 100000000>;
+		qcom,bw-scale = /* Gen1 */
+				<RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen2 */
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen3 */
+				RPMH_REGULATOR_LEVEL_NOM
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				100000000>;
 
-		qcom,msm-bus,name = "pcie2";
-		qcom,msm-bus,num-cases = <2>;
-		qcom,msm-bus,num-paths = <1>;
-		qcom,msm-bus,vectors-KBps =
-				<108 512 0 0>,
-				<108 512 500 800>;
+		interconnect-names = "icc_path";
+		interconnects = <&aggre1_noc MASTER_PCIE_2 &mc_virt SLAVE_EBI1>;
 
 		clocks = <&clock_gcc GCC_PCIE_2_PIPE_CLK>,
 			<&clock_rpmh RPMH_CXO_CLK>,
@@ -622,7 +637,7 @@
 
 		qcom,boot-option = <0x1>;
 		qcom,drv-supported;
-		qcom,use-19p2mhz-aux-clk;
+		qcom,aux-clk-freq = <20>; /* 19.2 MHz */
 		qcom,no-l0s-supported;
 		qcom,slv-addr-space-size = <0x4000000>;
 		qcom,ep-latency = <10>;

@@ -1471,34 +1471,6 @@
 		};
 	};
 
-	emac {
-		emac_mdc: emac_mdc {
-			mux {
-				pins = "gpio8";
-				function = "emac0_mdc";
-			};
-
-			config {
-				pins = "gpio8";
-				bias-pull-up;
-				drive-strength = <16>;
-			};
-		};
-
-		emac_mdio: emac_mdio {
-			mux {
-				pins = "gpio9";
-				function = "emac0_mdio";
-			};
-
-			config {
-				pins = "gpio9";
-				bias-pull-up;
-				drive-strength = <16>;
-			};
-		};
-	};
-
 	pcie0 {
 		pcie0_perst_default: pcie0_perst_default {
 			mux {

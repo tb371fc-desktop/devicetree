@@ -828,7 +828,3 @@
 	/delete-property/ qcom,msm-bus,vectors-bus-ids;
 	qcom,iommu-dma = "bypass";
 };
-
-&cpu_pmu {
-	interrupts = <GIC_PPI 7 IRQ_TYPE_LEVEL_LOW>;
-};

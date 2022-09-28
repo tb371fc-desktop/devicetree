@@ -12,6 +12,7 @@
 		mhi,max-channels = <30>;
 		mhi,timeout = <10000>;
 		qrtr_node_id = <0x20>;
+		board_id = <0xac>;
 		status="okay";
 
 		mhi_channels {

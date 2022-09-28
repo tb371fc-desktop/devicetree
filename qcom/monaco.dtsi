@@ -1469,6 +1469,12 @@ qcom,msm-adsprpc-mem {
 			qcom,glinkpkt-dev-name = "glink_pkt_slate_display_ctrl";
 		};
 
+		qcom,glinkpkt-slate-location-ctrl {
+			qcom,glinkpkt-edge = "slate";
+			qcom,glinkpkt-ch-name = "location_ctrl";
+			qcom,glinkpkt-dev-name = "glink_pkt_slate_location_ctrl";
+		};
+
 		qcom,glinkpkt-slate-display-data {
 			qcom,glinkpkt-edge = "slate";
 			qcom,glinkpkt-ch-name = "display-data";

@@ -513,6 +513,11 @@
 	status = "ok";
 };
 
+&sde_dsi {
+	qcom,dsi-hibernate-splash-enable;
+	qcom,dsi-reserve-splash-region;
+};
+
 &sde_dp {
 	status="disabled";
 };
@@ -528,6 +533,7 @@
 	qcom,mdss-dsi-bl-max-level = <4095>;
 	qcom,platform-te-gpio = <&tlmm 90 0>;
 	qcom,platform-reset-gpio = <&tlmm 91 0>;
+	qcom,platform-reset-gpio-always-on;
 };
 
 &pil_modem_mem {

@@ -122,7 +122,7 @@
 
 		audio_mem: audio_region@0 {
 			compatible = "shared-dma-pool";
-			no-map;
+			reusable;
 			size = <0x400000>;
 		};
 
@@ -1019,6 +1019,14 @@
 		qcom,rmnet-ipa-ssr;
 	};
 
+	dcc: dcc_v2@10a2000 {
+		compatible = "qcom,dcc-v2";
+		reg = <0x10a2000 0x1000>,
+			<0x10ae800 0x1800>;
+		reg-names = "dcc-base", "dcc-ram-base";
+		dcc-ram-offset = <0x800>;
+	};
+
 	qcom,ipa_fws {
 		compatible = "qcom,pil-tz-generic";
 		qcom,pas-id = <0xf>;
@@ -1252,6 +1260,13 @@
 			rgmii-tx-drv = <1>;
 			};
 		};
+		sdx_ext_ipc: qcom,sdx_ext_ipc {
+			compatible = "qcom,sdx-ext-ipc";
+			qcom,status-in-gpio = <&tlmm 64 0x00>;
+			qcom,status-out-gpio = <&tlmm 63 0x00>;
+			qcom,status-out2-gpio = <&tlmm 66 0x00>;
+			status = "disabled";
+		};
 };
 
 #include "sa515m-pinctrl.dtsi"
@@ -1377,5 +1392,78 @@
 				cooling-device = <&modem_v2x 3 3>;
 			};
 		};
+	};
+};
+
+&i2c_4 {
+	status = "okay";
+	smi130_gyro@68 {
+		compatible = "smi130_gyro";
+		reg = <0x68>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sensor_int1_default>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <84 IRQ_TYPE_EDGE_RISING>;
+		smi130_gyro,gpio_irq = <&tlmm 84 IRQ_TYPE_EDGE_RISING>;
+	};
+
+	smi130_acc@18 {
+		compatible = "smi130_acc";
+		reg = <0x18>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sensor_int2_default>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <85 IRQ_TYPE_EDGE_RISING>;
+	};
+
+	smi230_gyro@68 {
+		compatible = "SMI230GYRO";
+		reg = <0x68>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sensor_int1_default>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <84 IRQ_TYPE_EDGE_RISING>;
+		gpio_irq = <&tlmm 84 IRQ_TYPE_EDGE_RISING>;
+	};
+
+	smi230_acc@18 {
+		compatible = "SMI230ACC";
+		reg = <0x18>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sensor_int2_default>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <85 IRQ_TYPE_EDGE_RISING>;
+		gpio_irq = <&tlmm 85 IRQ_TYPE_EDGE_RISING>;
+	};
+
+	iam20680@69 {
+		compatible = "inven,iam20680";
+		reg = <0x69>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sensor_int1_default>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <84 IRQ_TYPE_EDGE_RISING>;
+		axis_map_x = <1>;
+		axis_map_y = <0>;
+		axis_map_z = <2>;
+		negate_x = <1>;
+		negate_y = <0>;
+		negate_z = <0>;
+		inven,secondary_type = "none";
+		inven,aux_type = "none";
+		inven,read_only_slave_type = "none";
+	};
+
+	asm330lhh@6b {
+		compatible = "st,asm330lhh";
+		reg = <0x6b>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sensor_int1_default>,<&sensor_enable_default>;
+		asm330-enable-gpio = <&tlmm 87 0x1>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <84 IRQ_TYPE_EDGE_RISING>;
+		st,drdy-int-pin= <2>;
+		qcom,regulator_check = <0>;
+		qcom,asm330_hrtimer;
 	};
 };

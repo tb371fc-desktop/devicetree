@@ -178,4 +178,11 @@
 			pcm-lane-config = <1>;
 		};
 	};
+
+	spf_snd_8155: spf-sound-adp-star {
+		compatible = "qcom,8155-spf-asoc-snd-adp-star";
+		qcom,model = "gvmauto-8155-snd-card";
+		asoc-codec = <&stub_codec>;
+		asoc-codec-names = "msm-stub-codec.1";
+	};
 };

@@ -57,10 +57,15 @@
 };
 
 &usb1 {
+	/delete-property/ qcom,default-mode-host;
 	status = "okay";
 };
 
 &usb2_phy1 {
+	status = "okay";
+};
+
+&usb_qmp_dp_phy1 {
 	status = "okay";
 };
 

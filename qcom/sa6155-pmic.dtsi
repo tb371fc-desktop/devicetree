@@ -165,6 +165,12 @@
 				hysteresis = <1000>;
 				type = "passive";
 			};
+
+			reset-mon-1-cfg {
+				temperature = <125000>;
+				hysteresis = <1000>;
+				type = "passive";
+			};
 		};
 	};
 
