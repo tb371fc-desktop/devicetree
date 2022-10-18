@@ -1,5 +1,5 @@
 /* Remove regulator nodes specific to sdmshrike */
-&apps_rsc {
+&apps_rsc_drv2 {
 	/* Logical rails */
 	/delete-node/ rpmh-regulator-cxlvl;
 	/delete-node/ rpmh-regulator-mxlvl;
@@ -59,13 +59,6 @@
 	/delete-node/ refgen;
 };
 
-&lmh_dcvs1 {
-	isens_vref_0p8-supply = <&pm8195_3_l5>;
-	isens-vref-0p8-settings = <880000 880000 20000>;
-	isens_vref_1p8-supply = <&pm8195_1_l12>;
-	isens-vref-1p8-settings = <1800000 1800000 20000>;
-};
-
 &camcc {
 	vdd_mx-supply = <&VDD_MX_LEVEL>;
 	vdd_mm-supply = <&VDD_MMCX_LEVEL>;
@@ -95,57 +88,13 @@
 			pm8195_1_trip1: trip1 {
 				temperature = <125000>;
 				hysteresis = <0>;
-				type = "critical";
+				type = "passive";
 			};
 
 			trip2 {
 				temperature = <155000>;
 				hysteresis = <0>;
 				type = "critical";
-			};
-		};
-
-		cooling-maps {
-			trip0_cpu0 {
-				trip = <&pm8195_1_trip0>;
-				cooling-device =
-					<&CPU0 THERMAL_MAX_LIMIT
-						THERMAL_MAX_LIMIT>;
-			};
-
-			trip0_cpu1 {
-				trip = <&pm8195_1_trip0>;
-				cooling-device = <&cpu1_isolate 1 1>;
-			};
-
-			trip0_cpu2 {
-				trip = <&pm8195_1_trip0>;
-				cooling-device = <&cpu2_isolate 1 1>;
-			};
-
-			trip0_cpu3 {
-				trip = <&pm8195_1_trip0>;
-				cooling-device = <&cpu3_isolate 1 1>;
-			};
-
-			trip0_cpu4 {
-				trip = <&pm8195_1_trip0>;
-				cooling-device = <&cpu4_isolate 1 1>;
-			};
-
-			trip0_cpu5 {
-				trip = <&pm8195_1_trip0>;
-				cooling-device = <&cpu5_isolate 1 1>;
-			};
-
-			trip0_cpu6 {
-				trip = <&pm8195_1_trip0>;
-				cooling-device = <&cpu6_isolate 1 1>;
-			};
-
-			trip0_cpu7 {
-				trip = <&pm8195_1_trip0>;
-				cooling-device = <&cpu7_isolate 1 1>;
 			};
 		};
 	};
@@ -166,57 +115,13 @@
 			pm8195_2_trip1: trip1 {
 				temperature = <125000>;
 				hysteresis = <0>;
-				type = "critical";
+				type = "passive";
 			};
 
 			trip2 {
 				temperature = <155000>;
 				hysteresis = <0>;
 				type = "critical";
-			};
-		};
-
-		cooling-maps {
-			trip0_cpu0 {
-				trip = <&pm8195_2_trip0>;
-				cooling-device =
-					<&CPU0 THERMAL_MAX_LIMIT
-						THERMAL_MAX_LIMIT>;
-			};
-
-			trip0_cpu1 {
-				trip = <&pm8195_2_trip0>;
-				cooling-device = <&cpu1_isolate 1 1>;
-			};
-
-			trip0_cpu2 {
-				trip = <&pm8195_2_trip0>;
-				cooling-device = <&cpu2_isolate 1 1>;
-			};
-
-			trip0_cpu3 {
-				trip = <&pm8195_2_trip0>;
-				cooling-device = <&cpu3_isolate 1 1>;
-			};
-
-			trip0_cpu4 {
-				trip = <&pm8195_2_trip0>;
-				cooling-device = <&cpu4_isolate 1 1>;
-			};
-
-			trip0_cpu5 {
-				trip = <&pm8195_2_trip0>;
-				cooling-device = <&cpu5_isolate 1 1>;
-			};
-
-			trip0_cpu6 {
-				trip = <&pm8195_2_trip0>;
-				cooling-device = <&cpu6_isolate 1 1>;
-			};
-
-			trip0_cpu7 {
-				trip = <&pm8195_2_trip0>;
-				cooling-device = <&cpu7_isolate 1 1>;
 			};
 		};
 	};
@@ -237,7 +142,7 @@
 			pm8195_3_trip1: trip1 {
 				temperature = <125000>;
 				hysteresis = <0>;
-				type = "critical";
+				type = "passive";
 			};
 
 			trip2 {
@@ -246,53 +151,9 @@
 				type = "critical";
 			};
 		};
-
-		cooling-maps {
-			trip0_cpu0 {
-				trip = <&pm8195_3_trip0>;
-				cooling-device =
-					<&CPU0 THERMAL_MAX_LIMIT
-						THERMAL_MAX_LIMIT>;
-			};
-
-			trip0_cpu1 {
-				trip = <&pm8195_3_trip0>;
-				cooling-device = <&cpu1_isolate 1 1>;
-			};
-
-			trip0_cpu2 {
-				trip = <&pm8195_3_trip0>;
-				cooling-device = <&cpu2_isolate 1 1>;
-			};
-
-			trip0_cpu3 {
-				trip = <&pm8195_3_trip0>;
-				cooling-device = <&cpu3_isolate 1 1>;
-			};
-
-			trip0_cpu4 {
-				trip = <&pm8195_3_trip0>;
-				cooling-device = <&cpu4_isolate 1 1>;
-			};
-
-			trip0_cpu5 {
-				trip = <&pm8195_3_trip0>;
-				cooling-device = <&cpu5_isolate 1 1>;
-			};
-
-			trip0_cpu6 {
-				trip = <&pm8195_3_trip0>;
-				cooling-device = <&cpu6_isolate 1 1>;
-			};
-
-			trip0_cpu7 {
-				trip = <&pm8195_3_trip0>;
-				cooling-device = <&cpu7_isolate 1 1>;
-			};
-		};
 	};
 };
 
 &pm8195_1_rtc {
-	disable-alarm-wakeup;
+	qcom,disable-alarm-wakeup;
 };

@@ -23,19 +23,6 @@ The following example reprsents a glink_slatecom node.
 		label = "slate";
 	};
 
-= AUDIO_CC_IPC_PLATFORM
-This node is defined as the platform driver with cc codec as the child device.
-- compatible:
-	Usage: required
-	Value type: <stringlist>
-	Definition: must be "qcom,audio-cc-ipc-platform"
-
-= EXAMPLE
-
-	qcom,audio-cc-ipc-platform {
-		compatible = "qcom,audio-cc-ipc-platform";
-	};
-
 = AUDIO_CC_IPC_NODE
 Each subnode of the glink_slatecom_xprt is a device node exposed to user space
 by the audio-cc-ipc driver for sending ipc packets between the ipc clients.
@@ -84,3 +71,5 @@ The following example represents the audio-cc-ipc node having a codec child node
 			compatible = "qcom, cc-codec";
 		};
 	};
+
+

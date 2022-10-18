@@ -44,4 +44,3 @@ qcom,rpm-master-stats@60150 {
 		qcom,master-stats-version = <2>;
 		qcom,master-offset = <4096>;
 	};
-

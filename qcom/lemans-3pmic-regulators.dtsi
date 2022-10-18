@@ -1,6 +1,6 @@
 #include "lemans-4pmic-regulators.dtsi"
 
-&apps_rsc {
+&apps_rsc_drv2 {
 	/delete-node/ rpmh-regulator-nsp0lvl;
 	/delete-node/ rpmh-regulator-nsp1lvl;
 

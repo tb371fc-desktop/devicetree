@@ -30,8 +30,6 @@ Optional properties:
 		  When not set we use per process pagetables
 - qcom,hyp_secure_alloc : A bool specifying if the hypervisor is used on this target
 		  for secure buffer allocation
-- qcom,secure-size : Specifies the size of gpu address region to be used for
-		  secure memory mapping.
 
 - List of sub nodes, one for each of the translation context banks supported.
   The driver uses the names of these nodes to determine how they are used,

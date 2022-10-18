@@ -1,6 +1,6 @@
 #include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 
-&apps_rsc {
+&apps_rsc_drv2 {
 	/* RPMh regulators: */
 
 	/* PM8150 S1 = VDD_MODEM supply */

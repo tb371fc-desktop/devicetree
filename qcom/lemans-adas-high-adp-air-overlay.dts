@@ -5,7 +5,7 @@
 
 / {
 	model = "Qualcomm Technologies, Inc. Lemans ADAS HIGH ADP AIR";
-	compatible = "qcom,lemans-adas-high", "qcom,lemans", "qcom,adp-air", "qcom,lemans-adas-high-adp-air";
+	compatible = "qcom,lemans", "qcom,adp-air", "qcom,lemans-adas-high", "qcom,lemans-adas-high-adp-air";
 	qcom,msm-id = <533 0x10000>;
 	qcom,board-id = <0x1010019 0>;
 };

@@ -61,48 +61,50 @@ Subsystem properties:
 		28. mmw_pa2
 		29. mmw_pa3
 		30. sdr_mmw_therm
-		31. msm_skin_therm
-		32. beamer_n_therm
-		33. beamer_e_therm
-		34. beamer_w_therm
-		35. qfe_ret_pa0_fr1
-		36. qfe_wtr_pa0_fr1
-		37. qfe_wtr_pa1_fr1
-		38. qfe_wtr_pa2_fr1
-		39. qfe_wtr_pa3_fr1
-		40. qfe_wtr0_fr1
-		41. qtm_therm
-		42. modem_bcl_warn
-		43. sdr0_pa0
-		44. sdr0_pa1
-		45. sdr0_pa2
-		46. sdr0_pa3
-		47. sdr0_pa4
-		48. sdr0_pa5
-		49. sdr0
-		50. sdr1_pa0
-		51. sdr1_pa1
-		52. sdr1_pa2
-		53. sdr1_pa3
-		54. sdr1_pa4
-		55. sdr1_pa5
-		56. sdr1
-		57. mmw0
-		58. mmw1
-		59. mmw2
-		60. mmw3
-		61. mmw_ific0
-		62. rf_cal
-		63. qfe_wtr_pa4
-		64. qfe_wtr_pa5
-		65. qfe_wtr_pa6
-		66. qfe_wtr_pa4_fr1
-		67. qfe_wtr_pa5_fr1
-		68. qfe_wtr_pa6_fr1
-		69. qfe_ret_pa1
-		70. qfe_ret_pa1_fr1
-		71. sdr0_pa
-		72. sdr1_pa
+		31. qtm_therm
+		32. modem_bcl_warn
+		33. sdr0_pa0
+		34. sdr0_pa1
+		35. sdr0_pa2
+		36. sdr0_pa3
+		37. sdr0_pa4
+		38. sdr0_pa5
+		39. sdr0
+		40. sdr1_pa0
+		41. sdr1_pa1
+		42. sdr1_pa2
+		43. sdr1_pa3
+		44. sdr1_pa4
+		45. sdr1_pa5
+		46. sdr1
+		47. mmw0
+		48. mmw1
+		49. mmw2
+		50. mmw3
+		51. mmw_ific0
+		52. sub1_modem_cfg
+		53. sub1_lte_cc
+		54. sub1_mcg_fr1_cc
+		55. sub1_mcg_fr2_cc
+		56. sub1_scg_fr1_cc
+		57. sub1_scg_fr2_cc
+		58. sub2_modem_cfg
+		59. sub2_lte_cc
+		60. sub2_mcg_fr1_cc
+		61. sub2_mcg_fr2_cc
+		62. sub2_scg_fr1_cc
+		63. sub2_scg_fr2_cc
+		64. isense_trim
+		65. epm0
+		66. epm1
+		67. epm2
+		68. epm3
+		69. epm4
+		70. epm5
+		71. epm6
+		72. epm7
+		73. sdr0_pa
+		74. sdr1_pa
 
 Example:
 
@@ -116,5 +118,10 @@ qmi_sensor: qmi-ts-sensors {
 					"pa_1",
 					"qfe_pa0",
 					"qfe_wtr0";
+	};
+
+	cdsp {
+		qcom,instance-id = <QMI_CDSP_INST_ID>;
+		qcom,qmi-sensor-names = "isense_trim";
 	};
 };

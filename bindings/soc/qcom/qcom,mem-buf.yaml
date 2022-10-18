@@ -16,20 +16,27 @@ properties:
   compatible:
     items:
       - const: qcom,mem-buf
+  qcom,vmid:
+    description: integer ID of the current virtual machine.
 
   qcom,mem-buf-capabilities:
     oneOf:
       - const: supplier
-        description: Allows the mem-buf driver to supply memory to other VMs.
+        description:
+          Allows the mem-buf driver to supply memory to other VMs through
+          remote allocation requests.
 
       - const: consumer
         description:
-          Allows the mem-buf driver to request and accept memory from other VMs.
+          Allows the mem-buf driver to request and accept memory from
+          other VMs. VMs with only this capability cannot satisfy remote
+          allocation requests.
 
       - const: dual
         description:
-          Allows the mem-buf driver to supply memory to other VMs, as well as
-          request and accept memory from other VMs
+          Allows the mem-buf driver to supply memory to other VMs through
+          remote allocation requests, as well as request and accept memory
+          from other VMs
 
 required:
   - compatible
@@ -41,3 +48,14 @@ examples:
         compatible = "qcom,mem-buf";
         qcom,mem-buf-capabilities = "supplier";
     };
+
+description: |
+  Provides inter-VM message transfer services to the qcom,mem-buf driver
+
+properties:
+  compatible:
+    items:
+      - const: qcom,mem-buf-msgq
+
+required:
+  - compatible

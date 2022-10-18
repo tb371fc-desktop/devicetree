@@ -54,7 +54,6 @@
 		regulator-name = "hlos1_vote_aggre_noc_mmu_audio_tbu_gdsc";
 		reg = <0x17d040 0x4>;
 		qcom,no-status-check-on-disable;
-		qcom,gds-timeout = <500>;
 		status = "disabled";
 	};
 
@@ -63,7 +62,6 @@
 		regulator-name = "hlos1_vote_aggre_noc_mmu_tbu1_gdsc";
 		reg = <0x17d044 0x4>;
 		qcom,no-status-check-on-disable;
-		qcom,gds-timeout = <500>;
 		status = "disabled";
 	};
 
@@ -72,7 +70,6 @@
 		regulator-name = "hlos1_vote_aggre_noc_mmu_tbu2_gdsc";
 		reg = <0x17d048 0x4>;
 		qcom,no-status-check-on-disable;
-		qcom,gds-timeout = <500>;
 		status = "disabled";
 	};
 
@@ -81,7 +78,6 @@
 		regulator-name = "hlos1_vote_aggre_noc_mmu_pcie_tbu_gdsc";
 		reg = <0x17d04c 0x4>;
 		qcom,no-status-check-on-disable;
-		qcom,gds-timeout = <500>;
 		status = "disabled";
 	};
 
@@ -90,7 +86,6 @@
 		regulator-name = "hlos1_vote_mmnoc_mmu_tbu_hf0_gdsc";
 		reg = <0x17d050 0x4>;
 		qcom,no-status-check-on-disable;
-		qcom,gds-timeout = <500>;
 		status = "disabled";
 	};
 
@@ -99,7 +94,6 @@
 		regulator-name = "hlos1_vote_mmnoc_mmu_tbu_sf_gdsc";
 		reg = <0x17d054 0x4>;
 		qcom,no-status-check-on-disable;
-		qcom,gds-timeout = <500>;
 		status = "disabled";
 	};
 
@@ -108,7 +102,6 @@
 		regulator-name = "hlos1_vote_mmnoc_mmu_tbu_hf1_gdsc";
 		reg = <0x17d058 0x4>;
 		qcom,no-status-check-on-disable;
-		qcom,gds-timeout = <500>;
 		status = "disabled";
 	};
 
@@ -117,7 +110,6 @@
 		regulator-name = "hlos1_vote_turing_mmu_tbu0_gdsc";
 		reg = <0x17d05c 0x4>;
 		qcom,no-status-check-on-disable;
-		qcom,gds-timeout = <500>;
 		status = "disabled";
 	};
 
@@ -126,7 +118,6 @@
 		regulator-name = "hlos1_vote_turing_mmu_tbu1_gdsc";
 		reg = <0x17d060 0x4>;
 		qcom,no-status-check-on-disable;
-		qcom,gds-timeout = <500>;
 		status = "disabled";
 	};
 
@@ -196,7 +187,6 @@
 		reg = <0x2c9106c 0x4>;
 		hw-ctrl-addr = <&gpu_cx_hw_ctrl>;
 		qcom,skip-disable;
-		qcom,gds-timeout = <500>;
 		qcom,clk-dis-wait-val = <8>;
 		mboxes = <&qmp_aop 0>;
 		status = "disabled";

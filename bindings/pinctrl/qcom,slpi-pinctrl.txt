@@ -1,4 +1,4 @@
-Qualcomm Technologies, Inc. SLPI Pin controller driver
+Qualcomm Technologies, Inc. SLPI Pin controller
 
 This DT bindings describes the Pin controller driver
 being added for supporting SLPI (Sensor Low Power Island) TLMM
@@ -20,9 +20,15 @@ Following properties are for SLPI Pin controller device main node.
 	Value type: <u32>
 	Definition: Number of PINs supported by the SLPI TLMM.
 
-- clock-names: Should be "ssc-clk"
+- clock-names:
+	Usage: required
+	value type: <string>
+	Definition: Should be "ssc-clk"
 
-- clocks: Handles to clocks specified in "clock-names" property.
+- clocks:
+	Usage: required
+	value type: Phandle to ssc clk device node
+	Definition: Handles to clocks specified in "clock-names" property.
 
 Please refer to pinctrl-bindings.txt in this directory for details of the
 common pinctrl bindings used by client devices, including the meaning of the
@@ -93,7 +99,7 @@ to specify in a pin configuration subnode:
 
 Example:
 
-	slpi_tlmm: slpi_pinctrl@02b40000 {
+	slpi_tlmm: slpi_pinctrl@2b40000 {
 		compatible = "qcom,slpi-pinctrl";
 		qcom,num-pins = <14>;
 		clock-names = "ssc-clk";

@@ -2,6 +2,6 @@
 
 / {
 	model = "Qualcomm Technologies, Inc. LeMans ADAS HIGH SoC";
-	compatible = "qcom,lemans-adas-high", "qcom,lemans";
+	compatible = "qcom,lemans", "qcom,lemans-adas-high";
 	qcom,msm-id = <533 0x10000>;
 };

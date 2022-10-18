@@ -13,6 +13,9 @@ Required properties:
 			    "qcom,msm8996-ufshc", "qcom,ufshc", "jedec,ufs-2.0"
 			    "qcom,msm8998-ufshc", "qcom,ufshc", "jedec,ufs-2.0"
 			    "qcom,sdm845-ufshc", "qcom,ufshc", "jedec,ufs-2.0"
+			    "qcom,sm8150-ufshc", "qcom,ufshc", "jedec,ufs-2.0"
+			    "qcom,sm8250-ufshc", "qcom,ufshc", "jedec,ufs-2.0"
+			    "qcom,sm8350-ufshc", "qcom,ufshc", "jedec,ufs-2.0"
 - interrupts        : <interrupt mapping for UFS host controller IRQ>
 - reg               : <registers mapping>
 
@@ -22,10 +25,6 @@ Optional properties:
                           with "phys" attribute, provides phandle to UFS PHY node
 - vdd-hba-supply        : phandle to UFS host controller supply regulator node
 - vcc-supply            : phandle to VCC supply regulator node
-- vcc-voltage-level     : specifies voltage levels for VCC supply.
-                          Should be specified in pairs (min, max), units uV.
-- vccq2-voltage-level   : specifies voltage levels for VCCQ2 supply.
-			  Should be specified in pairs (min, max), units uV.
 - vccq-supply           : phandle to VCCQ supply regulator node
 - vccq2-supply          : phandle to VCCQ2 supply regulator node
 - vcc-supply-1p8        : For embedded UFS devices, valid VCC range is 1.7-1.95V
@@ -36,10 +35,6 @@ Optional properties:
 - vcc-max-microamp      : specifies max. load that can be drawn from vcc supply
 - vccq-max-microamp     : specifies max. load that can be drawn from vccq supply
 - vccq2-max-microamp    : specifies max. load that can be drawn from vccq2 supply
-- qcom,delay-ssu        : UFS 3.x uses PMIC Buck regulator which requires additional
-			  delay to settle its voltage back to normal 2.5volts from the
-			  power down, so this property is used to enable delay before sending
-			  start stop unit command.
 
 - clocks                : List of phandle and clock specifier pairs
 - clock-names           : List of clock input name strings sorted in the same

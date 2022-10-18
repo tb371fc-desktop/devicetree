@@ -36,17 +36,11 @@ Properties:
 	Definition: phandle to the regulator device tree node that powers
 			this domain.
 
-- cpu:
-	Usage: optional
-	Value type: <CPU phandle>
-	Definition: The CPU for which the clock changes should be monitored.
-
 - csr-id:
 	Usage: required
 	Value type: <array of u32>
 	Definition: Array of CSR ID matching the clock order mentioned in the
-			clocks property. The last ID can be the CSR
-			corresponding to the CPU that needs to be monitored.
+			clocks property.
 
 Example:
 
@@ -57,9 +51,7 @@ cx_sdpm@0x00634000 {
 	clocks = <&clock_camcc CAM_CC_IPE_0_CLK_SRC>,
 		<&clk_m_a2_div1 CLK_M_COMPO_AUX>;
 	cam_cc_ipe-supply = <&cam_cc_ipe_0_gdsc>;
-	cpu = <&CPU7>;
-	csr-id = <5 7 4>;
+	csr-id = <5 7>;
 	//CSR 5 <=> cam_cc
 	//CSR 7 <=> compo_aux
-	//CSR 4 <=> CPU7
 };

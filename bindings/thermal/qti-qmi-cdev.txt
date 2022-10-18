@@ -41,9 +41,6 @@ Subsystem properties:
 			"modem" -> for processor passive cooling device,
 			"modem_current" -> for current limiting device,
 			"modem_bw" ->  for bus bandwidth limiting device,
-			"modem_bw_backoff" ->  for bus bandwidth limit device with
-						absolute bandwidth reduction from max bandwidth
-						in 100mbbs resolution,
 			"vbatt_low" -> BCL vbat mitigation device,
 			"mmw0" -> Millimeter wave limiting device 0,
 			"mmw1" -> Millimeter wave limiting device 1,
@@ -56,7 +53,6 @@ Subsystem properties:
 			"mmw_skin3" -> MMW skin mitigation device3,
 			"cpr_cold" -> for cpr restriction,
 			"wlan" -> for modem wlan mitigation device,
-			"wlan_bw" -> for bus bandwidth limiting device,
 			"cdsp_sw" -> for CDSP DCVS mitigation device,
 			"cdsp_hw" -> for CDSP hardware mitigation device,
 			"mmw_skin0_dsc" -> DSC based MMW skin mitigation
@@ -72,7 +68,7 @@ Subsystem properties:
 			"modem_skin_nr_dsc" -> DSC based NR skin mitigation
 						device,
 			"pa_dsc" -> DSC based pa cooling device,
-			"pa_fr1_dsc" -> DSC based pa cooling device.
+			"pa_fr1_dsc" -> DSC based pa cooling device,
 			"modem_lte_dsc" -> DSC based modem lte cooling device,
 			"modem_nr_dsc" -> DSC based modem nr cooling device,
 			"modem_nr_scg_dsc" -> DSC based modem nr scg cooling
@@ -81,6 +77,8 @@ Subsystem properties:
 			"sdr1_lte_dsc" -> DSC based sdr1 lte cooling device,
 			"sdr0_nr_dsc" -> DSC based sdr0 nr cooling device,
 			"sdr1_nr_dsc" -> DSC based sdr1 nr cooling device,
+			"sdr0_nr_scg_dsc" -> DSC based sdr0 nr scg cooling device,
+			"sdr1_nr_scg_dsc" -> DSC based sdr1 nr scg cooling device,
 			"pa_lte_sdr0_dsc" -> DSC based pa lte sdr0 cooling
 						device,
 			"pa_lte_sdr1_dsc" -> DSC based pa lte sdr1 cooling
@@ -96,9 +94,24 @@ Subsystem properties:
 			"mmw2_dsc" -> DSC based MMW cooling device2,
 			"mmw3_dsc" -> DSC based MMW cooling device3,
 			"mmw_ific_dsc" -> DSC based MMW IFIC cooling device,
-			"tmd_rf_cal" -> for acknowledging modem that bcl disable
-						is done,
-			"modem_v2x" -> modem CV2X mitigation cooling device.
+			"modem_lte_sub1_dsc" -> DSC based modem lte sub1 cooling device,
+			"modem_nr_sub1_dsc" -> DSC based modem nr sub1 cooling device,
+			"modem_nr_scg_sub1_dsc" -> DSC based modem nr scg sub1 cooling device,
+			"sdr0_lte_sub1_dsc" -> DSC based sdr0 lte sub1 cooling device,
+			"sdr1_lte_sub1_dsc" -> DSC based sdr1 lte sub1 cooling device,
+			"sdr0_nr_sub1_dsc"  -> DSC based sdr0 nr sub1 cooling device,
+			"sdr1_nr_sub1_dsc"  -> DSC based sdr1 nr sub1 cooling device,
+			"pa_lte_sdr0_sub1_dsc" -> DSC based pa lte sdr0 sub1 cooling device,
+			"pa_lte_sdr1_sub1_dsc" -> DSC based pa lte sdr1 sub1 cooling device,
+			"pa_nr_sdr0_sub1_dsc" -> DSC based pa nr sdr0 sub1 cooling device,
+			"pa_nr_sdr1_sub1_dsc" -> DSC based pa nr sdr1 sub1 cooling device,
+			"pa_nr_sdr0_scg_sub1_dsc" -> DSC based pa nr sdr0 scg sub1 cooling device,
+			"pa_nr_sdr1_scg_sub1_dsc" -> DSC based pa nr sdr1 scg sub1 cooling device,
+			"mmw0_sub1_dsc" -> DSC based MMW sub1 cooling device0,
+			"mmw1_sub1_dsc" -> DSC based MMW sub1 cooling device1,
+			"mmw2_sub1_dsc" -> DSC based MMW sub1 cooling device2,
+			"mmw3_sub1_dsc" -> DSC based MMW sub1 cooling device3,
+			"mmw_ific_sub1_dsc" -> DSC based MMW IFIC sub1 cooling device.
 
 	-#cooling-cells:
 		Usage: required

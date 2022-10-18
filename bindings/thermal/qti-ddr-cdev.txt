@@ -1,4 +1,4 @@
-QTI DDR cooling device.
+QTI DDR cooling device
 
 The DDR cooling device will be used to place a DDR frequency vote. This
 cooling device will be used in those cases where all the subsystem's are
@@ -12,7 +12,7 @@ Properties:
 	Definition: should be "qcom,ddr-cooling-device"
 
 Cooling device node:
-- qcom,ddr-freq:
+- qcom,freq-table:
 	Usage: required
 	Value type: <u32 array>
 	Definition: List of available DDR frequencies.
@@ -24,19 +24,29 @@ Cooling device node:
 			identifier. Please refer to
 			<devicetree/bindings/thermal/thermal.txt> for more
 			details.
+
+- interconnects:
+	Usage: required
+	Definition: Pairs of phandles and interconnect provider specificers
+			to denote the edge source and destination ports of
+			the desired interconnect path. Please refer to
+			<devicetree/bindings/interconnect/interconnect.txt>
+			for more details.
+
+- qcom,bus-width:
+	Usage: required
+	Definition: Provides the bus width for DDR.
+
 Example:
 	qcom,ddr-cdev {
 		compatible = "qcom,ddr-cooling-device";
-		qcom,ddr-freq = <200000>,
-				<451000>,
-				<547000>,
-				<681000>,
-				<768000>,
-				<1017000>,
-				<1555000>,
-				<1708000>,
-				<2092000>,
-				<2736000>,
-				<3196000>;
+		qcom,freq-table = <200000>,
+                                  <451000>,
+                                  <768000>,
+                                  <1017000>,
+                                  <2092000>,
+                                  <2736000>;
+		qcom,bus-width = <4>;
 		#cooling-cells = <2>;
+		interconnects = <&mc_virt MASTER_LLCC &mc_virt SLAVE_EBI1>;
         };

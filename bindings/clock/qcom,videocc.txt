@@ -1,4 +1,4 @@
-Qualcomm Video Clock & Reset Controller Binding
+Qualcomm Technologies, Inc. Video Clock & Reset Controller Binding
 -----------------------------------------------
 
 Required properties :
@@ -7,18 +7,15 @@ Required properties :
 			"qcom,sdm845-videocc"
 			"qcom,lahaina-videocc"
 			"qcom,shima-videocc"
+			"qcom,waipio-videocc"
+			"qcom,diwali-videocc"
+			"qcom,kalama-videocc"
+			"qcom,kalama-videocc-v2"
 			"qcom,sm8150-videocc"
 			"qcom,sm8150-videocc-v2"
 			"qcom,sa8155-videocc"
 			"qcom,sa8155-videocc-v2"
-			"qcom,yupik-videocc"
-			"qcom,sm6150-videocc"
-			"qcom,sa6155-videocc"
-			"qcom,direwolf-videocc"
-			"qcom,direwolf-videocc-v2"
 			"qcom,lemans-videocc"
-			"qcom,videocc-kona"
-			"qcom,videocc-kona-v2"
 
 - reg : shall contain base register location and length
 - #clock-cells : from common clock binding, shall contain 1.

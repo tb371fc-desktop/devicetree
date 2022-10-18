@@ -1287,12 +1287,10 @@
 
 		coresight-name = "coresight-tmc-etf";
 
-		coresight-ctis = <&cti0 &cti6>;
-		cti-flush-trig-num = <1>;
-		cti-reset-trig-num = <5>;
-
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
+		coresight-ctis = <&cti0>;
+		coresight-csr = <&csr>;
 		ports {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -1369,10 +1367,7 @@
 		arm,buffer-size = <0x400000>;
 		arm,scatter-gather;
 
-		coresight-ctis = <&cti0 &cti6>;
-		cti-flush-trig-num = <3>;
-		cti-reset-trig-num = <5>;
-
+		coresight-ctis = <&cti0>;
 		coresight-csr = <&csr>;
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;

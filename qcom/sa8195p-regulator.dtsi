@@ -1,6 +1,6 @@
 #include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 
-&apps_rsc {
+&apps_rsc_drv2 {
 
 	/* PM8195_1 S1 = VDD_EBI supply */
 	rpmh-regulator-ebilvl {
@@ -22,6 +22,7 @@
 	rpmh-regulator-mmcxlvl {
 		compatible = "qcom,rpmh-arc-regulator";
 		qcom,resource-name = "mmcx.lvl";
+		proxy-supply = <&VDD_MMCX_LEVEL>;
 
 		VDD_MMCX_LEVEL:
 		S7A_LEVEL: pm8195_1_s7_level: regulator-pm8195-1-s7-level {
@@ -33,6 +34,10 @@
 				= <RPMH_REGULATOR_LEVEL_MAX>;
 			qcom,init-voltage-level
 				= <RPMH_REGULATOR_LEVEL_RETENTION>;
+			qcom,proxy-consumer-enable;
+			qcom,proxy-consumer-voltage
+				= <RPMH_REGULATOR_LEVEL_TURBO
+				   RPMH_REGULATOR_LEVEL_MAX>;
 		};
 
 		VDD_MMCX_LEVEL_AO: S7A_LEVEL_AO:
@@ -117,6 +122,9 @@
 	rpmh-regulator-mxlvl {
 		compatible = "qcom,rpmh-arc-regulator";
 		qcom,resource-name = "mx.lvl";
+		pm8195_1_s10_level-parent-supply = <&VDD_MMCX_LEVEL>;
+		pm8195_1_s10_level_ao-parent-supply = <&VDD_MMCX_LEVEL_AO>;
+		proxy-supply = <&VDD_MX_LEVEL>;
 
 		VDD_MX_LEVEL:
 		S10A_LEVEL: pm8195_1_s10_level: regulator-pm8195-1-s10-level {
@@ -128,6 +136,10 @@
 				= <RPMH_REGULATOR_LEVEL_MAX>;
 			qcom,init-voltage-level
 				= <RPMH_REGULATOR_LEVEL_RETENTION>;
+			qcom,proxy-consumer-enable;
+			qcom,proxy-consumer-voltage
+				= <RPMH_REGULATOR_LEVEL_TURBO
+				   RPMH_REGULATOR_LEVEL_MAX>;
 		};
 
 		VDD_MX_LEVEL_AO: S10A_LEVEL_AO:
@@ -381,7 +393,7 @@
 			qcom,set = <RPMH_REGULATOR_SET_ALL>;
 			regulator-min-microvolt = <1060000>;
 			regulator-max-microvolt = <1170000>;
-			qcom,init-voltage = <1128000>;
+			qcom,init-voltage = <1060000>;
 		};
 	};
 
@@ -413,7 +425,7 @@
 	rpmh-regulator-gfxlvl {
 		compatible = "qcom,rpmh-arc-regulator";
 		qcom,resource-name = "gfx.lvl";
-		VDD_GFX:
+		VDD_GFX_LEVEL:
 		S10C_LEVEL: pm8195_2_s10_level: regulator-pm8195-2-s10-level {
 			regulator-name = "pm8195_2_s10_level";
 			qcom,set = <RPMH_REGULATOR_SET_ALL>;
@@ -439,7 +451,7 @@
 			qcom,set = <RPMH_REGULATOR_SET_ALL>;
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <3330000>;
-			qcom,init-voltage = <1808000>;
+			qcom,init-voltage = <1800000>;
 			qcom,init-mode = <RPMH_REGULATOR_MODE_LPM>;
 		};
 	};
@@ -493,7 +505,7 @@
 			qcom,set = <RPMH_REGULATOR_SET_ALL>;
 			regulator-min-microvolt = <1620000>;
 			regulator-max-microvolt = <3300000>;
-			qcom,init-voltage = <1808000>;
+			qcom,init-voltage = <1620000>;
 			qcom,init-mode = <RPMH_REGULATOR_MODE_LPM>;
 		};
 	};

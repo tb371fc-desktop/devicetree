@@ -86,7 +86,7 @@ First Level Node - QGAUGE device
 - qcom,qg-iterm-ma
 	Usage:      optional
 	Value type: <u32>
-	Definition: The battery current (in mA) at which the the QG algorithm
+	Definition: The battery current (in mA) at which the QG algorithm
 		    converges the SOC to 100% during charging and can be used to
 		    terminate charging. If not specified, the default value is
 		    100mA.

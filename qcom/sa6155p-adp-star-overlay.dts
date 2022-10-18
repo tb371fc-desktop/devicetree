@@ -1,8 +1,7 @@
 /dts-v1/;
 /plugin/;
 
-#include "sa6155-adp-star.dtsi"
-#include "display/sa6155-display-shd.dtsi"
+#include "sa6155-adp-common.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. SA6155P ADP-STAR";

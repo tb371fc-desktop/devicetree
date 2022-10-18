@@ -8,7 +8,7 @@ Properties:
 - compatible
 	Usage:		required
 	Value type:	<string>
-	Definition:	must be "qcom,cpufreq-hw" or "qcom,cpufreq-hw-epss".
+	Definition:	must be "qcom,cpufreq-hw" or "qcom,cpufreq-epss" or "qcom,cpufreq-hw-epss".
 
 - clocks
 	Usage:		required
@@ -31,6 +31,10 @@ Properties:
 	Definition:	Frequency domain name i.e.
 			"freq-domain0", "freq-domain1".
 
+- #freq-domain-cells:
+	Usage:		required.
+	Definition:	Number of cells in a freqency domain specifier.
+
 - qcom,lut-row-size
 	Usage:		Optional
 	Value type:	<u32>
@@ -49,12 +53,6 @@ Properties:
 			In case this property is present, the reg & reg-names
 			should have the "pdmem-domainX" to indicate the
 			corresponding bases.
-
-- qcom,sdpm-cx-mx-<id>
-	Usage:		Optional
-	Value type:	<prop-encoded-array>
-	Definition:	Addresses and sizes for the SDPM memory of the HW bases
-			in each frequency domain, indicated by an "id"(0/1/2).
 
 * Property qcom,freq-domain
 Devices supporting freq-domain must set their "qcom,freq-domain" property with
@@ -187,8 +185,6 @@ DCVS state together.
 
 		clocks = <&rpmhcc RPMH_CXO_CLK>, <&gcc GPLL0>;
 		clock-names = "xo", "alternate";
-		qcom,sdpm-cx-mx-1 = <0x00636f08 0x4>;
-		qcom,sdpm-cx-mx-2 = <0x00636f0c 0x4>;
 
 		#freq-domain-cells = <1>;
 	};

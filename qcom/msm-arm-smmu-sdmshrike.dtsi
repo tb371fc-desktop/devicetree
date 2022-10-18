@@ -4,7 +4,7 @@
 	kgsl_smmu: kgsl-smmu@2ca0000 {
 		compatible = "qcom,qsmmu-v500";
 		reg = <0x2ca0000 0x10000>,
-			<0x2CC2000 0x20>;
+			<0x2cc2000 0x20>;
 		reg-names = "base", "tcu-base";
 		#iommu-cells = <2>;
 		qcom,skip-init;
@@ -41,6 +41,7 @@
 				<0x2cc2200 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x0 0x400>;
+			qcom,iova-width = <49>;
 		};
 
 		gfx_1_tbu: gfx_1_tbu@2cc9000 {
@@ -49,6 +50,7 @@
 				<0x2cc2208 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x400 0x400>;
+			qcom,iova-width = <49>;
 		};
 
 		gfx_2_tbu: gfx_2_tbu@2ccd000 {
@@ -57,6 +59,7 @@
 				<0x2cc2210 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x800 0x400>;
+			qcom,iova-width = <49>;
 		};
 
 		gfx_3_tbu: gfx_3_tbu@2cd1000 {
@@ -65,6 +68,7 @@
 				<0x2cc2218 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0xC00 0x400>;
+			qcom,iova-width = <49>;
 		};
 	};
 
@@ -224,6 +228,7 @@
 			qcom,active-only;
 			interconnects = <&system_noc MASTER_GEM_NOC_SNOC
 					 &config_noc SLAVE_IMEM_CFG>;
+			qcom,iova-width = <36>;
 		};
 
 		anoc_2_tbu: anoc_2_tbu@15189000 {
@@ -237,6 +242,7 @@
 			qcom,active-only;
 			interconnects = <&system_noc MASTER_GEM_NOC_SNOC
 					 &config_noc SLAVE_IMEM_CFG>;
+			qcom,iova-width = <36>;
 		};
 
 		mnoc_hf_0_tbu: mnoc_hf_0_tbu@1518d000 {
@@ -250,6 +256,7 @@
 			qcom,active-only;
 			interconnects = <&mmss_noc MASTER_MDP0
 					 &mmss_noc SLAVE_MNOC_HF_MEM_NOC>;
+			qcom,iova-width = <32>;
 		};
 
 		mnoc_hf_1_tbu: mnoc_hf_1_tbu@15191000 {
@@ -263,6 +270,7 @@
 			qcom,active-only;
 			interconnects = <&mmss_noc MASTER_MDP0
 					 &mmss_noc SLAVE_MNOC_HF_MEM_NOC>;
+			qcom,iova-width = <32>;
 		};
 
 		compute_dsp_1_tbu: compute_dsp_1_tbu@15195000 {
@@ -274,6 +282,7 @@
 			qcom,active-only;
 			interconnects = <&compute_noc MASTER_NPU
 					 &compute_noc SLAVE_CDSP_MEM_NOC>;
+			qcom,iova-width = <32>;
 		};
 
 		compute_dsp_0_tbu: compute_dsp_0_tbu@15199000 {
@@ -285,6 +294,7 @@
 			qcom,active-only;
 			interconnects = <&compute_noc MASTER_NPU
 					 &compute_noc SLAVE_CDSP_MEM_NOC>;
+			qcom,iova-width = <32>;
 		};
 
 		adsp_tbu: adsp_tbu@1519d000 {
@@ -298,6 +308,7 @@
 			qcom,active-only;
 			interconnects = <&system_noc MASTER_GEM_NOC_SNOC
 					 &config_noc SLAVE_IMEM_CFG>;
+			qcom,iova-width = <32>;
 		};
 
 		anoc_pcie: anoc_pcie@151a1000 {
@@ -313,6 +324,7 @@
 			qcom,active-only;
 			interconnects = <&system_noc MASTER_GEM_NOC_SNOC
 					 &config_noc SLAVE_IMEM_CFG>;
+			qcom,iova-width = <36>;
 		};
 
 		mnoc_sf_0_tbu: mnoc_sf_0_tbu@151a5000 {
@@ -326,33 +338,39 @@
 			qcom,active-only;
 			interconnects = <&mmss_noc MASTER_CAMNOC_SF
 					 &mmss_noc SLAVE_MNOC_SF_MEM_NOC>;
+			qcom,iova-width = <32>;
 		};
 	};
 
-	kgsl_iommu_test_device {
-		compatible = "iommu-debug-test";
-		iommus = <&kgsl_smmu 0x7 0>;
-		qcom,iommu-dma = "disabled";
+	dma_dev@0x0 {
+		compatible = "qcom,iommu-dma";
+		memory-region = <&system_cma>;
 	};
 
-	kgsl_iommu_coherent_test_device {
-		compatible = "iommu-debug-test";
-		iommus = <&kgsl_smmu 0x9 0>;
-		qcom,iommu-dma = "disabled";
-		dma-coherent;
-	};
+	iommu_test_device {
+		compatible = "qcom,iommu-debug-test";
 
-	apps_iommu_test_device {
-		compatible = "iommu-debug-test";
-		iommus = <&apps_smmu 0x21 0>;
-		qcom,iommu-dma = "disabled";
-	};
+		kgsl_iommu_test_device {
+			compatible = "qcom,iommu-debug-usecase";
+			iommus = <&kgsl_smmu 0x7 0>;
+		};
 
-	apps_iommu_coherent_test_device {
-		compatible = "iommu-debug-test";
-		iommus = <&apps_smmu 0x23 0>;
-		qcom,iommu-dma = "disabled";
-		dma-coherent;
+		kgsl_iommu_coherent_test_device {
+			compatible = "qcom,iommu-debug-usecase";
+			iommus = <&kgsl_smmu 0x9 0>;
+			dma-coherent;
+		};
+
+		apps_iommu_test_device {
+			compatible = "qcom,iommu-debug-usecase";
+			iommus = <&apps_smmu 0x21 0>;
+		};
+
+		apps_iommu_coherent_test_device {
+			compatible = "qcom,iommu-debug-usecase";
+			iommus = <&apps_smmu 0x23 0>;
+			dma-coherent;
+		};
 	};
 };
 

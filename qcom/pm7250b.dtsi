@@ -1,4 +1,3 @@
-#include <dt-bindings/clock/qcom,rpmcc.h>
 #include <dt-bindings/spmi/spmi.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/iio/qcom,spmi-vadc.h>
@@ -9,28 +8,24 @@
 	interrupt-controller;
 	#interrupt-cells = <4>;
 
-	pm7250b_2: qcom,pm7250b@2 {
+	qcom,pm7250b@2 {
 		compatible = "qcom,spmi-pmic";
-		reg = <2 SPMI_USID>;
+		reg = <0x2 SPMI_USID>;
 		#address-cells = <1>;
 		#size-cells = <0>;
-
-		qcom,power-on@800 {
-			compatible = "qcom,qpnp-power-on";
-			reg = <0x800>;
-		};
 
 		pm7250b_charger: qcom,qpnp-smb5 {
 			compatible = "qcom,pm7250b-smb5";
 			depends-on-supply = <&pm7250b_vadc>;
 			#address-cells = <1>;
-			#size-cells = <0>;
+			#size-cells = <1>;
 			#cooling-cells = <2>;
 
 			qcom,thermal-mitigation = <5400000 4500000 4000000
 				3500000 3000000 2500000 2000000 1500000
 				1000000 500000>;
 			qcom,hvdcp2-max-icl-ua = <2000000>;
+			qcom,hvdcp2-12v-max-icl-ua = <1500000>;
 
 			qcom,chgr@1000 {
 				reg = <0x1000>;
@@ -180,11 +175,47 @@
 			};
 		};
 
+		pm7250b_pdphy: qcom,usb-pdphy@1700 {
+			compatible = "qcom,qpnp-pdphy";
+			reg = <0x1700>;
+			interrupts = <0x2 0x17 0x0 IRQ_TYPE_EDGE_RISING>,
+				     <0x2 0x17 0x1 IRQ_TYPE_EDGE_RISING>,
+				     <0x2 0x17 0x2 IRQ_TYPE_EDGE_RISING>,
+				     <0x2 0x17 0x3 IRQ_TYPE_EDGE_RISING>,
+				     <0x2 0x17 0x4 IRQ_TYPE_EDGE_RISING>,
+				     <0x2 0x17 0x5 IRQ_TYPE_EDGE_RISING>,
+				     <0x2 0x17 0x6 IRQ_TYPE_EDGE_RISING>,
+				     <0x2 0x17 0x7 IRQ_TYPE_EDGE_RISING>;
+
+			interrupt-names = "sig-tx",
+					  "sig-rx",
+					  "msg-tx",
+					  "msg-rx",
+					  "msg-tx-failed",
+					  "msg-tx-discarded",
+					  "msg-rx-discarded",
+					  "fr-swap";
+			#io-channel-cells = <1>;
+
+			qcom,default-sink-caps = <5000 3000>, /* 5V @ 3A */
+						 <9000 3000>, /* 9V @ 3A */
+						 <12000 2250>; /* 12V @ 2.25A */
+		};
+
+		pm7250b_tz: qcom,temp-alarm@2400 {
+			compatible = "qcom,spmi-temp-alarm";
+			reg = <0x2400>;
+			interrupts = <0x2 0x24 0x0 IRQ_TYPE_EDGE_BOTH>;
+			io-channels = <&pm7250b_vadc ADC5_DIE_TEMP>;
+			io-channel-names = "thermal";
+			#thermal-sensor-cells = <0>;
+			qcom,temperature-threshold-set = <1>;
+		};
+
 		pm7250b_qg: qpnp,qg {
 			compatible = "qcom,pm7250b-qg";
-			depends-on-supply = <&pm7250b_vadc>;
 			#address-cells = <1>;
-			#size-cells = <0>;
+			#size-cells = <1>;
 
 			qcom,vbatt-cutoff-mv = <3200>;
 			qcom,vbatt-low-mv = <3300>;
@@ -215,34 +246,36 @@
 			};
 		};
 
-		pm7250b_tz: qcom,temp-alarm@2400 {
-			compatible = "qcom,spmi-temp-alarm";
-			reg = <0x2400>;
-			interrupts = <0x2 0x24 0x0 IRQ_TYPE_EDGE_BOTH>;
-			io-channels = <&pm7250b_vadc ADC5_DIE_TEMP>;
-			io-channel-names = "thermal";
-			#thermal-sensor-cells = <0>;
-			qcom,temperature-threshold-set = <1>;
-		};
-
 		pm7250b_clkdiv: clock-controller@5b00 {
 			compatible = "qcom,spmi-clkdiv";
 			reg = <0x5b00>;
 			#clock-cells = <1>;
 			qcom,num-clkdivs = <1>;
 			clock-output-names = "pm7250b_div_clk1";
-			clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>;
+			clocks = <&rpmhcc RPMH_CXO_CLK>;
 			clock-names = "xo";
-			status = "disabled";
+			assigned-clocks = <&pm7250b_clkdiv 1>;
+			assigned-clock-rates = <19200000>;
+		};
+
+		pm7250b_gpios: pinctrl@c000 {
+			compatible = "qcom,pm7250b-gpio";
+			reg = <0xc000>;
+			gpio-controller;
+			#gpio-cells = <2>;
+			interrupt-controller;
+			#interrupt-cells = <2>;
 		};
 
 		pm7250b_vadc: vadc@3100 {
 			compatible = "qcom,spmi-adc5";
 			reg = <0x3100>;
+			reg-names = "adc5-usr-base";
 			#address-cells = <1>;
 			#size-cells = <0>;
 			interrupts = <0x2 0x31 0x0 IRQ_TYPE_EDGE_RISING>;
 			interrupt-names = "eoc-int-en-set";
+			qcom,adc-vdd-reference = <1875>;
 			#io-channel-cells = <1>;
 			io-channel-ranges;
 
@@ -345,13 +378,14 @@
 				label = "chg_mid";
 				qcom,pre-scaling = <1 6>;
 			};
+
 		};
 
 		pm7250b_adc_tm: adc_tm@3500 {
 			compatible = "qcom,adc-tm5";
 			reg = <0x3500>;
 			interrupts = <0x2 0x35 0x0 IRQ_TYPE_EDGE_RISING>;
-			interrupt-names = "threshold";
+			interrupt-names = "thr-int-en";
 			#address-cells = <1>;
 			#size-cells = <0>;
 			#thermal-sensor-cells = <1>;
@@ -360,9 +394,9 @@
 		pm7250b_bcl: bcl@1d00 {
 			compatible = "qcom,bcl-v5";
 			reg = <0x1d00>;
-			interrupts = <0x2 0x1d 0x0 IRQ_TYPE_EDGE_RISING>,
-					<0x2 0x1d 0x1 IRQ_TYPE_EDGE_RISING>,
-					<0x2 0x1d 0x2 IRQ_TYPE_EDGE_RISING>;
+			interrupts = <0x2 0x1d 0x0 IRQ_TYPE_NONE>,
+					<0x2 0x1d 0x1 IRQ_TYPE_NONE>,
+					<0x2 0x1d 0x2 IRQ_TYPE_NONE>;
 			interrupt-names = "bcl-lvl0",
 						"bcl-lvl1",
 						"bcl-lvl2";
@@ -373,46 +407,11 @@
 			compatible = "qcom,msm-bcl-soc";
 			#thermal-sensor-cells = <0>;
 		};
-
-		pm7250b_gpios: pinctrl@c000 {
-			compatible = "qcom,pm7250b-gpio";
-			reg = <0xc000>;
-			gpio-controller;
-			#gpio-cells = <2>;
-			interrupt-controller;
-			#interrupt-cells = <2>;
-		};
-
-		pm7250b_pdphy: qcom,usb-pdphy@1700 {
-			compatible = "qcom,qpnp-pdphy";
-			reg = <0x1700 0x100>;
-			interrupts = <0x2 0x17 0x0 IRQ_TYPE_EDGE_RISING>,
-				     <0x2 0x17 0x1 IRQ_TYPE_EDGE_RISING>,
-				     <0x2 0x17 0x2 IRQ_TYPE_EDGE_RISING>,
-				     <0x2 0x17 0x3 IRQ_TYPE_EDGE_RISING>,
-				     <0x2 0x17 0x4 IRQ_TYPE_EDGE_RISING>,
-				     <0x2 0x17 0x5 IRQ_TYPE_EDGE_RISING>,
-				     <0x2 0x17 0x6 IRQ_TYPE_EDGE_RISING>,
-				     <0x2 0x17 0x7 IRQ_TYPE_EDGE_RISING>;
-
-			interrupt-names = "sig-tx",
-					  "sig-rx",
-					  "msg-tx",
-					  "msg-rx",
-					  "msg-tx-failed",
-					  "msg-tx-discarded",
-					  "msg-rx-discarded",
-					  "fr-swap";
-
-			qcom,default-sink-caps = <5000 3000>, /* 5V @ 3A */
-						 <9000 3000>, /* 9V @ 3A */
-						 <12000 2250>; /* 12V @ 2.25A */
-		};
 	};
 
-	pm7250b_3: qcom,pm7250b@3 {
+	qcom,pm7250b@3 {
 		compatible = "qcom,spmi-pmic";
-		reg = <3 SPMI_USID>;
+		reg = <0x3 SPMI_USID>;
 		#address-cells = <1>;
 		#size-cells = <0>;
 
@@ -426,10 +425,9 @@
 };
 
 &thermal_zones {
-	pm7250b_temp_alarm: pm7250b_tz {
+	pm7250b_temp_alarm: pm7250b-tz {
 		polling-delay-passive = <100>;
 		polling-delay = <0>;
-		thermal-governor = "step_wise";
 		thermal-sensors = <&pm7250b_tz>;
 
 		trips {
@@ -442,13 +440,13 @@
 			pm7250b_trip1: trip1 {
 				temperature = <115000>;
 				hysteresis = <0>;
-				type = "critical";
+				type = "passive";
 			};
 
-			pm7250b_trip2: trip2 {
+			trip2 {
 				temperature = <145000>;
 				hysteresis = <0>;
-				type = "critical";
+				type = "passive";
 			};
 		};
 	};
@@ -456,7 +454,6 @@
 	pm7250b-ibat-lvl0 {
 		polling-delay-passive = <0>;
 		polling-delay = <0>;
-		thermal-governor = "step_wise";
 		thermal-sensors = <&pm7250b_bcl 0>;
 
 		trips {
@@ -471,7 +468,6 @@
 	pm7250b-ibat-lvl1 {
 		polling-delay-passive = <0>;
 		polling-delay = <0>;
-		thermal-governor = "step_wise";
 		thermal-sensors = <&pm7250b_bcl 1>;
 
 		trips {
@@ -486,7 +482,6 @@
 	pm7250b-bcl-lvl0 {
 		polling-delay-passive = <100>;
 		polling-delay = <0>;
-		thermal-governor = "step_wise";
 		thermal-sensors = <&pm7250b_bcl 5>;
 
 		trips {
@@ -501,7 +496,6 @@
 	pm7250b-bcl-lvl1 {
 		polling-delay-passive = <100>;
 		polling-delay = <0>;
-		thermal-governor = "step_wise";
 		thermal-sensors = <&pm7250b_bcl 6>;
 
 		trips {
@@ -516,7 +510,6 @@
 	pm7250b-bcl-lvl2 {
 		polling-delay-passive = <100>;
 		polling-delay = <0>;
-		thermal-governor = "step_wise";
 		thermal-sensors = <&pm7250b_bcl 7>;
 
 		trips {
@@ -531,11 +524,22 @@
 	socd {
 		polling-delay-passive = <100>;
 		polling-delay = <0>;
-		thermal-governor = "step_wise";
 		thermal-sensors = <&bcl_soc>;
 
 		trips {
-			socd_trip:socd-trip {
+			thermal-engine-trip {
+				temperature = <100>;
+				hysteresis = <0>;
+				type = "passive";
+			};
+
+			thermal-hal-trip {
+				temperature = <100>;
+				hysteresis = <0>;
+				type = "passive";
+			};
+
+			soc_trip:soc-trip {
 				temperature = <90>;
 				hysteresis = <0>;
 				type = "passive";

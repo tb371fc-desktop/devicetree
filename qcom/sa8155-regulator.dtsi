@@ -1,6 +1,6 @@
 #include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 
-&apps_rsc {
+&apps_rsc_drv2 {
 	/* RPMh regulators: */
 
 	rpmh-regulator-smpa4 {
@@ -208,8 +208,8 @@
 			qcom,set = <RPMH_REGULATOR_SET_ALL>;
 			regulator-min-microvolt = <2504000>;
 			regulator-max-microvolt = <2960000>;
-			qcom,init-voltage = <2950000>;
-			qcom,init-mode = <RPMH_REGULATOR_MODE_HPM>;
+			qcom,init-voltage = <2504000>;
+			qcom,init-mode = <RPMH_REGULATOR_MODE_LPM>;
 		};
 	};
 

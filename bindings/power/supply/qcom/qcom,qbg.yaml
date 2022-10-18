@@ -1,12 +1,4 @@
-%YAML 1.2
----
-$id: http://devicetree.org/schemas/bindings/power/supply/qcom/qcom,qbg.yaml#
-$schema: http://devicetree.org/meta-schemas/core.yaml#
-
-title: Qualcomm Technologies, Inc. Battery Gauge (QBG) binding
-
-maintainers:
-  - Shyam Kumar Thella <sthella@qti.qualcomm.com>
+Qualcomm Technologies, Inc. Battery Gauge (QBG) binding
 
 description: |
   Qualcomm Technologies, Inc. Battery Gauge (QBG) uses the periodic samples of

@@ -33,7 +33,7 @@ First Level Nodes - RPMh Interface
 - qcom,resource-name
 	Usage:      required
 	Value type: <string>
-	Definition: RPMh resource name which encodes the the specific instance
+	Definition: RPMh resource name which encodes the specific instance
 		    of a given type of regulator (LDO, SMPS, VS, etc) within
 		    a particular PMIC found in the system.  This name must match
 		    to one that is defined by the bootloader.

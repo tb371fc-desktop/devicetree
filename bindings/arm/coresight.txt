@@ -34,8 +34,11 @@ its hardware characteristcs.
 					Program Flow Trace Macrocell:
 			"arm,coresight-etm3x", "arm,primecell";
 
-		- Embedded Trace Macrocell (version 4.x):
+		- Embedded Trace Macrocell (version 4.x), with memory mapped access.
 			"arm,coresight-etm4x", "arm,primecell";
+
+		- Embedded Trace Macrocell (version 4.x), with system register access only.
+			"arm,coresight-etm4x-sysreg";
 
 		- Coresight programmable Replicator :
 			"arm,coresight-dynamic-replicator", "arm,primecell";
@@ -44,6 +47,10 @@ its hardware characteristcs.
 			"arm,coresight-stm", "arm,primecell"; [1]
 		- Coresight Address Translation Unit (CATU)
 			"arm,coresight-catu", "arm,primecell";
+
+		- Coresight Cross Trigger Interface (CTI):
+			"arm,coresight-cti", "arm,primecell";
+			See coresight-cti.yaml for full CTI definitions.
 
 	* reg: physical base address and length of the register
 	  set(s) of the component.
@@ -72,6 +79,9 @@ its hardware characteristcs.
 	* reg-names: the only acceptable values are "stm-base" and
 	  "stm-stimulus-base", each corresponding to the areas defined in "reg".
 
+* Required properties for Coresight Cross Trigger Interface (CTI)
+	See coresight-cti.yaml for full CTI definitions.
+
 * Required properties for devices that don't show up on the AMBA bus, such as
   non-configurable replicators and non-configurable funnels:
 
@@ -85,6 +95,16 @@ its hardware characteristcs.
 		- Coresight Non-configurable Funnel:
 			"arm,coresight-static-funnel";
 
+	* port or ports: see "Graph bindings for Coresight" below.
+
+* Optional properties for all components:
+
+	* arm,coresight-loses-context-with-cpu : boolean. Indicates that the
+	  hardware will lose register context on CPU power down (e.g. CPUIdle).
+	  An example of where this may be needed are systems which contain a
+	  coresight component and CPU in the same power domain. When the CPU
+	  powers down the coresight component also powers down and loses its
+	  context. This property is currently only used for the ETM 4.x driver.
 		- Coresight Trace, Profiling & Diagnostic module:
 			"qcom,coresight-tpda"
 			"qcom,coresight-tpdm"
@@ -100,14 +120,6 @@ its hardware characteristcs.
 
 		- Coresight remote ETM:
 			"qcom,coresight-remote-etm"
-
-		- Coresight dbgui device:
-			"qcom,coresight-dbgui"
-
-		- Coresight fuse device:
-			"arm,coresight-fuse"
-			"arm,coresight-fuse-v2"
-			"arm,coresight-fuse-v3"
 
 	* port or ports: see "Graph bindings for Coresight" below.
 
@@ -136,6 +148,13 @@ its hardware characteristcs.
 	* qcom,tupwr-disable: For ETM, don't keep trace unit powered across
 	  power collapse.
 
+	* qcom,skip-power-up: boolean. Indicates that an implementation can
+	  skip powering up the trace unit. TRCPDCR.PU does not have to be set
+	  on Qualcomm Technologies Inc. systems since ETMs are in the same power
+	  domain as their CPU cores. This property is required to identify such
+	  systems with hardware errata where the CPU watchdog counter is stopped
+	  when TRCPDCR.PU is set.
+
 * Optional property for TMC:
 
 	* arm,buffer-size: size of contiguous buffer space for TMC ETR
@@ -145,14 +164,23 @@ its hardware characteristcs.
 	* arm,scatter-gather: boolean. Indicates that the TMC-ETR can safely
 	  use the SG mode on this system.
 
-	* cti-reset-trig-num: Specifies the reset CTI trigger number for TMC
-	  ETR and TMC ETF.
+	* usb_bam_support: boolean. Indicates that the TMC-ETR supports usb
+	  bam connection.
 
-	* cti-flush-trig-num: Specifies the flush CTI trigger number for TMC
-	  ETR and TMC ETF.
+	* csr-atid-offset: When there are two ETRs, each of the ETR has its own ATID config
+	  csr registers. It is the ETR_ATID0 register offset to the CSR base address.
 
-	* qcom,qdss-ipa-support : indicates whether qdss to ipa bam connection
-	   need to support.
+	* csr-irqctrl-offset: When there are two ETRs, each of the ETR has its own ETRIRQCTRL
+	  register. It is the IRQCTRL register offset to the CSR base address.
+
+	* byte-cntr-name: The name of the byte-cntr
+
+	* byte-cntr-class-name: The name for class_create in byte-cntr driver.
+
+	* qcom,mem_support: boolean. Indicates that TMC-ETR supports memory mode.
+
+	* qcom,eth_support: boolean. Indicates that TMC-ETR supports QDSS over
+	  ethernet function.
 
 * Optional property for CATU and APSS :
 	* interrupts : Exactly one SPI may be listed for reporting the address
@@ -208,6 +236,12 @@ its hardware characteristcs.
 	* qcom,timestamp-support:boolean, indicates CSR support sys interface to read
 	  timestamp value.
 
+	* qcom,perflsheot-set-support: boolean, indicates PERFLSHEOT bit of USBFLSHCTRL
+	  register will be set to 1 when usb sink is enabled.
+
+	* qcom,msr-support: boolean, indicates that CSR supports configure msr config for
+	  tpdm.
+
 * Required property for Remote ETMs:
 
 	* qcom,inst-id: must be present. QMI instance id for remote ETMs.
@@ -231,6 +265,20 @@ its hardware characteristcs.
 
 	* reg-names: funnel-base-real: actual register space for the
 	  duplicate funnel.
+
+* Optional property for configurable replicators:
+
+	* qcom,replicator-loses-context: boolean. Indicates that the replicator
+	  will lose register context when AMBA clock is removed which is observed
+	  in some replicator designs.
+
+* Optional property for CTIs:
+
+	* qcom,extended_cti: boolean. Indicates that cti is an extended cti.
+
+* Optional property for all source components:
+	* atid: atid for the trace data of the source. If the data has two atids, configure
+	  two ids for the source. This is for multi ETR sink.
 
 Graph bindings for Coresight
 -------------------------------

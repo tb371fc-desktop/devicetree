@@ -86,7 +86,7 @@ Optional properties:
 			- snps,dcb-algorithm: Queue to be enabled as DCB
 			- snps,avb-algorithm: Queue to be enabled as AVB
 		- snps,map-to-dma-channel: Channel to map
-		- Specifiy specific packet routing:
+		- Specify specific packet routing:
 			- snps,route-avcp: AV Untagged Control packets
 			- snps,route-ptp: PTP Packets
 			- snps,route-dcbcp: DCB Control Packets

@@ -1,4 +1,4 @@
-#include <dt-bindings/clock/qcom,gcc-scshrike.h>
+#include <dt-bindings/clock/qcom,gcc-sc8180x.h>
 
 &soc {
 	pcie0: qcom,pcie@1c00000 {
@@ -140,12 +140,12 @@
 		perst-gpio = <&tlmm 35 0>;
 		wake-gpio = <&tlmm 37 0>;
 
-		gdsc-vdd-supply = <&pcie_0_gdsc>;
-		vreg-1p8-supply = <&pm8195_1_l9>;
+		gdsc-core-vdd-supply = <&pcie_0_gdsc>;
+		vreg-1p2-supply = <&pm8195_1_l9>;
 		vreg-0p9-supply = <&pm8195_3_l5>;
 		vreg-cx-supply = <&VDD_CX_LEVEL>;
 
-		qcom,vreg-1p8-voltage-level = <1200000 1200000 24000>;
+		qcom,vreg-1p2-voltage-level = <1200000 1200000 24000>;
 		qcom,vreg-0p9-voltage-level = <880000 880000 24000>;
 		qcom,vreg-cx-voltage-level = <RPMH_REGULATOR_LEVEL_MAX
 						RPMH_REGULATOR_LEVEL_NOM 0>;
@@ -175,9 +175,18 @@
 		qcom,smmu-sid-base = <0x1d80>;
 
 		dma-coherent;
-		qcom,bw-scale = <RPMH_REGULATOR_LEVEL_LOW_SVS 19200000 /* Gen1 */
-				RPMH_REGULATOR_LEVEL_LOW_SVS 19200000 /* Gen2 */
-				RPMH_REGULATOR_LEVEL_NOM 100000000>; /* Gen3 */
+		qcom,bw-scale = /* Gen1 */
+				<RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen2 */
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen3 */
+				RPMH_REGULATOR_LEVEL_NOM
+				RPMH_REGULATOR_LEVEL_NOM
+				100000000>;
 
 		iommu-map = <0x0 &apps_smmu 0x1d80 0x1>,
 			<0x100 &apps_smmu 0x1d81 0x1>,
@@ -211,15 +220,18 @@
 			<&gcc GCC_PCIE0_PHY_REFGEN_CLK>,
 			<&gcc GCC_PCIE_PHY_AUX_CLK>;
 
-		clock-names = "pcie_0_pipe_clk", "pcie_0_ref_clk_src",
+		clock-names = "pcie_pipe_clk", "pcie_ref_clk_src",
 				"pcie_0_aux_clk", "pcie_0_cfg_ahb_clk",
 				"pcie_0_mstr_axi_clk", "pcie_0_slv_axi_clk",
-				"pcie_0_ldo", "pcie_0_slv_q2a_axi_clk",
+				"pcie_ldo", "pcie_0_slv_q2a_axi_clk",
 				"pcie_tbu_clk", "pcie_phy_refgen_clk",
 				"pcie_phy_aux_clk";
 
-		max-clock-frequency-hz = <0>, <0>, <19200000>, <0>, <0>, <0>,
+		clock-frequency = <0>, <0>, <19200000>, <0>, <0>,
 					<0>, <0>, <0>, <0>, <100000000>, <0>;
+
+		clock-suppressible = <0>, <0>, <0>, <0>, <0>, <0>, <1>,
+						 <0>, <0>, <0>, <0>;
 
 		resets = <&gcc GCC_PCIE_0_BCR>,
 			<&gcc GCC_PCIE_0_PHY_BCR>;
@@ -453,12 +465,12 @@
 		perst-gpio = <&tlmm 175 0>;
 		wake-gpio = <&tlmm 177 0>;
 
-		gdsc-vdd-supply = <&pcie_1_gdsc>;
-		vreg-1p8-supply = <&pm8195_1_l9>;
+		gdsc-core-vdd-supply = <&pcie_1_gdsc>;
+		vreg-1p2-supply = <&pm8195_1_l9>;
 		vreg-0p9-supply = <&pm8195_3_l5>;
 		vreg-cx-supply = <&VDD_CX_LEVEL>;
 
-		qcom,vreg-1p8-voltage-level = <1200000 1200000 24000>;
+		qcom,vreg-1p2-voltage-level = <1200000 1200000 24000>;
 		qcom,vreg-0p9-voltage-level = <880000 880000 24000>;
 		qcom,vreg-cx-voltage-level = <RPMH_REGULATOR_LEVEL_MAX
 						RPMH_REGULATOR_LEVEL_NOM 0>;
@@ -485,9 +497,18 @@
 		qcom,smmu-sid-base = <0x1c80>;
 
 		dma-coherent;
-		qcom,bw-scale = <RPMH_REGULATOR_LEVEL_LOW_SVS 19200000 /* Gen1 */
-				RPMH_REGULATOR_LEVEL_LOW_SVS 19200000 /* Gen2 */
-				RPMH_REGULATOR_LEVEL_NOM 100000000>; /* Gen3 */
+		qcom,bw-scale = /* Gen1 */
+				<RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen2 */
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen3 */
+				RPMH_REGULATOR_LEVEL_NOM
+				RPMH_REGULATOR_LEVEL_NOM
+				100000000>;
 
 		iommu-map = <0x0 &apps_smmu 0x1c80 0x1>,
 			<0x100 &apps_smmu 0x1c81 0x1>,
@@ -521,15 +542,18 @@
 			<&gcc GCC_PCIE1_PHY_REFGEN_CLK>,
 			<&gcc GCC_PCIE_PHY_AUX_CLK>;
 
-		clock-names = "pcie_1_pipe_clk", "pcie_1_ref_clk_src",
+		clock-names = "pcie_pipe_clk", "pcie_ref_clk_src",
 				"pcie_1_aux_clk", "pcie_1_cfg_ahb_clk",
 				"pcie_1_mstr_axi_clk", "pcie_1_slv_axi_clk",
-				"pcie_1_ldo", "pcie_1_slv_q2a_axi_clk",
+				"pcie_ldo", "pcie_1_slv_q2a_axi_clk",
 				"pcie_tbu_clk", "pcie_phy_refgen_clk",
 				"pcie_phy_aux_clk";
 
-		max-clock-frequency-hz = <0>, <0>, <19200000>, <0>, <0>, <0>,
+		clock-frequency = <0>, <0>, <19200000>, <0>, <0>,
 					<0>, <0>, <0>, <0>, <100000000>, <0>;
+
+		clock-suppressible = <0>, <0>, <0>, <0>, <0>, <0>, <1>,
+						 <0>, <0>, <0>, <0>;
 
 		resets = <&gcc GCC_PCIE_1_BCR>,
 			<&gcc GCC_PCIE_1_PHY_BCR>;
@@ -763,12 +787,12 @@
 		perst-gpio = <&tlmm 102 0>;
 		wake-gpio = <&tlmm 104 0>;
 
-		gdsc-vdd-supply = <&pcie_2_gdsc>;
-		vreg-1p8-supply = <&pm8195_1_l9>;
+		gdsc-core-vdd-supply = <&pcie_2_gdsc>;
+		vreg-1p2-supply = <&pm8195_1_l9>;
 		vreg-0p9-supply = <&pm8195_3_l5>;
 		vreg-cx-supply = <&VDD_CX_LEVEL>;
 
-		qcom,vreg-1p8-voltage-level = <1200000 1200000 24000>;
+		qcom,vreg-1p2-voltage-level = <1200000 1200000 24000>;
 		qcom,vreg-0p9-voltage-level = <880000 880000 24000>;
 		qcom,vreg-cx-voltage-level = <RPMH_REGULATOR_LEVEL_MAX
 						RPMH_REGULATOR_LEVEL_NOM 0>;
@@ -795,9 +819,18 @@
 		qcom,smmu-sid-base = <0x1d00>;
 
 		dma-coherent;
-		qcom,bw-scale = <RPMH_REGULATOR_LEVEL_LOW_SVS 19200000 /* Gen1 */
-				RPMH_REGULATOR_LEVEL_LOW_SVS 19200000 /* Gen2 */
-				RPMH_REGULATOR_LEVEL_NOM 100000000>; /* Gen3 */
+		qcom,bw-scale = /* Gen1 */
+				<RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen2 */
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen3 */
+				RPMH_REGULATOR_LEVEL_NOM
+				RPMH_REGULATOR_LEVEL_NOM
+				100000000>;
 
 		iommu-map = <0x0 &apps_smmu 0x1d00 0x1>,
 			<0x100 &apps_smmu 0x1d01 0x1>,
@@ -831,15 +864,18 @@
 			<&gcc GCC_PCIE2_PHY_REFGEN_CLK>,
 			<&gcc GCC_PCIE_PHY_AUX_CLK>;
 
-		clock-names = "pcie_2_pipe_clk", "pcie_2_ref_clk_src",
+		clock-names = "pcie_pipe_clk", "pcie_ref_clk_src",
 				"pcie_2_aux_clk", "pcie_2_cfg_ahb_clk",
 				"pcie_2_mstr_axi_clk", "pcie_2_slv_axi_clk",
-				"pcie_2_ldo", "pcie_2_slv_q2a_axi_clk",
+				"pcie_ldo", "pcie_2_slv_q2a_axi_clk",
 				"pcie_tbu_clk", "pcie_phy_refgen_clk",
 				"pcie_phy_aux_clk";
 
-		max-clock-frequency-hz = <0>, <0>, <19200000>, <0>, <0>, <0>,
+		clock-frequency = <0>, <0>, <19200000>, <0>, <0>,
 					<0>, <0>, <0>, <0>, <100000000>, <0>;
+
+		clock-suppressible = <0>, <0>, <0>, <0>, <0>, <0>, <1>,
+						 <0>, <0>, <0>, <0>;
 
 		resets = <&gcc GCC_PCIE_2_BCR>,
 			<&gcc GCC_PCIE_2_PHY_BCR>;
@@ -1203,12 +1239,12 @@
 		perst-gpio = <&tlmm 178 0>;
 		wake-gpio = <&tlmm 56 0>;
 
-		gdsc-vdd-supply = <&pcie_3_gdsc>;
-		vreg-1p8-supply = <&pm8195_1_l9>;
+		gdsc-core-vdd-supply = <&pcie_3_gdsc>;
+		vreg-1p2-supply = <&pm8195_1_l9>;
 		vreg-0p9-supply = <&pm8195_3_l5>;
 		vreg-cx-supply = <&VDD_CX_LEVEL>;
 
-		qcom,vreg-1p8-voltage-level = <1200000 1200000 24000>;
+		qcom,vreg-1p2-voltage-level = <1200000 1200000 24000>;
 		qcom,vreg-0p9-voltage-level = <880000 880000 24000>;
 		qcom,vreg-cx-voltage-level = <RPMH_REGULATOR_LEVEL_MAX
 						RPMH_REGULATOR_LEVEL_NOM 0>;
@@ -1235,9 +1271,18 @@
 		qcom,smmu-sid-base = <0x1e00>;
 
 		dma-coherent;
-		qcom,bw-scale = <RPMH_REGULATOR_LEVEL_LOW_SVS 19200000 /* Gen1 */
-				RPMH_REGULATOR_LEVEL_LOW_SVS 19200000 /* Gen2 */
-				RPMH_REGULATOR_LEVEL_NOM 100000000>; /* Gen3 */
+		qcom,bw-scale = /* Gen1 */
+				<RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen2 */
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				RPMH_REGULATOR_LEVEL_LOW_SVS
+				19200000
+				/* Gen3 */
+				RPMH_REGULATOR_LEVEL_NOM
+				RPMH_REGULATOR_LEVEL_NOM
+				100000000>;
 
 		iommu-map = <0x0 &apps_smmu 0x1e00 0x1>,
 			<0x100 &apps_smmu 0x1e01 0x1>,
@@ -1271,15 +1316,18 @@
 			<&gcc GCC_PCIE3_PHY_REFGEN_CLK>,
 			<&gcc GCC_PCIE_PHY_AUX_CLK>;
 
-		clock-names = "pcie_3_pipe_clk", "pcie_3_ref_clk_src",
+		clock-names = "pcie_pipe_clk", "pcie_ref_clk_src",
 				"pcie_3_aux_clk", "pcie_3_cfg_ahb_clk",
 				"pcie_3_mstr_axi_clk", "pcie_3_slv_axi_clk",
-				"pcie_3_ldo", "pcie_3_slv_q2a_axi_clk",
+				"pcie_ldo", "pcie_3_slv_q2a_axi_clk",
 				"pcie_tbu_clk", "pcie_phy_refgen_clk",
 				"pcie_phy_aux_clk";
 
-		max-clock-frequency-hz = <0>, <0>, <19200000>, <0>, <0>, <0>,
+		clock-frequency = <0>, <0>, <19200000>, <0>, <0>,
 					<0>, <0>, <0>, <0>, <100000000>, <0>;
+
+		clock-suppressible = <0>, <0>, <0>, <0>, <0>, <0>, <1>,
+						 <0>, <0>, <0>, <0>;
 
 		resets = <&gcc GCC_PCIE_3_BCR>,
 			<&gcc GCC_PCIE_3_PHY_BCR>;
@@ -1332,3 +1380,4 @@
 			<GIC_SPI 831 IRQ_TYPE_EDGE_RISING>;
 	};
 };
+

@@ -26,7 +26,6 @@ Optional properties:
   - vdd-hba-supply   : handle for fixed power regulator
   - qcom,qsee-reentrancy-support: indicates the qsee reentrancy phase supported by the target
   - qcom,commonlib64-loaded-by-uefi: indicates commonlib64 is loaded by uefi already
-  - qcom,commonlib-loaded-by-hostvm: indicates commonlibs (commonlib and commonlib64) are loaded by host VM already
   - qcom,fde-key-size: indicates which FDE key size is used in device.
 
 Example:

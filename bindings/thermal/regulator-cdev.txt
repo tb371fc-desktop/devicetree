@@ -21,7 +21,7 @@ Properties:
 	Value type: <U32 array>
 	Definition: Array of regulator voltages the cooling device should
 			use to place a floor restriction. The voltages should
-			be specified in ascending order.
+			be specified in descending order.
 
 - #cooling-cells: Must be 2. Please refer to
 			<devicetree/bindings/thermal/thermal.txt> for more
@@ -32,7 +32,7 @@ Example:
 	mv_cdev: mx-cdev-lvl {
 		compatible = "qcom,regulator-cooling-device";
 		cdev-supply = <&regulator-cdev-supply>;
-		regulator-levels = <RPMH_REGULATOR_LEVEL_OFF
-			RPMH_REGULATOR_LEVEL_NOM>;
+		regulator-levels = <RPMH_REGULATOR_LEVEL_NOM
+			RPMH_REGULATOR_LEVEL_OFF>;
 		#cooling-cells = <2>;
 	};

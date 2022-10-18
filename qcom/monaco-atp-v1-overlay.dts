@@ -2,7 +2,6 @@
 /plugin/;
 
 #include "monaco-atp-v1.dtsi"
-#include "monaco-slate-audio-overlay.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. Monaco ATP V1.0";

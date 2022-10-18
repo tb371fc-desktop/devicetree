@@ -126,20 +126,6 @@ Properties:
 		haptics ISC (short circuit current) config during LRA impedance
 		detection. Not applicable for PM5100.
 
-- qcom,hpwr-supply:
-  Usage:	optional
-  Value type:	<phandle>
-  Definition:	Phandle of the regulator device that supplies power for haptics
-		module. This is needed when haptics module is supplied by
-		non-HBoost regulator.
-
-- qcom,hpwr-voltage-mv:
-  Usage:	optional
-  Value type:	<u32>
-  Definition:	Specify the voltage level in mv unit requested from the
-		non-HBoost regulator. When BoB regulator is used, the
-		requested voltage shouldn't be higher than 4000 mV.
-
 The following properties are only required when LRA actuator is used:
 
 - qcom,lra-period-us:
@@ -171,6 +157,13 @@ The following properties are only required when LRA actuator is used:
   Definition:	Specifies the brake signal gain when sine brake signal shape
 		is selected. Please refer to:
 		include/dt-bindings/input/qcom,hv-haptics.h.
+
+- qcom,rt-imp-detect:
+  Usage:	optional
+  Value type:	<bool>
+  Definition:	Specifies if HW based realtime impedance measurement is used
+		when detecting LRA impedance. This is only applicable for
+		HAP525_HV haptics module.
 
 A child node named "qcom,hap-swr-slave-reg" can be defined to export a regulator
 device which is used for swr-haptics module to control the online status of SWR
@@ -253,6 +246,19 @@ different vibration effects:
   Definition:	Specifies the play period definition for the FIFO data defined
 		in "qcom,wf-fifo-data".
 		See definition at: include/dt-bindings/input/qcom,hv-haptics.h
+
+- qcom,wf-fifo-preload:
+  Usage:	optional
+  Value type:	<bool>
+  Definition:	Specifies if the FIFO effect data should be preloaded into
+		pattern memory during boot up. In HAP525_HV module, there are
+		4 pattern memory partitions with configurable size and each
+		partition can be used for preloading one FIFO effect. The total
+		FIFO memory space is 2K bytes and 640 bytes space is reserved
+		for FIFO streaming mode which needs to load the FIFO data at
+		runtime, the rest can be all used for pattern memory partitions.
+		This feature is only available for HAP525_HV haptics module
+		that is present on PMICs like PM8550B.
 
 - qcom,wf-brake-mode:
   Usage:	optional
