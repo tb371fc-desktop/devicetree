@@ -25,6 +25,7 @@
 	#address-cells = <2>;
 	#size-cells = <2>;
 	memory { device_type = "memory"; reg = <0 0 0 0>; };
+	ddr-regions { };
 
 	aliases {
 		mmc1 = &sdhc_2; /* SDC2 SD card slot */
@@ -350,7 +351,7 @@
 	};
 
 	chosen: chosen {
-		bootargs = "qcom_dma_heaps.enable_bitstream_contig_heap=y";
+		bootargs = "qcom_dma_heaps.enable_bitstream_contig_heap=y kpti=0 ssbd=force-off";
 	};
 
 	soc: soc { };

@@ -28,14 +28,14 @@
 
 
 	chosen: chosen {
-			bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 service_locator.enable=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-7 ftrace_dump_on_oops swiotlb=noforce loop.max_part=7 fw_devlink.strict=1 allow_mismatched_32bit_el0 cpufreq.default_governor=performance printk.console_no_auto_verbose=1 kasan=off sysctl.kernel.sched_pelt_multiplier=4 can.stats_timer=0 pcie_ports=compat irqaffinity=0-2 disable_dma32=on no-steal-acc";
+			bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 service_locator.enable=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-7 ftrace_dump_on_oops swiotlb=noforce loop.max_part=7 fw_devlink.strict=1 allow_mismatched_32bit_el0 cpufreq.default_governor=performance printk.console_no_auto_verbose=1 kasan=off sysctl.kernel.sched_pelt_multiplier=4 can.stats_timer=0 pcie_ports=compat irqaffinity=0-2 disable_dma32=on no-steal-acc cgroup.memory=nokmem,nosocket";
 	};
 
 	reserved_memory: reserved-memory { };
 
 	mem-offline {
 		compatible = "qcom,mem-offline";
-		offline-sizes = <0x2 0xc0000000 0x1 0x40000000>;
+		offline-sizes = <0x2 0xc0000000 0x1 0x00000000>;
 		granule = <512>;
 		mboxes = <&qmp_aop 0>;
 	};
@@ -479,10 +479,10 @@
 		reg = <0x0 0xd4d00000 0x0 0x3300000>;
 	};
 
-	tz_reserved_mem: tz_reserved_region@d8000000 {
-		no-map;
-		reg = <0x0 0xd8000000 0x0 0x100000>;
-	};
+	/*
+	 * tz_reserved_mem not passed to linux as valid memory. Size
+	 * varies based on bootloader policy.
+	 */
 
 	xbl_sc_mem: xbl_sc_region@d8100000 {
 		no-map;
@@ -645,6 +645,14 @@
 		size = <0x0 0x1000000>;
 	};
 
+	glink_contig_mem: glink_contig_region {
+		compatible = "shared-dma-pool";
+		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
+		reusable;
+		alignment = <0x0 0x400000>;
+		size = <0x0 0x1000000>;
+	};
+
 	ramoops_mem: ramoops_region {
 		compatible = "ramoops";
 		alloc-ranges = <0x0 0x00000000 0xffffffff 0xffffffff>;
@@ -661,6 +669,12 @@
 		alignment = <0x0 0x400000>;
 		size = <0x0 0x2000000>;
 		linux,cma-default;
+	};
+
+	kinfo_mem: debug_kinfo_region {
+		alloc-ranges = <0x0 0x00000000 0xffffffff 0xffffffff>;
+		size = <0x0 0x1000>;
+		no-map;
 	};
 };
 
@@ -2568,6 +2582,11 @@
 			qcom,glinkpkt-ch-name = "DATA11";
 			qcom,glinkpkt-dev-name = "smd11";
 		};
+		qcom,glinkpkt-btoip_control {
+			qcom,glinkpkt-edge = "adsp";
+			qcom,glinkpkt-ch-name = "bt_cp_ctrl";
+			qcom,glinkpkt-dev-name = "bt_cp_ctrl";
+		};
 	};
 
 	qcom,glink {
@@ -2713,7 +2732,7 @@
 			iommus = <&apps_smmu 0x1961 0x0000>,
 				 <&apps_smmu 0x0C01 0x0020>,
 				 <&apps_smmu 0x19C1 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2724,7 +2743,7 @@
 			iommus = <&apps_smmu 0x1962 0x0000>,
 				 <&apps_smmu 0x0C02 0x0020>,
 				 <&apps_smmu 0x19C2 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2735,7 +2754,7 @@
 			iommus = <&apps_smmu 0x1963 0x0000>,
 				 <&apps_smmu 0x0C03 0x0020>,
 				 <&apps_smmu 0x19C3 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2746,7 +2765,7 @@
 			iommus = <&apps_smmu 0x1964 0x0000>,
 				 <&apps_smmu 0x0C04 0x0020>,
 				 <&apps_smmu 0x19C4 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2757,7 +2776,7 @@
 			iommus = <&apps_smmu 0x1965 0x0000>,
 				 <&apps_smmu 0x0C05 0x0020>,
 				 <&apps_smmu 0x19C5 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2768,7 +2787,7 @@
 			iommus = <&apps_smmu 0x1966 0x0000>,
 				 <&apps_smmu 0x0C06 0x0020>,
 				 <&apps_smmu 0x19C6 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2779,7 +2798,7 @@
 			iommus = <&apps_smmu 0x1967 0x0000>,
 				 <&apps_smmu 0x0C07 0x0020>,
 				 <&apps_smmu 0x19C7 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2790,7 +2809,7 @@
 			iommus = <&apps_smmu 0x1968 0x0000>,
 				 <&apps_smmu 0x0C08 0x0020>,
 				 <&apps_smmu 0x19C8 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2802,7 +2821,7 @@
 			iommus = <&apps_smmu 0x1969 0x0000>,
 				 <&apps_smmu 0x0C09 0x0020>,
 				 <&apps_smmu 0x19C9 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x60000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x40000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			qcom,iommu-vmid = <0xA>;	/* VMID_CP_PIXEL */
 			dma-coherent;
@@ -2813,7 +2832,7 @@
 			label = "adsprpc-smd";
 			iommus = <&apps_smmu 0x1003 0x0080>,
 				 <&apps_smmu 0x1063 0x0000>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2823,7 +2842,7 @@
 			label = "adsprpc-smd";
 			iommus = <&apps_smmu 0x1004 0x0080>,
 				 <&apps_smmu 0x1064 0x0000>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2833,7 +2852,7 @@
 			label = "adsprpc-smd";
 			iommus = <&apps_smmu 0x1005 0x0080>,
 				 <&apps_smmu 0x1065 0x0000>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			shared-cb = <8>;
 			dma-coherent;
@@ -2844,7 +2863,7 @@
 			label = "adsprpc-smd";
 			iommus = <&apps_smmu 0x1006 0x0080>,
 				 <&apps_smmu 0x1066 0x0000>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2854,7 +2873,7 @@
 			label = "adsprpc-smd";
 			iommus = <&apps_smmu 0x1007 0x0080>,
 				 <&apps_smmu 0x1067 0x0000>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2865,7 +2884,7 @@
 			iommus = <&apps_smmu 0x196C 0x0000>,
 				 <&apps_smmu 0x0C0C 0x0020>,
 				 <&apps_smmu 0x19CC 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2876,7 +2895,7 @@
 			iommus = <&apps_smmu 0x196D 0x0000>,
 				 <&apps_smmu 0x0C0D 0x0020>,
 				 <&apps_smmu 0x19CD 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2887,7 +2906,7 @@
 			iommus = <&apps_smmu 0x196E 0x0000>,
 				 <&apps_smmu 0x0C0E 0x0020>,
 				 <&apps_smmu 0x19CE 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2898,7 +2917,7 @@
 			iommus = <&apps_smmu 0x196F 0x0000>,
 				 <&apps_smmu 0x0C0F 0x0020>,
 				 <&apps_smmu 0x19CF 0x0010>;
-			qcom,iommu-dma-addr-pool = <0x80000000 0x78000000>;
+			qcom,iommu-dma-addr-pool = <0x60000000 0x98000000>;
 			qcom,iommu-faults = "stall-disable", "HUPCF";
 			dma-coherent;
 		};
@@ -2932,13 +2951,15 @@
 					<&adsp_smp2p_in 0 0>,
 					<&adsp_smp2p_in 2 0>,
 					<&adsp_smp2p_in 1 0>,
-					<&adsp_smp2p_in 3 0>;
+					<&adsp_smp2p_in 3 0>,
+					<&adsp_smp2p_in 7 0>;
 
 		interrupt-names = "wdog",
 				"fatal",
 				"handover",
 				"ready",
-				"stop-ack";
+				"stop-ack",
+				"shutdown-ack";
 
 		/* Outputs to turing */
 		qcom,smem-states = <&adsp_smp2p_out 0>;
@@ -3022,13 +3043,15 @@
 					<&cdsp_smp2p_in 0 0>,
 					<&cdsp_smp2p_in 2 0>,
 					<&cdsp_smp2p_in 1 0>,
-					<&cdsp_smp2p_in 3 0>;
+					<&cdsp_smp2p_in 3 0>,
+					<&cdsp_smp2p_in 7 0>;
 
 		interrupt-names = "wdog",
 				"fatal",
 				"handover",
 				"ready",
-				"stop-ack";
+				"stop-ack",
+				"shutdown-ack";
 
 		/* Outputs to turing */
 		qcom,smem-states = <&cdsp_smp2p_out 0>;
@@ -3855,6 +3878,11 @@
 	};
 
 	msm_gpu: qcom,kgsl-3d0@3d00000 { };
+
+	google,debug-kinfo {
+		compatible = "google,debug-kinfo";
+		memory-region = <&kinfo_mem>;
+	};
 };
 
 &firmware {

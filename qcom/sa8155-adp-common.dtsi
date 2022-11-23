@@ -78,5 +78,26 @@
 	qcom,vddp-ref-clk-supply = <&pm8150_2_l5>;
 	qcom,vddp-ref-clk-max-microamp = <100>;
 
+	/* Disable Write Booster Feature */
+	qcom,disable-wb-support;
+
 	status = "ok";
+};
+
+&qupv3_se10_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	status = "ok";
+	asm330@6a {
+		compatible = "st,asm330lhh";
+		reg = <0x6a>;
+		vio-supply = <&pm8150_2_l7>;
+		vdd-supply = <&pm8150_2_l16>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <12 IRQ_TYPE_LEVEL_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sensor_int1_default
+		&sensor_int2_default>;
+	};
 };
