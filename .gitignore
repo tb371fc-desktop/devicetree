@@ -1,6 +1,6 @@
 # Ignore camera directory
 qcom/camera
 
-# Ignore display directory and soft link
+# Ignore display-devicetree directory and symlink
+qcom/display-devicetree
 qcom/display
-bindings/display/qcom
