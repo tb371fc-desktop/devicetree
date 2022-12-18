@@ -30,6 +30,7 @@
 
 		USB3_GDSC-supply = <&gcc_usb20_prim_gdsc>;
 		dpdm-supply = <&usb2_phy0>;
+		extcon = <&eud>;
 
 		qcom,core-clk-rate = <60000000>;
 		qcom,default-bus-vote = <2>; /* use svs bus voting */
@@ -68,7 +69,7 @@
 			snps,has-lpm-erratum;
 			snps,hird-threshold = /bits/ 8 <0x0>;
 			maximum-speed = "high-speed";
-			dr_mode = "peripheral";
+			dr_mode = "otg";
 		};
 
 		qcom,usbbam@0x04f04000 {
