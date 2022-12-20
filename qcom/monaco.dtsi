@@ -2070,6 +2070,16 @@
 #include "monaco-gdsc.dtsi"
 #include "monaco-usb.dtsi"
 #include "monaco-thermal.dtsi"
+#include "../../graphics-devicetree/gpu/monaco-gpu.dtsi"
+#include "../../video-devicetree/monaco-vidc.dtsi"
+#include "../../bt-devicetree/monaco-bt-standalone-idp-v1.dtsi"
+#include "../../wlan-devicetree/monaco-cnss.dtsi"
+#include "../../nfc-devicetree/nxp/monaco-nfc-common.dtsi"
+#include "../../nfc-devicetree/nxp/monaco-pinctrl.dtsi"
+#include "../../audio-devicetree/monaco-audio.dtsi"
+#include "../../audio-devicetree/monaco-audio-overlay.dtsi"
+#include "../../audio-devicetree/monaco-dmic-audio.dtsi"
+#include "../../audio-devicetree/monaco-lpi.dtsi"
 
 &gcc_camss_top_gdsc {
 	parent-supply = <&VDD_CX_LEVEL>;
