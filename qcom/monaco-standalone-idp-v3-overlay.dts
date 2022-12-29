@@ -2,7 +2,6 @@
 /plugin/;
 
 #include "monaco-standalone-idp-v3.dtsi"
-#include "../../display-devicetree/display/monaco-sde-display-idp.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. Monaco standalone IDP V3.0";

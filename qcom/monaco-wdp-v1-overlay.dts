@@ -2,7 +2,6 @@
 /plugin/;
 
 #include "monaco-wdp-v1.dtsi"
-#include "../../display-devicetree/display/monaco-sde-display-wdp.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. Monaco WDP V1.0";

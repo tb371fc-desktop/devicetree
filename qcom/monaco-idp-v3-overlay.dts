@@ -2,8 +2,6 @@
 /plugin/;
 
 #include "monaco-idp-v3.dtsi"
-#include "../../display-devicetree/display/monaco-sde-display-idp.dtsi"
-
 / {
 	model = "Qualcomm Technologies, Inc. Monaco IDP V3.0";
 	qcom,board-id = <0x030022 0x0>;
