@@ -2074,6 +2074,8 @@
 #include "../../video-devicetree/monaco-vidc.dtsi"
 #include "../../bt-devicetree/monaco-bt-standalone-idp-v1.dtsi"
 #include "../../wlan-devicetree/monaco-cnss.dtsi"
+#include "../../nfc-devicetree/nxp/monaco-nfc-common.dtsi"
+#include "../../nfc-devicetree/nxp/monaco-pinctrl.dtsi"
 #include "../../audio-devicetree/monaco-audio.dtsi"
 #include "../../audio-devicetree/monaco-audio-overlay.dtsi"
 #include "../../audio-devicetree/monaco-dmic-audio.dtsi"
