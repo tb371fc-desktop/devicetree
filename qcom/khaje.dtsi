@@ -587,7 +587,7 @@
 	};
 
 	chosen {
-		bootargs = "lpm_levels.sleep_disabled=1 console=ttyMSM0,115200n8 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=7 cpufreq.default_governor=performance rcupdate.rcu_expedited=1 rcu_nocbs=0-7 kpti=off export_pmu_events movable_node ftrace_dump_on_oops ssbd=force-off";
+		bootargs = "lpm_levels.sleep_disabled=1 console=ttyMSM0,115200n8 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=7 cpufreq.default_governor=performance rcupdate.rcu_expedited=1 rcu_nocbs=0-7 kpti=off export_pmu_events movable_node ftrace_dump_on_oops ssbd=force-off disable_dma32=on cgroup.memory=nokmem,nosocket";
 	};
 
 	soc: soc { };
@@ -3992,6 +3992,14 @@ tpdm_turing_llm: tpdm@8861000 {
 #include "khaje-regulator.dtsi"
 #include "khaje-pinctrl.dtsi"
 #include "bengal-qupv3.dtsi"
+
+/*
+ * Each QUP device that's a parent to PMIC must be listed as a critical device
+ * to GCC.
+ */
+&gcc {
+	qcom,critical-devices = <&qupv3_se1_i2c>;
+};
 
 &qupv3_se1_i2c {
 	status = "ok";

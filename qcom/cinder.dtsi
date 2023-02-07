@@ -19,7 +19,7 @@
 
 
 	chosen: chosen {
-			bootargs = "cpufreq.default_governor=performance msm_rtb.filter=0x237";
+			bootargs = "cpufreq.default_governor=performance msm_rtb.filter=0x237 ftrace_dump_on_oops";
 	};
 
 	aliases {
@@ -244,6 +244,14 @@
 		size = <0x0 0x1000000>;
 	};
 
+	ramoops_mem: ramoops_region {
+		compatible = "ramoops";
+		alloc-ranges = <0x0 0x00000000 0xffffffff 0xffffffff>;
+		size = <0x0 0x200000>;
+		pmsg-size = <0x200000>;
+		mem-type = <2>;
+	};
+
 };
 
 &soc {
@@ -385,6 +393,7 @@
 		interrupts = <GIC_SPI 3 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>;
+		power-domains = <&CLUSTER_PD>;
 
 		apps_rsc_drv2: drv@2 {
 			qcom,drv-id = <2>;
@@ -866,6 +875,32 @@
 	cluster-device {
 		compatible = "qcom,lpm-cluster-dev";
 		power-domains = <&CLUSTER_PD>;
+	};
+
+	cpuss-sleep-stats@17800054 {
+		compatible = "qcom,cpuss-sleep-stats-v2";
+		reg = <0x17800054 0x4>, <0x17810054 0x4>, <0x17820054 0x4>,
+		      <0x17830054 0x4>, <0x17880098 0x4>, <0x178C0000 0x10000>;
+		reg-names = "seq_lpm_cntr_cfg_cpu0", "seq_lpm_cntr_cfg_cpu1",
+			    "seq_lpm_cntr_cfg_cpu2", "seq_lpm_cntr_cfg_cpu3",
+			    "l3_seq_lpm_cntr_cfg", "apss_seq_mem_base";
+		num-cpus = <4>;
+	};
+
+	soc-sleep-stats@c3f0000 {
+		compatible = "qcom,rpmh-sleep-stats";
+		reg = <0xc3f0000 0x400>;
+		qcom,drv-max = <0x14>;
+		ss-name = "modem", "apss";
+		mboxes = <&qmp_aop 0>;
+		mbox-names = "aop";
+		ddr-freq-update;
+	};
+
+	subsystem-sleep-stats@c3f0000 {
+		compatible = "qcom,subsystem-sleep-stats";
+		reg = <0xc3f0000 0x400>;
+		ddr-freq-update;
 	};
 
 	vendor_hooks: qcom,cpu-vendor-hooks {
@@ -1485,6 +1520,7 @@
 
 	mhi_net_device: qcom,mhi_net_dev {
 		compatible = "qcom,msm-mhi-dev-net";
+		qcom,mhi-ethernet-interface-channel = <50>;
 		status = "ok";
 	};
 

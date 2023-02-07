@@ -4,6 +4,11 @@
 	status = "disabled";
 };
 
+&qcom_qbt {
+	status = "disabled";
+};
+
+
 &pm8550_flash {
 	/delete-node/ qcom,flash_0;
 	/delete-node/ qcom,flash_1;
@@ -123,6 +128,7 @@
 		compatible = "maxim,max31760";
 		reg = <0x50>;
 		#cooling-cells = <2>;
+		maxim,fan-num = <1>;
 		maxim,vdd-supply = <&L4N>;
 		maxim,vcca-supply = <&L15B>;
 		regulator-name = "maxim,vdd", "maxim,vcca";
@@ -130,6 +136,11 @@
 		pinctrl-0 = <&pwr_en_gpio_default>;
 		maxim,pwr-en-gpio = <&pm8550_gpios 9 GPIO_ACTIVE_LOW>;
 		status = "ok";
+	};
+
+	//disable FM
+	nq@64 {
+		status = "disabled";
 	};
 };
 
@@ -187,12 +198,12 @@
 		cooling-maps {
 			fan_cdev_0 {
 				trip = <&fan_cpu19_config0>;
-				cooling-device = <&fancontroller 2 2>;
+				cooling-device = <&fancontroller 50 50>;
 			};
 
 			fan_cdev_1 {
 				trip = <&fan_cpu19_config1>;
-				cooling-device = <&fancontroller 3 3>;
+				cooling-device = <&fancontroller 80 80>;
 			};
 		};
 	};
@@ -227,12 +238,12 @@
 		cooling-maps {
 			fan_cdev_0 {
 				trip = <&fan_cpu1a_config0>;
-				cooling-device = <&fancontroller 2 2>;
+				cooling-device = <&fancontroller 50 50>;
 			};
 
 			fan_cdev_1 {
 				trip = <&fan_cpu1a_config1>;
-				cooling-device = <&fancontroller 3 3>;
+				cooling-device = <&fancontroller 80 80>;
 			};
 		};
 	};
@@ -267,12 +278,12 @@
 		cooling-maps {
 			fan_cdev_0 {
 				trip = <&fan_gpuss0_config0>;
-				cooling-device = <&fancontroller 3 3>;
+				cooling-device = <&fancontroller 80 80>;
 			};
 
 			fan_cdev_1 {
 				trip = <&fan_gpuss0_config1>;
-				cooling-device = <&fancontroller 4 4>;
+				cooling-device = <&fancontroller 100 100>;
 			};
 		};
 	};
@@ -307,12 +318,12 @@
 		cooling-maps {
 			fan_cdev_0 {
 				trip = <&fan_gpuss1_config0>;
-				cooling-device = <&fancontroller 3 3>;
+				cooling-device = <&fancontroller 80 80>;
 			};
 
 			fan_cdev_1 {
 				trip = <&fan_gpuss1_config1>;
-				cooling-device = <&fancontroller 4 4>;
+				cooling-device = <&fancontroller 100 100>;
 			};
 		};
 	};
@@ -335,12 +346,12 @@
 		cooling-maps {
 			fan_cdev_0 {
 				trip = <&fan_thmbat0_config0>;
-				cooling-device = <&fancontroller 3 3>;
+				cooling-device = <&fancontroller 80 80>;
 			};
 
 			fan_cdev_1 {
 				trip = <&fan_thmbat1_config1>;
-				cooling-device = <&fancontroller 4 4>;
+				cooling-device = <&fancontroller 100 100>;
 			};
 		};
 	};
