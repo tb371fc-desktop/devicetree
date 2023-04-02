@@ -19,7 +19,7 @@
 
 
 	chosen: chosen {
-			bootargs = "cpufreq.default_governor=performance msm_rtb.filter=0x237 ftrace_dump_on_oops";
+			bootargs = "cpufreq.default_governor=performance msm_rtb.filter=0x237 ftrace_dump_on_oops lpm_levels.sleep_disabled=1";
 	};
 
 	aliases {
@@ -509,6 +509,7 @@
 		#gpio-cells = <2>;
 		interrupt-controller;
 		#interrupt-cells = <2>;
+		qcom,gpios-reserved = <28 29>;
 	};
 
 	eud: qcom,msm-eud@88e0000 {
@@ -1193,8 +1194,12 @@
 		qcom,ecpricc = <&ecpricc>;
 		qcom,apsscc = <&apsscc>;
 		qcom,mccc = <&mccc>;
-		clock-names = "xo_clk_src";
-		clocks = <&rpmhcc RPMH_CXO_CLK>;
+		clocks = <&rpmhcc RPMH_CXO_CLK>,
+			 <&ecpricc 0>,
+			 <&gcc 0>;
+		clock-names = "xo_clk_src",
+			      "ecpricc",
+			      "gcc";
 		#clock-cells = <1>;
 	};
 
@@ -1476,10 +1481,6 @@
 			status = "disabled";
 	};
 
-	ecpri_iommu_group: ecpri_common_iommu_group {
-		qcom,iommu-dma = "default";
-	};
-
 	mhi_device: mhi_dev@1c04000 {
 		compatible = "qcom,msm-mhi-dev";
 		reg = <0x1c04000 0x1000>;
@@ -1509,11 +1510,9 @@
 			 <&apps_smmu 0x0410 0x0>,
 			 <&apps_smmu 0x0414 0x0>,
 			 <&apps_smmu 0x0418 0x0>,
-			 <&apps_smmu 0x041C 0x0>,
-			 <&apps_smmu 0x0802 0x0>,
-			 <&apps_smmu 0x0C02 0x0>;
-		qcom,iommu-group = <&ecpri_iommu_group>;
+			 <&apps_smmu 0x041C 0x0>;
 		dma-coherent;
+		qcom,iommu-dma = "default";
 
 		status = "ok";
 	};
