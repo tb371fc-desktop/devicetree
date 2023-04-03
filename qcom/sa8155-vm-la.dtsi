@@ -121,11 +121,20 @@
 	};
 };
 
+&qupv3_se2_i2c {
+	qcom,clk-freq-out = <400000>;
+	status = "ok";
+};
+
 &usb0 {
 	status = "ok";
 };
 
 &usb2_phy0 {
+	status = "ok";
+};
+
+&sdhc_2 {
 	status = "ok";
 };
 

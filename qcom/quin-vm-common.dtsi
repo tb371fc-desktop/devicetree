@@ -141,7 +141,35 @@
 		interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH>;
 
 		regulator: virtio_regulator_device {
-			compatible = "virtio,device31";
+			compatible = "virtio,device31", "virtio,device49153";
+					/* VIRTIO_ID_BC: 0x1F, VIRTIO_ID: 0xC001 */
+		};
+	};
+
+	subsys_notif_virt: qcom,subsys_notif_virt@2D000000 {
+		compatible = "qcom,subsys-notif-virt";
+		reg = <0x2D000000 0x400>;
+		reg-names = "vdev_base";
+		cdsp0 {
+			subsys-name = "cdsp0";
+			interrupts = <GIC_SPI 68 IRQ_TYPE_LEVEL_HIGH>;
+			interrupt-names = "state-irq";
+			type = "virtual";
+			offset = <768>;
+		};
+
+		adsp {
+			subsys-name = "adsp";
+			interrupts = <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH>;
+			interrupt-names = "state-irq";
+			type = "virtual";
+			offset = <0>;
+		};
+
+		wlan {
+			subsys-name = "wlan";
+			type = "native";
+			offset = <512>;
 		};
 	};
 
@@ -205,6 +233,7 @@
 			grp-start-id = <700>;
 			role = "fe";
 			remote-vmids = <0>;
+			kernel_only;
 		};
 
 		mmidgrp900: mmidgrp900 {
@@ -291,7 +320,8 @@
 		status = "okay";
 
 		spmi_bus: virt_spmi {
-			compatible = "virtio,device33";
+			compatible = "virtio,device33", "virtio,device49155";
+					/* VIRTIO_ID_BC: 0x21, VIRTIO_ID: 0xC003 */
 		};
 	};
 

@@ -17,6 +17,10 @@
 	};
 };
 
+&system_cma {
+	size = <0x0 0x3c00000>;
+};
+
 &soc {
 	tlmm: pinctrl@f000000 {
 		compatible = "qcom,direwolf-pinctrl";
@@ -87,5 +91,17 @@
 };
 
 &pcie4_msi_snps {
+	status = "okay";
+};
+
+&ufs2phy_mem {
+	status = "ok";
+};
+
+&ufshc2_mem {
+	status = "ok";
+};
+
+&qcom_rng_ee3 {
 	status = "okay";
 };
