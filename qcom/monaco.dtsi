@@ -183,7 +183,7 @@
 	soc: soc { };
 
 	chosen {
-		bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=off log_buf_len=256K kernel.panic_on_rcu_stall=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-3 ftrace_dump_on_oops fw_devlink.strict=1 allow_mismatched_32bit_el0 printk.console_no_auto_verbose=1 irqaffinity=0-2 cpufreq.default_governor=performance";
+		bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=off log_buf_len=256K kernel.panic_on_rcu_stall=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-3 ftrace_dump_on_oops fw_devlink.strict=1 allow_mismatched_32bit_el0 printk.console_no_auto_verbose=1 irqaffinity=0-2 cpufreq.default_governor=performance android_kmalloc_64_create";
 	};
 
 	reserved-memory {
@@ -1621,6 +1621,12 @@
 			qcom,glinkpkt-ch-name = "ss_bt_data";
 			qcom,glinkpkt-dev-name = "glink_pkt_ss_bt_data";
 			};
+
+		qcom,glinkpkt-ss-bt-le-data {
+			qcom,glinkpkt-edge = "slate";
+			qcom,glinkpkt-ch-name = "ss_bt_le_data";
+			qcom,glinkpkt-dev-name = "glink_pkt_ss_bt_le_data";
+			};
 	};
 
 	jtag_mm0: jtagmm@9040000 {
@@ -2074,7 +2080,7 @@
 				qcom,cpulist = <&CPU0 &CPU1 &CPU2 &CPU3>;
 				qcom,sampling-enabled;
 				qcom,cpufreq-memfreq-tbl =
-					< 614400 547000 >,
+					< 614400 681000 >,
 					< 864000 681000 >,
 					< 1363200 1353000 >,
 					< 1708800 1804000 >;
@@ -2086,7 +2092,7 @@
 				qcom,sampling-enabled;
 				qcom,compute-mon;
 				qcom,cpufreq-memfreq-tbl =
-					< 614400 200000 >,
+					< 614400 547000 >,
 					< 864000 547000 >,
 					< 1363200 681000 >,
 					< 1708800 1353000 >;

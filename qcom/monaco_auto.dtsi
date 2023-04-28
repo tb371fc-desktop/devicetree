@@ -1,4 +1,5 @@
 #include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/soc/qcom,ipcc.h>
 
 / {
 	model = "Qualcomm Technologies, Inc. Monaco AUTO";
@@ -30,9 +31,10 @@
 			device_type = "cpu";
 			compatible = "qcom,kryo";
 			reg = <0x0 0x0>;
-			enable-method = "spin-table";
+			enable-method = "psci";
 			cpu-release-addr = <0x0 0xc0000000>;
 			next-level-cache = <&L2_0>;
+			#cooling-cells = <2>;
 			L2_0: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
@@ -49,9 +51,10 @@
 			device_type = "cpu";
 			compatible = "qcom,kryo";
 			reg = <0x0 0x100>;
-			enable-method = "spin-table";
+			enable-method = "psci";
 			cpu-release-addr = <0x0 0xc0000000>;
 			next-level-cache = <&L2_1>;
+			#cooling-cells = <2>;
 			L2_1: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
@@ -63,9 +66,10 @@
 			device_type = "cpu";
 			compatible = "qcom,kryo";
 			reg = <0x0 0x200>;
-			enable-method = "spin-table";
+			enable-method = "psci";
 			cpu-release-addr = <0x0 0xc0000000>;
 			next-level-cache = <&L2_2>;
+			#cooling-cells = <2>;
 			L2_2: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
@@ -77,9 +81,10 @@
 			device_type = "cpu";
 			compatible = "qcom,kryo";
 			reg = <0x0 0x300>;
-			enable-method = "spin-table";
+			enable-method = "psci";
 			cpu-release-addr = <0x0 0xc0000000>;
 			next-level-cache = <&L2_3>;
+			#cooling-cells = <2>;
 			L2_3: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
@@ -91,9 +96,10 @@
 			device_type = "cpu";
 			compatible = "qcom,kryo";
 			reg = <0x0 0x10000>;
-			enable-method = "spin-table";
+			enable-method = "psci";
 			cpu-release-addr = <0x0 0xc0000000>;
 			next-level-cache = <&L2_4>;
+			#cooling-cells = <2>;
 			L2_4: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
@@ -110,9 +116,10 @@
 			device_type = "cpu";
 			compatible = "qcom,kryo";
 			reg = <0x0 0x10100>;
-			enable-method = "spin-table";
+			enable-method = "psci";
 			cpu-release-addr = <0x0 0xc0000000>;
 			next-level-cache = <&L2_5>;
+			#cooling-cells = <2>;
 			L2_5: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
@@ -124,9 +131,10 @@
 			device_type = "cpu";
 			compatible = "qcom,kryo";
 			reg = <0x0 0x10200>;
-			enable-method = "spin-table";
+			enable-method = "psci";
 			cpu-release-addr = <0x0 0xc0000000>;
 			next-level-cache = <&L2_6>;
+			#cooling-cells = <2>;
 			L2_6: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
@@ -138,9 +146,10 @@
 			device_type = "cpu";
 			compatible = "qcom,kryo";
 			reg = <0x0 0x10300>;
-			enable-method = "spin-table";
+			enable-method = "psci";
 			cpu-release-addr = <0x0 0xc0000000>;
 			next-level-cache = <&L2_7>;
+			#cooling-cells = <2>;
 			L2_7: l2-cache {
 			      compatible = "arm,arch-cache";
 			      cache-level = <2>;
@@ -194,6 +203,11 @@
 };
 
 &reserved_memory {
+
+	smem_region: smem@90900000 {
+		no-map;
+		reg = <0x0 0x90900000 0x0 0x200000>;
+	};
 };
 
 &soc {
@@ -210,6 +224,18 @@
 		#gpio-cells = <2>;
 		interrupt-controller;
 		#interrupt-cells = <2>;
+	};
+
+	psci {
+		compatible = "arm,psci-1.0";
+		method = "smc";
+	};
+
+	wdog: qcom,wdt@17c10000 {
+		compatible = "qcom,msm-watchdog";
+		reg = <0x17c10000 0x1000>;
+		reg-names = "wdt-base";
+		interrupts = <GIC_SPI 0 IRQ_TYPE_LEVEL_HIGH>;
 	};
 
 	intc: interrupt-controller@17a00000 {
@@ -294,6 +320,134 @@
 		};
 	};
 
+	cpu_pmu: cpu-pmu {
+		compatible = "arm,armv8-pmuv3";
+		qcom,irq-is-percpu;
+		interrupts = <GIC_PPI 7 IRQ_TYPE_LEVEL_LOW>;
+	};
+
+	tcsr_mutex_block: syscon@1f40000 {
+		compatible = "syscon";
+		reg = <0x1f40000 0x20000>;
+	};
+
+	tcsr_mutex: hwlock {
+		compatible = "qcom,tcsr-mutex";
+		syscon = <&tcsr_mutex_block 0 0x1000>;
+		#hwlock-cells = <1>;
+	};
+
+	smem: qcom,smem {
+		compatible = "qcom,smem";
+		memory-region = <&smem_region>;
+		hwlocks = <&tcsr_mutex 3>;
+	};
+
+	ipcc_mproc: qcom,ipcc@408000 {
+		compatible = "qcom,ipcc";
+		reg = <0x408000 0x1000>;
+		interrupts = <GIC_SPI 229 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-controller;
+		#interrupt-cells = <3>;
+		#mbox-cells = <2>;
+	};
+
+	aoss_qmp: power-controller@c300000 {
+
+		compatible = "qcom,sm8150-aoss-qmp";
+		reg = <0xc300000 0x400>;
+		mboxes = <&ipcc_mproc IPCC_CLIENT_AOP
+			  IPCC_MPROC_SIGNAL_GLINK_QMP>;
+		mbox-names = "aop_qmp";
+		interrupt-parent = <&ipcc_mproc>;
+		interrupts = <IPCC_CLIENT_AOP
+			      IPCC_MPROC_SIGNAL_GLINK_QMP
+			      IRQ_TYPE_EDGE_RISING>;
+
+		#clock-cells = <0>;
+		#power-domain-cells = <1>;
+	};
+
+	qmp_aop: qcom,qmp-aop@c300000 {
+		compatible = "qcom,qmp-mbox";
+		qcom,qmp = <&aoss_qmp>;
+		label = "aop";
+		#mbox-cells = <1>;
+	};
+
+	qcom,smp2p-adsp {
+		compatible = "qcom,smp2p";
+		qcom,smem = <443>, <429>;
+		interrupt-parent = <&ipcc_mproc>;
+		interrupts = <IPCC_CLIENT_LPASS IPCC_MPROC_SIGNAL_SMP2P
+			      IRQ_TYPE_EDGE_RISING>;
+		mboxes = <&ipcc_mproc IPCC_CLIENT_LPASS
+			  IPCC_MPROC_SIGNAL_SMP2P>;
+		qcom,local-pid = <0>;
+		qcom,remote-pid = <2>;
+
+		adsp_smp2p_out: master-kernel {
+			qcom,entry-name = "master-kernel";
+			#qcom,smem-state-cells = <1>;
+		};
+
+		adsp_smp2p_in: slave-kernel {
+			qcom,entry-name = "slave-kernel";
+			interrupt-controller;
+			#interrupt-cells = <2>;
+		};
+	};
+
+	qcom,smp2p-cdsp@1799000c {
+		compatible = "qcom,smp2p";
+		qcom,smem = <94>, <432>;
+		interrupt-parent = <&ipcc_mproc>;
+		interrupts = <IPCC_CLIENT_CDSP IPCC_MPROC_SIGNAL_SMP2P
+			      IRQ_TYPE_EDGE_RISING>;
+		mboxes = <&ipcc_mproc IPCC_CLIENT_CDSP IPCC_MPROC_SIGNAL_SMP2P>;
+		qcom,local-pid = <0>;
+		qcom,remote-pid = <5>;
+
+		cdsp_smp2p_out: master-kernel {
+			qcom,entry-name = "master-kernel";
+			#qcom,smem-state-cells = <1>;
+		};
+
+		cdsp_smp2p_in: slave-kernel {
+			qcom,entry-name = "slave-kernel";
+			interrupt-controller;
+			#interrupt-cells = <2>;
+		};
+	};
+
+	qcom,smp2p-gpdsp0 {
+		compatible = "qcom,smp2p";
+		qcom,smem = <617>, <616>;
+		interrupt-parent = <&ipcc_mproc>;
+		interrupts = <IPCC_CLIENT_GPDSP0 IPCC_MPROC_SIGNAL_SMP2P
+			      IRQ_TYPE_EDGE_RISING>;
+		mboxes = <&ipcc_mproc IPCC_CLIENT_GPDSP0
+			  IPCC_MPROC_SIGNAL_SMP2P>;
+		qcom,local-pid = <0>;
+		qcom,remote-pid = <17>;
+
+		gpdsp0_smp2p_out: master-kernel {
+			qcom,entry-name = "master-kernel";
+			#qcom,smem-state-cells = <1>;
+		};
+
+		gpdsp0_smp2p_in: slave-kernel {
+			qcom,entry-name = "slave-kernel";
+			interrupt-controller;
+			#interrupt-cells = <2>;
+		};
+	};
+
+	thermal_zones: thermal-zones {
+	};
 };
 
 #include "monaco_auto-pinctrl.dtsi"
+#include "monaco_auto-stub-regulators.dtsi"
+#include "msm-arm-smmu-monaco_auto.dtsi"
+#include "monaco_auto-thermal.dtsi"
