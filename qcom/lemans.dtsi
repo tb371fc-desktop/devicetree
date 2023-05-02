@@ -444,9 +444,14 @@
 		reg = <0x0 0xd1300000 0x0 0x500000>;
 	};
 
-	trusted_apps_mem: trusted_apps_region@d1800000 {
+	deep_sleep_backup_mem: deep_sleep_backup_region@d1800000 {
 		no-map;
-		reg = <0x0 0xd1800000 0x0 0x3900000>;
+		reg = <0x0 0xd1800000 0x0 0x100000>;
+	};
+
+	trusted_apps_mem: trusted_apps_region@d1900000 {
+		no-map;
+		reg = <0x0 0xd1900000 0x0 0x3800000>;
 	};
 
 	dump_mem: mem_dump_region {
@@ -502,14 +507,6 @@
 		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
 		size = <0x0 0xa400000>;
 		alignment = <0x0 0x400000>;
-	};
-
-	secure_display_memory: secure_display_region {
-		compatible = "shared-dma-pool";
-		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
-		reusable;
-		alignment = <0x0 0x400000>;
-		size = <0x0 0xA000000>;
 	};
 
 	user_contig_mem: user_contig_region {
@@ -690,12 +687,6 @@
 			apps_bcm_voter: bcm_voter {
 				compatible = "qcom,bcm-voter";
 			};
-
-			dcvs_fp: qcom,dcvs-fp {
-				compatible = "qcom,dcvs-fp";
-				qcom,ddr-bcm-name = "MC4";
-				qcom,llcc-bcm-name = "SH5";
-			};
 		};
 	};
 
@@ -800,8 +791,13 @@
 		};
 
 		pil@94c {
-			compatible = "qcom,msm-imem-pil";
+			compatible = "qcom,pil-reloc-info";
 			reg = <0x94c 0xc8>;
+		};
+
+		pil@6dc {
+			compatible = "qcom,msm-imem-pil-disable-timeout";
+			reg = <0x6dc 0x4>;
 		};
 
 		diag_dload@c8 {
@@ -1335,12 +1331,6 @@
 				interconnects = <&mc_virt MASTER_LLCC
 						 &mc_virt SLAVE_EBI1>;
 			};
-
-			ddr_dcvs_fp: fp {
-				compatible = "qcom,dcvs-path";
-				qcom,dcvs-path-type = <1>;
-				qcom,fp-voter = <&dcvs_fp>;
-			};
 		};
 
 		qcom_llcc_dcvs_hw: llcc {
@@ -1354,12 +1344,6 @@
 				qcom,dcvs-path-type = <0>;
 				interconnects = <&gem_noc MASTER_APPSS_PROC
 						 &gem_noc SLAVE_LLCC>;
-			};
-
-			llcc_dcvs_fp: fp {
-				compatible = "qcom,dcvs-path";
-				qcom,dcvs-path-type = <1>;
-				qcom,fp-voter = <&dcvs_fp>;
 			};
 		};
 
@@ -1384,7 +1368,7 @@
 		ddr {
 			compatible = "qcom,memlat-grp";
 			qcom,target-dev = <&qcom_ddr_dcvs_hw>;
-			qcom,sampling-path = <&ddr_dcvs_fp>;
+			qcom,sampling-path = <&ddr_dcvs_sp>;
 			qcom,miss-ev = <0x1000>;
 
 			gold-0 {
@@ -1423,7 +1407,7 @@
 		llcc {
 			compatible = "qcom,memlat-grp";
 			qcom,target-dev = <&qcom_llcc_dcvs_hw>;
-			qcom,sampling-path = <&llcc_dcvs_fp>;
+			qcom,sampling-path = <&llcc_dcvs_sp>;
 			qcom,miss-ev = <0x37>;
 
 			gold-0 {
@@ -2166,11 +2150,12 @@
 
 	qtee_shmbridge {
 		compatible = "qcom,tee-shared-memory-bridge";
+		qcom,disable-shmbridge-support;
 	};
 
-	qcom_qseecom: qseecom@d1800000 {
+	qcom_qseecom: qseecom@d1900000 {
 		compatible = "qcom,qseecom";
-		reg = <0xd1800000 0x3900000>;
+		reg = <0xd1900000 0x3800000>;
 		reg-names = "secapp-region";
 		memory-region = <&qseecom_mem>;
 		#qcom,hlos-num-ce-hw-instances = <1>;

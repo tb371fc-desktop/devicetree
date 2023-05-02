@@ -42,6 +42,7 @@
 	aliases {
 		ufshc1 = &ufshc_mem; /* Embedded UFS slot */
 		serial0 = &qupv3_se12_2uart;
+		hsuart0 = &qupv3_se6_4uart;
 		pci-domain0 = &pcie0; /* PCIe0 domain */
 		pci-domain1 = &pcie1; /* PCIe1 domain */
 		pci-domain2 = &pcie2; /* PCIe2 domain */
@@ -421,6 +422,10 @@
 			compatible = "qcom,tee-shared-memory-bridge";
 		};
 
+		qcom_smcinvoke {
+			compatible = "qcom,smcinvoke";
+		};
+
 		android {
 			compatible = "android,firmware";
 			vbmeta {
@@ -561,16 +566,6 @@
 		reusable;
 		alignment = <0x0 0x400000>;
 		size = <0x0 0x400000>;
-	};
-
-	cont_splash_memory: cont_splash_region@9c000000 {
-		reg = <0x0 0x9c000000 0x0 0x02300000>;
-		label = "cont_splash_region";
-	};
-
-	disp_rdump_memory: disp_rdump_region@9c000000 {
-		reg = <0x0 0x9c000000 0x0 0x00800000>;
-		label = "disp_rdump_region";
 	};
 
 	dfps_data_memory: dfps_data_region@9e300000 {
@@ -802,6 +797,14 @@
 			qcom,appsbl-qseecom-support;
 			qcom,commonlib64-loaded-by-uefi;
 			qcom,qsee-reentrancy-support = <2>;
+	};
+
+	qcom_tzlog: tz-log@146bf720 {
+		compatible = "qcom,tz-log";
+		reg = <0x146bf720 0x3000>;
+		qcom,hyplog-enabled;
+		hyplog-address-offset = <0x410>;
+		hyplog-size-offset = <0x414>;
 	};
 
 	cpu_pmu: cpu-pmu {
@@ -1757,13 +1760,13 @@
 		qcom,target-dev = <&qcom_ddr_dcvs_hw>;
 	};
 
-	qcom,chd_silver {
+	qcom,chd {
 		compatible = "qcom,core-hang-detect";
-		label = "silver";
-		qcom,threshold-arr = <0x18000058 0x18010058
-		0x18020058 0x18030058>;
-		qcom,config-arr = <0x18000060 0x18010060
-		0x18020060 0x18030060>;
+		label = "core";
+		qcom,threshold-arr = <0x18000058 0x18010058 0x18020058 0x18030058
+			0x18040058 0x18050058 0x18060058 0x18070058>;
+		qcom,config-arr = <0x18000060 0x18010060 0x18020060 0x18030060
+			0x18040060 0x18050060 0x18060060 0x18070060>;
 	};
 
 	dsu_pmu@0 {
@@ -1771,15 +1774,6 @@
 		interrupts = <GIC_SPI 50 IRQ_TYPE_LEVEL_HIGH>;
 		cpus = <&CPU0>, <&CPU1>, <&CPU2>, <&CPU3>,
 			<&CPU4>, <&CPU5>, <&CPU6>, <&CPU7>;
-	};
-
-	qcom,chd_gold {
-		compatible = "qcom,core-hang-detect";
-		label = "gold";
-		qcom,threshold-arr = <0x18040058 0x18050058
-		0x18060058 0x18070058>;
-		qcom,config-arr = <0x18040060 0x18050060
-		0x18060060 0x18070060>;
 	};
 
 	ufsphy_mem: ufsphy_mem@1d87000 {
@@ -2695,7 +2689,7 @@
 	slpi_pas: remoteproc-slpi@5c00000 {
 		compatible = "qcom,kona-slpi-pas";
 		reg = <0x5c00000 0x4000>;
-		status = "disabled";
+		status = "ok";
 
 		cx-supply = <&L11A_LEVEL>;
 		cx-uV-uA = <RPMH_REGULATOR_LEVEL_TURBO 0>;
