@@ -669,6 +669,7 @@
 		atid = <78>;
 		coresight-name = "coresight-tpdm-rdpm-cx";
 
+		status = "disabled";
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 
@@ -691,6 +692,7 @@
 		atid = <78>;
 		coresight-name = "coresight-tpdm-rdpm-mx";
 
+		status = "disabled";
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 
@@ -1403,7 +1405,7 @@
 		reg = <0x10c43000 0x1000>;
 		reg-names = "tpda-base";
 
-		qcom,tpda-atid = <65>;
+		qcom,tpda-atid = <79>;
 		coresight-name = "coresight-tpda-dlct2";
 
 		clocks = <&aoss_qmp>;
@@ -3264,7 +3266,7 @@
 	swao_csr: csr@10b11000 {
 		compatible = "qcom,coresight-csr";
 		reg = <0x10b11000 0x1000>,
-		      <0x10b110f8 0x50>;
+		      <0x10b110f8 0x70>;
 		reg-names = "csr-base", "msr-base";
 
 		coresight-name = "coresight-swao-csr";
@@ -3287,6 +3289,10 @@
 		qcom,extended_cti;
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
+
+		qcom,cti-gpio-trigout = <20>;
+		pinctrl-names = "cti-trigout-pctrl";
+		pinctrl-0 = <&trigout_a>;
 	};
 
 	cti0: cti@10c32000 {

@@ -28,7 +28,8 @@
 
 
 	chosen: chosen {
-			bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 service_locator.enable=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-7 ftrace_dump_on_oops swiotlb=noforce loop.max_part=7 fw_devlink.strict=1 allow_mismatched_32bit_el0 cpufreq.default_governor=performance printk.console_no_auto_verbose=1 kasan=off sysctl.kernel.sched_pelt_multiplier=4 can.stats_timer=0 pcie_ports=compat irqaffinity=0-2 disable_dma32=on no-steal-acc cgroup.memory=nokmem,nosocket";
+			bootargs = "console=ttyMSM0,115200n8 loglevel=6 kpti=0 log_buf_len=256K kernel.panic_on_rcu_stall=1 service_locator.enable=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-7 ftrace_dump_on_oops swiotlb=noforce loop.max_part=7 fw_devlink.strict=1 allow_mismatched_32bit_el0 cpufreq.default_governor=performance printk.console_no_auto_verbose=1 kasan=off sysctl.kernel.sched_pelt_multiplier=4 can.stats_timer=0 pcie_ports=compat irqaffinity=0-2 disable_dma32=on no-steal-acc cgroup.memory=nokmem,nosocket slub_debug=-";
+			stdout-path = "/soc/qcom,qupv3_1_geni_se@ac0000/qcom,qup_uart@a9c000";
 	};
 
 	reserved_memory: reserved-memory { };
@@ -43,6 +44,7 @@
 	aliases: aliases {
 		serial0 = &qupv3_se7_2uart;
 		hsuart0 = &qupv3_se14_4uart;
+		hsuart1 = &qupv3_se4_4uart;
 		mmc1 = &sdhc_2; /* SD card slot */
 		ufshc1 = &ufshc_mem; /* Embedded UFS Slot */
 	};
@@ -369,6 +371,11 @@
 	aop_config_merged_mem: aop_config_merged_region@81c80000 {
 		no-map;
 		reg = <0x0 0x81c80000 0x0 0x74000>;
+	};
+
+	chipinfo_mem: chipinfo_region@81cf4000 {
+		no-map;
+		reg = <0x0 0x81cf4000 0x0 0x1000>;
 	};
 
 	/* secdata region can be reused by apps */
@@ -754,6 +761,12 @@
 			#power-domain-cells = <0>;
 			domain-idle-states = <&CLUSTER_PWR_DN &APSS_OFF>;
 		};
+	};
+
+	qcom,power-state {
+		compatible = "qcom,power-state";
+		qcom,subsys-name = "lpass", "cdsp", "mpss";
+		qcom,rproc-handle = <&adsp_pas>, <&cdsp_pas>, <&modem_pas>;
 	};
 
 	slimbam: bamdma@6C04000 {
@@ -1527,7 +1540,7 @@
 			label = "modem";
 		};
 
-		qcom,client_3 {
+		mem_client_3: qcom,client_3 {
 			compatible = "qcom,memshare-peripheral";
 			qcom,peripheral-size = <0x500000>;
 			qcom,client-id = <1>;
@@ -1535,7 +1548,7 @@
 			label = "modem";
 		};
 
-		qcom,client_4 {
+		mem_client_4: qcom,client_4 {
 			compatible = "qcom,memshare-peripheral";
 			qcom,peripheral-size = <0x1000000>;
 			qcom,client-id = <5>;
@@ -1545,7 +1558,7 @@
 			label = "modem";
 		};
 
-		qcom,client_5 {
+		mem_client_5: qcom,client_5 {
 			compatible = "qcom,memshare-peripheral";
 			qcom,peripheral-size = <0x400000>;
 			qcom,client-id = <6>;

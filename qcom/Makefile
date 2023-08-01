@@ -84,6 +84,7 @@ CROW_BOARDS += \
 		crow-idp-wcd9395-wcd-dmic-overlay.dtbo \
 		crow-idp-wcd9395-dmic-overlay.dtbo \
 		crow-idp-wcd9395-aatc-overlay.dtbo \
+		crow-idp-rcm-overlay.dtbo \
 		crow-qrd-overlay.dtbo
 
 kalama-dtb-$(CONFIG_ARCH_CROW) += \
@@ -147,8 +148,7 @@ KONA_BOARDS += \
                  kona-hdk-overlay.dtbo \
                  kona-rb5-HDMI-overlay.dtbo \
                  kona-iot-v2.1-vc-overlay.dtbo \
-		 kona-rb5-overlay.dtbo \
-		 kona-iot-v2.1-rb5-overlay.dtbo
+		 kona-rb5-overlay.dtbo
 
 
 KONA_LE_BOARDS += \
@@ -200,7 +200,7 @@ cinder-dtb-$(CONFIG_ARCH_CINDER) += cinder-ru-rumi.dtb \
 	cinder-v2-du-rumi.dtb
 dtb-y += $(cinder-dtb-y)
 
-QCS405_BASE_DTB += qcs405.dtb
+QCS405_BASE_DTB += qcs405.dtb qcs407.dtb
 
 QCS405_BOARDS += qcs405-iot-sku1-overlay.dtbo \
 	qcs405-iot-sku2-overlay.dtbo \
@@ -212,11 +212,8 @@ QCS405_BOARDS += qcs405-iot-sku1-overlay.dtbo \
 	qcs405-iot-sku8-overlay.dtbo \
 	qcs405-iot-sku9-overlay.dtbo \
 	qcs405-iot-sku10-overlay.dtbo \
-	qcs407-iot-sku12-overlay.dtbo \
-	qcs407-iot-sku13-overlay.dtbo \
-	qcs407-iot-sku4-overlay.dtbo   \
-	qcs407-iot-sku6-overlay.dtbo   \
-	qcs407-iot-sku9-overlay.dtbo
+	qcs405-iot-sku12-overlay.dtbo \
+	qcs405-iot-sku13-overlay.dtbo
 
 qcs405-dtb-$(CONFIG_ARCH_QCS405) += \
         $(call add-overlays, $(QCS405_BOARDS) ,$(QCS405_BASE_DTB))
@@ -449,6 +446,7 @@ kalama_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += crow-vm-rumi.dtb \
 	crow-vm-idp-wcd9395-dmic.dtb \
 	crow-vm-idp-wcd9395-wcd-dmic.dtb \
 	crow-vm-idp.dtb \
+	crow-vm-idp-rcm.dtb \
 	crow-vm-qrd.dtb
 dtb-y += $(kalama_tuivm-dtb-y)
 endif
