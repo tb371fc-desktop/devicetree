@@ -59,7 +59,8 @@ KALAMA_BOARDS += \
 		 kalama-sg-hhg-overlay.dtbo \
 		 kalamap-hdk-overlay.dtbo \
 		 kalamap-sg-hhg-overlay.dtbo \
-		 kalamap-rb5-gen2-overlay.dtbo
+		 kalamap-rb5-gen2-overlay.dtbo \
+		 kalamap-aim300-overlay.dtbo
 
 NOAPQ_KALAMA_BOARDS += \
 		 kalama-rumi-overlay.dtbo \
@@ -147,7 +148,10 @@ KONA_LE_BASE_DTB += kona-7230-iot-v2.1.dtb qrb5165-iot.dtb qrb5165n-iot.dtb qrb3
 KONA_BOARDS += \
                  kona-hdk-overlay.dtbo \
                  kona-rb5-HDMI-overlay.dtbo \
+                 kona-rb5-HDMI-overlay-new.dtbo \
+                 kona-rb5-overlay-new.dtbo \
                  kona-iot-v2.1-vc-overlay.dtbo \
+		 kona-7230-iot-rb5-overlay.dtbo \
 		 kona-rb5-overlay.dtbo
 
 
@@ -420,6 +424,32 @@ dtb-y += $(scuba_auto-dtb-y)
 
 endif
 
+ifeq ($(CONFIG_ARCH_LEMANS), y)
+ifeq ($(CONFIG_ARCH_QTI_VM), y)
+
+LEMANS_GH_LA_GVM_QAM_BASE_DTB += lemans-gunyah-vm-qam.dtb
+LEMANS_GH_LA_GVM_QAM_BOARDS += lemans-gunyah-vm-qam-overlay.dtbo
+
+LEMANS_GH_LA_GVM_VP_BASE_DTB += lemans-gunyah-vm-vp.dtb
+LEMANS_GH_LA_GVM_VP_BOARDS += lemans-gunyah-vm-vp-overlay.dtbo
+
+LEMANS_GH_LA_GVM_COB_BASE_DTB += lemans-gunyah-vm-cob.dtb
+LEMANS_GH_LA_GVM_COB_BOARDS += lemans-gunyah-vm-cob-overlay.dtbo
+
+autoghgvm-dtb-$(CONFIG_ARCH_QTI_VM) += \
+	$(call add-overlays, $(LEMANS_GH_LA_GVM_QAM_BOARDS),$(LEMANS_GH_LA_GVM_QAM_BASE_DTB)) \
+	$(call add-overlays, $(LEMANS_GH_LA_GVM_VP_BOARDS),$(LEMANS_GH_LA_GVM_VP_BASE_DTB)) \
+	$(call add-overlays, $(LEMANS_GH_LA_GVM_COB_BOARDS),$(LEMANS_GH_LA_GVM_COB_BASE_DTB))
+
+autoghgvm-overlays-dtb-$(CONFIG_ARCH_QTI_VM) += \
+	$(LEMANS_GH_LA_GVM_QAM_BOARDS) $(LEMANS_GH_LA_GVM_QAM_BASE_DTB) \
+	$(LEMANS_GH_LA_GVM_VP_BOARDS) $(LEMANS_GH_LA_GVM_VP_BASE_DTB) \
+	$(LEMANS_GH_LA_GVM_COB_BOARDS) $(LEMANS_GH_LA_GVM_COB_BASE_DTB)
+
+dtb-y += $(autoghgvm-dtb-y)
+endif
+endif
+
 ifeq ($(CONFIG_ARCH_KALAMA), y)
 ifeq ($(CONFIG_ARCH_QTI_VM), y)
 kalama_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += kalama-vm-rumi.dtb \
@@ -447,7 +477,14 @@ kalama_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) += crow-vm-rumi.dtb \
 	crow-vm-idp-wcd9395-wcd-dmic.dtb \
 	crow-vm-idp.dtb \
 	crow-vm-idp-rcm.dtb \
-	crow-vm-qrd.dtb
+	crow-vm-qrd.dtb \
+	crow-oemvm-atp.dtb \
+	crow-oemvm-idp-wcd9395-aatc.dtb \
+	crow-oemvm-idp-wcd9395-dmic.dtb \
+	crow-oemvm-idp-wcd9395-wcd-dmic.dtb \
+	crow-oemvm-idp.dtb \
+	crow-oemvm-idp-rcm.dtb \
+	crow-oemvm-qrd.dtb
 dtb-y += $(kalama_tuivm-dtb-y)
 endif
 endif
