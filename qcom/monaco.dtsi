@@ -440,6 +440,12 @@
 		clock-frequency = <19200000>;
 	};
 
+	qcom,mem-buf {
+		compatible = "qcom,mem-buf";
+		qcom,mem-buf-capabilities = "supplier";
+		qcom,vmid = <3>;
+	};
+
 	memtimer: timer@f120000 {
 		#address-cells = <1>;
 		#size-cells = <1>;
@@ -1660,6 +1666,11 @@
 			qcom,glinkpkt-edge = "slate";
 			qcom,glinkpkt-ch-name = "ss_bt_ssr_data";
 			qcom,glinkpkt-dev-name = "glink_pkt_ss_bt_ssr_data";
+			};
+		qcom,glinkpkt-ss-bt-obex-data {
+			qcom,glinkpkt-edge = "slate";
+			qcom,glinkpkt-ch-name = "ss_bt_obex_data";
+			qcom,glinkpkt-dev-name = "glink_pkt_ss_bt_obex_data";
 			};
 
 	};

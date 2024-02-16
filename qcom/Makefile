@@ -177,7 +177,9 @@ MONACO_BOARDS += \
         monaco-standalone-idp-v2-overlay.dtbo \
         monaco-idp-v3-overlay.dtbo \
         monaco-standalone-idp-v3-overlay.dtbo \
+	monaco-idp-v1.1-overlay.dtbo \
 	monaco-wdp-v1-overlay.dtbo \
+	monaco-wdp-v1.1-overlay.dtbo \
 	monaco-standalone-wdp-v1-overlay.dtbo \
 	monaco-atp-v1-overlay.dtbo \
 	monaco-standalone-atp-v1-overlay.dtbo
