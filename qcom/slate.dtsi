@@ -66,6 +66,11 @@
 			qcom,intents = <0x24 1>;
 		};
 
+		qcom,glink-slate-custom-data {
+			qcom,glink-channels = "slate_custom_data";
+			qcom,intents = <0x24 1>;
+		};
+
 		qcom,glinkpkt-slate-ssc-hal {
 			qcom,glink-channels = "ssc_hal";
 			qcom,intents = <0x2710 2

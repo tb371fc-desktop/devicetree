@@ -2,15 +2,18 @@ _platform_map = {
     "monaco": {
         "dtb_list": [
             {"name": "monaco.dtb"},
+            {"name": "monacop.dtb"},
         ],
         "dtbo_list": [
             {"name": "monaco-idp-v1-overlay.dtbo"},
+            {"name": "monaco-idp-v1.1-overlay.dtbo"},
             {"name": "monaco-standalone-idp-v1-overlay.dtbo"},
             {"name": "monaco-idp-v2-overlay.dtbo"},
             {"name": "monaco-standalone-idp-v2-overlay.dtbo"},
             {"name": "monaco-idp-v3-overlay.dtbo"},
             {"name": "monaco-standalone-idp-v3-overlay.dtbo"},
             {"name": "monaco-wdp-v1-overlay.dtbo"},
+            {"name": "monaco-wdp-v1.1-overlay.dtbo"},
             {"name": "monaco-standalone-wdp-v1-overlay.dtbo"},
             {"name": "monaco-atp-v1-overlay.dtbo"},
             {"name": "monaco-standalone-atp-v1-overlay.dtbo"},
