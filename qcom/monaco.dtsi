@@ -1608,6 +1608,13 @@
 			qcom,glinkpkt-dev-name = "glink_pkt_slate_ux_ctl";
 		};
 
+		qcom,glinkpkt-slate-rma {
+			qcom,glinkpkt-edge = "slate";
+			qcom,glinkpkt-ch-name = "slate-rma";
+			qcom,glinkpkt-dev-name = "glink_pkt_slate_rma";
+			qcom,glinkpkt-fragmented-read;
+		};
+
 		qcom,glinkpkt-slate-qcli {
 			qcom,glinkpkt-edge = "slate";
 			qcom,glinkpkt-ch-name = "slate-qcli";
