@@ -40,7 +40,6 @@ Optional properties:
 			    Depending on the use case and system latencies, the client can
 			    configure this.
 			    Unit - ms.
-
 SPI slave nodes must be children of the SPI master node and can contain
 the following properties.
 
@@ -57,6 +56,15 @@ Optional properties:
                   shifted clock phase (CPHA) mode.
 
 - qcom,slv-ctrl : Set this flag to configure QUPV3 as SPI slave controller.
+- qcom,geni-to-core-vote: List of possible geni to core clock vote values.
+- qcom,cpu-to-geni-vote: List of possible cpu to geni clock vote values.
+- qcom,geni-to-ddr-vote: List of possible geni to ddr clock vote values.
+- qcom,vote-index: vote index value which contains 3 indexes indicating values to be picked
+				   from possible values mentioned in geni-to-core-vote, cpu-to-geni-vote
+				   and geni-to-ddr-vote.
+				   first index points to values to be picked from geni-to-core-vote
+				   second index points to values to be picked from cpu-to-geni-vote
+				   third index points to values to be picked from geni-to-ddr-vote
 
 Other optional properties described in
 Documentation/devicetree/bindings/spi/spi-bus.txt

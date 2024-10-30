@@ -50,6 +50,11 @@
 			qcom,intents = <0x0C 1>;
 		};
 
+		qcom,glink-slate-rma {
+			qcom,glink-channels = "slate-rma";
+			qcom,intents = <0x24 1>;
+		};
+
 		qcom,glink-slatecom-qcli {
 			qcom,glink-channels = "slate-qcli";
 			qcom,intents = <0x0C 1>;
