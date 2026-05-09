@@ -1,0 +1,13 @@
+/dts-v1/;
+
+#include "lenovo-tb371fc-desktop.dts"
+
+&cont_splash_memory {
+	compatible = "removed-dma-pool";
+	no-map;
+};
+
+&disp_rdump_memory {
+	compatible = "removed-dma-pool";
+	no-map;
+};

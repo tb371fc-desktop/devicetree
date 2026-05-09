@@ -30,47 +30,52 @@ kona-arglass-overlay.dtbo-base := kona.dtb kona-v2.dtb kona-v2.1.dtb
 kona-xrsku4-overlay.dtbo-base := kona.dtb kona-v2.dtb kona-v2.1.dtb
 kona-hdk-overlay.dtbo-base := kona.dtb kona-v2.dtb kona-v2.1.dtb
 else
-dtb-$(CONFIG_ARCH_KONA) += kona-rumi.dtb \
-        kona-mtp.dtb \
-        kona-mtp-ws.dtb \
-        kona-mtp-sa.dtb \
-        kona-xr.dtb \
-        kona-xrfusion.dtb \
-        kona-xrfusion-ult.dtb \
-        kona-arglass.dtb \
-        kona-xrsku4.dtb \
-        kona-cdp.dtb \
-        kona-cdp-lcd.dtb \
-        kona-cdp-lcd-tron.dtb \
-        kona-qrd.dtb \
-        kona-v2-rumi.dtb \
-        kona-v2-mtp.dtb \
-        kona-v2-mtp-ws.dtb \
-        kona-v2-mtp-sa.dtb \
-        kona-v2-cdp.dtb \
-        kona-v2-qrd.dtb \
-        kona-v2-xrfusion.dtb \
-        kona-v2-xrfusion-ult.dtb \
-        kona-v2-arglass.dtb \
-        kona-v2-xrsku4.dtb \
-        kona-hdk.dtb \
-        kona-v2.1-mtp.dtb \
-        kona-v2.1-mtp-ws.dtb \
-        kona-v2.1-mtp-sa.dtb \
-        kona-v2.1-cdp.dtb \
-        kona-v2.1-qrd.dtb \
-        kona-v2.1-hdk.dtb \
-        kona-v2.1-xrfusion.dtb \
-        kona-v2.1-xrfusion-ult.dtb \
-        kona-v2.1-arglass.dtb \
-        kona-v2.1-xrsku4.dtb \
-        qrb5165-iot-rb5.dtb \
-        qrb5165m-iot-rb5.dtb \
-        qrb5165n-iot-rb5.dtb \
-        qrb5165n-v2-iot-rb5.dtb \
-        kona-v2.1-iot-rb5.dtb \
-        kona-7230-iot-rb5.dtb \
-        kona-7230m-iot-rb5.dtb
+# dtb-$(CONFIG_ARCH_KONA) += kona-rumi.dtb \
+#         kona-mtp.dtb \
+#         kona-mtp-ws.dtb \
+#         kona-mtp-sa.dtb \
+#         kona-xr.dtb \
+#         kona-xrfusion.dtb \
+#         kona-xrfusion-ult.dtb \
+#         kona-arglass.dtb \
+#         kona-xrsku4.dtb \
+#         kona-cdp.dtb \
+#         kona-cdp-lcd.dtb \
+#         kona-cdp-lcd-tron.dtb \
+#         kona-qrd.dtb \
+#         kona-v2-rumi.dtb \
+#         kona-v2-mtp.dtb \
+#         kona-v2-mtp-ws.dtb \
+#         kona-v2-mtp-sa.dtb \
+#         kona-v2-cdp.dtb \
+#         kona-v2-qrd.dtb \
+#         kona-v2-xrfusion.dtb \
+#         kona-v2-xrfusion-ult.dtb \
+#         kona-v2-arglass.dtb \
+#         kona-v2-xrsku4.dtb \
+#         kona-hdk.dtb \
+#         kona-v2.1-mtp.dtb \
+#         kona-v2.1-mtp-ws.dtb \
+#         kona-v2.1-mtp-sa.dtb \
+#         kona-v2.1-cdp.dtb \
+#         kona-v2.1-qrd.dtb \
+#         kona-v2.1-hdk.dtb \
+#         kona-v2.1-xrfusion.dtb \
+#         kona-v2.1-xrfusion-ult.dtb \
+#         kona-v2.1-arglass.dtb \
+#         kona-v2.1-xrsku4.dtb \
+#         qrb5165-iot-rb5.dtb \
+#         qrb5165m-iot-rb5.dtb \
+#         qrb5165n-iot-rb5.dtb \
+#         qrb5165n-v2-iot-rb5.dtb \
+#         kona-v2.1-iot-rb5.dtb \
+#         kona-7230-iot-rb5.dtb \
+#         kona-7230m-iot-rb5.dtb
+
+dtb-$(CONFIG_ARCH_KONA) +=  lenovo-tb371fc.dtb \
+        lenovo-tb371fc-simplefb.dtb \
+        lenovo-tb371fc-desktop.dtb \
+        lenovo-tb371fc-experiments.dtb
 
 endif
 
