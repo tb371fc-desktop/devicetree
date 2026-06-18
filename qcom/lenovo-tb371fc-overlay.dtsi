@@ -240,27 +240,29 @@
 		pm8150_adc_tm: adc_tm@3500 {
 			compatible = "qcom,adc-tm5";
 			reg = <0x3500 0x100>;
-			interrupts = <0x0 0x35 0x00 0x01>;
+			interrupts = <0x0 0x35 0x00 IRQ_TYPE_EDGE_RISING>;
 			interrupt-names = "thr-int-en";
 			#address-cells = <1>;
 			#size-cells = <0>;
 			#thermal-sensor-cells = <1>;
-			io-channels = <&pm8150_vadc 0x4c>, <&pm8150_vadc 0x4d>, <&pm8150_vadc 0x4e>;
+			io-channels = <&pm8150_vadc ADC_XO_THERM_PU2>,
+					 <&pm8150_vadc ADC_AMUX_THM1_PU2>,
+					 <&pm8150_vadc ADC_AMUX_THM2_PU2>;
 
 			xo_therm@4c {
-				reg = <0x4c>;
+				reg = <ADC_XO_THERM_PU2>;
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
 			};
 
 			skin_therm@4d {
-				reg = <0x4d>;
+				reg = <ADC_AMUX_THM1_PU2>;
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
 			};
 
 			pa_therm1@4e {
-				reg = <0x4e>;
+				reg = <ADC_AMUX_THM2_PU2>;
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
 			};
