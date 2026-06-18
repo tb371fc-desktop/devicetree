@@ -289,19 +289,19 @@
 		trips {
 
 			pm8150_trip0: trip0 {
-				temperature = <0x17318>;
+				temperature = <95000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
 			pm8150_trip1: trip1 {
-				temperature = <0x1c138>;
+				temperature = <115000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
 
 			trip2 {
-				temperature = <0x23668>;
+				temperature = <145000>;
 				hysteresis = <0>;
 				type = "passive";
 			};
