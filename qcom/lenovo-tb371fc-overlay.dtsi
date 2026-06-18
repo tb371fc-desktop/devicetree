@@ -168,7 +168,7 @@
 
 		pm8150_rtc: qcom,pm8150_rtc {
 			compatible = "qcom,pm8941-rtc";
-			interrupts = <0x00 0x61 0x01 0x00>;
+			interrupts = <0x00 0x61 0x01 IRQ_TYPE_NONE>;
 		};
 
 		pm8150_vadc: vadc@3100 {
