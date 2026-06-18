@@ -8,15 +8,15 @@
 };
 
 &spmi_bus {
-	#address-cells = <0x02>;
-	#size-cells = <0x00>;
+	#address-cells = <2>;
+	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
 	qcom,pm8150@0 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x00 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 		qcom,power-on@800 {
 			compatible = "qcom,qpnp-power-on";
 			reg = <0x800 0x100>;
@@ -160,8 +160,8 @@
 		pm8150_vadc: vadc@3100 {
 			compatible = "qcom,spmi-adc5";
 			reg = <0x3100 0x100>;
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			interrupts = <0x0 0x31 0x00 0x01>;
 			interrupt-names = "eoc-int-en-set";
 			qcom,adc-vdd-reference = <1875>;
@@ -228,8 +228,8 @@
 			reg = <0x3500 0x100>;
 			interrupts = <0x0 0x35 0x00 0x01>;
 			interrupt-names = "thr-int-en";
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			#thermal-sensor-cells = <1>;
 			io-channels = <&pm8150_vadc 0x4c>, <&pm8150_vadc 0x4d>, <&pm8150_vadc 0x4e>;
 			xo_therm@4c {
@@ -257,8 +257,8 @@
 	qcom,pm8150@1 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x01 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 	};
 
 };
@@ -296,15 +296,15 @@
 };
 
 &spmi_bus {
-	#address-cells = <0x02>;
-	#size-cells = <0x00>;
+	#address-cells = <2>;
+	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
 	qcom,pm8150b@2 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x02 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 		pm8150b_revid: qcom,revid@100 {
 			compatible = "qcom,qpnp-revid";
 			reg = <0x100 0x100>;
@@ -408,8 +408,8 @@
 
 		pm8150b_charger: qcom,qpnp-smb5 {
 			compatible = "qcom,qpnp-smb5";
-			#address-cells = <0x01>;
-			#size-cells = <0x01>;
+			#address-cells = <1>;
+			#size-cells = <1>;
 			#cooling-cells = <2>;
 			device_type = "battery";
 			qcom,pmic-revid = <&pm8150b_revid>;
@@ -515,8 +515,8 @@
 
 		pm8150b_fg: qpnp,fg {
 			compatible = "qcom,fg-gen4";
-			#address-cells = <0x01>;
-			#size-cells = <0x01>;
+			#address-cells = <1>;
+			#size-cells = <1>;
 			qcom,pmic-revid = <&pm8150b_revid>;
 			qcom,pmic-pbs = <&pm8150b_pbs1>;
 			status = "disabled";
@@ -568,8 +568,8 @@
 			compatible = "qcom,spmi-adc5";
 			reg = <0x3100 0x100 0x3700 0x100>;
 			reg-names = "adc5-usr-base", "adc5-cal-base";
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			interrupts = <0x2 0x31 0x00 0x01>;
 			interrupt-names = "eoc-int-en-set";
 			qcom,adc-vdd-reference = <1875>;
@@ -667,8 +667,8 @@
 			reg = <0x3500 0x100>;
 			interrupts = <0x2 0x35 0x00 0x01>;
 			interrupt-names = "thr-int-en";
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			#thermal-sensor-cells = <1>;
 			qcom,pmic-revid = <&pm8150b_revid>;
 			io-channels = <&pm8150b_vadc 0x4f>;
@@ -685,8 +685,8 @@
 	qcom,pm8150b@3 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x03 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 		pm8150b_pwm: qcom,pwms@b100 {
 			compatible = "qcom,pwm-lpg";
 			reg = <0xb100 0x200>;
@@ -988,15 +988,15 @@
 };
 
 &spmi_bus {
-	#address-cells = <0x02>;
-	#size-cells = <0x00>;
+	#address-cells = <2>;
+	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
 	qcom,pm8150l@4 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x04 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 		pm8150l_revid: qcom,revid@100 {
 			compatible = "qcom,qpnp-revid";
 			reg = <0x100 0x100>;
@@ -1040,8 +1040,8 @@
 		pm8150l_vadc: vadc@3100 {
 			compatible = "qcom,spmi-adc5";
 			reg = <0x3100 0x100>;
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			interrupts = <0x4 0x31 0x00 0x01>;
 			interrupt-names = "eoc-int-en-set";
 			qcom,adc-vdd-reference = <1875>;
@@ -1110,8 +1110,8 @@
 			reg = <0x3500 0x100>;
 			interrupts = <0x4 0x35 0x00 0x01>;
 			interrupt-names = "thr-int-en";
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			#thermal-sensor-cells = <1>;
 			io-channels = <&pm8150l_vadc 0x4d>, <&pm8150l_vadc 0x4e>, <&pm8150l_vadc 0x4f>;
 			camera_flash_therm@4d {
@@ -1139,8 +1139,8 @@
 	qcom,pm8150l@5 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x05 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 		pm8150l_lcdb: qcom,lcdb@ec00 {
 			compatible = "qcom,qpnp-lcdb-regulator";
 			reg = <0xec00 0x100>;
@@ -1400,8 +1400,8 @@
 
 		pm8150a_amoled: qcom,amoled {
 			compatible = "qcom,qpnp-amoled-regulator";
-			#address-cells = <0x01>;
-			#size-cells = <0x01>;
+			#address-cells = <1>;
+			#size-cells = <1>;
 			status = "disabled";
 			oledb_vreg: oledb@e000 {
 				reg = <0xe000 0x100>;
@@ -1574,15 +1574,15 @@
 };
 
 &spmi_bus {
-	#address-cells = <0x02>;
-	#size-cells = <0x00>;
+	#address-cells = <2>;
+	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
 	qcom,pm8009@a {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x0a 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 		qcom,revid@100 {
 			compatible = "qcom,qpnp-revid";
 			reg = <0x100 0x100>;
@@ -1607,22 +1607,22 @@
 	qcom,pm8009@b {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x0b 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 	};
 
 };
 
 &spmi_bus {
-	#address-cells = <0x02>;
-	#size-cells = <0x00>;
+	#address-cells = <2>;
+	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
 	qcom,pmxprairie@8 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x08 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 		qcom,power-on@800 {
 			compatible = "qcom,qpnp-power-on";
 			reg = <0x800 0x100>;
@@ -1634,8 +1634,8 @@
 	qcom,pmxprairie@9 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x09 0x00>;
-		#address-cells = <0x02>;
-		#size-cells = <0x00>;
+		#address-cells = <2>;
+		#size-cells = <0>;
 	};
 
 };
@@ -1926,8 +1926,8 @@ Fragments 12 - 38 were skipped
 	};
 
 	dsi_panel_pwr_supply: dsi_panel_pwr_supply {
-		#address-cells = <0x01>;
-		#size-cells = <0x00>;
+		#address-cells = <1>;
+		#size-cells = <0>;
 		qcom,panel-supply-entry@0 {
 			reg = <0x00>;
 			qcom,supply-name = "vddio";
@@ -1970,8 +1970,8 @@ Fragments 12 - 38 were skipped
 	};
 
 	dsi_panel_pwr_supply_lab_ibb: dsi_panel_pwr_supply_lab_ibb {
-		#address-cells = <0x01>;
-		#size-cells = <0x00>;
+		#address-cells = <1>;
+		#size-cells = <0>;
 		qcom,panel-supply-entry@0 {
 			reg = <0x00>;
 			qcom,supply-name = "vddio";
@@ -2004,8 +2004,8 @@ Fragments 12 - 38 were skipped
 	};
 
 	dsi_panel_pwr_supply_avdd: dsi_panel_pwr_supply_avdd {
-		#address-cells = <0x01>;
-		#size-cells = <0x00>;
+		#address-cells = <1>;
+		#size-cells = <0>;
 		qcom,panel-supply-entry@0 {
 			reg = <0x00>;
 			qcom,supply-name = "vddio";
@@ -2055,8 +2055,8 @@ Fragments 12 - 38 were skipped
 		qcom,mdp = <&mdss_mdp>;
 		qcom,dsi-default-panel = <0x21>;
 		ports {
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			port@0 {
 				reg = <0x00>;
 				ext_dsi_out: endpoint {
@@ -4203,8 +4203,8 @@ Fragments 12 - 38 were skipped
 		qcom,tx-dmic-sample-rate = <2400000>;
 		swr2: tx_swr_master {
 			compatible = "qcom,swr-mstr";
-			#address-cells = <0x02>;
-			#size-cells = <0x00>;
+			#address-cells = <2>;
+			#size-cells = <0>;
 			clock-names = "lpass_core_hw_vote", "lpass_audio_hw_vote";
 			clocks = <&lpass_core_hw_vote>, <0x00>, <&lpass_audio_hw_vote>, <0x00>;
 			qcom,swr-master-version = <0x1050001>;
@@ -4239,8 +4239,8 @@ Fragments 12 - 38 were skipped
 		qcom,default-clk-id = <0>;
 		swr1: rx_swr_master {
 			compatible = "qcom,swr-mstr";
-			#address-cells = <0x02>;
-			#size-cells = <0x00>;
+			#address-cells = <2>;
+			#size-cells = <0>;
 			clock-names = "lpass_core_hw_vote", "lpass_audio_hw_vote";
 			clocks = <&lpass_core_hw_vote>, <0x00>, <&lpass_audio_hw_vote>, <0x00>;
 			qcom,swr-master-version = <0x1050001>;
@@ -4273,8 +4273,8 @@ Fragments 12 - 38 were skipped
 		qcom,default-clk-id = <0>;
 		swr0: wsa_swr_master {
 			compatible = "qcom,swr-mstr";
-			#address-cells = <0x02>;
-			#size-cells = <0x00>;
+			#address-cells = <2>;
+			#size-cells = <0>;
 			clock-names = "lpass_core_hw_vote", "lpass_audio_hw_vote";
 			clocks = <&lpass_core_hw_vote>, <0x00>, <&lpass_audio_hw_vote>, <0x00>;
 			qcom,swr-master-version = <0x1050001>;
@@ -4685,8 +4685,8 @@ Fragments 12 - 38 were skipped
 &qupv3_se1_i2c {
 	status = "ok";
 	#qcom,clk-freq-out = <0xf4240>;
-	#address-cells = <0x01>;
-	#size-cells = <0x00>;
+	#address-cells = <1>;
+	#size-cells = <0>;
 	ctn730@28 {
 		compatible = "nxp,ctn730";
 		reg = <0x28>;
@@ -4732,8 +4732,8 @@ Fragments 12 - 38 were skipped
 };
 
 &qupv3_se14_spi {
-	#address-cells = <0x01>;
-	#size-cells = <0x00>;
+	#address-cells = <1>;
+	#size-cells = <0>;
 	status = "ok";
 	pinctrl-0 = <&qupv3_se14_spi_active>;
 	pinctrl-1 = <&qupv3_se14_spi_sleep>;
@@ -4749,8 +4749,8 @@ Fragments 12 - 38 were skipped
 		novatek,stylus-resol-double;
 		novatek,mp-support-dt;
 		novatek-mp-criteria-6067@0 {
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			compatible = "novatek-mp-criteria-6067";
 			IC_X_CFG_SIZE = <0x3c>;
 			IC_Y_CFG_SIZE = <0x28>;
@@ -4790,8 +4790,8 @@ Fragments 12 - 38 were skipped
 		};
 
 		novatek-mp-criteria-6068@0 {
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			compatible = "novatek-mp-criteria-6068";
 			IC_X_CFG_SIZE = <0x3c>;
 			IC_Y_CFG_SIZE = <0x28>;
@@ -4902,22 +4902,22 @@ Fragments 12 - 38 were skipped
 };
 
 &qupv3_se3_i2c {
-	#address-cells = <0x01>;
-	#size-cells = <0x00>;
+	#address-cells = <1>;
+	#size-cells = <0>;
 	status = "ok";
 	mm8013_battery: mitsumi,mm8013@55 {
 		compatible = "mitsumi,mm8013c06";
 		reg = <0x55>;
-		#address-cells = <0x01>;
-		#size-cells = <0x00>;
+		#address-cells = <1>;
+		#size-cells = <0>;
 		status = "ok";
 	};
 
 };
 
 &qupv3_se15_i2c {
-	#address-cells = <0x01>;
-	#size-cells = <0x00>;
+	#address-cells = <1>;
+	#size-cells = <0>;
 	status = "ok";
 	redriver: redriver@1c {
 		compatible = "onnn,redriver";
@@ -4933,8 +4933,8 @@ Fragments 12 - 38 were skipped
 	smb1390: qcom,smb1390@10 {
 		compatible = "qcom,i2c-pmic";
 		reg = <0x10>;
-		#address-cells = <0x01>;
-		#size-cells = <0x00>;
+		#address-cells = <1>;
+		#size-cells = <0>;
 		interrupt-parent = <&spmi_bus>;
 		interrupts = <0x2 0xc5 0x0 0x08>;
 		interrupt_names = "smb1390";
@@ -4971,8 +4971,8 @@ Fragments 12 - 38 were skipped
 	smb1390_slave: qcom,smb1390_slave@18 {
 		compatible = "qcom,i2c-pmic";
 		reg = <0x18>;
-		#address-cells = <0x01>;
-		#size-cells = <0x00>;
+		#address-cells = <1>;
+		#size-cells = <0>;
 		qcom,periph-map = <0x10>;
 		status = "disabled";
 		smb1390_slave_charger: qcom,charge_pump_slave {
@@ -4985,8 +4985,8 @@ Fragments 12 - 38 were skipped
 };
 
 &qupv3_se9_i2c {
-	#address-cells = <0x01>;
-	#size-cells = <0x00>;
+	#address-cells = <1>;
+	#size-cells = <0>;
 	status = "ok";
 	hq_redriver: hq_redriver@28 {
 		compatible = "hq_redriver,ps5169";
@@ -4997,14 +4997,14 @@ Fragments 12 - 38 were skipped
 };
 
 &qupv3_se16_i2c {
-	#address-cells = <0x01>;
-	#size-cells = <0x00>;
+	#address-cells = <1>;
+	#size-cells = <0>;
 	status = "ok";
 	smb1396: qcom,smb1396@34 {
 		compatible = "qcom,i2c-pmic";
 		reg = <0x34>;
-		#address-cells = <0x01>;
-		#size-cells = <0x00>;
+		#address-cells = <1>;
+		#size-cells = <0>;
 		interrupt-parent = <&spmi_bus>;
 		interrupts = <0x2 0xc5 0x0 0x08>;
 		interrupt_names = "smb1396";
@@ -5038,8 +5038,8 @@ Fragments 12 - 38 were skipped
 	smb1396_slave: qcom,smb1396@35 {
 		compatible = "qcom,i2c-pmic";
 		reg = <0x35>;
-		#address-cells = <0x01>;
-		#size-cells = <0x00>;
+		#address-cells = <1>;
+		#size-cells = <0>;
 		status = "disabled";
 		smb1396_div2_cp_slave: qcom,div2_cp_slave {
 			compatible = "qcom,smb1396-div2-cp-slave";
@@ -5051,8 +5051,8 @@ Fragments 12 - 38 were skipped
 	smb1398: qcom,smb1398@36 {
 		compatible = "qcom,i2c-pmic";
 		reg = <0x36>;
-		#address-cells = <0x01>;
-		#size-cells = <0x00>;
+		#address-cells = <1>;
+		#size-cells = <0>;
 		status = "disabled";
 		smb1398_pre_regulator: qcom,pre_regulator {
 			compatible = "qcom,smb1398-pre-regulator";
@@ -5638,8 +5638,8 @@ Fragments 12 - 38 were skipped
 &qupv3_se1_i2c {
 	status = "ok";
 	qcom,clk-freq-out = <100000>;
-	#address-cells = <0x01>;
-	#size-cells = <0x00>;
+	#address-cells = <1>;
+	#size-cells = <0>;
 	lt9611: lt,lt9611@2b {
 		compatible = "lt,lt9611uxc";
 		reg = <0x2b>;
@@ -5672,8 +5672,8 @@ Fragments 12 - 38 were skipped
 		};
 
 		ports {
-			#address-cells = <0x01>;
-			#size-cells = <0x00>;
+			#address-cells = <1>;
+			#size-cells = <0>;
 			port@0 {
 				reg = <0x00>;
 				lt9611_in: endpoint {
@@ -5697,13 +5697,13 @@ Fragments 12 - 38 were skipped
 };
 
 &pcie2_rp {
-	#address-cells = <0x05>;
-	#size-cells = <0x00>;
+	#address-cells = <5>;
+	#size-cells = <0>;
 	nvme: nvme {
 		reg = <0x00 0x00 0x00 0x00 0x00>;
 		qcom,iommu-group = <&nvme_pci_iommu_group>;
-		#address-cells = <0x01>;
-		#size-cells = <0x01>;
+		#address-cells = <1>;
+		#size-cells = <1>;
 		nvme_pci_iommu_group: nvme_pci_iommu_group {
 			qcom,iommu-dma-addr-pool = <0x20000000 0x40000000>;
 			qcom,iommu-dma = "fastmap";
