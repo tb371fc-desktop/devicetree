@@ -5,6 +5,7 @@
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/iio/qcom,spmi-vadc.h>
+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
 
 / {
 	model = "Qualcomm Technologies, Inc. kona HDK";
@@ -91,7 +92,7 @@
 
 				key_home_default: key_home_default {
 					pins = "gpio1";
-					function = "normal";
+					function = PMIC_GPIO_FUNC_NORMAL;
 					input-enable;
 					bias-pull-up;
 					power-source = <0>;
@@ -102,22 +103,22 @@
 
 				imu_clkin_default: imu_clkin_default {
 					pins = "gpio3";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 					output-low;
 					power-source = <0>;
 					bias-disable;
 					qcom,dtest-buffer = <1>;
-					qcom,drive-strength = <1>;
+					qcom,drive-strength = <PMIC_GPIO_STRENGTH_LOW>;
 				};
 
 				imu_clkin_sleep: imu_clkin_sleep {
 					pins = "gpio3";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 					input-enable;
 					bias-pull-down;
 					power-source = <0>;
 					qcom,dtest-buffer = <1>;
-					qcom,drive-strength = <1>;
+					qcom,drive-strength = <PMIC_GPIO_STRENGTH_LOW>;
 				};
 			};
 
@@ -125,7 +126,7 @@
 
 				key_vol_up_default: key_vol_up_default {
 					pins = "gpio6";
-					function = "normal";
+					function = PMIC_GPIO_FUNC_NORMAL;
 					input-enable;
 					bias-pull-up;
 					power-source = <1>;
@@ -136,7 +137,7 @@
 
 				key_confirm_default: key_confirm_default {
 					pins = "gpio7";
-					function = "normal";
+					function = PMIC_GPIO_FUNC_NORMAL;
 					input-enable;
 					bias-pull-up;
 					power-source = <0>;
@@ -147,7 +148,7 @@
 
 				usb2_vbus_boost_default: usb2_vbus_boost_default {
 					pins = "gpio9";
-					function = "normal";
+					function = PMIC_GPIO_FUNC_NORMAL;
 					output-low;
 					power-source = <1>;
 				};
@@ -157,7 +158,7 @@
 
 				usb2_vbus_det_default: usb2_vbus_det_default {
 					pins = "gpio10";
-					function = "normal";
+					function = PMIC_GPIO_FUNC_NORMAL;
 					input-enable;
 					bias-pull-down;
 					power-source = <1>;
@@ -376,7 +377,7 @@
 
 				qnovo_fet_ctrl_state1: qnovo_fet_ctrl_state1 {
 					pins = "gpio8";
-					function = "normal";
+					function = PMIC_GPIO_FUNC_NORMAL;
 					input-enable;
 					output-disable;
 					bias-disable;
@@ -385,7 +386,7 @@
 
 				qnovo_fet_ctrl_state2: qnovo_fet_ctrl_state2 {
 					pins = "gpio8";
-					function = "normal";
+					function = PMIC_GPIO_FUNC_NORMAL;
 					input-enable;
 					output-disable;
 					bias-pull-down;
@@ -397,10 +398,10 @@
 
 				smb_stat_default: smb_stat_default {
 					pins = "gpio6";
-					function = "normal";
+					function = PMIC_GPIO_FUNC_NORMAL;
 					input-enable;
 					bias-pull-up;
-					qcom,pull-up-strength = <0x00>;
+					qcom,pull-up-strength = <PMIC_GPIO_PULL_UP_30>;
 					power-source = <0>;
 				};
 			};
@@ -409,11 +410,11 @@
 
 				haptics_boost_default: haptics_boost_default {
 					pins = "gpio5";
-					function = "normal";
+					function = PMIC_GPIO_FUNC_NORMAL;
 					output-enable;
 					input-disable;
 					bias-disable;
-					qcom,drive-strength = <3>;
+					qcom,drive-strength = <PMIC_GPIO_STRENGTH_HIGH>;
 					power-source = <1>;
 				};
 			};
@@ -2175,7 +2176,7 @@ Fragments 12 - 38 were skipped
 		config {
 			pins = "gpio92";
 			bias-disable;
-			drive-strength = <0x02>;
+			drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 		};
 	};
 
@@ -2188,7 +2189,7 @@ Fragments 12 - 38 were skipped
 		config {
 			pins = "gpio92";
 			bias-pull-down;
-			drive-strength = <0x02>;
+			drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 			output-low;
 		};
 	};
@@ -2374,7 +2375,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio0";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2407,7 +2408,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio1";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2439,7 +2440,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio2";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2472,7 +2473,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio3";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2505,7 +2506,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio4";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2538,7 +2539,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio5";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2571,7 +2572,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio6";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2604,7 +2605,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio7";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2637,7 +2638,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio8";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2670,7 +2671,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio9";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2698,12 +2699,12 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio10";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
 					pins = "gpio10";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2713,7 +2714,7 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio10";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
@@ -2731,12 +2732,12 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio11";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
 					pins = "gpio11";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2746,7 +2747,7 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio11";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
@@ -2769,7 +2770,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio12";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2802,7 +2803,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio13";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2835,7 +2836,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio0";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2868,7 +2869,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio1";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2901,7 +2902,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio2";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2934,7 +2935,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio3";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -2967,7 +2968,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio4";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3000,7 +3001,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio5";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3033,7 +3034,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio6";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3066,7 +3067,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio7";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3099,7 +3100,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio8";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3132,7 +3133,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio9";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3160,12 +3161,12 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio10";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
 					pins = "gpio10";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3175,7 +3176,7 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio10";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
@@ -3193,12 +3194,12 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio11";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
 					pins = "gpio11";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3208,7 +3209,7 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio11";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
@@ -3231,7 +3232,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio12";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3264,7 +3265,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio13";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3297,7 +3298,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio0";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3330,7 +3331,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio1";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3363,7 +3364,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio2";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3396,7 +3397,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio3";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3429,7 +3430,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio4";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3462,7 +3463,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio5";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3495,7 +3496,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio6";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3528,7 +3529,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio7";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3561,7 +3562,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio8";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3594,7 +3595,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio9";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3622,12 +3623,12 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio10";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
 					pins = "gpio10";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3637,7 +3638,7 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio10";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
@@ -3655,12 +3656,12 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio11";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
 					pins = "gpio11";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3670,7 +3671,7 @@ Fragments 12 - 38 were skipped
 
 				mux {
 					pins = "gpio11";
-					function = "func1";
+					function = PMIC_GPIO_FUNC_FUNC1;
 				};
 
 				config {
@@ -3693,7 +3694,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio12";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3726,7 +3727,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio13";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					bias-pull-down;
 					input-enable;
 				};
@@ -3759,7 +3760,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio10";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					input-enable;
 					bias-pull-down;
 				};
@@ -3774,7 +3775,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio10";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					slew-rate = <1>;
 					bias-disable;
 				};
@@ -3792,7 +3793,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio11";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					input-enable;
 					bias-pull-down;
 				};
@@ -3807,7 +3808,7 @@ Fragments 12 - 38 were skipped
 
 				config {
 					pins = "gpio11";
-					drive-strength = <0x02>;
+					drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 					slew-rate = <1>;
 					bias-bus-hold;
 				};
@@ -3818,14 +3819,14 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio0";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 				input-enable;
 				bias-pull-down;
 			};
 
 			config {
 				pins = "gpio0";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 			};
 		};
 
@@ -3833,12 +3834,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio0";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio0";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				slew-rate = <1>;
 				bias-disable;
 			};
@@ -3848,12 +3849,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio1";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio1";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				input-enable;
 				bias-bus-hold;
 			};
@@ -3863,12 +3864,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio1";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio1";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				slew-rate = <1>;
 				bias-bus-hold;
 			};
@@ -3878,12 +3879,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio2";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio2";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				input-enable;
 				bias-pull-down;
 			};
@@ -3893,12 +3894,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio2";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio2";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				slew-rate = <1>;
 				bias-bus-hold;
 			};
@@ -3908,12 +3909,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio3";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio3";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				input-enable;
 				bias-pull-down;
 			};
@@ -3923,12 +3924,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio3";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio3";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				slew-rate = <1>;
 				bias-disable;
 			};
@@ -3938,12 +3939,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio4";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio4";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				input-enable;
 				bias-pull-down;
 			};
@@ -3953,12 +3954,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio4";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio4";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				slew-rate = <1>;
 				bias-bus-hold;
 			};
@@ -3973,7 +3974,7 @@ Fragments 12 - 38 were skipped
 
 			config {
 				pins = "gpio5";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				input-enable;
 				bias-pull-down;
 			};
@@ -3988,7 +3989,7 @@ Fragments 12 - 38 were skipped
 
 			config {
 				pins = "gpio5";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				slew-rate = <1>;
 				bias-bus-hold;
 			};
@@ -3998,7 +3999,7 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio6";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
@@ -4012,12 +4013,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio6";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio6";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				bias-disable;
 				output-low;
 			};
@@ -4027,7 +4028,7 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio7";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
@@ -4041,12 +4042,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio7";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio7";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				pull-down;
 				input-enable;
 			};
@@ -4056,7 +4057,7 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio8";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
@@ -4070,12 +4071,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio8";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio8";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				bias-disable;
 				output-low;
 			};
@@ -4085,7 +4086,7 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio9";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
@@ -4099,12 +4100,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio9";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio9";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				pull-down;
 				input-enable;
 			};
@@ -4114,7 +4115,7 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio12";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
@@ -4128,12 +4129,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio12";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio12";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				bias-disable;
 				output-low;
 			};
@@ -4143,7 +4144,7 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio13";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
@@ -4157,12 +4158,12 @@ Fragments 12 - 38 were skipped
 
 			mux {
 				pins = "gpio13";
-				function = "func1";
+				function = PMIC_GPIO_FUNC_FUNC1;
 			};
 
 			config {
 				pins = "gpio13";
-				drive-strength = <0x02>;
+				drive-strength = <PMIC_GPIO_PULL_UP_31P5>;
 				pull-down;
 				input-enable;
 			};
