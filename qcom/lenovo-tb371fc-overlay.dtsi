@@ -183,37 +183,37 @@
 			io-channel-ranges;
 
 			ref_gnd@0 {
-				reg = <0x00>;
+				reg = <ADC_REF_GND>;
 				label = "ref_gnd";
 				qcom,pre-scaling = <1 1>;
 			};
 
 			vref_1p25@1 {
-				reg = <0x01>;
+				reg = <ADC_1P25VREF>;
 				label = "vref_1p25";
 				qcom,pre-scaling = <1 1>;
 			};
 
 			die_temp@2 {
-				reg = <0x06>;
+				reg = <ADC_DIE_TEMP>;
 				label = "die_temp";
 				qcom,pre-scaling = <1 1>;
 			};
 
 			vph_pwr@83 {
-				reg = <0x83>;
+				reg = <ADC_VPH_PWR>;
 				label = "vph_pwr";
 				qcom,pre-scaling = <1 3>;
 			};
 
 			vcoin@85 {
-				reg = <0x85>;
+				reg = <ADC_VCOIN>;
 				label = "vcoin";
 				qcom,pre-scaling = <1 3>;
 			};
 
 			xo_therm@4c {
-				reg = <0x4c>;
+				reg = <ADC_XO_THERM_PU2>;
 				label = "xo_therm";
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
@@ -221,7 +221,7 @@
 			};
 
 			skin_therm@4d {
-				reg = <0x4d>;
+				reg = <ADC_AMUX_THM1_PU2>;
 				label = "skin_therm";
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
@@ -229,7 +229,7 @@
 			};
 
 			pa_therm1@4e {
-				reg = <0x4e>;
+				reg = <ADC_AMUX_THM2_PU2>;
 				label = "pa_therm1";
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
