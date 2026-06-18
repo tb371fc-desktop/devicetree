@@ -37,7 +37,6 @@
 				linux,code = <114>;
 				qcom,pull-up;
 			};
-
 		};
 
 		pm8150_tz: qcom,temp-alarm@2400 {
@@ -81,7 +80,6 @@
 					bias-pull-up;
 					power-source = <0>;
 				};
-
 			};
 
 			imu_clkin {
@@ -104,7 +102,6 @@
 					qcom,dtest-buffer = <1>;
 					qcom,drive-strength = <1>;
 				};
-
 			};
 
 			key_vol_up {
@@ -115,7 +112,6 @@
 					bias-pull-up;
 					power-source = <1>;
 				};
-
 			};
 
 			key_confirm {
@@ -126,7 +122,6 @@
 					bias-pull-up;
 					power-source = <0>;
 				};
-
 			};
 
 			usb2_vbus_boost {
@@ -136,7 +131,6 @@
 					output-low;
 					power-source = <1>;
 				};
-
 			};
 
 			usb2_vbus_det {
@@ -147,9 +141,7 @@
 					bias-pull-down;
 					power-source = <1>;
 				};
-
 			};
-
 		};
 
 		pm8150_rtc: qcom,pm8150_rtc {
@@ -220,7 +212,6 @@
 				qcom,hw-settle-time = <200>;
 				qcom,pre-scaling = <1 1>;
 			};
-
 		};
 
 		pm8150_adc_tm: adc_tm@3500 {
@@ -249,9 +240,7 @@
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
 			};
-
 		};
-
 	};
 
 	qcom,pm8150@1 {
@@ -260,7 +249,6 @@
 		#address-cells = <2>;
 		#size-cells = <0>;
 	};
-
 };
 
 &thermal_zones {
@@ -288,11 +276,8 @@
 				hysteresis = <0>;
 				type = "passive";
 			};
-
 		};
-
 	};
-
 };
 
 &spmi_bus {
@@ -376,7 +361,6 @@
 					bias-pull-down;
 					power-source = <0>;
 				};
-
 			};
 
 			smb_stat {
@@ -388,7 +372,6 @@
 					qcom,pull-up-strength = <0x00>;
 					power-source = <0>;
 				};
-
 			};
 
 			haptics_boost {
@@ -401,9 +384,7 @@
 					qcom,drive-strength = <3>;
 					power-source = <1>;
 				};
-
 			};
-
 		};
 
 		pm8150b_charger: qcom,qpnp-smb5 {
@@ -486,7 +467,6 @@
 			smb5_vbus: qcom,smb5-vbus {
 				regulator-name = "smb5-vbus";
 			};
-
 		};
 
 		pm8150b_pdphy: qcom,usb-pdphy@1700 {
@@ -561,7 +541,6 @@
 				interrupts = <0x02 0x43 0x00 0x03 0x02 0x43 0x01 0x03 0x02 0x43 0x02 0x03 0x02 0x43 0x03 0x01 0x02 0x43 0x04 0x02>;
 				interrupt-names = "ima-rdy", "ima-xcp", "dma-xcp", "dma-grant", "mem-attn";
 			};
-
 		};
 
 		pm8150b_vadc: vadc@3100 {
@@ -659,7 +638,6 @@
 				label = "usb_in_v_div_16";
 				qcom,pre-scaling = <1 16>;
 			};
-
 		};
 
 		pm8150b_adc_tm: adc_tm@3500 {
@@ -677,9 +655,7 @@
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
 			};
-
 		};
-
 	};
 
 	qcom,pm8150b@3 {
@@ -711,7 +687,6 @@
 				pwms = <&pm8150b_pwm 0x1 0xf4240>;
 				led-sources = <1>;
 			};
-
 		};
 
 		pm8150b_haptics: qcom,haptics@c000 {
@@ -791,11 +766,8 @@
 				qcom,wf-s-repeat-count = <0x01>;
 				qcom,lra-auto-resonance-disable;
 			};
-
 		};
-
 	};
-
 };
 
 &thermal_zones {
@@ -823,9 +795,7 @@
 				hysteresis = <0>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150b-ibat-lvl0 {
@@ -840,9 +810,7 @@
 				hysteresis = <200>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150b-ibat-lvl1 {
@@ -857,9 +825,7 @@
 				hysteresis = <200>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150b-vbat-lvl0 {
@@ -875,9 +841,7 @@
 				hysteresis = <200>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150b-vbat-lvl1 {
@@ -893,9 +857,7 @@
 				hysteresis = <200>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150b-vbat-lvl2 {
@@ -911,9 +873,7 @@
 				hysteresis = <200>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150b-bcl-lvl0 {
@@ -928,9 +888,7 @@
 				hysteresis = <1>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150b-bcl-lvl1 {
@@ -945,9 +903,7 @@
 				hysteresis = <1>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150b-bcl-lvl2 {
@@ -962,9 +918,7 @@
 				hysteresis = <1>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	soc {
@@ -980,11 +934,8 @@
 				hysteresis = <0>;
 				type = "passive";
 			};
-
 		};
-
 	};
-
 };
 
 &spmi_bus {
@@ -1094,7 +1045,6 @@
 				qcom,hw-settle-time = <200>;
 				qcom,pre-scaling = <1 1>;
 			};
-
 		};
 
 		pm8150l_bcl: bcl@3d00 {
@@ -1131,9 +1081,7 @@
 				qcom,ratiometric;
 				qcom,hw-settle-time = <200>;
 			};
-
 		};
-
 	};
 
 	qcom,pm8150l@5 {
@@ -1169,7 +1117,6 @@
 				regulator-min-microvolt = <4700000>;
 				regulator-max-microvolt = <6275000>;
 			};
-
 		};
 
 		flash_led: qcom,leds@d300 {
@@ -1291,7 +1238,6 @@
 				qcom,led-mask = <4>;
 				qcom,default-led-trigger = "switch3_trigger";
 			};
-
 		};
 
 		pm8150l_wled: qcom,wled@d800 {
@@ -1319,7 +1265,6 @@
 				label = "switch";
 				qcom,default-led-trigger = "wled_switch";
 			};
-
 		};
 
 		pm8150l_lpg: qcom,pwms@b100 {
@@ -1361,7 +1306,6 @@
 				qcom,ramp-from-low-to-high;
 				qcom,ramp-pattern-repeat;
 			};
-
 		};
 
 		pm8150l_pwm: qcom,pwms@bc00 {
@@ -1395,7 +1339,6 @@
 				led-sources = <2>;
 				linux,default-trigger = "timer";
 			};
-
 		};
 
 		pm8150a_amoled: qcom,amoled {
@@ -1429,11 +1372,8 @@
 				regulator-max-microvolt = <5400000>;
 				qcom,swire-control;
 			};
-
 		};
-
 	};
-
 };
 
 &thermal_zones {
@@ -1461,9 +1401,7 @@
 				hysteresis = <0>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150l-vph-lvl0 {
@@ -1479,9 +1417,7 @@
 				hysteresis = <200>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150l-vph-lvl1 {
@@ -1497,9 +1433,7 @@
 				hysteresis = <200>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150l-vph-lvl2 {
@@ -1515,9 +1449,7 @@
 				hysteresis = <200>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150l-bcl-lvl0 {
@@ -1532,9 +1464,7 @@
 				hysteresis = <1>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150l-bcl-lvl1 {
@@ -1549,9 +1479,7 @@
 				hysteresis = <1>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	pm8150l-bcl-lvl2 {
@@ -1566,11 +1494,8 @@
 				hysteresis = <1>;
 				type = "passive";
 			};
-
 		};
-
 	};
-
 };
 
 &spmi_bus {
@@ -1601,7 +1526,6 @@
 			gpio-controller;
 			#gpio-cells = <2>;
 		};
-
 	};
 
 	qcom,pm8009@b {
@@ -1610,7 +1534,6 @@
 		#address-cells = <2>;
 		#size-cells = <0>;
 	};
-
 };
 
 &spmi_bus {
@@ -1628,7 +1551,6 @@
 			reg = <0x800 0x100>;
 			qcom,modem-reset;
 		};
-
 	};
 
 	qcom,pmxprairie@9 {
@@ -1637,7 +1559,6 @@
 		#address-cells = <2>;
 		#size-cells = <0>;
 	};
-
 };
 
 &soc {
@@ -1661,7 +1582,6 @@
 		enable-active-high;
 		status = "ok";
 	};
-
 };
 
 &usb0 {
@@ -1795,11 +1715,8 @@ Fragments 12 - 38 were skipped
 				qcom,display-topology = <2 2 2>;
 				qcom,default-topology-index = <0>;
 			};
-
 		};
-
 	};
-
 };
 
 &mdss_mdp {
@@ -1891,11 +1808,8 @@ Fragments 12 - 38 were skipped
 				qcom,display-topology = <2 2 2>;
 				qcom,default-topology-index = <0>;
 			};
-
 		};
-
 	};
-
 };
 
 &tlmm {
@@ -1911,9 +1825,7 @@ Fragments 12 - 38 were skipped
 			bias-disable = <0x00>;
 			output-high;
 		};
-
 	};
-
 };
 
 &soc {
@@ -1922,7 +1834,6 @@ Fragments 12 - 38 were skipped
 		ext_disp_audio_codec: qcom,msm-ext-disp-audio-codec-rx {
 			compatible = "qcom,msm-ext-disp-audio-codec-rx";
 		};
-
 	};
 
 	dsi_panel_pwr_supply: dsi_panel_pwr_supply {
@@ -1966,7 +1877,6 @@ Fragments 12 - 38 were skipped
 			qcom,supply-disable-load = <100>;
 			qcom,supply-post-on-sleep = <20>;
 		};
-
 	};
 
 	dsi_panel_pwr_supply_lab_ibb: dsi_panel_pwr_supply_lab_ibb {
@@ -2000,7 +1910,6 @@ Fragments 12 - 38 were skipped
 			qcom,supply-disable-load = <100>;
 			qcom,supply-post-on-sleep = <20>;
 		};
-
 	};
 
 	dsi_panel_pwr_supply_avdd: dsi_panel_pwr_supply_avdd {
@@ -2024,7 +1933,6 @@ Fragments 12 - 38 were skipped
 			qcom,supply-enable-load = <100000>;
 			qcom,supply-disable-load = <100>;
 		};
-
 	};
 
 	display_panel_avdd: display_gpio_regulator@1 {
@@ -2062,11 +1970,8 @@ Fragments 12 - 38 were skipped
 				ext_dsi_out: endpoint {
 					remote-endpoint = <&lt9611_in>;
 				};
-
 			};
-
 		};
-
 	};
 
 	sde_dsi1: qcom,dsi-display-secondary {
@@ -2097,7 +2002,6 @@ Fragments 12 - 38 were skipped
 		compatible = "qcom,msm-notifier";
 		panel = <0x24 0x25 0x26>;
 	};
-
 };
 
 &sde_dp {
@@ -2149,7 +2053,6 @@ Fragments 12 - 38 were skipped
 		compatible = "qcom,cam-res-mgr";
 		status = "ok";
 	};
-
 };
 
 &tlmm {
@@ -2164,7 +2067,6 @@ Fragments 12 - 38 were skipped
 			bias-disable;
 			drive-strength = <0x02>;
 		};
-
 	};
 
 	cam_sensor_suspend_rst2: cam_sensor_suspend_rst2 {
@@ -2179,9 +2081,7 @@ Fragments 12 - 38 were skipped
 			drive-strength = <0x02>;
 			output-low;
 		};
-
 	};
-
 };
 
 &cam_cci0 {
@@ -2265,7 +2165,6 @@ Fragments 12 - 38 were skipped
 		clock-cntl-level = "turbo";
 		clock-rates = <24000000>;
 	};
-
 };
 
 &cam_cci1 {
@@ -2336,7 +2235,6 @@ Fragments 12 - 38 were skipped
 		clock-cntl-level = "turbo";
 		clock-rates = <24000000>;
 	};
-
 };
 
 &q6core {
@@ -2364,7 +2262,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_mi2s_sck_active: quat_mi2s_sck_active {
@@ -2379,9 +2276,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_mi2s_ws {
@@ -2397,7 +2292,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_mi2s_ws_active: quat_mi2s_ws_active {
@@ -2412,9 +2306,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_mi2s_sd0 {
@@ -2430,7 +2322,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_mi2s_sd0_active: quat_mi2s_sd0_active {
@@ -2445,9 +2336,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_mi2s_sd1 {
@@ -2463,7 +2352,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_mi2s_sd1_active: quat_mi2s_sd1_active {
@@ -2478,9 +2366,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_mi2s_sd2 {
@@ -2496,7 +2382,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_mi2s_sd2_active: quat_mi2s_sd2_active {
@@ -2511,9 +2396,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_mi2s_sd3 {
@@ -2529,7 +2412,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_mi2s_sd3_active: quat_mi2s_sd3_active {
@@ -2544,9 +2426,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_i2s1_sck {
@@ -2562,7 +2442,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_i2s1_sck_active: lpi_i2s1_sck_active {
@@ -2577,9 +2456,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_i2s1_ws {
@@ -2595,7 +2472,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_i2s1_ws_active: lpi_i2s1_ws_active {
@@ -2610,9 +2486,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_i2s1_sd0 {
@@ -2628,7 +2502,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_i2s1_sd0_active: lpi_i2s1_sd0_active {
@@ -2643,9 +2516,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_i2s1_sd1 {
@@ -2661,7 +2532,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_i2s1_sd1_active: lpi_i2s1_sd1_active {
@@ -2676,9 +2546,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_i2s2_sck {
@@ -2694,7 +2562,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_i2s2_sck_active: lpi_i2s2_sck_active {
@@ -2709,9 +2576,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_i2s2_ws {
@@ -2727,7 +2592,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_i2s2_ws_active: lpi_i2s2_ws_active {
@@ -2742,9 +2606,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_i2s2_sd0 {
@@ -2760,7 +2622,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_i2s2_sd0_active: lpi_i2s2_sd0_active {
@@ -2775,9 +2636,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_i2s2_sd1 {
@@ -2793,7 +2652,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_i2s2_sd1_active: lpi_i2s2_sd1_active {
@@ -2808,9 +2666,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_tdm_sck {
@@ -2826,7 +2682,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_tdm_sck_active: quat_tdm_sck_active {
@@ -2841,9 +2696,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_tdm_ws {
@@ -2859,7 +2712,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_tdm_ws_active: quat_tdm_ws_active {
@@ -2874,9 +2726,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_tdm_sd0 {
@@ -2892,7 +2742,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_tdm_sd0_active: quat_tdm_sd0_active {
@@ -2907,9 +2756,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_tdm_sd1 {
@@ -2925,7 +2772,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_tdm_sd1_active: quat_tdm_sd1_active {
@@ -2940,9 +2786,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_tdm_sd2 {
@@ -2958,7 +2802,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_tdm_sd2_active: quat_tdm_sd2_active {
@@ -2973,9 +2816,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_tdm_sd3 {
@@ -2991,7 +2832,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_tdm_sd3_active: quat_tdm_sd3_active {
@@ -3006,9 +2846,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_tdm1_sck {
@@ -3024,7 +2862,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_tdm1_sck_active: lpi_tdm1_sck_active {
@@ -3039,9 +2876,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_tdm1_ws {
@@ -3057,7 +2892,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_tdm1_ws_active: lpi_tdm1_ws_active {
@@ -3072,9 +2906,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_tdm1_sd0 {
@@ -3090,7 +2922,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_tdm1_sd0_active: lpi_tdm1_sd0_active {
@@ -3105,9 +2936,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_tdm1_sd1 {
@@ -3123,7 +2952,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_tdm1_sd1_active: lpi_tdm1_sd1_active {
@@ -3138,9 +2966,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_tdm2_sck {
@@ -3156,7 +2982,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_tdm2_sck_active: lpi_tdm2_sck_active {
@@ -3171,9 +2996,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_tdm2_ws {
@@ -3189,7 +3012,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_tdm2_ws_active: lpi_tdm2_ws_active {
@@ -3204,9 +3026,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_tdm2_sd0 {
@@ -3222,7 +3042,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_tdm2_sd0_active: lpi_tdm2_sd0_active {
@@ -3237,9 +3056,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_tdm2_sd1 {
@@ -3255,7 +3072,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_tdm2_sd1_active: lpi_tdm2_sd1_active {
@@ -3270,9 +3086,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_aux_sck {
@@ -3288,7 +3102,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_aux_sck_active: quat_aux_sck_active {
@@ -3303,9 +3116,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_aux_ws {
@@ -3321,7 +3132,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_aux_ws_active: quat_aux_ws_active {
@@ -3336,9 +3146,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_aux_sd0 {
@@ -3354,7 +3162,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_aux_sd0_active: quat_aux_sd0_active {
@@ -3369,9 +3176,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_aux_sd1 {
@@ -3387,7 +3192,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_aux_sd1_active: quat_aux_sd1_active {
@@ -3402,9 +3206,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_aux_sd2 {
@@ -3420,7 +3222,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_aux_sd2_active: quat_aux_sd2_active {
@@ -3435,9 +3236,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		quat_aux_sd3 {
@@ -3453,7 +3252,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			quat_aux_sd3_active: quat_aux_sd3_active {
@@ -3468,9 +3266,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_aux1_sck {
@@ -3486,7 +3282,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_aux1_sck_active: lpi_aux1_sck_active {
@@ -3501,9 +3296,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_aux1_ws {
@@ -3519,7 +3312,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_aux1_ws_active: lpi_aux1_ws_active {
@@ -3534,9 +3326,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_aux1_sd0 {
@@ -3552,7 +3342,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_aux1_sd0_active: lpi_aux1_sd0_active {
@@ -3567,9 +3356,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_aux1_sd1 {
@@ -3585,7 +3372,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_aux1_sd1_active: lpi_aux1_sd1_active {
@@ -3600,9 +3386,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_aux2_sck {
@@ -3618,7 +3402,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_aux2_sck_active: lpi_aux2_sck_active {
@@ -3633,9 +3416,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_aux2_ws {
@@ -3651,7 +3432,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_aux2_ws_active: lpi_aux2_ws_active {
@@ -3666,9 +3446,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_aux2_sd0 {
@@ -3684,7 +3462,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_aux2_sd0_active: lpi_aux2_sd0_active {
@@ -3699,9 +3476,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		lpi_aux2_sd1 {
@@ -3717,7 +3492,6 @@ Fragments 12 - 38 were skipped
 					bias-pull-down;
 					input-enable;
 				};
-
 			};
 
 			lpi_aux2_sd1_active: lpi_aux2_sd1_active {
@@ -3732,9 +3506,7 @@ Fragments 12 - 38 were skipped
 					bias-disable;
 					output-high;
 				};
-
 			};
-
 		};
 
 		wsa_swr_clk_pin {
@@ -3750,7 +3522,6 @@ Fragments 12 - 38 were skipped
 					input-enable;
 					bias-pull-down;
 				};
-
 			};
 
 			wsa_swr_clk_active: wsa_swr_clk_active {
@@ -3765,9 +3536,7 @@ Fragments 12 - 38 were skipped
 					slew-rate = <1>;
 					bias-disable;
 				};
-
 			};
-
 		};
 
 		wsa_swr_data_pin {
@@ -3783,7 +3552,6 @@ Fragments 12 - 38 were skipped
 					input-enable;
 					bias-pull-down;
 				};
-
 			};
 
 			wsa_swr_data_active: wsa_swr_data_active {
@@ -3798,9 +3566,7 @@ Fragments 12 - 38 were skipped
 					slew-rate = <1>;
 					bias-bus-hold;
 				};
-
 			};
-
 		};
 
 		tx_swr_clk_sleep: tx_swr_clk_sleep {
@@ -3815,7 +3581,6 @@ Fragments 12 - 38 were skipped
 				pins = "gpio0";
 				drive-strength = <0x02>;
 			};
-
 		};
 
 		tx_swr_clk_active: tx_swr_clk_active {
@@ -3830,7 +3595,6 @@ Fragments 12 - 38 were skipped
 				slew-rate = <1>;
 				bias-disable;
 			};
-
 		};
 
 		tx_swr_data1_sleep: tx_swr_data1_sleep {
@@ -3845,7 +3609,6 @@ Fragments 12 - 38 were skipped
 				input-enable;
 				bias-bus-hold;
 			};
-
 		};
 
 		tx_swr_data1_active: tx_swr_data1_active {
@@ -3860,7 +3623,6 @@ Fragments 12 - 38 were skipped
 				slew-rate = <1>;
 				bias-bus-hold;
 			};
-
 		};
 
 		tx_swr_data2_sleep: tx_swr_data2_sleep {
@@ -3875,7 +3637,6 @@ Fragments 12 - 38 were skipped
 				input-enable;
 				bias-pull-down;
 			};
-
 		};
 
 		tx_swr_data2_active: tx_swr_data2_active {
@@ -3890,7 +3651,6 @@ Fragments 12 - 38 were skipped
 				slew-rate = <1>;
 				bias-bus-hold;
 			};
-
 		};
 
 		rx_swr_clk_sleep: rx_swr_clk_sleep {
@@ -3905,7 +3665,6 @@ Fragments 12 - 38 were skipped
 				input-enable;
 				bias-pull-down;
 			};
-
 		};
 
 		rx_swr_clk_active: rx_swr_clk_active {
@@ -3920,7 +3679,6 @@ Fragments 12 - 38 were skipped
 				slew-rate = <1>;
 				bias-disable;
 			};
-
 		};
 
 		rx_swr_data_sleep: rx_swr_data_sleep {
@@ -3935,7 +3693,6 @@ Fragments 12 - 38 were skipped
 				input-enable;
 				bias-pull-down;
 			};
-
 		};
 
 		rx_swr_data_active: rx_swr_data_active {
@@ -3950,7 +3707,6 @@ Fragments 12 - 38 were skipped
 				slew-rate = <1>;
 				bias-bus-hold;
 			};
-
 		};
 
 		rx_swr_data1_sleep: rx_swr_data1_sleep {
@@ -3965,7 +3721,6 @@ Fragments 12 - 38 were skipped
 				input-enable;
 				bias-pull-down;
 			};
-
 		};
 
 		rx_swr_data1_active: rx_swr_data1_active {
@@ -3980,7 +3735,6 @@ Fragments 12 - 38 were skipped
 				slew-rate = <1>;
 				bias-bus-hold;
 			};
-
 		};
 
 		cdc_dmic01_clk_active: dmic01_clk_active {
@@ -3994,7 +3748,6 @@ Fragments 12 - 38 were skipped
 				drive-strength = <0x08>;
 				output-high;
 			};
-
 		};
 
 		cdc_dmic01_clk_sleep: dmic01_clk_sleep {
@@ -4009,7 +3762,6 @@ Fragments 12 - 38 were skipped
 				bias-disable;
 				output-low;
 			};
-
 		};
 
 		cdc_dmic01_data_active: dmic01_data_active {
@@ -4023,7 +3775,6 @@ Fragments 12 - 38 were skipped
 				drive-strength = <0x08>;
 				input-enable;
 			};
-
 		};
 
 		cdc_dmic01_data_sleep: dmic01_data_sleep {
@@ -4038,7 +3789,6 @@ Fragments 12 - 38 were skipped
 				pull-down;
 				input-enable;
 			};
-
 		};
 
 		cdc_dmic23_clk_active: dmic23_clk_active {
@@ -4052,7 +3802,6 @@ Fragments 12 - 38 were skipped
 				drive-strength = <0x08>;
 				output-high;
 			};
-
 		};
 
 		cdc_dmic23_clk_sleep: dmic23_clk_sleep {
@@ -4067,7 +3816,6 @@ Fragments 12 - 38 were skipped
 				bias-disable;
 				output-low;
 			};
-
 		};
 
 		cdc_dmic23_data_active: dmic23_data_active {
@@ -4081,7 +3829,6 @@ Fragments 12 - 38 were skipped
 				drive-strength = <0x08>;
 				input-enable;
 			};
-
 		};
 
 		cdc_dmic23_data_sleep: dmic23_data_sleep {
@@ -4096,7 +3843,6 @@ Fragments 12 - 38 were skipped
 				pull-down;
 				input-enable;
 			};
-
 		};
 
 		cdc_dmic45_clk_active: dmic45_clk_active {
@@ -4110,7 +3856,6 @@ Fragments 12 - 38 were skipped
 				drive-strength = <0x08>;
 				output-high;
 			};
-
 		};
 
 		cdc_dmic45_clk_sleep: dmic45_clk_sleep {
@@ -4125,7 +3870,6 @@ Fragments 12 - 38 were skipped
 				bias-disable;
 				output-low;
 			};
-
 		};
 
 		cdc_dmic45_data_active: dmic45_data_active {
@@ -4139,7 +3883,6 @@ Fragments 12 - 38 were skipped
 				drive-strength = <0x08>;
 				input-enable;
 			};
-
 		};
 
 		cdc_dmic45_data_sleep: dmic45_data_sleep {
@@ -4154,11 +3897,8 @@ Fragments 12 - 38 were skipped
 				pull-down;
 				input-enable;
 			};
-
 		};
-
 	};
-
 };
 
 &bolero {
@@ -4175,7 +3915,6 @@ Fragments 12 - 38 were skipped
 		qcom,va-island-mode-muxsel = <0x33a0000>;
 		qcom,default-clk-id = <0>;
 	};
-
 };
 
 &va_cdc_dma_0_tx {
@@ -4223,9 +3962,7 @@ Fragments 12 - 38 were skipped
 				compatible = "qcom,wcd938x-slave";
 				reg = <0x0d 0x1170223>;
 			};
-
 		};
-
 	};
 
 	rx_macro: rx-macro@3200000 {
@@ -4258,9 +3995,7 @@ Fragments 12 - 38 were skipped
 				compatible = "qcom,wcd938x-slave";
 				reg = <0x0d 0x1170224>;
 			};
-
 		};
-
 	};
 
 	wsa_macro: wsa-macro@3240000 {
@@ -4313,9 +4048,7 @@ Fragments 12 - 38 were skipped
 				qcom,spkr-sd-n-node = <&wsa_spkr_en2>;
 				qcom,bolero-handle = <&bolero>;
 			};
-
 		};
-
 	};
 
 	wcd938x_codec: wcd938x-codec {
@@ -4344,7 +4077,6 @@ Fragments 12 - 38 were skipped
 		qcom,cdc-micbias4-mv = <1800>;
 		qcom,cdc-static-supplies = "cdc-vdd-rxtx", "cdc-vddio", "cdc-vdd-buck", "cdc-vdd-mic-bias";
 	};
-
 };
 
 &kona_snd {
@@ -4417,7 +4149,6 @@ Fragments 12 - 38 were skipped
 		qcom,lpi-gpios;
 		qcom,tlmm-gpio = <147>;
 	};
-
 };
 
 &soc {
@@ -4505,7 +4236,6 @@ Fragments 12 - 38 were skipped
 		qcom,codec-lpass-clk-id = <784>;
 		#clock-cells = <1>;
 	};
-
 };
 
 &mdss_mdp {
@@ -4519,9 +4249,7 @@ Fragments 12 - 38 were skipped
 				trip = <&soc_trip>;
 				cooling-device = <&cpu7_isolate>, <&pm8150_vadc>, <0x1>;
 			};
-
 		};
-
 	};
 
 	pm8150b-bcl-lvl0 {
@@ -4540,9 +4268,7 @@ Fragments 12 - 38 were skipped
 				trip = <&b_bcl_lvl0>;
 				cooling-device = <&msm_gpu>, <&pm8150_tz>, <&pm8150_tz>;
 			};
-
 		};
-
 	};
 
 	pm8150b-bcl-lvl1 {
@@ -4561,9 +4287,7 @@ Fragments 12 - 38 were skipped
 				trip = <&b_bcl_lvl1>;
 				cooling-device = <&msm_gpu>, <&qnovo_fet_ctrl_state1>, <&qnovo_fet_ctrl_state1>;
 			};
-
 		};
-
 	};
 
 	pm8150b-bcl-lvl2 {
@@ -4572,9 +4296,7 @@ Fragments 12 - 38 were skipped
 				trip = <&b_bcl_lvl2>;
 				cooling-device = <&msm_gpu>, <0xfffffffe>, <0xfffffffe>;
 			};
-
 		};
-
 	};
 
 	pm8150l-bcl-lvl0 {
@@ -4594,9 +4316,7 @@ Fragments 12 - 38 were skipped
 				trip = <&l_bcl_lvl0>;
 				cooling-device = <&msm_gpu>, <&pm8150_tz>, <&pm8150_tz>;
 			};
-
 		};
-
 	};
 
 	pm8150l-bcl-lvl1 {
@@ -4616,9 +4336,7 @@ Fragments 12 - 38 were skipped
 				trip = <&l_bcl_lvl1>;
 				cooling-device = <&msm_gpu>, <&qnovo_fet_ctrl_state1>, <&qnovo_fet_ctrl_state1>;
 			};
-
 		};
-
 	};
 
 	pm8150l-bcl-lvl2 {
@@ -4628,18 +4346,14 @@ Fragments 12 - 38 were skipped
 				trip = <&l_bcl_lvl2>;
 				cooling-device = <&msm_gpu>, <0xfffffffe>, <0xfffffffe>;
 			};
-
 		};
-
 	};
-
 };
 
 &vendor {
 	kona_qrd_batterydata: qcom,battery-data {
 		qcom,batt-id-range-pct = <0x0f>;
 	};
-
 };
 
 &qupv3_se12_2uart {
@@ -4668,7 +4382,6 @@ Fragments 12 - 38 were skipped
 		pinctrl-0 = <&pri_tdm_clk_active>, <&pri_tdm_sync_active>, <&pri_tdm_din_active>, <&pri_tdm_dout_active>;
 		pinctrl-1 = <&pri_tdm_clk_sleep>, <&pri_tdm_sync_sleep>, <&pri_tdm_din_sleep>, <&pri_tdm_dout_sleep>;
 	};
-
 };
 
 &kona_snd {
@@ -4697,7 +4410,6 @@ Fragments 12 - 38 were skipped
 		interrupts = <0x6f 0x00>;
 		interrupt-names = "nfc_irq";
 	};
-
 };
 
 &qupv3_se9_i2c {
@@ -4711,7 +4423,6 @@ Fragments 12 - 38 were skipped
 		hall,bias-ratio = <0x5a>;
 		hall,irq-gpio = <&tlmm 0x9e 0x0>;
 	};
-
 };
 
 &qupv3_se13_i2c {
@@ -4728,7 +4439,6 @@ Fragments 12 - 38 were skipped
 		hid-descr-addr = <0x1>;
 		post-power-on-delay-ms = <100>;
 	};
-
 };
 
 &qupv3_se14_spi {
@@ -4829,9 +4539,7 @@ Fragments 12 - 38 were skipped
 			PS_Config_Lmt_PenRingY_FW_Diff_N = <0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8 0xfffffda8>;
 			PS_Config_Diff_Test_Frame = <0x32>;
 		};
-
 	};
-
 };
 
 &ufsphy_mem {
@@ -4877,7 +4585,6 @@ Fragments 12 - 38 were skipped
 			debounce-interval = <15>;
 			linux,can-disable;
 		};
-
 	};
 
 	goodix_fp {
@@ -4898,7 +4605,6 @@ Fragments 12 - 38 were skipped
 		pinctrl-0 = <&key_home_default>;
 		qcom,finger-detect-gpio = <&pm8150_gpios 0x1 0x0>;
 	};
-
 };
 
 &qupv3_se3_i2c {
@@ -4912,7 +4618,6 @@ Fragments 12 - 38 were skipped
 		#size-cells = <0>;
 		status = "ok";
 	};
-
 };
 
 &qupv3_se15_i2c {
@@ -4963,9 +4668,7 @@ Fragments 12 - 38 were skipped
 				interrupts = <0x10 0x00 0x03 0x10 0x01 0x03 0x10 0x02 0x03 0x10 0x03 0x03 0x10 0x04 0x03 0x10 0x05 0x01 0x10 0x06 0x01 0x10 0x07 0x01>;
 				interrupt-names = "switcher-off-window", "switcher-off-fault", "tsd-fault", "irev-fault", "vph-ov-hard", "vph-ov-soft", "ilim", "temp-alarm";
 			};
-
 		};
-
 	};
 
 	smb1390_slave: qcom,smb1390_slave@18 {
@@ -4979,9 +4682,7 @@ Fragments 12 - 38 were skipped
 			compatible = "qcom,smb1390-slave";
 			status = "disabled";
 		};
-
 	};
-
 };
 
 &qupv3_se9_i2c {
@@ -4993,7 +4694,6 @@ Fragments 12 - 38 were skipped
 		reg = <0x28>;
 		extcon = <&pm8150b_pdphy>, <&pm8150b_pdphy>;
 	};
-
 };
 
 &qupv3_se16_i2c {
@@ -5032,7 +4732,6 @@ Fragments 12 - 38 were skipped
 			interrupt-names = "temp-shdwn", "div2-irev", "usbin-uv", "usbin-ov", "div2-ilim", "div2-win-uv", "div2-win-ov";
 			status = "ok";
 		};
-
 	};
 
 	smb1396_slave: qcom,smb1396@35 {
@@ -5045,7 +4744,6 @@ Fragments 12 - 38 were skipped
 			compatible = "qcom,smb1396-div2-cp-slave";
 			status = "disabled";
 		};
-
 	};
 
 	smb1398: qcom,smb1398@36 {
@@ -5058,9 +4756,7 @@ Fragments 12 - 38 were skipped
 			compatible = "qcom,smb1398-pre-regulator";
 			status = "disabled";
 		};
-
 	};
-
 };
 
 &spmi_debug_bus {
@@ -5080,9 +4776,7 @@ Fragments 12 - 38 were skipped
 				hysteresis = <1000>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	xo-therm-usr {
@@ -5097,9 +4791,7 @@ Fragments 12 - 38 were skipped
 				hysteresis = <1000>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	skin-therm-usr {
@@ -5114,9 +4806,7 @@ Fragments 12 - 38 were skipped
 				hysteresis = <1000>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	camera-flash-temp {
@@ -5131,9 +4821,7 @@ Fragments 12 - 38 were skipped
 				hysteresis = <1000>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	camera-therm-usr {
@@ -5148,9 +4836,7 @@ Fragments 12 - 38 were skipped
 				hysteresis = <1000>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	skin-msm-therm-usr {
@@ -5171,9 +4857,7 @@ Fragments 12 - 38 were skipped
 				hysteresis = <1000>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	mmw-pa2-usr {
@@ -5188,9 +4872,7 @@ Fragments 12 - 38 were skipped
 				hysteresis = <1000>;
 				type = "passive";
 			};
-
 		};
-
 	};
 
 	chg-skin-therm-usr {
@@ -5241,7 +4923,6 @@ Fragments 12 - 38 were skipped
 				hysteresis = <4000>;
 				type = "passive";
 			};
-
 		};
 
 		cooling-maps {
@@ -5279,9 +4960,7 @@ Fragments 12 - 38 were skipped
 				trip = <&virt_trip6>;
 				cooling-device = <&pm8150b_charger 0x0 0xf>;
 			};
-
 		};
-
 	};
 
 	gpu-skin-avg-step {
@@ -5294,7 +4973,6 @@ Fragments 12 - 38 were skipped
 				hysteresis = <2000>;
 				type = "passive";
 			};
-
 		};
 
 		cooling-maps {
@@ -5302,9 +4980,7 @@ Fragments 12 - 38 were skipped
 				trip = <&virt_trip>;
 				cooling-device = <&msm_gpu>, <0x00>, <&pm8150_vadc>;
 			};
-
 		};
-
 	};
 
 	skin-msm-therm-step {
@@ -5319,7 +4995,6 @@ Fragments 12 - 38 were skipped
 				hysteresis = <0>;
 				type = "passive";
 			};
-
 		};
 
 		cooling-maps {
@@ -5327,9 +5002,7 @@ Fragments 12 - 38 were skipped
 				trip = <&skin_trip>;
 				cooling-device = <&mdss_mdp>, <&usb2_vbus_boost_default>, <&usb2_vbus_boost_default>;
 			};
-
 		};
-
 	};
 
 	xo-therm-step {
@@ -5355,7 +5028,6 @@ Fragments 12 - 38 were skipped
 				hysteresis = <6000>;
 				type = "passive";
 			};
-
 		};
 
 		cooling-maps {
@@ -5373,9 +5045,7 @@ Fragments 12 - 38 were skipped
 				trip = <&xo_lvl2>;
 				cooling-device = <&modem_mmw_skin2>, <&pm8150b_vadc>, <0x3>;
 			};
-
 		};
-
 	};
 
 	mmw-pa1-step {
@@ -5401,7 +5071,6 @@ Fragments 12 - 38 were skipped
 				hysteresis = <6000>;
 				type = "passive";
 			};
-
 		};
 
 		cooling-maps {
@@ -5419,9 +5088,7 @@ Fragments 12 - 38 were skipped
 				trip = <&pa1_lvl2>;
 				cooling-device = <&modem_mmw_skin0>, <&pm8150b_vadc>, <0x3>;
 			};
-
 		};
-
 	};
 
 	mmw-pa2-step {
@@ -5447,7 +5114,6 @@ Fragments 12 - 38 were skipped
 				hysteresis = <6000>;
 				type = "passive";
 			};
-
 		};
 
 		cooling-maps {
@@ -5465,9 +5131,7 @@ Fragments 12 - 38 were skipped
 				trip = <&pa2_lvl2>;
 				cooling-device = <&modem_mmw_skin1>, <&pm8150b_vadc>, <0x3>;
 			};
-
 		};
-
 	};
 
 	skin-therm-step {
@@ -5495,7 +5159,6 @@ Fragments 12 - 38 were skipped
 				hysteresis = <2000>;
 				type = "passive";
 			};
-
 		};
 
 		cooling-maps {
@@ -5513,11 +5176,8 @@ Fragments 12 - 38 were skipped
 				trip = <&skin_therm2>;
 				cooling-device = <&modem_skin>, <&pm8150b_vadc>, <0x3>;
 			};
-
 		};
-
 	};
-
 };
 
 &sdhc_2 {
@@ -5555,14 +5215,12 @@ Fragments 12 - 38 were skipped
 		qca,bt-vdd-asd-voltage-level = <3024000 3304000>;
 		qca,bt-vdd-asd-current-level = <10000>;
 	};
-
 };
 
 &usb0 {
 	dwc3@a600000 {
 		maximum-speed = "super-speed-plus";
 	};
-
 };
 
 &usb1 {
@@ -5587,7 +5245,6 @@ Fragments 12 - 38 were skipped
 		ktz8866,enp-gpio = <&tlmm 0x4d 0x0>;
 		ktz8866,enn-gpio = <&tlmm 0x4e 0x0>;
 	};
-
 };
 
 &qupv3_se11_i2c {
@@ -5600,7 +5257,6 @@ Fragments 12 - 38 were skipped
 		ktz8866,enp-gpio = <&tlmm 0x4d 0x0>;
 		ktz8866,enn-gpio = <&tlmm 0x4e 0x0>;
 	};
-
 };
 
 &qupv3_se13_i2c {
@@ -5610,7 +5266,6 @@ Fragments 12 - 38 were skipped
 		st,x-flip;
 		st,y-flip;
 	};
-
 };
 
 &kona_snd {
@@ -5624,7 +5279,6 @@ Fragments 12 - 38 were skipped
 	dwc3@a800000 {
 		dr_mode = "host";
 	};
-
 };
 
 &usb2_phy0 {
@@ -5668,7 +5322,6 @@ Fragments 12 - 38 were skipped
 				lt,mode-refresh-rate = <60>;
 				lt,mode-clock-in-khz = <148500>;
 			};
-
 		};
 
 		ports {
@@ -5679,13 +5332,9 @@ Fragments 12 - 38 were skipped
 				lt9611_in: endpoint {
 					remote-endpoint = <&ext_dsi_out>;
 				};
-
 			};
-
 		};
-
 	};
-
 };
 
 &pcie2 {
@@ -5708,9 +5357,7 @@ Fragments 12 - 38 were skipped
 			qcom,iommu-dma-addr-pool = <0x20000000 0x40000000>;
 			qcom,iommu-dma = "fastmap";
 		};
-
 	};
-
 };
 
 
