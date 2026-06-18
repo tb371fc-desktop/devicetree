@@ -4,6 +4,7 @@
 #include <dt-bindings/input/qcom,qpnp-power-on.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/input/input.h>
+#include <dt-bindings/iio/qcom,spmi-vadc.h>
 
 / {
 	model = "Qualcomm Technologies, Inc. kona HDK";
@@ -50,8 +51,8 @@
 		pm8150_tz: qcom,temp-alarm@2400 {
 			compatible = "qcom,spmi-temp-alarm";
 			reg = <0x2400 0x100>;
-			interrupts = <0x00 0x24 0x00 0x03>;
-			io-channels = <&pm8150_vadc 0x6>;
+			interrupts = <0x00 0x24 0x00 IRQ_TYPE_EDGE_BOTH>;
+			io-channels = <&pm8150_vadc VADC_VBAT_SNS>;
 			io-channel-names = "thermal";
 			#thermal-sensor-cells = <0>;
 			qcom,temperature-threshold-set = <1>;
