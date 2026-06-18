@@ -335,7 +335,7 @@
 			compatible = "qcom,spmi-temp-alarm";
 			reg = <0x2400 0x100>;
 			interrupts = <0x02 0x24 0x00 0x03>;
-			io-channels = <&pm8150b_vadc 0x6>;
+			io-channels = <&pm8150b_vadc ADC_DIE_TEMP>;
 			io-channel-names = "thermal";
 			#thermal-sensor-cells = <0>;
 			qcom,temperature-threshold-set = <1>;
@@ -347,7 +347,7 @@
 			#clock-cells = <1>;
 			qcom,num-clkdivs = <1>;
 			clock-output-names = "pm8150b_div_clk1";
-			clocks = <&clock_rpmh>, <0x00>;
+			clocks = <&clock_rpmh RPMH_CXO_CLK>;
 			clock-names = "xo";
 		};
 
@@ -359,7 +359,7 @@
 		pm8150b_qnovo: qcom,sdam-qnovo@b000 {
 			compatible = "qcom,qpnp-qnovo5";
 			reg = <0xb000 0x100>;
-			interrupts = <0x02 0xb0 0x01 0x01>;
+			interrupts = <0x02 0xb0 0x01 IRQ_TYPE_EDGE_RISING>;
 			interrupt-names = "ptrain-done";
 			pinctrl-names = "q_state1", "q_state2";
 			pinctrl-0 = <&qnovo_fet_ctrl_state1>;
@@ -369,11 +369,19 @@
 		pm8150b_gpios: pinctrl@c000 {
 			compatible = "qcom,spmi-gpio";
 			reg = <0xc000 0xc00>;
-			interrupts = <0x2 0xc0 0x00 0x00 0x02 0xc1 0x00 0x00 0x02 0xc4 0x00 0x00 0x02 0xc5 0x00 0x00 0x02 0xc6 0x00 0x00 0x02 0xc7 0x00 0x00 0x02 0xc8 0x00 0x00 0x02 0xc9 0x00 0x00 0x02 0xcb 0x00 0x00>;
+			interrupts = <0x2 0xc0 0x00 IRQ_TYPE_NONE>,
+					 <0x02 0xc1 0x00 IRQ_TYPE_NONE>,
+					 <0x02 0xc4 0x00 IRQ_TYPE_NONE>,
+					 <0x02 0xc5 0x00 IRQ_TYPE_NONE>,
+					 <0x02 0xc6 0x00 IRQ_TYPE_NONE>,
+					 <0x02 0xc7 0x00 IRQ_TYPE_NONE>,
+					 <0x02 0xc8 0x00 IRQ_TYPE_NONE>,
+					 <0x02 0xc9 0x00 IRQ_TYPE_NONE>,
+					 <0x02 0xcb 0x00 IRQ_TYPE_NONE>;
 			interrupt-names = "pm8150b_gpio1", "pm8150b_gpio2", "pm8150b_gpio5", "pm8150b_gpio6", "pm8150b_gpio7", "pm8150b_gpio8", "pm8150b_gpio9", "pm8150b_gpio10", "pm8150b_gpio12";
 			gpio-controller;
 			#gpio-cells = <2>;
-			qcom,gpios-disallowed = <3 4 0x0b>;
+			qcom,gpios-disallowed = <3 4 11>;
 
 			qnovo_fet_ctrl {
 
