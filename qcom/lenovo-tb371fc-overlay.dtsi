@@ -12,11 +12,13 @@
 	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
+
 	qcom,pm8150@0 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x00 0x00>;
 		#address-cells = <2>;
 		#size-cells = <0>;
+
 		qcom,power-on@800 {
 			compatible = "qcom,qpnp-power-on";
 			reg = <0x800 0x100>;
@@ -26,6 +28,7 @@
 			qcom,kpdpwr-sw-debounce;
 			qcom,system-reset;
 			qcom,store-hard-reset-reason;
+
 			qcom,pon_1 {
 				qcom,pon-type = <0>;
 				linux,code = <116>;
@@ -72,7 +75,9 @@
 			gpio-controller;
 			#gpio-cells = <2>;
 			qcom,gpios-disallowed = <2 4 0x05 0x08>;
+
 			key_home {
+
 				key_home_default: key_home_default {
 					pins = "gpio1";
 					function = "normal";
@@ -83,6 +88,7 @@
 			};
 
 			imu_clkin {
+
 				imu_clkin_default: imu_clkin_default {
 					pins = "gpio3";
 					function = "func1";
@@ -105,6 +111,7 @@
 			};
 
 			key_vol_up {
+
 				key_vol_up_default: key_vol_up_default {
 					pins = "gpio6";
 					function = "normal";
@@ -115,6 +122,7 @@
 			};
 
 			key_confirm {
+
 				key_confirm_default: key_confirm_default {
 					pins = "gpio7";
 					function = "normal";
@@ -125,6 +133,7 @@
 			};
 
 			usb2_vbus_boost {
+
 				usb2_vbus_boost_default: usb2_vbus_boost_default {
 					pins = "gpio9";
 					function = "normal";
@@ -134,6 +143,7 @@
 			};
 
 			usb2_vbus_det {
+
 				usb2_vbus_det_default: usb2_vbus_det_default {
 					pins = "gpio10";
 					function = "normal";
@@ -159,6 +169,7 @@
 			qcom,adc-vdd-reference = <1875>;
 			#io-channel-cells = <1>;
 			io-channel-ranges;
+
 			ref_gnd@0 {
 				reg = <0x00>;
 				label = "ref_gnd";
@@ -223,6 +234,7 @@
 			#size-cells = <0>;
 			#thermal-sensor-cells = <1>;
 			io-channels = <&pm8150_vadc 0x4c>, <&pm8150_vadc 0x4d>, <&pm8150_vadc 0x4e>;
+
 			xo_therm@4c {
 				reg = <0x4c>;
 				qcom,ratiometric;
@@ -252,13 +264,16 @@
 };
 
 &thermal_zones {
+
 	pm8150_temp_alarm: pm8150_tz {
 		polling-delay-passive = <100>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150_tz>;
 		wake-capable-sensor;
+
 		trips {
+
 			pm8150_trip0: trip0 {
 				temperature = <0x17318>;
 				hysteresis = <0>;
@@ -285,11 +300,13 @@
 	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
+
 	qcom,pm8150b@2 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x02 0x00>;
 		#address-cells = <2>;
 		#size-cells = <0>;
+
 		pm8150b_revid: qcom,revid@100 {
 			compatible = "qcom,qpnp-revid";
 			reg = <0x100 0x100>;
@@ -343,7 +360,9 @@
 			gpio-controller;
 			#gpio-cells = <2>;
 			qcom,gpios-disallowed = <3 4 0x0b>;
+
 			qnovo_fet_ctrl {
+
 				qnovo_fet_ctrl_state1: qnovo_fet_ctrl_state1 {
 					pins = "gpio8";
 					function = "normal";
@@ -364,6 +383,7 @@
 			};
 
 			smb_stat {
+
 				smb_stat_default: smb_stat_default {
 					pins = "gpio6";
 					function = "normal";
@@ -375,6 +395,7 @@
 			};
 
 			haptics_boost {
+
 				haptics_boost_default: haptics_boost_default {
 					pins = "gpio5";
 					function = "normal";
@@ -418,6 +439,7 @@
 			qcom,jeita-fv-ranges = <0 500 4450000>;
 			qcom,otg-cl-ua = <1800000>;
 			qcom,hvdcp2-max-icl-ua = <2000000>;
+
 			qcom,chgr@1000 {
 				reg = <0x1000 0x100>;
 				interrupts = <0x02 0x10 0x00 0x01 0x02 0x10 0x01 0x01 0x02 0x10 0x02 0x01 0x02 0x10 0x03 0x01 0x02 0x10 0x04 0x01 0x02 0x10 0x06 0x03 0x02 0x10 0x07 0x03>;
@@ -514,6 +536,7 @@
 			qcom,fg-esr-timer-dischg-slow = <0x00 0x60>;
 			qcom,fg-esr-cal-soc-thresh = <0x1a 0xe6>;
 			qcom,fg-esr-cal-temp-thresh = <0x0a 0x28>;
+
 			qcom,fg-batt-soc@4000 {
 				status = "okay";
 				reg = <0x4000 0x100>;
@@ -554,6 +577,7 @@
 			qcom,adc-vdd-reference = <1875>;
 			#io-channel-cells = <1>;
 			io-channel-ranges;
+
 			ref_gnd@0 {
 				reg = <0x00>;
 				label = "ref_gnd";
@@ -650,6 +674,7 @@
 			#thermal-sensor-cells = <1>;
 			qcom,pmic-revid = <&pm8150b_revid>;
 			io-channels = <&pm8150b_vadc 0x4f>;
+
 			conn_therm@4f {
 				reg = <0x4f>;
 				qcom,ratiometric;
@@ -663,6 +688,7 @@
 		reg = <0x03 0x00>;
 		#address-cells = <2>;
 		#size-cells = <0>;
+
 		pm8150b_pwm: qcom,pwms@b100 {
 			compatible = "qcom,pwm-lpg";
 			reg = <0xb100 0x200>;
@@ -676,6 +702,7 @@
 			reg = <0xd000 0x100>;
 			nvmem-names = "pbs_sdam";
 			nvmem = <&pm8150_sdam_2>;
+
 			hr_led1 {
 				label = "hr_led1";
 				pwms = <&pm8150b_pwm 0x0 0xf4240>;
@@ -701,6 +728,7 @@
 			qcom,lra-auto-resonance-mode = "qwd";
 			qcom,lra-allow-variable-play-rate;
 			vdd-supply = <&vreg_hap_boost>;
+
 			wf_0 {
 				qcom,effect-id = <0>;
 				qcom,wf-vmax-mv = <0x6a1>;
@@ -771,13 +799,16 @@
 };
 
 &thermal_zones {
+
 	pm8150b_temp_alarm: pm8150b_tz {
 		polling-delay-passive = <100>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150b_tz>;
 		wake-capable-sensor;
+
 		trips {
+
 			pm8150b_trip0: trip0 {
 				temperature = <0x17318>;
 				hysteresis = <0>;
@@ -804,7 +835,9 @@
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150b_bcl 0x0>;
 		wake-capable-sensor;
+
 		trips {
+
 			ibat_lvl0: ibat-lvl0 {
 				temperature = <0x1194>;
 				hysteresis = <200>;
@@ -819,7 +852,9 @@
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150b_bcl 0x1>;
 		wake-capable-sensor;
+
 		trips {
+
 			ibat_lvl1: ibat-lvl1 {
 				temperature = <0x1f40>;
 				hysteresis = <200>;
@@ -835,7 +870,9 @@
 		thermal-sensors = <&pm8150b_bcl 0x2>;
 		tracks-low;
 		wake-capable-sensor;
+
 		trips {
+
 			vbat_lvl0: vbat-lvl0 {
 				temperature = <0xbb8>;
 				hysteresis = <200>;
@@ -851,7 +888,9 @@
 		thermal-sensors = <&pm8150b_bcl 0x3>;
 		tracks-low;
 		wake-capable-sensor;
+
 		trips {
+
 			vbat_lvl1: vbat-lvl1 {
 				temperature = <0xaf0>;
 				hysteresis = <200>;
@@ -867,7 +906,9 @@
 		thermal-sensors = <&pm8150b_bcl 0x4>;
 		tracks-low;
 		wake-capable-sensor;
+
 		trips {
+
 			vbat_lvl2: vbat-lvl2 {
 				temperature = <0xa28>;
 				hysteresis = <200>;
@@ -882,7 +923,9 @@
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150b_bcl 0x5>;
 		wake-capable-sensor;
+
 		trips {
+
 			b_bcl_lvl0: b-bcl-lvl0 {
 				temperature = <0x01>;
 				hysteresis = <1>;
@@ -897,7 +940,9 @@
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150b_bcl 0x6>;
 		wake-capable-sensor;
+
 		trips {
+
 			b_bcl_lvl1: b-bcl-lvl1 {
 				temperature = <0x01>;
 				hysteresis = <1>;
@@ -912,7 +957,9 @@
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150b_bcl 0x7>;
 		wake-capable-sensor;
+
 		trips {
+
 			b_bcl_lvl2: b-bcl-lvl2 {
 				temperature = <0x01>;
 				hysteresis = <1>;
@@ -928,7 +975,9 @@
 		thermal-sensors = <&bcl_soc>;
 		tracks-low;
 		wake-capable-sensor;
+
 		trips {
+
 			soc_trip: soc-trip {
 				temperature = <0x0a>;
 				hysteresis = <0>;
@@ -943,11 +992,13 @@
 	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
+
 	qcom,pm8150l@4 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x04 0x00>;
 		#address-cells = <2>;
 		#size-cells = <0>;
+
 		pm8150l_revid: qcom,revid@100 {
 			compatible = "qcom,qpnp-revid";
 			reg = <0x100 0x100>;
@@ -998,6 +1049,7 @@
 			qcom,adc-vdd-reference = <1875>;
 			#io-channel-cells = <1>;
 			io-channel-ranges;
+
 			ref_gnd@0 {
 				reg = <0x00>;
 				label = "ref_gnd";
@@ -1064,6 +1116,7 @@
 			#size-cells = <0>;
 			#thermal-sensor-cells = <1>;
 			io-channels = <&pm8150l_vadc 0x4d>, <&pm8150l_vadc 0x4e>, <&pm8150l_vadc 0x4f>;
+
 			camera_flash_therm@4d {
 				reg = <0x4d>;
 				qcom,ratiometric;
@@ -1089,6 +1142,7 @@
 		reg = <0x05 0x00>;
 		#address-cells = <2>;
 		#size-cells = <0>;
+
 		pm8150l_lcdb: qcom,lcdb@ec00 {
 			compatible = "qcom,qpnp-lcdb-regulator";
 			reg = <0xec00 0x100>;
@@ -1097,6 +1151,7 @@
 			qcom,pmic-revid = <&pm8150l_revid>;
 			qcom,voltage-step-ramp;
 			status = "ok";
+
 			lcdb_ldo_vreg: ldo {
 				label = "ldo";
 				regulator-name = "lcdb_ldo";
@@ -1134,6 +1189,7 @@
 			qcom,thermal-derate-current = <200 500 0x3e8>;
 			qcom,isc-delay = <192>;
 			qcom,pmic-revid = <&pm8150l_revid>;
+
 			pm8150l_flash0: qcom,flash_0 {
 				label = "flash";
 				qcom,led-name = "led:flash_0";
@@ -1250,6 +1306,7 @@
 			qcom,pmic-revid = <&pm8150l_revid>;
 			qcom,auto-calibration;
 			status = "disabled";
+
 			wled_flash: qcom,wled-flash {
 				label = "flash";
 				qcom,default-led-trigger = "wled_flash";
@@ -1274,6 +1331,7 @@
 			#pwm-cells = <2>;
 			qcom,num-lpg-channels = <3>;
 			qcom,lut-patterns = <0 10 20 30 40 50 60 70 80 90 100 90 80 70 60 50 0x28 0x1e 0x14 0x0a 0x00>;
+
 			lpg1 {
 				qcom,lpg-chan-id = <1>;
 				qcom,ramp-step-ms = <100>;
@@ -1319,6 +1377,7 @@
 		pm8150l_rgb_led: qcom,leds@d000 {
 			compatible = "qcom,tri-led";
 			reg = <0xd000 0x100>;
+
 			red {
 				label = "red";
 				pwms = <&pm8150l_lpg 0x0 0xf4240>;
@@ -1346,6 +1405,7 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 			status = "disabled";
+
 			oledb_vreg: oledb@e000 {
 				reg = <0xe000 0x100>;
 				reg-names = "oledb_base";
@@ -1377,13 +1437,16 @@
 };
 
 &thermal_zones {
+
 	pm8150l_temp_alarm: pm8150l_tz {
 		polling-delay-passive = <100>;
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150l_tz>;
 		wake-capable-sensor;
+
 		trips {
+
 			trip0 {
 				temperature = <0x17318>;
 				hysteresis = <0>;
@@ -1411,7 +1474,9 @@
 		thermal-sensors = <&pm8150l_bcl 0x2>;
 		tracks-low;
 		wake-capable-sensor;
+
 		trips {
+
 			vph_lvl0: vph-lvl0 {
 				temperature = <0xbb8>;
 				hysteresis = <200>;
@@ -1427,7 +1492,9 @@
 		thermal-sensors = <&pm8150l_bcl 0x3>;
 		tracks-low;
 		wake-capable-sensor;
+
 		trips {
+
 			vph_lvl1: vph-lvl1 {
 				temperature = <0xabe>;
 				hysteresis = <200>;
@@ -1443,7 +1510,9 @@
 		thermal-sensors = <&pm8150l_bcl 0x4>;
 		tracks-low;
 		wake-capable-sensor;
+
 		trips {
+
 			vph_lvl2: vph-lvl2 {
 				temperature = <0x9c4>;
 				hysteresis = <200>;
@@ -1458,7 +1527,9 @@
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150l_bcl 0x5>;
 		wake-capable-sensor;
+
 		trips {
+
 			l_bcl_lvl0: l-bcl-lvl0 {
 				temperature = <0x01>;
 				hysteresis = <1>;
@@ -1473,7 +1544,9 @@
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150l_bcl 0x6>;
 		wake-capable-sensor;
+
 		trips {
+
 			l_bcl_lvl1: l-bcl-lvl1 {
 				temperature = <0x01>;
 				hysteresis = <1>;
@@ -1488,7 +1561,9 @@
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150l_bcl 0x7>;
 		wake-capable-sensor;
+
 		trips {
+
 			l_bcl_lvl2: l-bcl-lvl2 {
 				temperature = <0x01>;
 				hysteresis = <1>;
@@ -1503,11 +1578,13 @@
 	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
+
 	qcom,pm8009@a {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x0a 0x00>;
 		#address-cells = <2>;
 		#size-cells = <0>;
+
 		qcom,revid@100 {
 			compatible = "qcom,qpnp-revid";
 			reg = <0x100 0x100>;
@@ -1541,11 +1618,13 @@
 	#size-cells = <0>;
 	interrupt-controller;
 	#interrupt-cells = <0x04>;
+
 	qcom,pmxprairie@8 {
 		compatible = "qcom,spmi-pmic";
 		reg = <0x08 0x00>;
 		#address-cells = <2>;
 		#size-cells = <0>;
+
 		qcom,power-on@800 {
 			compatible = "qcom,qpnp-power-on";
 			reg = <0x800 0x100>;
@@ -1562,6 +1641,7 @@
 };
 
 &soc {
+
 	vreg_tof: regulator-dbb1 {
 		compatible = "regulator-fixed";
 		regulator-name = "vdd_tof";
@@ -1626,7 +1706,9 @@ Fragments 12 - 38 were skipped
 - 37: sy049wdm02 uoled video mode dsi seeya 60Hz panel
 - 38: sy049wdm02 uoled video mode dsi seeya 90HZ panel with DSC
 */
+
 &mdss_mdp {
+
 	dsi_panel_spinel_boe_nt36532_dsc_3k_video: qcom,mdss_dsi_panel_spinel_boe_nt36532_dsc_3k_video {
 		qcom,mdss-dsi-panel-name = "nt36532 boe 3k video mode dsi panel";
 		qcom,mdss-dsi-panel-type = "dsi_video_mode";
@@ -1672,7 +1754,9 @@ Fragments 12 - 38 were skipped
 		qcom,mdss-brightness-max-level = <2047>;
 		qcom,platform-reset-gpio = <&tlmm>, <&cdc_dmic23_gpios>, <0x00>;
 		qcom,platform-te-gpio = <&tlmm>, <&wcd938x_rx_slave>, <0x00>;
+
 		qcom,mdss-dsi-display-timings {
+
 			timing@0 {
 				qcom,mdss-dsi-panel-width = <1472>;
 				qcom,mdss-dsi-panel-height = <1840>;
@@ -1720,6 +1804,7 @@ Fragments 12 - 38 were skipped
 };
 
 &mdss_mdp {
+
 	dsi_panel_spinel_tianma_nt36532_dsc_3k_video: qcom,mdss_dsi_panel_spinel_tianma_nt36532_dsc_3k_video {
 		qcom,mdss-dsi-panel-name = "nt36532 tianma 3k video mode dsi panel";
 		qcom,mdss-dsi-panel-type = "dsi_video_mode";
@@ -1765,7 +1850,9 @@ Fragments 12 - 38 were skipped
 		qcom,mdss-brightness-max-level = <2047>;
 		qcom,platform-reset-gpio = <&tlmm>, <&cdc_dmic23_gpios>, <0x00>;
 		qcom,platform-te-gpio = <&tlmm>, <&wcd938x_rx_slave>, <0x00>;
+
 		qcom,mdss-dsi-display-timings {
+
 			timing@0 {
 				qcom,mdss-dsi-panel-width = <1472>;
 				qcom,mdss-dsi-panel-height = <1840>;
@@ -1813,7 +1900,9 @@ Fragments 12 - 38 were skipped
 };
 
 &tlmm {
+
 	display_panel_avdd_default: display_panel_avdd_default {
+
 		mux {
 			pins = "gpio61";
 			function = "gpio";
@@ -1829,8 +1918,10 @@ Fragments 12 - 38 were skipped
 };
 
 &soc {
+
 	ext_disp: qcom,msm-ext-disp {
 		compatible = "qcom,msm-ext-disp";
+
 		ext_disp_audio_codec: qcom,msm-ext-disp-audio-codec-rx {
 			compatible = "qcom,msm-ext-disp-audio-codec-rx";
 		};
@@ -1839,6 +1930,7 @@ Fragments 12 - 38 were skipped
 	dsi_panel_pwr_supply: dsi_panel_pwr_supply {
 		#address-cells = <1>;
 		#size-cells = <0>;
+
 		qcom,panel-supply-entry@0 {
 			reg = <0x00>;
 			qcom,supply-name = "vddio";
@@ -1882,6 +1974,7 @@ Fragments 12 - 38 were skipped
 	dsi_panel_pwr_supply_lab_ibb: dsi_panel_pwr_supply_lab_ibb {
 		#address-cells = <1>;
 		#size-cells = <0>;
+
 		qcom,panel-supply-entry@0 {
 			reg = <0x00>;
 			qcom,supply-name = "vddio";
@@ -1915,6 +2008,7 @@ Fragments 12 - 38 were skipped
 	dsi_panel_pwr_supply_avdd: dsi_panel_pwr_supply_avdd {
 		#address-cells = <1>;
 		#size-cells = <0>;
+
 		qcom,panel-supply-entry@0 {
 			reg = <0x00>;
 			qcom,supply-name = "vddio";
@@ -1962,11 +2056,14 @@ Fragments 12 - 38 were skipped
 		ibb-supply = <0x20>;
 		qcom,mdp = <&mdss_mdp>;
 		qcom,dsi-default-panel = <0x21>;
+
 		ports {
 			#address-cells = <1>;
 			#size-cells = <0>;
+
 			port@0 {
 				reg = <0x00>;
+
 				ext_dsi_out: endpoint {
 					remote-endpoint = <&lt9611_in>;
 				};
@@ -2040,6 +2137,7 @@ Fragments 12 - 38 were skipped
 };
 
 &soc {
+
 	led_flash_rear: qcom,camera-flash0 {
 		cell-index = <0>;
 		compatible = "qcom,camera-flash";
@@ -2056,6 +2154,7 @@ Fragments 12 - 38 were skipped
 };
 
 &tlmm {
+
 	cam_sensor_active_rst2: cam_sensor_active_rst2 {
 		mux {
 			pins = "gpio92";
@@ -2085,6 +2184,7 @@ Fragments 12 - 38 were skipped
 };
 
 &cam_cci0 {
+
 	actuator_rear: qcom,actuator0 {
 		cell-index = <0>;
 		compatible = "qcom,actuator";
@@ -2168,6 +2268,7 @@ Fragments 12 - 38 were skipped
 };
 
 &cam_cci1 {
+
 	eeprom_front: qcom,eeprom2 {
 		cell-index = <2>;
 		compatible = "qcom,eeprom";
@@ -2238,6 +2339,7 @@ Fragments 12 - 38 were skipped
 };
 
 &q6core {
+
 	lpi_tlmm: lpi_pinctrl@33c0000 {
 		compatible = "qcom,lpi-pinctrl";
 		reg = <0x33c0000 0x00>;
@@ -2249,8 +2351,11 @@ Fragments 12 - 38 were skipped
 		qcom,lpi-slew-offset-tbl = <0x0 0x2 0x4 0x8 0xa 0xc 0x0 0x0 0x0 0x0 0x10 0x12 0x0 0x0>;
 		clock-names = "lpass_core_hw_vote", "lpass_audio_hw_vote";
 		clocks = <&lpass_core_hw_vote>, <0x00>, <&lpass_audio_hw_vote>, <0x00>;
+
 		quat_mi2s_sck {
+
 			quat_mi2s_sck_sleep: quat_mi2s_sck_sleep {
+
 				mux {
 					pins = "gpio0";
 					function = "func2";
@@ -2265,6 +2370,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_mi2s_sck_active: quat_mi2s_sck_active {
+
 				mux {
 					pins = "gpio0";
 					function = "func2";
@@ -2280,7 +2386,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_mi2s_ws {
+
 			quat_mi2s_ws_sleep: quat_mi2s_ws_sleep {
+
 				mux {
 					pins = "gpio1";
 					function = "func2";
@@ -2295,6 +2403,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_mi2s_ws_active: quat_mi2s_ws_active {
+
 				mux {
 					pins = "gpio1";
 					function = "func2";
@@ -2311,6 +2420,7 @@ Fragments 12 - 38 were skipped
 
 		quat_mi2s_sd0 {
 			quat_mi2s_sd0_sleep: quat_mi2s_sd0_sleep {
+
 				mux {
 					pins = "gpio2";
 					function = "func2";
@@ -2325,6 +2435,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_mi2s_sd0_active: quat_mi2s_sd0_active {
+
 				mux {
 					pins = "gpio2";
 					function = "func2";
@@ -2340,7 +2451,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_mi2s_sd1 {
-			quat_mi2s_sd1_sleep: quat_mi2s_sd1_sleep {
+
+			quat_mi2s_sd1_sleep: quat_mi2s_sd1_sleep
+{
 				mux {
 					pins = "gpio3";
 					function = "func2";
@@ -2355,6 +2468,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_mi2s_sd1_active: quat_mi2s_sd1_active {
+
 				mux {
 					pins = "gpio3";
 					function = "func2";
@@ -2370,7 +2484,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_mi2s_sd2 {
+
 			quat_mi2s_sd2_sleep: quat_mi2s_sd2_sleep {
+
 				mux {
 					pins = "gpio4";
 					function = "func2";
@@ -2385,6 +2501,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_mi2s_sd2_active: quat_mi2s_sd2_active {
+
 				mux {
 					pins = "gpio4";
 					function = "func2";
@@ -2400,7 +2517,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_mi2s_sd3 {
+
 			quat_mi2s_sd3_sleep: quat_mi2s_sd3_sleep {
+
 				mux {
 					pins = "gpio5";
 					function = "func4";
@@ -2415,6 +2534,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_mi2s_sd3_active: quat_mi2s_sd3_active {
+
 				mux {
 					pins = "gpio5";
 					function = "func4";
@@ -2430,7 +2550,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_i2s1_sck {
+
 			lpi_i2s1_sck_sleep: lpi_i2s1_sck_sleep {
+
 				mux {
 					pins = "gpio6";
 					function = "func2";
@@ -2445,6 +2567,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_i2s1_sck_active: lpi_i2s1_sck_active {
+
 				mux {
 					pins = "gpio6";
 					function = "func2";
@@ -2460,7 +2583,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_i2s1_ws {
+
 			lpi_i2s1_ws_sleep: lpi_i2s1_ws_sleep {
+
 				mux {
 					pins = "gpio7";
 					function = "func2";
@@ -2475,6 +2600,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_i2s1_ws_active: lpi_i2s1_ws_active {
+
 				mux {
 					pins = "gpio7";
 					function = "func2";
@@ -2490,7 +2616,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_i2s1_sd0 {
+
 			lpi_i2s1_sd0_sleep: lpi_i2s1_sd0_sleep {
+
 				mux {
 					pins = "gpio8";
 					function = "func2";
@@ -2505,6 +2633,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_i2s1_sd0_active: lpi_i2s1_sd0_active {
+
 				mux {
 					pins = "gpio8";
 					function = "func2";
@@ -2520,7 +2649,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_i2s1_sd1 {
+
 			lpi_i2s1_sd1_sleep: lpi_i2s1_sd1_sleep {
+
 				mux {
 					pins = "gpio9";
 					function = "func2";
@@ -2535,6 +2666,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_i2s1_sd1_active: lpi_i2s1_sd1_active {
+
 				mux {
 					pins = "gpio9";
 					function = "func2";
@@ -2550,7 +2682,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_i2s2_sck {
+
 			lpi_i2s2_sck_sleep: lpi_i2s2_sck_sleep {
+
 				mux {
 					pins = "gpio10";
 					function = "func1";
@@ -2565,6 +2699,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_i2s2_sck_active: lpi_i2s2_sck_active {
+
 				mux {
 					pins = "gpio10";
 					function = "func1";
@@ -2580,7 +2715,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_i2s2_ws {
+
 			lpi_i2s2_ws_sleep: lpi_i2s2_ws_sleep {
+
 				mux {
 					pins = "gpio11";
 					function = "func1";
@@ -2595,6 +2732,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_i2s2_ws_active: lpi_i2s2_ws_active {
+
 				mux {
 					pins = "gpio11";
 					function = "func1";
@@ -2610,7 +2748,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_i2s2_sd0 {
+
 			lpi_i2s2_sd0_sleep: lpi_i2s2_sd0_sleep {
+
 				mux {
 					pins = "gpio12";
 					function = "func2";
@@ -2625,6 +2765,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_i2s2_sd0_active: lpi_i2s2_sd0_active {
+
 				mux {
 					pins = "gpio12";
 					function = "func2";
@@ -2640,7 +2781,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_i2s2_sd1 {
+
 			lpi_i2s2_sd1_sleep: lpi_i2s2_sd1_sleep {
+
 				mux {
 					pins = "gpio13";
 					function = "func2";
@@ -2655,6 +2798,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_i2s2_sd1_active: lpi_i2s2_sd1_active {
+
 				mux {
 					pins = "gpio13";
 					function = "func2";
@@ -2670,7 +2814,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_tdm_sck {
+
 			quat_tdm_sck_sleep: quat_tdm_sck_sleep {
+
 				mux {
 					pins = "gpio0";
 					function = "func2";
@@ -2685,6 +2831,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_tdm_sck_active: quat_tdm_sck_active {
+
 				mux {
 					pins = "gpio0";
 					function = "func2";
@@ -2700,7 +2847,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_tdm_ws {
+
 			quat_tdm_ws_sleep: quat_tdm_ws_sleep {
+
 				mux {
 					pins = "gpio1";
 					function = "func2";
@@ -2715,6 +2864,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_tdm_ws_active: quat_tdm_ws_active {
+
 				mux {
 					pins = "gpio1";
 					function = "func2";
@@ -2730,7 +2880,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_tdm_sd0 {
+
 			quat_tdm_sd0_sleep: quat_tdm_sd0_sleep {
+
 				mux {
 					pins = "gpio2";
 					function = "func2";
@@ -2745,6 +2897,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_tdm_sd0_active: quat_tdm_sd0_active {
+
 				mux {
 					pins = "gpio2";
 					function = "func2";
@@ -2760,7 +2913,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_tdm_sd1 {
+
 			quat_tdm_sd1_sleep: quat_tdm_sd1_sleep {
+
 				mux {
 					pins = "gpio3";
 					function = "func2";
@@ -2775,6 +2930,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_tdm_sd1_active: quat_tdm_sd1_active {
+
 				mux {
 					pins = "gpio3";
 					function = "func2";
@@ -2790,7 +2946,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_tdm_sd2 {
+
 			quat_tdm_sd2_sleep: quat_tdm_sd2_sleep {
+
 				mux {
 					pins = "gpio4";
 					function = "func2";
@@ -2805,6 +2963,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_tdm_sd2_active: quat_tdm_sd2_active {
+
 				mux {
 					pins = "gpio4";
 					function = "func2";
@@ -2820,7 +2979,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_tdm_sd3 {
+
 			quat_tdm_sd3_sleep: quat_tdm_sd3_sleep {
+
 				mux {
 					pins = "gpio5";
 					function = "func4";
@@ -2835,6 +2996,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_tdm_sd3_active: quat_tdm_sd3_active {
+
 				mux {
 					pins = "gpio5";
 					function = "func4";
@@ -2850,7 +3012,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_tdm1_sck {
+
 			lpi_tdm1_sck_sleep: lpi_tdm1_sck_sleep {
+
 				mux {
 					pins = "gpio6";
 					function = "func2";
@@ -2865,6 +3029,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_tdm1_sck_active: lpi_tdm1_sck_active {
+
 				mux {
 					pins = "gpio6";
 					function = "func2";
@@ -2880,7 +3045,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_tdm1_ws {
+
 			lpi_tdm1_ws_sleep: lpi_tdm1_ws_sleep {
+
 				mux {
 					pins = "gpio7";
 					function = "func2";
@@ -2895,6 +3062,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_tdm1_ws_active: lpi_tdm1_ws_active {
+
 				mux {
 					pins = "gpio7";
 					function = "func2";
@@ -2910,7 +3078,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_tdm1_sd0 {
+
 			lpi_tdm1_sd0_sleep: lpi_tdm1_sd0_sleep {
+
 				mux {
 					pins = "gpio8";
 					function = "func2";
@@ -2925,6 +3095,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_tdm1_sd0_active: lpi_tdm1_sd0_active {
+
 				mux {
 					pins = "gpio8";
 					function = "func2";
@@ -2940,7 +3111,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_tdm1_sd1 {
+
 			lpi_tdm1_sd1_sleep: lpi_tdm1_sd1_sleep {
+
 				mux {
 					pins = "gpio9";
 					function = "func2";
@@ -2955,6 +3128,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_tdm1_sd1_active: lpi_tdm1_sd1_active {
+
 				mux {
 					pins = "gpio9";
 					function = "func2";
@@ -2970,7 +3144,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_tdm2_sck {
+
 			lpi_tdm2_sck_sleep: lpi_tdm2_sck_sleep {
+
 				mux {
 					pins = "gpio10";
 					function = "func1";
@@ -2985,6 +3161,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_tdm2_sck_active: lpi_tdm2_sck_active {
+
 				mux {
 					pins = "gpio10";
 					function = "func1";
@@ -3000,7 +3177,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_tdm2_ws {
+
 			lpi_tdm2_ws_sleep: lpi_tdm2_ws_sleep {
+
 				mux {
 					pins = "gpio11";
 					function = "func1";
@@ -3015,6 +3194,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_tdm2_ws_active: lpi_tdm2_ws_active {
+
 				mux {
 					pins = "gpio11";
 					function = "func1";
@@ -3030,7 +3210,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_tdm2_sd0 {
+
 			lpi_tdm2_sd0_sleep: lpi_tdm2_sd0_sleep {
+
 				mux {
 					pins = "gpio12";
 					function = "func2";
@@ -3045,6 +3227,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_tdm2_sd0_active: lpi_tdm2_sd0_active {
+
 				mux {
 					pins = "gpio12";
 					function = "func2";
@@ -3060,7 +3243,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_tdm2_sd1 {
+
 			lpi_tdm2_sd1_sleep: lpi_tdm2_sd1_sleep {
+
 				mux {
 					pins = "gpio13";
 					function = "func2";
@@ -3075,6 +3260,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_tdm2_sd1_active: lpi_tdm2_sd1_active {
+
 				mux {
 					pins = "gpio13";
 					function = "func2";
@@ -3090,7 +3276,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_aux_sck {
+
 			quat_aux_sck_sleep: quat_aux_sck_sleep {
+
 				mux {
 					pins = "gpio0";
 					function = "func2";
@@ -3105,6 +3293,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_aux_sck_active: quat_aux_sck_active {
+
 				mux {
 					pins = "gpio0";
 					function = "func2";
@@ -3120,7 +3309,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_aux_ws {
+
 			quat_aux_ws_sleep: quat_aux_ws_sleep {
+
 				mux {
 					pins = "gpio1";
 					function = "func2";
@@ -3135,6 +3326,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_aux_ws_active: quat_aux_ws_active {
+
 				mux {
 					pins = "gpio1";
 					function = "func2";
@@ -3150,7 +3342,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_aux_sd0 {
+
 			quat_aux_sd0_sleep: quat_aux_sd0_sleep {
+
 				mux {
 					pins = "gpio2";
 					function = "func2";
@@ -3165,6 +3359,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_aux_sd0_active: quat_aux_sd0_active {
+
 				mux {
 					pins = "gpio2";
 					function = "func2";
@@ -3180,7 +3375,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_aux_sd1 {
+
 			quat_aux_sd1_sleep: quat_aux_sd1_sleep {
+
 				mux {
 					pins = "gpio3";
 					function = "func2";
@@ -3195,6 +3392,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_aux_sd1_active: quat_aux_sd1_active {
+
 				mux {
 					pins = "gpio3";
 					function = "func2";
@@ -3210,7 +3408,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_aux_sd2 {
+
 			quat_aux_sd2_sleep: quat_aux_sd2_sleep {
+
 				mux {
 					pins = "gpio4";
 					function = "func2";
@@ -3225,6 +3425,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_aux_sd2_active: quat_aux_sd2_active {
+
 				mux {
 					pins = "gpio4";
 					function = "func2";
@@ -3240,7 +3441,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		quat_aux_sd3 {
+
 			quat_aux_sd3_sleep: quat_aux_sd3_sleep {
+
 				mux {
 					pins = "gpio5";
 					function = "func4";
@@ -3255,6 +3458,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			quat_aux_sd3_active: quat_aux_sd3_active {
+
 				mux {
 					pins = "gpio5";
 					function = "func4";
@@ -3270,7 +3474,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_aux1_sck {
+
 			lpi_aux1_sck_sleep: lpi_aux1_sck_sleep {
+
 				mux {
 					pins = "gpio6";
 					function = "func2";
@@ -3285,6 +3491,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_aux1_sck_active: lpi_aux1_sck_active {
+
 				mux {
 					pins = "gpio6";
 					function = "func2";
@@ -3300,7 +3507,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_aux1_ws {
+
 			lpi_aux1_ws_sleep: lpi_aux1_ws_sleep {
+
 				mux {
 					pins = "gpio7";
 					function = "func2";
@@ -3315,6 +3524,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_aux1_ws_active: lpi_aux1_ws_active {
+
 				mux {
 					pins = "gpio7";
 					function = "func2";
@@ -3330,7 +3540,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_aux1_sd0 {
+
 			lpi_aux1_sd0_sleep: lpi_aux1_sd0_sleep {
+
 				mux {
 					pins = "gpio8";
 					function = "func2";
@@ -3345,6 +3557,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_aux1_sd0_active: lpi_aux1_sd0_active {
+
 				mux {
 					pins = "gpio8";
 					function = "func2";
@@ -3360,7 +3573,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_aux1_sd1 {
+
 			lpi_aux1_sd1_sleep: lpi_aux1_sd1_sleep {
+
 				mux {
 					pins = "gpio9";
 					function = "func2";
@@ -3375,6 +3590,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_aux1_sd1_active: lpi_aux1_sd1_active {
+
 				mux {
 					pins = "gpio9";
 					function = "func2";
@@ -3390,7 +3606,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_aux2_sck {
+
 			lpi_aux2_sck_sleep: lpi_aux2_sck_sleep {
+
 				mux {
 					pins = "gpio10";
 					function = "func1";
@@ -3405,6 +3623,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_aux2_sck_active: lpi_aux2_sck_active {
+
 				mux {
 					pins = "gpio10";
 					function = "func1";
@@ -3420,7 +3639,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_aux2_ws {
+
 			lpi_aux2_ws_sleep: lpi_aux2_ws_sleep {
+
 				mux {
 					pins = "gpio11";
 					function = "func1";
@@ -3435,6 +3656,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_aux2_ws_active: lpi_aux2_ws_active {
+
 				mux {
 					pins = "gpio11";
 					function = "func1";
@@ -3450,7 +3672,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_aux2_sd0 {
+
 			lpi_aux2_sd0_sleep: lpi_aux2_sd0_sleep {
+
 				mux {
 					pins = "gpio12";
 					function = "func2";
@@ -3465,6 +3689,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_aux2_sd0_active: lpi_aux2_sd0_active {
+
 				mux {
 					pins = "gpio12";
 					function = "func2";
@@ -3480,7 +3705,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		lpi_aux2_sd1 {
+
 			lpi_aux2_sd1_sleep: lpi_aux2_sd1_sleep {
+
 				mux {
 					pins = "gpio13";
 					function = "func2";
@@ -3495,6 +3722,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			lpi_aux2_sd1_active: lpi_aux2_sd1_active {
+
 				mux {
 					pins = "gpio13";
 					function = "func2";
@@ -3510,7 +3738,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		wsa_swr_clk_pin {
+
 			wsa_swr_clk_sleep: wsa_swr_clk_sleep {
+
 				mux {
 					pins = "gpio10";
 					function = "func2";
@@ -3525,6 +3755,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			wsa_swr_clk_active: wsa_swr_clk_active {
+
 				mux {
 					pins = "gpio10";
 					function = "func2";
@@ -3540,7 +3771,9 @@ Fragments 12 - 38 were skipped
 		};
 
 		wsa_swr_data_pin {
+
 			wsa_swr_data_sleep: wsa_swr_data_sleep {
+
 				mux {
 					pins = "gpio11";
 					function = "func2";
@@ -3555,6 +3788,7 @@ Fragments 12 - 38 were skipped
 			};
 
 			wsa_swr_data_active: wsa_swr_data_active {
+
 				mux {
 					pins = "gpio11";
 					function = "func2";
@@ -3570,6 +3804,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		tx_swr_clk_sleep: tx_swr_clk_sleep {
+
 			mux {
 				pins = "gpio0";
 				function = "func1";
@@ -3584,6 +3819,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		tx_swr_clk_active: tx_swr_clk_active {
+
 			mux {
 				pins = "gpio0";
 				function = "func1";
@@ -3598,6 +3834,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		tx_swr_data1_sleep: tx_swr_data1_sleep {
+
 			mux {
 				pins = "gpio1";
 				function = "func1";
@@ -3612,6 +3849,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		tx_swr_data1_active: tx_swr_data1_active {
+
 			mux {
 				pins = "gpio1";
 				function = "func1";
@@ -3626,6 +3864,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		tx_swr_data2_sleep: tx_swr_data2_sleep {
+
 			mux {
 				pins = "gpio2";
 				function = "func1";
@@ -3640,6 +3879,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		tx_swr_data2_active: tx_swr_data2_active {
+
 			mux {
 				pins = "gpio2";
 				function = "func1";
@@ -3654,6 +3894,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		rx_swr_clk_sleep: rx_swr_clk_sleep {
+
 			mux {
 				pins = "gpio3";
 				function = "func1";
@@ -3668,6 +3909,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		rx_swr_clk_active: rx_swr_clk_active {
+
 			mux {
 				pins = "gpio3";
 				function = "func1";
@@ -3682,6 +3924,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		rx_swr_data_sleep: rx_swr_data_sleep {
+
 			mux {
 				pins = "gpio4";
 				function = "func1";
@@ -3696,6 +3939,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		rx_swr_data_active: rx_swr_data_active {
+
 			mux {
 				pins = "gpio4";
 				function = "func1";
@@ -3710,6 +3954,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		rx_swr_data1_sleep: rx_swr_data1_sleep {
+
 			mux {
 				pins = "gpio5";
 				function = "func2";
@@ -3724,6 +3969,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		rx_swr_data1_active: rx_swr_data1_active {
+
 			mux {
 				pins = "gpio5";
 				function = "func2";
@@ -3738,6 +3984,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic01_clk_active: dmic01_clk_active {
+
 			mux {
 				pins = "gpio6";
 				function = "func1";
@@ -3751,6 +3998,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic01_clk_sleep: dmic01_clk_sleep {
+
 			mux {
 				pins = "gpio6";
 				function = "func1";
@@ -3765,6 +4013,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic01_data_active: dmic01_data_active {
+
 			mux {
 				pins = "gpio7";
 				function = "func1";
@@ -3778,6 +4027,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic01_data_sleep: dmic01_data_sleep {
+
 			mux {
 				pins = "gpio7";
 				function = "func1";
@@ -3792,6 +4042,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic23_clk_active: dmic23_clk_active {
+
 			mux {
 				pins = "gpio8";
 				function = "func1";
@@ -3805,6 +4056,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic23_clk_sleep: dmic23_clk_sleep {
+
 			mux {
 				pins = "gpio8";
 				function = "func1";
@@ -3819,6 +4071,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic23_data_active: dmic23_data_active {
+
 			mux {
 				pins = "gpio9";
 				function = "func1";
@@ -3832,6 +4085,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic23_data_sleep: dmic23_data_sleep {
+
 			mux {
 				pins = "gpio9";
 				function = "func1";
@@ -3846,6 +4100,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic45_clk_active: dmic45_clk_active {
+
 			mux {
 				pins = "gpio12";
 				function = "func1";
@@ -3859,6 +4114,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic45_clk_sleep: dmic45_clk_sleep {
+
 			mux {
 				pins = "gpio12";
 				function = "func1";
@@ -3873,6 +4129,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic45_data_active: dmic45_data_active {
+
 			mux {
 				pins = "gpio13";
 				function = "func1";
@@ -3886,6 +4143,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cdc_dmic45_data_sleep: dmic45_data_sleep {
+
 			mux {
 				pins = "gpio13";
 				function = "func1";
@@ -3902,6 +4160,7 @@ Fragments 12 - 38 were skipped
 };
 
 &bolero {
+
 	va_macro: va-macro@3370000 {
 		compatible = "qcom,va-macro";
 		reg = <0x3370000 0x00>;
@@ -3923,6 +4182,7 @@ Fragments 12 - 38 were skipped
 
 &bolero {
 	qcom,num-macros = <0x04>;
+
 	bolero-clk-rsc-mngr {
 		compatible = "qcom,bolero-clk-rsc-mngr";
 		qcom,fs-gen-sequence = <0x3000 0x1 0x3004 0x1 0x3080 0x2>;
@@ -3940,6 +4200,7 @@ Fragments 12 - 38 were skipped
 		clocks = <&clock_audio_tx_1 0x0>, <&clock_audio_tx_2 0x0>;
 		qcom,tx-swr-gpios = <&tx_swr_gpios>;
 		qcom,tx-dmic-sample-rate = <2400000>;
+
 		swr2: tx_swr_master {
 			compatible = "qcom,swr-mstr";
 			#address-cells = <2>;
@@ -3958,6 +4219,7 @@ Fragments 12 - 38 were skipped
 			qcom,swr-num-dev = <1>;
 			qcom,swr-clock-stop-mode0 = <1>;
 			qcom,swr-mstr-irq-wakeup-capable = <1>;
+
 			wcd938x_tx_slave: wcd938x-tx-slave {
 				compatible = "qcom,wcd938x-slave";
 				reg = <0x0d 0x1170223>;
@@ -3974,6 +4236,7 @@ Fragments 12 - 38 were skipped
 		qcom,rx_mclk_mode_muxsel = <0x33240d8>;
 		qcom,rx-bcl-pmic-params = <278016>;
 		qcom,default-clk-id = <0>;
+
 		swr1: rx_swr_master {
 			compatible = "qcom,swr-mstr";
 			#address-cells = <2>;
@@ -3991,6 +4254,7 @@ Fragments 12 - 38 were skipped
 			qcom,swr-port-mapping = <0x1 0x9 0x1 1 10 0x2 2 13 0x1 0x03 0x0b 0x01 0x03 0x0c 0x02 0x04 0x0e 0x01 0x05 0x0f 0x01 0x05 0x10 0x02>;
 			qcom,swr-num-dev = <1>;
 			qcom,swr-clock-stop-mode0 = <1>;
+
 			wcd938x_rx_slave: wcd938x-rx-slave {
 				compatible = "qcom,wcd938x-slave";
 				reg = <0x0d 0x1170224>;
@@ -4006,6 +4270,7 @@ Fragments 12 - 38 were skipped
 		qcom,wsa-swr-gpios = <62>;
 		qcom,wsa-bcl-pmic-params = <278016>;
 		qcom,default-clk-id = <0>;
+
 		swr0: wsa_swr_master {
 			compatible = "qcom,swr-mstr";
 			#address-cells = <2>;
@@ -4021,6 +4286,7 @@ Fragments 12 - 38 were skipped
 			qcom,swr-num-ports = <8>;
 			qcom,swr-port-mapping = <0x1 0x1 0x1 2 3 0xf 3 2 0x3 0x04 0x05 0x01 0x05 0x07 0x0f 0x06 0x06 0x03 0x07 0x04 0x03 0x08 0x08 0x03>;
 			qcom,swr-num-dev = <2>;
+
 			wsa881x_0211: wsa881x@20170211 {
 				compatible = "qcom,wsa881x";
 				reg = <0x10 0x20170211>;
@@ -4101,6 +4367,7 @@ Fragments 12 - 38 were skipped
 };
 
 &q6core {
+
 	cdc_dmic01_gpios: cdc_dmic01_pinctrl {
 		compatible = "qcom,msm-cdc-pinctrl";
 		pinctrl-names = "aud_active", "aud_sleep";
@@ -4152,6 +4419,7 @@ Fragments 12 - 38 were skipped
 };
 
 &soc {
+
 	wsa_spkr_en1: wsa_spkr_en1_pinctrl {
 		compatible = "qcom,msm-cdc-pinctrl";
 		pinctrl-names = "aud_active", "aud_sleep";
@@ -4243,8 +4511,11 @@ Fragments 12 - 38 were skipped
 };
 
 &thermal_zones {
+
 	soc {
+
 		cooling-maps {
+
 			soc_cpu7 {
 				trip = <&soc_trip>;
 				cooling-device = <&cpu7_isolate>, <&pm8150_vadc>, <0x1>;
@@ -4253,7 +4524,9 @@ Fragments 12 - 38 were skipped
 	};
 
 	pm8150b-bcl-lvl0 {
+
 		cooling-maps {
+
 			vbat_cpu4 {
 				trip = <&b_bcl_lvl0>;
 				cooling-device = <&cpu4_isolate>, <&pm8150_vadc>, <0x1>;
@@ -4272,7 +4545,9 @@ Fragments 12 - 38 were skipped
 	};
 
 	pm8150b-bcl-lvl1 {
+
 		cooling-maps {
+
 			vbat_cpu6 {
 				trip = <&b_bcl_lvl1>;
 				cooling-device = <&cpu6_isolate>, <&pm8150_vadc>, <0x1>;
@@ -4291,7 +4566,9 @@ Fragments 12 - 38 were skipped
 	};
 
 	pm8150b-bcl-lvl2 {
+
 		cooling-maps {
+
 			vbat_gpu2 {
 				trip = <&b_bcl_lvl2>;
 				cooling-device = <&msm_gpu>, <0xfffffffe>, <0xfffffffe>;
@@ -4301,7 +4578,9 @@ Fragments 12 - 38 were skipped
 
 	pm8150l-bcl-lvl0 {
 		disable-thermal-zone;
+
 		cooling-maps {
+
 			vph_cpu4 {
 				trip = <&l_bcl_lvl0>;
 				cooling-device = <&cpu4_isolate>, <&pm8150_vadc>, <0x1>;
@@ -4321,7 +4600,9 @@ Fragments 12 - 38 were skipped
 
 	pm8150l-bcl-lvl1 {
 		disable-thermal-zone;
+
 		cooling-maps {
+
 			vph_cpu6 {
 				trip = <&l_bcl_lvl1>;
 				cooling-device = <&cpu6_isolate>, <&pm8150_vadc>, <0x1>;
@@ -4341,7 +4622,9 @@ Fragments 12 - 38 were skipped
 
 	pm8150l-bcl-lvl2 {
 		disable-thermal-zone;
+
 		cooling-maps {
+
 			vph_gpu2 {
 				trip = <&l_bcl_lvl2>;
 				cooling-device = <&msm_gpu>, <0xfffffffe>, <0xfffffffe>;
@@ -4369,6 +4652,7 @@ Fragments 12 - 38 were skipped
 };
 
 &q6core {
+
 	cdc_tert_mi2s_gpios: msm_cdc_pinctrl_tert {
 		compatible = "qcom,msm-cdc-pinctrl";
 		pinctrl-names = "aud_active", "aud_sleep";
@@ -4400,6 +4684,7 @@ Fragments 12 - 38 were skipped
 	#qcom,clk-freq-out = <0xf4240>;
 	#address-cells = <1>;
 	#size-cells = <0>;
+
 	ctn730@28 {
 		compatible = "nxp,ctn730";
 		reg = <0x28>;
@@ -4414,6 +4699,7 @@ Fragments 12 - 38 were skipped
 
 &qupv3_se9_i2c {
 	status = "okay";
+
 	OCH8801_0: dhall@18 {
 		status = "okay";
 		compatible = "isentek,OCH8801-0";
@@ -4428,6 +4714,7 @@ Fragments 12 - 38 were skipped
 &qupv3_se13_i2c {
 	clock-frequency = <1000000>;
 	status = "okay";
+
 	mouse@60 {
 		compatible = "hid-over-i2c";
 		reg = <0x60>;
@@ -4447,6 +4734,7 @@ Fragments 12 - 38 were skipped
 	status = "ok";
 	pinctrl-0 = <&qupv3_se14_spi_active>;
 	pinctrl-1 = <&qupv3_se14_spi_sleep>;
+
 	novatek@0 {
 		compatible = "novatek,NVT-ts-spi";
 		panel = <&dsi_panel_spinel_boe_nt36532_dsc_3k_video>, <&dsi_panel_spinel_tianma_nt36532_dsc_3k_video>;
@@ -4458,6 +4746,7 @@ Fragments 12 - 38 were skipped
 		novatek,pen-support;
 		novatek,stylus-resol-double;
 		novatek,mp-support-dt;
+
 		novatek-mp-criteria-6067@0 {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -4571,11 +4860,13 @@ Fragments 12 - 38 were skipped
 };
 
 &soc {
+
 	gpio_keys {
 		compatible = "gpio-keys";
 		label = "gpio-keys";
 		pinctrl-names = "default";
 		pinctrl-0 = <&key_vol_up_default>;
+
 		vol_up {
 			label = "volume_up";
 			gpios = <&pm8150_gpios 0x6 0x1>;
@@ -4611,6 +4902,7 @@ Fragments 12 - 38 were skipped
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "ok";
+
 	mm8013_battery: mitsumi,mm8013@55 {
 		compatible = "mitsumi,mm8013c06";
 		reg = <0x55>;
@@ -4624,6 +4916,7 @@ Fragments 12 - 38 were skipped
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "ok";
+
 	redriver: redriver@1c {
 		compatible = "onnn,redriver";
 		reg = <0x1c>;
@@ -4649,6 +4942,7 @@ Fragments 12 - 38 were skipped
 		status = "disabled";
 		pinctrl-names = "default";
 		pinctrl-0 = <&smb_stat_default>;
+
 		smb1390_revid: qcom,revid@100 {
 			compatible = "qcom,qpnp-revid";
 			reg = <0x100>;
@@ -4664,6 +4958,7 @@ Fragments 12 - 38 were skipped
 			qcom,parallel-output-mode = <0x02>;
 			qcom,min-ilim-ua = <0xb71b0>;
 			qcom,parallel-input-mode = <0x01>;
+
 			qcom,core {
 				interrupts = <0x10 0x00 0x03 0x10 0x01 0x03 0x10 0x02 0x03 0x10 0x03 0x03 0x10 0x04 0x03 0x10 0x05 0x01 0x10 0x06 0x01 0x10 0x07 0x01>;
 				interrupt-names = "switcher-off-window", "switcher-off-fault", "tsd-fault", "irev-fault", "vph-ov-hard", "vph-ov-soft", "ilim", "temp-alarm";
@@ -4678,6 +4973,7 @@ Fragments 12 - 38 were skipped
 		#size-cells = <0>;
 		qcom,periph-map = <0x10>;
 		status = "disabled";
+
 		smb1390_slave_charger: qcom,charge_pump_slave {
 			compatible = "qcom,smb1390-slave";
 			status = "disabled";
@@ -4689,6 +4985,7 @@ Fragments 12 - 38 were skipped
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "ok";
+
 	hq_redriver: hq_redriver@28 {
 		compatible = "hq_redriver,ps5169";
 		reg = <0x28>;
@@ -4700,6 +4997,7 @@ Fragments 12 - 38 were skipped
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "ok";
+
 	smb1396: qcom,smb1396@34 {
 		compatible = "qcom,i2c-pmic";
 		reg = <0x34>;
@@ -4715,6 +5013,7 @@ Fragments 12 - 38 were skipped
 		pinctrl-names = "default";
 		qcom,enable-toggle-stat;
 		pinctrl-0 = <&smb_stat_default>;
+
 		smb1396_revid: qcom,revid {
 			compatible = "qcom,qpnp-revid";
 			reg = <0x100>;
@@ -4740,6 +5039,7 @@ Fragments 12 - 38 were skipped
 		#address-cells = <1>;
 		#size-cells = <0>;
 		status = "disabled";
+
 		smb1396_div2_cp_slave: qcom,div2_cp_slave {
 			compatible = "qcom,smb1396-div2-cp-slave";
 			status = "disabled";
@@ -4752,6 +5052,7 @@ Fragments 12 - 38 were skipped
 		#address-cells = <1>;
 		#size-cells = <0>;
 		status = "disabled";
+
 		smb1398_pre_regulator: qcom,pre_regulator {
 			compatible = "qcom,smb1398-pre-regulator";
 			status = "disabled";
@@ -4764,13 +5065,16 @@ Fragments 12 - 38 were skipped
 };
 
 &thermal_zones {
+
 	conn-therm-usr {
 		polling-delay-passive = <0>;
 		polling-delay = <0>;
 		thermal-governor = "user_space";
 		thermal-sensors = <&pm8150b_adc_tm 0x4f>;
 		wake-capable-sensor;
+
 		trips {
+
 			active-config0 {
 				temperature = <0x1e848>;
 				hysteresis = <1000>;
@@ -4785,7 +5089,9 @@ Fragments 12 - 38 were skipped
 		thermal-governor = "user_space";
 		thermal-sensors = <&pm8150_adc_tm 0x4c>;
 		wake-capable-sensor;
+
 		trips {
+
 			active-config0 {
 				temperature = <0x1e848>;
 				hysteresis = <1000>;
@@ -4800,7 +5106,9 @@ Fragments 12 - 38 were skipped
 		thermal-governor = "user_space";
 		thermal-sensors = <&pm8150_adc_tm 0x4d>;
 		wake-capable-sensor;
+
 		trips {
+
 			active-config0 {
 				temperature = <0x1e848>;
 				hysteresis = <1000>;
@@ -4815,7 +5123,9 @@ Fragments 12 - 38 were skipped
 		thermal-governor = "user_space";
 		thermal-sensors = <&pm8150_adc_tm 0x4e>;
 		wake-capable-sensor;
+
 		trips {
+
 			active-config0 {
 				temperature = <0x1e848>;
 				hysteresis = <1000>;
@@ -4830,7 +5140,9 @@ Fragments 12 - 38 were skipped
 		thermal-governor = "user_space";
 		thermal-sensors = <&pm8150l_adc_tm 0x4d>;
 		wake-capable-sensor;
+
 		trips {
+
 			active-config0 {
 				temperature = <0x1e848>;
 				hysteresis = <1000>;
@@ -4845,7 +5157,9 @@ Fragments 12 - 38 were skipped
 		thermal-governor = "user_space";
 		thermal-sensors = <&pm8150l_adc_tm 0x4e>;
 		wake-capable-sensor;
+
 		trips {
+
 			active-config0 {
 				temperature = <0x1e848>;
 				hysteresis = <1000>;
@@ -4866,7 +5180,9 @@ Fragments 12 - 38 were skipped
 		thermal-governor = "user_space";
 		thermal-sensors = <&pm8150l_adc_tm 0x4f>;
 		wake-capable-sensor;
+
 		trips {
+
 			active-config0 {
 				temperature = <0x1e848>;
 				hysteresis = <1000>;
@@ -4881,7 +5197,9 @@ Fragments 12 - 38 were skipped
 		thermal-governor = "user_space";
 		thermal-sensors = <&pm8150l_adc_tm 0x4f>;
 		wake-capable-sensor;
+
 		trips {
+
 			virt_trip0: virt-trip0 {
 				temperature = <0x8ca0>;
 				hysteresis = <2000>;
@@ -4926,6 +5244,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cooling-maps {
+
 			batt_cdev0 {
 				trip = <&virt_trip0>;
 				cooling-device = <&pm8150b_charger 0x0 0xf>;
@@ -4967,7 +5286,9 @@ Fragments 12 - 38 were skipped
 		polling-delay-passive = <1000>;
 		polling-delay = <5000>;
 		thermal-governor = "step_wise";
+
 		trips {
+
 			virt_trip: virt-trip {
 				temperature = <0x14c08>;
 				hysteresis = <2000>;
@@ -4976,6 +5297,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cooling-maps {
+
 			gpu_cdev {
 				trip = <&virt_trip>;
 				cooling-device = <&msm_gpu>, <0x00>, <&pm8150_vadc>;
@@ -4989,7 +5311,9 @@ Fragments 12 - 38 were skipped
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150l_adc_tm 0x4e>;
 		wake-capable-sensor;
+
 		trips {
+
 			skin_trip: skin-config0 {
 				temperature = <0xb3b0>;
 				hysteresis = <0>;
@@ -4998,6 +5322,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cooling-maps {
+
 			lcd_cdev {
 				trip = <&skin_trip>;
 				cooling-device = <&mdss_mdp>, <&usb2_vbus_boost_default>, <&usb2_vbus_boost_default>;
@@ -5010,7 +5335,9 @@ Fragments 12 - 38 were skipped
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150_adc_tm 0x4c>;
+
 		trips {
+
 			xo_lvl0: active-config0 {
 				temperature = <0xa410>;
 				hysteresis = <2000>;
@@ -5031,6 +5358,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cooling-maps {
+
 			xo_skin_lvl0 {
 				trip = <&xo_lvl0>;
 				cooling-device = <&modem_mmw_skin2>, <&pm8150_vadc>, <0x1>;
@@ -5053,7 +5381,9 @@ Fragments 12 - 38 were skipped
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150_adc_tm 0x4e>;
+
 		trips {
+
 			pa1_lvl0: active-config0 {
 				temperature = <0xabe0>;
 				hysteresis = <5000>;
@@ -5074,6 +5404,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cooling-maps {
+
 			pa1_skin_lvl0 {
 				trip = <&pa1_lvl0>;
 				cooling-device = <&modem_mmw_skin0>, <&pm8150_vadc>, <0x1>;
@@ -5096,7 +5427,9 @@ Fragments 12 - 38 were skipped
 		polling-delay = <0>;
 		thermal-governor = "step_wise";
 		thermal-sensors = <&pm8150l_adc_tm 0x4f>;
+
 		trips {
+
 			pa2_lvl0: active-config0 {
 				temperature = <0xa410>;
 				hysteresis = <4000>;
@@ -5117,6 +5450,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cooling-maps {
+
 			pa2_skin_lvl0 {
 				trip = <&pa2_lvl0>;
 				cooling-device = <&modem_mmw_skin1>, <&pm8150_vadc>, <0x1>;
@@ -5141,7 +5475,9 @@ Fragments 12 - 38 were skipped
 		thermal-sensors = <&pm8150_adc_tm 0x4d>;
 		wake-capable-sensor;
 		disable-thermal-zone;
+
 		trips {
+
 			skin_therm0: active-config0 {
 				temperature = <0xf230>;
 				hysteresis = <5000>;
@@ -5162,6 +5498,7 @@ Fragments 12 - 38 were skipped
 		};
 
 		cooling-maps {
+
 			skin_lvl0 {
 				trip = <&skin_therm0>;
 				cooling-device = <&modem_skin>, <&pm8150_vadc>, <0x1>;
@@ -5197,6 +5534,7 @@ Fragments 12 - 38 were skipped
 };
 
 &vendor {
+
 	bluetooth: bt_qca6390 {
 		compatible = "qca,qca6390";
 		pinctrl-names = "default";
@@ -5237,6 +5575,7 @@ Fragments 12 - 38 were skipped
 
 &qupv3_se5_i2c {
 	status = "ok";
+
 	ktz8866@11 {
 		compatible = "ktz,ktz8866a";
 		status = "ok";
@@ -5249,6 +5588,7 @@ Fragments 12 - 38 were skipped
 
 &qupv3_se11_i2c {
 	status = "ok";
+
 	ktz8866@11 {
 		compatible = "ktz,ktz8866b";
 		status = "ok";
@@ -5262,6 +5602,7 @@ Fragments 12 - 38 were skipped
 &qupv3_se13_i2c {
 	status = "ok";
 	qcom,i2c-touch-active = <0x0>;
+
 	st_fts@49 {
 		st,x-flip;
 		st,y-flip;
@@ -5276,6 +5617,7 @@ Fragments 12 - 38 were skipped
 
 &usb1 {
 	qcom,ignore-wakeup-src-in-hostmode;
+
 	dwc3@a800000 {
 		dr_mode = "host";
 	};
@@ -5294,6 +5636,7 @@ Fragments 12 - 38 were skipped
 	qcom,clk-freq-out = <100000>;
 	#address-cells = <1>;
 	#size-cells = <0>;
+
 	lt9611: lt,lt9611@2b {
 		compatible = "lt,lt9611uxc";
 		reg = <0x2b>;
@@ -5307,7 +5650,9 @@ Fragments 12 - 38 were skipped
 		pinctrl-names = "default";
 		pinctrl-0 = <&lt9611_pins>;
 		lt,preferred-mode = "1920x1080";
+
 		lt,customize-modes {
+
 			lt,customize-mode-id@0 {
 				lt,mode-h-active = <1920>;
 				lt,mode-h-front-porch = <88>;
@@ -5327,8 +5672,10 @@ Fragments 12 - 38 were skipped
 		ports {
 			#address-cells = <1>;
 			#size-cells = <0>;
+
 			port@0 {
 				reg = <0x00>;
+
 				lt9611_in: endpoint {
 					remote-endpoint = <&ext_dsi_out>;
 				};
@@ -5348,11 +5695,13 @@ Fragments 12 - 38 were skipped
 &pcie2_rp {
 	#address-cells = <5>;
 	#size-cells = <0>;
+
 	nvme: nvme {
 		reg = <0x00 0x00 0x00 0x00 0x00>;
 		qcom,iommu-group = <&nvme_pci_iommu_group>;
 		#address-cells = <1>;
 		#size-cells = <1>;
+
 		nvme_pci_iommu_group: nvme_pci_iommu_group {
 			qcom,iommu-dma-addr-pool = <0x20000000 0x40000000>;
 			qcom,iommu-dma = "fastmap";
