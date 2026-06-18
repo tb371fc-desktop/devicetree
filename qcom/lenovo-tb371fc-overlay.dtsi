@@ -11,7 +11,7 @@
 	#address-cells = <2>;
 	#size-cells = <0>;
 	interrupt-controller;
-	#interrupt-cells = <0x04>;
+	#interrupt-cells = <4>;
 
 	qcom,pm8150@0 {
 		compatible = "qcom,spmi-pmic";
@@ -299,7 +299,7 @@
 	#address-cells = <2>;
 	#size-cells = <0>;
 	interrupt-controller;
-	#interrupt-cells = <0x04>;
+	#interrupt-cells = <4>;
 
 	qcom,pm8150b@2 {
 		compatible = "qcom,spmi-pmic";
@@ -991,7 +991,7 @@
 	#address-cells = <2>;
 	#size-cells = <0>;
 	interrupt-controller;
-	#interrupt-cells = <0x04>;
+	#interrupt-cells = <4>;
 
 	qcom,pm8150l@4 {
 		compatible = "qcom,spmi-pmic";
@@ -1577,7 +1577,7 @@
 	#address-cells = <2>;
 	#size-cells = <0>;
 	interrupt-controller;
-	#interrupt-cells = <0x04>;
+	#interrupt-cells = <4>;
 
 	qcom,pm8009@a {
 		compatible = "qcom,spmi-pmic";
@@ -1617,7 +1617,7 @@
 	#address-cells = <2>;
 	#size-cells = <0>;
 	interrupt-controller;
-	#interrupt-cells = <0x04>;
+	#interrupt-cells = <4>;
 
 	qcom,pmxprairie@8 {
 		compatible = "qcom,spmi-pmic";
@@ -4937,7 +4937,7 @@ Fragments 12 - 38 were skipped
 		interrupts = <0x2 0xc5 0x0 0x08>;
 		interrupt_names = "smb1390";
 		interrupt-controller;
-		#interrupt-cells = <0x03>;
+		#interrupt-cells = <3>;
 		qcom,periph-map = <0x10>;
 		status = "disabled";
 		pinctrl-names = "default";
@@ -5007,7 +5007,7 @@ Fragments 12 - 38 were skipped
 		interrupts = <0x2 0xc5 0x0 0x08>;
 		interrupt_names = "smb1396";
 		interrupt-controller;
-		#interrupt-cells = <0x03>;
+		#interrupt-cells = <3>;
 		qcom,periph-map = <0x6 0x26 0x27>;
 		status = "ok";
 		pinctrl-names = "default";
