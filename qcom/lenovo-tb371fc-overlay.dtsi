@@ -437,7 +437,7 @@
 			#cooling-cells = <2>;
 			device_type = "battery";
 			qcom,pmic-revid = <&pm8150b_revid>;
-			qcom,thermal-mitigation = <4000000 3900000 3800000 3600000 0x30d400 0x2ab980 0x249f00 0x1e8480 0x1b7740 0x186a00 0x155cc0 0x124f80 0xf4240 0xc3500 0x927c0 0x7a120>;
+			qcom,thermal-mitigation = <4000000 3900000 3800000 3600000 3200000 2800000 2400000 2000000 1800000 1600000 1400000 1200000 1000000 800000 600000 500000>;
 			qcom,chg-term-src = <1>;
 			qcom,charger-temp-max = <800>;
 			qcom,smb-temp-max = <800>;
@@ -445,63 +445,158 @@
 			dpdm-supply = <&usb2_phy0>;
 			qcom,sec-charger-config = <1>;
 			qcom,auto-recharge-vbat-mv = <4380>;
-			io-channels = <&pm8150b_vadc 0x1e>, <&pm8150b_vadc 0x7>, <&pm8150b_vadc 0x4f>, <&pm8150b_vadc 0x99>, <&pm8150b_vadc 0x83>, <&pm8150b_vadc 0x9>;
+			io-channels = <&pm8150b_vadc ADC_MID_CHG_DIV6>,
+					 <&pm8150b_vadc ADC_USB_IN_I>,
+					 <&pm8150b_vadc ADC_AMUX_THM3_PU2>,
+					 <&pm8150b_vadc ADC_SBUx>,
+					 <&pm8150b_vadc ADC_VPH_PWR>,
+					 <&pm8150b_vadc ADC_CHG_TEMP>;
 			io-channel-names = "mid_voltage", "usb_in_current", "conn_temp", "sbux_res", "vph_voltage", "chg_temp";
 			qcom,battery-data = <&kona_qrd_batterydata>;
 			qcom,wd-bark-time-secs = <16>;
 			qcom,smb-internal-pull-kohm = <0>;
 			qcom,pd-thermal-mitigation = <6000000 5450000 5300000 5000000 4600000 4200000 3800000 3400000 3200000 3000000 2800000 2600000 2400000 2400000 2200000 2100000>;
-			qcom,chg-control-gpio = <&pm8150_gpios 0xa 0x0>;
+			qcom,chg-control-gpio = <&pm8150_gpios 0xa GPIO_ACTIVE_HIGH>;
 			lenovo,jeita_enable = <1>;
 			qcom,fv-max-uv = <4490000>;
 			qcom,fcc-max-ua = <6000000>;
 			qcom,max-voltage-uv = <4490000>;
 			qcom,fastchg-current-ma = <6000>;
-			qcom,jeita-fcc-ranges = <0 150 3000000 150 450 3000000 450 500 3000000>;
+			qcom,jeita-fcc-ranges = <0 150 3000000>,
+					 <150 450 3000000>,
+					 <450 500 3000000>;
 			qcom,jeita-fv-ranges = <0 500 4450000>;
 			qcom,otg-cl-ua = <1800000>;
 			qcom,hvdcp2-max-icl-ua = <2000000>;
 
 			qcom,chgr@1000 {
 				reg = <0x1000 0x100>;
-				interrupts = <0x02 0x10 0x00 0x01 0x02 0x10 0x01 0x01 0x02 0x10 0x02 0x01 0x02 0x10 0x03 0x01 0x02 0x10 0x04 0x01 0x02 0x10 0x06 0x03 0x02 0x10 0x07 0x03>;
-				interrupt-names = "chgr-error", "chg-state-change", "step-chg-state-change", "step-chg-soc-update-fail", "step-chg-soc-update-req", "vph-alarm", "vph-drop-prechg";
+				interrupts = <0x02 0x10 0x00 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x10 0x01 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x10 0x02 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x10 0x03 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x10 0x04 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x10 0x06 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x10 0x07 IRQ_TYPE_EDGE_BOTH>;
+				interrupt-names = "chgr-error",
+						 "chg-state-change",
+						 "step-chg-state-change",
+						 "step-chg-soc-update-fail",
+						 "step-chg-soc-update-req",
+						 "vph-alarm",
+						 "vph-drop-prechg";
 			};
 
 			qcom,dcdc@1100 {
 				reg = <0x1100 0x100>;
-				interrupts = <0x02 0x11 0x00 0x03 0x02 0x11 0x01 0x03 0x02 0x11 0x02 0x03 0x02 0x11 0x04 0x03 0x02 0x11 0x05 0x03 0x02 0x11 0x06 0x03 0x02 0x11 0x07 0x03>;
-				interrupt-names = "otg-fail", "otg-oc-disable-sw", "otg-oc-hiccup", "high-duty-cycle", "input-current-limiting", "concurrent-mode-disable", "switcher-power-ok";
+				interrupts = <0x02 0x11 0x00 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x11 0x01 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x11 0x02 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x11 0x04 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x11 0x05 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x11 0x06 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x11 0x07 IRQ_TYPE_EDGE_BOTH>;
+				interrupt-names = "otg-fail",
+						 "otg-oc-disable-sw",
+						 "otg-oc-hiccup",
+						 "high-duty-cycle",
+						 "input-current-limiting",
+						 "concurrent-mode-disable",
+						 "switcher-power-ok";
 			};
 
 			qcom,batif@1200 {
 				reg = <0x1200 0x100>;
-				interrupts = <0x02 0x12 0x00 0x01 0x02 0x12 0x02 0x03 0x02 0x12 0x03 0x03 0x02 0x12 0x04 0x03 0x02 0x12 0x05 0x03 0x02 0x12 0x06 0x03 0x02 0x12 0x07 0x03>;
-				interrupt-names = "bat-temp", "bat-ov", "bat-low", "bat-therm-or-id-missing", "bat-terminal-missing", "buck-oc", "vph-ov";
+				interrupts = <0x02 0x12 0x00 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x12 0x02 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x12 0x03 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x12 0x04 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x12 0x05 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x12 0x06 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x12 0x07 IRQ_TYPE_EDGE_BOTH>;
+				interrupt-names = "bat-temp",
+						 "bat-ov",
+						 "bat-low",
+						 "bat-therm-or-id-missing",
+						 "bat-terminal-missing",
+						 "buck-oc",
+						 "vph-ov";
 			};
 
 			qcom,usb@1300 {
 				reg = <0x1300 0x100>;
-				interrupts = <0x02 0x13 0x00 0x03 0x02 0x13 0x01 0x03 0x02 0x13 0x02 0x03 0x02 0x13 0x03 0x03 0x02 0x13 0x04 0x03 0x02 0x13 0x05 0x03 0x02 0x13 0x06 0x01 0x02 0x13 0x07 0x01>;
-				interrupt-names = "usbin-collapse", "usbin-vashdn", "usbin-uv", "usbin-ov", "usbin-plugin", "usbin-revi-change", "usbin-src-change", "usbin-icl-change";
+				interrupts = <0x02 0x13 0x00 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x13 0x01 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x13 0x02 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x13 0x03 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x13 0x04 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x13 0x05 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x13 0x06 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x13 0x07 IRQ_TYPE_EDGE_RISING>;
+				interrupt-names = "usbin-collapse",
+						 "usbin-vashdn",
+						 "usbin-uv",
+						 "usbin-ov",
+						 "usbin-plugin",
+						 "usbin-revi-change",
+						 "usbin-src-change",
+						 "usbin-icl-change";
 			};
 
 			qcom,dc@1400 {
 				reg = <0x1400 0x100>;
-				interrupts = <0x02 0x14 0x01 0x03 0x02 0x14 0x02 0x03 0x02 0x14 0x03 0x03 0x02 0x14 0x04 0x03 0x02 0x14 0x05 0x03 0x02 0x14 0x06 0x03 0x02 0x14 0x07 0x03>;
-				interrupt-names = "dcin-vashdn", "dcin-uv", "dcin-ov", "dcin-plugin", "dcin-revi", "dcin-pon", "dcin-en";
+				interrupts = <0x02 0x14 0x01 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x14 0x02 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x14 0x03 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x14 0x04 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x14 0x05 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x14 0x06 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x14 0x07 IRQ_TYPE_EDGE_BOTH>;
+				interrupt-names = "dcin-vashdn",
+						 "dcin-uv",
+						 "dcin-ov",
+						 "dcin-plugin",
+						 "dcin-revi",
+						 "dcin-pon",
+						 "dcin-en";
 			};
 
 			qcom,typec@1500 {
 				reg = <0x1500 0x100>;
-				interrupts = <0x02 0x15 0x00 0x01 0x02 0x15 0x01 0x03 0x02 0x15 0x02 0x01 0x02 0x15 0x03 0x03 0x02 0x15 0x04 0x01 0x02 0x15 0x05 0x01 0x02 0x15 0x06 0x03 0x02 0x15 0x07 0x01>;
-				interrupt-names = "typec-or-rid-detect-change", "typec-vpd-detect", "typec-cc-state-change", "typec-vconn-oc", "typec-vbus-change", "typec-attach-detach", "typec-legacy-cable-detect", "typec-try-snk-src-detect";
+				interrupts = <0x02 0x15 0x00 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x15 0x01 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x15 0x02 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x15 0x03 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x15 0x04 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x15 0x05 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x15 0x06 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x15 0x07 IRQ_TYPE_EDGE_RISING>;
+				interrupt-names = "typec-or-rid-detect-change",
+						 "typec-vpd-detect",
+						 "typec-cc-state-change",
+						 "typec-vconn-oc",
+						 "typec-vbus-change",
+						 "typec-attach-detach",
+						 "typec-legacy-cable-detect",
+						 "typec-try-snk-src-detect";
 			};
 
 			qcom,misc@1600 {
 				reg = <0x1600 0x100>;
-				interrupts = <0x02 0x16 0x00 0x01 0x02 0x16 0x01 0x01 0x02 0x16 0x02 0x03 0x02 0x16 0x03 0x03 0x02 0x16 0x04 0x03 0x02 0x16 0x06 0x03 0x02 0x16 0x07 0x03>;
-				interrupt-names = "wdog-snarl", "wdog-bark", "aicl-fail", "aicl-done", "smb-en", "temp-change", "temp-change-smb";
+				interrupts = <0x02 0x16 0x00 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x16 0x01 IRQ_TYPE_EDGE_RISING>,
+						 <0x02 0x16 0x02 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x16 0x03 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x16 0x04 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x16 0x06 IRQ_TYPE_EDGE_BOTH>,
+						 <0x02 0x16 0x07 IRQ_TYPE_EDGE_BOTH>;
+				interrupt-names = "wdog-snarl",
+						 "wdog-bark",
+						 "aicl-fail",
+						 "aicl-done",
+						 "smb-en",
+						 "temp-change",
+						 "temp-change-smb";
 			};
 
 			smb5_vconn: qcom,smb5-vconn {
