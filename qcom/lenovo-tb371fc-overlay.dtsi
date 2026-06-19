@@ -886,7 +886,8 @@
 		pm8150b_haptics: qcom,haptics@c000 {
 			compatible = "qcom,haptics";
 			reg = <0xc000 0x100>;
-			interrupts = <0x03 0xc0 0x00 0x03 0x03 0xc0 0x01 0x03>;
+			interrupts = <0x03 0xc0 0x00 IRQ_TYPE_EDGE_BOTH>,
+						 <0x03 0xc0 0x01 IRQ_TYPE_EDGE_BOTH>;
 			interrupt-names = "hap-sc-irq", "hap-play-irq";
 			qcom,actuator-type = "lra";
 			qcom,vmax-mv = <1697>;
@@ -898,67 +899,67 @@
 
 			wf_0 {
 				qcom,effect-id = <0>;
-				qcom,wf-vmax-mv = <0x6a1>;
-				qcom,wf-pattern = <0x3e3e3e3e 0x3e3e3e3e>;
+				qcom,wf-vmax-mv = <1697>;
+				qcom,wf-pattern = [3e 3e 3e 3e 3e 3e 3e 3e];
 				qcom,wf-play-rate-us = <5882>;
-				qcom,wf-brake-pattern = <0x00>;
-				qcom,wf-repeat-count = <0x01>;
-				qcom,wf-s-repeat-count = <0x01>;
+				qcom,wf-brake-pattern = [00 00 00 00];
+				qcom,wf-repeat-count = <1>;
+				qcom,wf-s-repeat-count = <1>;
 				qcom,lra-auto-resonance-disable;
 			};
 
 			wf_1 {
 				qcom,effect-id = <1>;
-				qcom,wf-vmax-mv = <0x6a1>;
-				qcom,wf-pattern = <0x3e3e3e3e 0x3e3e3e3e>;
+				qcom,wf-vmax-mv = <1697>;
+				qcom,wf-pattern = [3e 3e 3e 3e 3e 3e 3e 3e];
 				qcom,wf-play-rate-us = <5882>;
-				qcom,wf-brake-pattern = <0x00>;
-				qcom,wf-repeat-count = <0x01>;
-				qcom,wf-s-repeat-count = <0x01>;
+				qcom,wf-brake-pattern = [00 00 00 00];
+				qcom,wf-repeat-count = <1>;
+				qcom,wf-s-repeat-count = <1>;
 				qcom,lra-auto-resonance-disable;
 			};
 
 			wf_2 {
 				qcom,effect-id = <2>;
-				qcom,wf-vmax-mv = <0x6a1>;
-				qcom,wf-pattern = <0x3e3e3e3e 0x3e3e3e3e>;
+				qcom,wf-vmax-mv = <1697>;
+				qcom,wf-pattern = [3e 3e 3e 3e 3e 3e 3e 3e];
 				qcom,wf-play-rate-us = <5882>;
-				qcom,wf-brake-pattern = <0x00>;
-				qcom,wf-repeat-count = <0x01>;
-				qcom,wf-s-repeat-count = <0x01>;
+				qcom,wf-brake-pattern = [00 00 00 00];
+				qcom,wf-repeat-count = <1>;
+				qcom,wf-s-repeat-count = <1>;
 				qcom,lra-auto-resonance-disable;
 			};
 
 			wf_3 {
 				qcom,effect-id = <3>;
-				qcom,wf-vmax-mv = <0x6a1>;
-				qcom,wf-pattern = <0x3e3e3e3e 0x3e3e3e3e>;
+				qcom,wf-vmax-mv = <1697>;
+				qcom,wf-pattern = [3e 3e 3e 3e 3e 3e 3e 3e];
 				qcom,wf-play-rate-us = <5882>;
-				qcom,wf-brake-pattern = <0x00>;
-				qcom,wf-repeat-count = <0x01>;
-				qcom,wf-s-repeat-count = <0x01>;
+				qcom,wf-brake-pattern = [00 00 00 00];
+				qcom,wf-repeat-count = <1>;
+				qcom,wf-s-repeat-count = <1>;
 				qcom,lra-auto-resonance-disable;
 			};
 
 			wf_4 {
 				qcom,effect-id = <4>;
-				qcom,wf-vmax-mv = <0x6a1>;
-				qcom,wf-pattern = <0x3e3e3e3e 0x3e3e3e3e>;
+				qcom,wf-vmax-mv = <1697>;
+				qcom,wf-pattern = [3e 3e 3e 3e 3e 3e 3e 3e];
 				qcom,wf-play-rate-us = <5882>;
-				qcom,wf-brake-pattern = <0x00>;
-				qcom,wf-repeat-count = <0x01>;
-				qcom,wf-s-repeat-count = <0x01>;
+				qcom,wf-brake-pattern = [00 00 00 00];
+				qcom,wf-repeat-count = <1>;
+				qcom,wf-s-repeat-count = <1>;
 				qcom,lra-auto-resonance-disable;
 			};
 
 			wf_5 {
 				qcom,effect-id = <5>;
-				qcom,wf-vmax-mv = <0x6a1>;
-				qcom,wf-pattern = <0x3e3e3e3e 0x3e3e3e3e>;
+				qcom,wf-vmax-mv = <1697>;
+				qcom,wf-pattern = [3e 3e 3e 3e 3e 3e 3e 3e];
 				qcom,wf-play-rate-us = <5882>;
-				qcom,wf-brake-pattern = <0x00>;
-				qcom,wf-repeat-count = <0x01>;
-				qcom,wf-s-repeat-count = <0x01>;
+				qcom,wf-brake-pattern = [00 00 00 00];
+				qcom,wf-repeat-count = <1>;
+				qcom,wf-s-repeat-count = <1>;
 				qcom,lra-auto-resonance-disable;
 			};
 		};
