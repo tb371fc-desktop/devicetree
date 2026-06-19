@@ -1792,8 +1792,14 @@
 		pm8009_gpios: pinctrl@c000 {
 			compatible = "qcom,spmi-gpio";
 			reg = <0xc000 0x400>;
-			interrupts = <0xa 0xc0 0x00 0x00 0x0a 0xc1 0x00 0x00 0x0a 0xc2 0x00 0x00 0x0a 0xc3 0x00 0x00>;
-			interrupt-names = "pm8009_gpio1", "pm8009_gpio2", "pm8009_gpio3", "pm8009_gpio4";
+			interrupts = <0xa 0xc0 0x00 IRQ_TYPE_NONE>,
+						 <0x0a 0xc1 0x00 IRQ_TYPE_NONE>,
+						 <0x0a 0xc2 0x00 IRQ_TYPE_NONE>,
+						 <0x0a 0xc3 0x00 IRQ_TYPE_NONE>;
+			interrupt-names = "pm8009_gpio1",
+							  "pm8009_gpio2",
+							  "pm8009_gpio3",
+							  "pm8009_gpio4";
 			gpio-controller;
 			#gpio-cells = <2>;
 		};
@@ -1841,7 +1847,7 @@
 		regulator-name = "vdd_tof";
 		regulator-min-microvolt = <3600000>;
 		regulator-max-microvolt = <3600000>;
-		gpio = <&pm8009_gpios 0x1 0x0>;
+		gpio = <&pm8009_gpios 1 GPIO_ACTIVE_HIGH>;
 		startup-delay-us = <1000>;
 		enable-active-high;
 	};
@@ -1849,7 +1855,7 @@
 	vreg_hap_boost: regulator-haptics-boost {
 		compatible = "regulator-fixed";
 		regulator-name = "vdd_hap_boost";
-		gpio = <&pm8150b_gpios 0x5 0x0>;
+		gpio = <&pm8150b_gpios 5 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&haptics_boost_default>;
 		startup-delay-us = <1000>;
