@@ -7784,10 +7784,10 @@ Fragments 12 - 38 were skipped
 		compatible = "lt,lt9611uxc";
 		reg = <0x2b>;
 		interrupt-parent = <&tlmm>;
-		interrupts = <0x01 0x00>;
+		interrupts = <1 IRQ_TYPE_NONE>;
 		interrupt-names = "lt_irq";
-		lt,irq-gpio = <&tlmm>, <&pm8150_vadc>, <0x0>;
-		lt,reset-gpio = <&tlmm>, <&pm8150_tz>, <0x00>;
+		lt,irq-gpio = <&tlmm 1 GPIO_ACTIVE_HIGH>;
+		lt,reset-gpio = <&tlmm 2 GPIO_ACTIVE_HIGH>;
 		instance_id = <0>;
 		lt,non-pluggable;
 		pinctrl-names = "default";
