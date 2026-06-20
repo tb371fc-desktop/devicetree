@@ -7721,9 +7721,9 @@ Fragments 12 - 38 were skipped
 		compatible = "ktz,ktz8866a";
 		status = "ok";
 		reg = <0x11>;
-		ktz8866,hwen-gpio = <&tlmm 0x36 0x0>;
-		ktz8866,enp-gpio = <&tlmm 0x4d 0x0>;
-		ktz8866,enn-gpio = <&tlmm 0x4e 0x0>;
+		ktz8866,hwen-gpio = <&tlmm 54 GPIO_ACTIVE_HIGH>;
+		ktz8866,enp-gpio = <&tlmm 77 GPIO_ACTIVE_HIGH>;
+		ktz8866,enn-gpio = <&tlmm 78 GPIO_ACTIVE_HIGH>;
 	};
 };
 
