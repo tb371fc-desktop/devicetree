@@ -5106,18 +5106,18 @@ Fragments 12 - 38 were skipped
 
 &qupv3_se1_i2c {
 	status = "ok";
-	#qcom,clk-freq-out = <0xf4240>;
+	#qcom,clk-freq-out = <1000000>;
 	#address-cells = <1>;
 	#size-cells = <0>;
 
 	ctn730@28 {
 		compatible = "nxp,ctn730";
 		reg = <0x28>;
-		rst-gpios = <&tlmm 0x54 0x0>;
-		enable-gpios = <&tlmm 0xa0 0x0>;
-		interrupt-gpios = <&tlmm 0x6f 0x0>;
+		rst-gpios = <&tlmm 84 GPIO_ACTIVE_HIGH>;
+		enable-gpios = <&tlmm 160 GPIO_ACTIVE_HIGH>;
+		interrupt-gpios = <&tlmm 111 GPIO_ACTIVE_HIGH>;
 		interrupt-parent = <&tlmm>;
-		interrupts = <0x6f 0x00>;
+		interrupts = <&l_bcl_lvl1 IRQ_TYPE_NONE>;
 		interrupt-names = "nfc_irq";
 	};
 };
