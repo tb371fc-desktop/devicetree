@@ -1926,7 +1926,7 @@ Fragments 12 - 38 were skipped
 		qcom,mdss-dsi-lane-3-state;
 		qcom,mdss-dsi-dma-trigger = "trigger_sw";
 		qcom,mdss-dsi-mdp-trigger = "none";
-		qcom,mdss-dsi-reset-sequence = <1 10 0 10 1 10 0x00 0x0a 0x01 0x0a>;
+		qcom,mdss-dsi-reset-sequence = <1 10>, <0 10>, <1 10>, <0 10>, <1 10>;
 		qcom,mdss-pan-physical-width-dimension = <274>;
 		qcom,mdss-pan-physical-height-dimension = <171>;
 		qcom,mdss-dsi-tx-eot-append;
@@ -1935,16 +1935,16 @@ Fragments 12 - 38 were skipped
 		qcom,mdss-dsi-panel-broadcast-mode;
 		qcom,mdss-dsi-pan-enable-dynamic-fps;
 		qcom,mdss-dsi-pan-fps-update = "dfps_immediate_porch_mode_vfp";
-		qcom,dsi-supported-dfps-list = <120 144 60 0x1e>;
+		qcom,dsi-supported-dfps-list = <120 144 60 30>;
 		qcom,mdss-dsi-panel-hdr-enabled;
-		qcom,mdss-dsi-panel-hdr-color-primaries = <0x38a4 0x3c8c 0x7d00 0x4268 0x3c8c 0x7530 0x1f40 0xbb8>;
-		qcom,mdss-dsi-panel-peak-brightness = <0x401640>;
-		qcom,mdss-dsi-panel-blackness-level = <0xc9e>;
-		qcom,mdss-dsi-panel-count = <0x02>;
+		qcom,mdss-dsi-panel-hdr-color-primaries = <14500 15500 32000 17000 15500 30000 8000 3000>;
+		qcom,mdss-dsi-panel-peak-brightness = <4200000>;
+		qcom,mdss-dsi-panel-blackness-level = <3230>;
+		qcom,mdss-dsi-panel-count = <2>;
 		qcom,ulps-enabled;
 		qcom,esd-check-enabled;
-		qcom,dsi-ctrl-num = <0x00 0x01>;
-		qcom,dsi-phy-num = <0x00 0x01>;
+		qcom,dsi-ctrl-num = <0 1>;
+		qcom,dsi-phy-num = <0 1>;
 		qcom,mdss-dsi-panel-status-check-mode = "te_signal_check";
 		qcom,dsi-select-clocks = "mux_byte_clk0", "mux_pixel_clk0";
 		qcom,panel-supply-entries = <&dsi_panel_pwr_supply_lab_ibb>;
@@ -1952,8 +1952,8 @@ Fragments 12 - 38 were skipped
 		qcom,mdss-dsi-bl-min-level = <1>;
 		qcom,mdss-dsi-bl-max-level = <2047>;
 		qcom,mdss-brightness-max-level = <2047>;
-		qcom,platform-reset-gpio = <&tlmm>, <&cdc_dmic23_gpios>, <0x00>;
-		qcom,platform-te-gpio = <&tlmm>, <&wcd938x_rx_slave>, <0x00>;
+		qcom,platform-reset-gpio = <&tlmm 69 GPIO_ACTIVE_HIGH>;
+		qcom,platform-te-gpio = <&tlmm 66 GPIO_ACTIVE_HIGH>;
 
 		qcom,mdss-dsi-display-timings {
 
@@ -2022,7 +2022,7 @@ Fragments 12 - 38 were skipped
 		qcom,mdss-dsi-lane-3-state;
 		qcom,mdss-dsi-dma-trigger = "trigger_sw";
 		qcom,mdss-dsi-mdp-trigger = "none";
-		qcom,mdss-dsi-reset-sequence = <1 10 0 10 1 10 0x00 0x0a 0x01 0x0a>;
+		qcom,mdss-dsi-reset-sequence = <1 10>, <0 10>, <1 10>, <0 10>, <1 10>;
 		qcom,mdss-pan-physical-width-dimension = <274>;
 		qcom,mdss-pan-physical-height-dimension = <171>;
 		qcom,mdss-dsi-tx-eot-append;
@@ -2031,16 +2031,16 @@ Fragments 12 - 38 were skipped
 		qcom,mdss-dsi-panel-broadcast-mode;
 		qcom,mdss-dsi-pan-enable-dynamic-fps;
 		qcom,mdss-dsi-pan-fps-update = "dfps_immediate_porch_mode_vfp";
-		qcom,dsi-supported-dfps-list = <120 144 60 0x1e>;
+		qcom,dsi-supported-dfps-list = <120 144 60 30>;
 		qcom,mdss-dsi-panel-hdr-enabled;
-		qcom,mdss-dsi-panel-hdr-color-primaries = <0x38a4 0x3c8c 0x7d00 0x4268 0x3c8c 0x7530 0x1f40 0xbb8>;
-		qcom,mdss-dsi-panel-peak-brightness = <0x401640>;
-		qcom,mdss-dsi-panel-blackness-level = <0xc9e>;
-		qcom,mdss-dsi-panel-count = <0x02>;
+		qcom,mdss-dsi-panel-hdr-color-primaries = <14500 15500 32000 17000 15500 30000 8000 3000>;
+		qcom,mdss-dsi-panel-peak-brightness = <4200000>;
+		qcom,mdss-dsi-panel-blackness-level = <3230>;
+		qcom,mdss-dsi-panel-count = <2>;
 		qcom,ulps-enabled;
 		qcom,esd-check-enabled;
-		qcom,dsi-ctrl-num = <0x00 0x01>;
-		qcom,dsi-phy-num = <0x00 0x01>;
+		qcom,dsi-ctrl-num = <0 1>;
+		qcom,dsi-phy-num = <0 1>;
 		qcom,mdss-dsi-panel-status-check-mode = "te_signal_check";
 		qcom,dsi-select-clocks = "mux_byte_clk0", "mux_pixel_clk0";
 		qcom,panel-supply-entries = <&dsi_panel_pwr_supply_lab_ibb>;
@@ -2048,8 +2048,8 @@ Fragments 12 - 38 were skipped
 		qcom,mdss-dsi-bl-min-level = <1>;
 		qcom,mdss-dsi-bl-max-level = <2047>;
 		qcom,mdss-brightness-max-level = <2047>;
-		qcom,platform-reset-gpio = <&tlmm>, <&cdc_dmic23_gpios>, <0x00>;
-		qcom,platform-te-gpio = <&tlmm>, <&wcd938x_rx_slave>, <0x00>;
+		qcom,platform-reset-gpio = <&tlmm 69 GPIO_ACTIVE_HIGH>;
+		qcom,platform-te-gpio = <&tlmm 66 GPIO_ACTIVE_HIGH>;
 
 		qcom,mdss-dsi-display-timings {
 
