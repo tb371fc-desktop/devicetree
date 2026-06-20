@@ -2110,8 +2110,8 @@ Fragments 12 - 38 were skipped
 
 		config {
 			pins = "gpio61";
-			drive-strength = <0x08>;
-			bias-disable = <0x00>;
+			drive-strength = <8>;
+			bias-disable = <0>;
 			output-high;
 		};
 	};
@@ -2235,7 +2235,7 @@ Fragments 12 - 38 were skipped
 		regulator-min-microvolt = <5500000>;
 		regulator-max-microvolt = <5500000>;
 		regulator-enable-ramp-delay = <233>;
-		gpio = <&tlmm>, <&wsa_swr_gpios>, <0x00>;
+		gpio = <&tlmm 62 0x00>;
 		enable-active-high;
 		regulator-boot-on;
 	};
@@ -2245,17 +2245,50 @@ Fragments 12 - 38 were skipped
 		label = "primary";
 		qcom,dsi-ctrl = <&mdss_dsi0>, <&mdss_dsi1>;
 		qcom,dsi-phy = <&mdss_dsi_phy0>, <&mdss_dsi_phy1>;
-		clocks = <&mdss_dsi0_pll>, <&pm8150b_revid>, <&mdss_dsi0_pll>, <&smb5_vbus>, <&mdss_dsi0_pll>, <&pm8150b_vadc>, <&mdss_dsi0_pll>, <&pm8150_gpios>, <&mdss_dsi0_pll>, <0x12>, <&mdss_dsi0_pll>, <&pm8150l_tz>, <&mdss_dsi0_pll>, <&pm8150b_pwm>, <&mdss_dsi0_pll>, <0x11>, <&mdss_dsi0_pll>, <&pm8150l_bcl>, <&mdss_dsi0_pll>, <&haptics_boost_default>, <&mdss_dsi1_pll>, <&lcdb_ncp_vreg>, <&mdss_dsi1_pll>, <&display_panel_avdd>, <&mdss_dsi1_pll>, <0x1d>, <&mdss_dsi1_pll>, <&lt9611_in>, <&mdss_dsi1_pll>, <&pm8150l_torch0>, <&mdss_dsi1_pll>, <&led_flash_rear>, <&mdss_dsi1_pll>, <&ext_disp>, <&mdss_dsi1_pll>, <&pm8150l_flash0>, <&mdss_dsi1_pll>, <&eeprom_rear>, <&mdss_dsi1_pll>, <&eeprom_front>;
-		clock-names = "mux_byte_clk0", "mux_pixel_clk0", "src_byte_clk0", "src_pixel_clk0", "cphy_byte_clk0", "cphy_pixel_clk0", "shadow_byte_clk0", "shadow_pixel_clk0", "shadow_cphybyte_clk0", "shadow_cphypixel_clk0", "mux_byte_clk1", "mux_pixel_clk1", "src_byte_clk1", "src_pixel_clk1", "cphy_byte_clk1", "cphy_pixel_clk1", "shadow_byte_clk1", "shadow_pixel_clk1", "shadow_cphybyte_clk1", "shadow_cphypixel_clk1";
+		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
+			 <&mdss_dsi0_pll PCLK_MUX_0_CLK>,
+			 <&mdss_dsi0_pll BYTECLK_SRC_0_CLK>,
+			 <&mdss_dsi0_pll PCLK_SRC_0_CLK>,
+			 <&mdss_dsi0_pll CPHY_BYTECLK_SRC_0_CLK>,
+			 <&mdss_dsi0_pll CPHY_PCLK_SRC_0_CLK>,
+			 <&mdss_dsi0_pll SHADOW_BYTECLK_SRC_0_CLK>,
+			 <&mdss_dsi0_pll SHADOW_PCLK_SRC_0_CLK>,
+			 <&mdss_dsi0_pll SHADOW_CPHY_BYTECLK_SRC_0_CLK>,
+			 <&mdss_dsi0_pll SHADOW_CPHY_PCLK_SRC_0_CLK>,
+			 <&mdss_dsi1_pll BYTECLK_MUX_1_CLK>,
+			 <&mdss_dsi1_pll PCLK_MUX_1_CLK>,
+			 <&mdss_dsi1_pll BYTECLK_SRC_1_CLK>,
+			 <&mdss_dsi1_pll PCLK_SRC_1_CLK>,
+			 <&mdss_dsi1_pll CPHY_BYTECLK_SRC_1_CLK>,
+			 <&mdss_dsi1_pll CPHY_PCLK_SRC_1_CLK>,
+			 <&mdss_dsi1_pll SHADOW_BYTECLK_SRC_1_CLK>,
+			 <&mdss_dsi1_pll SHADOW_PCLK_SRC_1_CLK>,
+			 <&mdss_dsi1_pll SHADOW_CPHY_BYTECLK_SRC_1_CLK>,
+			 <&mdss_dsi1_pll SHADOW_CPHY_PCLK_SRC_1_CLK>;
+		clock-names = "mux_byte_clk0", "mux_pixel_clk0",
+					  "src_byte_clk0", "src_pixel_clk0",
+					  "cphy_byte_clk0", "cphy_pixel_clk0",
+					  "shadow_byte_clk0", "shadow_pixel_clk0",
+					  "shadow_cphybyte_clk0", "shadow_cphypixel_clk0",
+					  "mux_byte_clk1", "mux_pixel_clk1",
+					  "src_byte_clk1", "src_pixel_clk1",
+					  "cphy_byte_clk1", "cphy_pixel_clk1",
+					  "shadow_byte_clk1", "shadow_pixel_clk1",
+					  "shadow_cphybyte_clk1", "shadow_cphypixel_clk1";
 		pinctrl-names = "panel_active", "panel_suspend";
 		pinctrl-0 = <&sde_te_active>, <&sde_bl_active>;
 		pinctrl-1 = <&sde_te_suspend>, <&sde_bl_suspend>;
-		qcom,platform-te-gpio = <&tlmm>, <&wcd938x_rx_slave>, <0x00>;
+		qcom,platform-te-gpio = <&tlmm 66 GPIO_ACTIVE_HIGH>;
 		qcom,panel-te-source = <0>;
-		lab-supply = <0x1f>;
-		ibb-supply = <0x20>;
+		lab-supply = <&lcdb_ldo_vreg>;
+		ibb-supply = <&lcdb_ncp_vreg>;
 		qcom,mdp = <&mdss_mdp>;
-		qcom,dsi-default-panel = <0x21>;
+		/*
+		 * Originally it was referencing <&dsi_ext_bridge_1080p>,
+		 * but since that node was cut from this device tree,
+		 * it has been changed to <&dsi_panel_spinel_tianma_nt36532_dsc_3k_video>.
+		 */
+		qcom,dsi-default-panel = <&dsi_panel_spinel_tianma_nt36532_dsc_3k_video>;
 
 		ports {
 			#address-cells = <1>;
@@ -2276,12 +2309,22 @@ Fragments 12 - 38 were skipped
 		label = "secondary";
 		qcom,dsi-ctrl = <&mdss_dsi0>, <&mdss_dsi1>;
 		qcom,dsi-phy = <&mdss_dsi_phy0>, <&mdss_dsi_phy1>;
-		clocks = <&mdss_dsi0_pll>, <&pm8150b_revid>, <&mdss_dsi0_pll>, <&smb5_vbus>, <&mdss_dsi0_pll>, <&pm8150l_vadc>, <&mdss_dsi0_pll>, <&pm8150l_tz>, <&mdss_dsi1_pll>, <&lcdb_ncp_vreg>, <&mdss_dsi1_pll>, <&display_panel_avdd>, <&mdss_dsi1_pll>, <&pm8150l_torch0>, <&mdss_dsi1_pll>, <&led_flash_rear>;
-		clock-names = "mux_byte_clk0", "mux_pixel_clk0", "cphy_byte_clk0", "cphy_pixel_clk0", "mux_byte_clk1", "mux_pixel_clk1", "cphy_byte_clk1", "cphy_pixel_clk1";
+		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
+			 <&mdss_dsi0_pll PCLK_MUX_0_CLK>,
+			 <&mdss_dsi0_pll CPHY_BYTECLK_SRC_0_CLK>,
+			 <&mdss_dsi0_pll CPHY_PCLK_SRC_0_CLK>,
+			 <&mdss_dsi1_pll BYTECLK_MUX_1_CLK>,
+			 <&mdss_dsi1_pll PCLK_MUX_1_CLK>,
+			 <&mdss_dsi1_pll CPHY_BYTECLK_SRC_1_CLK>,
+			 <&mdss_dsi1_pll CPHY_PCLK_SRC_1_CLK>;
+		clock-names = "mux_byte_clk0", "mux_pixel_clk0",
+					  "cphy_byte_clk0", "cphy_pixel_clk0",
+					  "mux_byte_clk1", "mux_pixel_clk1",
+					  "cphy_byte_clk1", "cphy_pixel_clk1";
 		pinctrl-names = "panel_active", "panel_suspend";
 		pinctrl-0 = <&sde_te1_active>;
 		pinctrl-1 = <&sde_te1_suspend>;
-		qcom,platform-te-gpio = <&tlmm>, <&wcd938x_tx_slave>, <0x00>;
+		qcom,platform-te-gpio = <&tlmm 67 GPIO_ACTIVE_HIGH>;
 		qcom,panel-te-source = <1>;
 		vddio-supply = <&pm8150_l14>;
 		vdd-supply = <&pm8150a_l11>;
@@ -2295,17 +2338,23 @@ Fragments 12 - 38 were skipped
 		label = "wb_display";
 	};
 
-	msm_notifier: qcom,msm_notifier@0 {
-		compatible = "qcom,msm-notifier";
-		panel = <0x24 0x25 0x26>;
-	};
+	/*
+	 * Since all referenced nodes in the original msm_notifier node have been removed from this device tree,
+	 * the entire msm_notifier node has been commented out to prevent build errors. 
+	 */
+	// msm_notifier: qcom,msm_notifier@0 {
+	// 	compatible = "qcom,msm-notifier";
+	// 	panel = <&dsi_sw43404_amoled_cmd>,
+	// 			<&dsi_sharp_qsync_wqhd_cmd>
+	// 			<&dsi_dual_sim_dsc_375_cmd>;
+	// };
 };
 
 &sde_dp {
 	qcom,dp-usbpd-detection = <&pm8150b_pdphy>;
 	qcom,ext-disp = <&ext_disp>;
 	qcom,dp-aux-switch = <&fsa4480>;
-	qcom,usbplug-cc-gpio = <&tlmm>, <&wcd938x_rst_gpio>, <0x00>;
+	qcom,usbplug-cc-gpio = <&tlmm 65 GPIO_ACTIVE_HIGH>;
 	pinctrl-names = "mdss_dp_active", "mdss_dp_sleep";
 	pinctrl-0 = <&sde_dp_usbplug_cc_active>;
 	pinctrl-1 = <&sde_dp_usbplug_cc_suspend>;
