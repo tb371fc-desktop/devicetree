@@ -7133,7 +7133,7 @@ Fragments 12 - 38 were skipped
 		#address-cells = <1>;
 		#size-cells = <0>;
 		interrupt-parent = <&spmi_bus>;
-		interrupts = <0x2 0xc5 0x0 0x08>;
+		interrupts = <0x2 0xc5 0x0 IRQ_TYPE_LEVEL_LOW>;
 		interrupt_names = "smb1396";
 		interrupt-controller;
 		#interrupt-cells = <3>;
@@ -7151,13 +7151,25 @@ Fragments 12 - 38 were skipped
 		smb1396_div2_cp_master: qcom,div2_cp {
 			compatible = "qcom,smb1396-div2-cp-master";
 			qcom,pmic-revid = <&smb1396_revid>;
-			qcom,parallel-input-mode = <0x01>;
-			qcom,parallel-output-mode = <0x02>;
-			qcom,div2-cp-min-ilim-ua = <0xb71b0>;
-			io-channels = <&pm8150b_vadc 0xe>;
+			qcom,parallel-input-mode = <1>;
+			qcom,parallel-output-mode = <1>;
+			qcom,div2-cp-min-ilim-ua = <750000>;
+			io-channels = <&pm8150b_vadc ADC_AMUX_THM2>;
 			io-channel-names = "die_temp";
-			interrupts = <0x26 0x01 0x01 0x26 0x03 0x01 0x26 0x05 0x01 0x26 0x07 0x01 0x27 0x05 0x01 0x27 0x06 0x01 0x27 0x07 0x01>;
-			interrupt-names = "temp-shdwn", "div2-irev", "usbin-uv", "usbin-ov", "div2-ilim", "div2-win-uv", "div2-win-ov";
+			interrupts = <0x26 0x01 IRQ_TYPE_EDGE_RISING>,
+					 <0x26 0x03 IRQ_TYPE_EDGE_RISING>,
+					 <0x26 0x05 IRQ_TYPE_EDGE_RISING>,
+					 <0x26 0x07 IRQ_TYPE_EDGE_RISING>,
+					 <0x27 0x05 IRQ_TYPE_EDGE_RISING>,
+					 <0x27 0x06 IRQ_TYPE_EDGE_RISING>,
+					 <0x27 0x07 IRQ_TYPE_EDGE_RISING>;
+			interrupt-names = "temp-shdwn",
+					  "div2-irev",
+					  "usbin-uv",
+					  "usbin-ov",
+					  "div2-ilim",
+					  "div2-win-uv",
+					  "div2-win-ov";
 			status = "ok";
 		};
 	};
