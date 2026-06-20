@@ -4884,7 +4884,7 @@ Fragments 12 - 38 were skipped
 
 			soc_cpu7 {
 				trip = <&soc_trip>;
-				cooling-device = <&cpu7_isolate>, <&pm8150_vadc>, <0x1>;
+				cooling-device = <&cpu7_isolate 1 1>;
 			};
 		};
 	};
@@ -4895,17 +4895,17 @@ Fragments 12 - 38 were skipped
 
 			vbat_cpu4 {
 				trip = <&b_bcl_lvl0>;
-				cooling-device = <&cpu4_isolate>, <&pm8150_vadc>, <0x1>;
+				cooling-device = <&cpu4_isolate 1 1>;
 			};
 
 			vbat_cpu5 {
 				trip = <&b_bcl_lvl0>;
-				cooling-device = <&cpu5_isolate>, <&pm8150_vadc>, <0x1>;
+				cooling-device = <&cpu5_isolate 1 1>;
 			};
 
 			vbat_gpu0 {
 				trip = <&b_bcl_lvl0>;
-				cooling-device = <&msm_gpu>, <&pm8150_tz>, <&pm8150_tz>;
+				cooling-device = <&msm_gpu 2 2>;
 			};
 		};
 	};
@@ -4916,17 +4916,17 @@ Fragments 12 - 38 were skipped
 
 			vbat_cpu6 {
 				trip = <&b_bcl_lvl1>;
-				cooling-device = <&cpu6_isolate>, <&pm8150_vadc>, <0x1>;
+				cooling-device = <&cpu6_isolate 1 1>;
 			};
 
 			vbat_cpu7 {
 				trip = <&b_bcl_lvl1>;
-				cooling-device = <&cpu7_isolate>, <&pm8150_vadc>, <0x1>;
+				cooling-device = <&cpu7_isolate 1 1>;
 			};
 
 			vbat_gpu1 {
 				trip = <&b_bcl_lvl1>;
-				cooling-device = <&msm_gpu>, <&qnovo_fet_ctrl_state1>, <&qnovo_fet_ctrl_state1>;
+				cooling-device = <&msm_gpu 4 4>;
 			};
 		};
 	};
@@ -4937,7 +4937,7 @@ Fragments 12 - 38 were skipped
 
 			vbat_gpu2 {
 				trip = <&b_bcl_lvl2>;
-				cooling-device = <&msm_gpu>, <0xfffffffe>, <0xfffffffe>;
+				cooling-device = <&msm_gpu THERMAL_MAX_LIMIT THERMAL_MAX_LIMIT>;
 			};
 		};
 	};
@@ -4949,17 +4949,17 @@ Fragments 12 - 38 were skipped
 
 			vph_cpu4 {
 				trip = <&l_bcl_lvl0>;
-				cooling-device = <&cpu4_isolate>, <&pm8150_vadc>, <0x1>;
+				cooling-device = <&cpu4_isolate 1 1>;
 			};
 
 			vph_cpu5 {
 				trip = <&l_bcl_lvl0>;
-				cooling-device = <&cpu5_isolate>, <&pm8150_vadc>, <0x1>;
+				cooling-device = <&cpu5_isolate 1 1>;
 			};
 
 			vph_gpu0 {
 				trip = <&l_bcl_lvl0>;
-				cooling-device = <&msm_gpu>, <&pm8150_tz>, <&pm8150_tz>;
+				cooling-device = <&msm_gpu 2 2>;
 			};
 		};
 	};
@@ -4971,17 +4971,17 @@ Fragments 12 - 38 were skipped
 
 			vph_cpu6 {
 				trip = <&l_bcl_lvl1>;
-				cooling-device = <&cpu6_isolate>, <&pm8150_vadc>, <0x1>;
+				cooling-device = <&cpu6_isolate 1 1>;
 			};
 
 			vph_cpu7 {
 				trip = <&l_bcl_lvl1>;
-				cooling-device = <&cpu7_isolate>, <&pm8150_vadc>, <0x1>;
+				cooling-device = <&cpu7_isolate 1 1>;
 			};
 
 			vph_gpu1 {
 				trip = <&l_bcl_lvl1>;
-				cooling-device = <&msm_gpu>, <&qnovo_fet_ctrl_state1>, <&qnovo_fet_ctrl_state1>;
+				cooling-device = <&msm_gpu 4 4>;
 			};
 		};
 	};
@@ -4993,7 +4993,7 @@ Fragments 12 - 38 were skipped
 
 			vph_gpu2 {
 				trip = <&l_bcl_lvl2>;
-				cooling-device = <&msm_gpu>, <0xfffffffe>, <0xfffffffe>;
+				cooling-device = <&msm_gpu THERMAL_MAX_LIMIT THERMAL_MAX_LIMIT>;
 			};
 		};
 	};
