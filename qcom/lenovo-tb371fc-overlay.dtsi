@@ -7667,10 +7667,10 @@ Fragments 12 - 38 were skipped
 	qcom,vdd-io-voltage-level = <1808000 2960000>;
 	qcom,vdd-io-current-level = <200 22000>;
 	pinctrl-names = "active", "sleep";
-	pinctrl-0 = <&sdc2_clk_on>, <&sdc2_cmd_on>, <&sdc2_data_on>, <&storage_cd>;
-	pinctrl-1 = <&sdc2_clk_off>, <&sdc2_cmd_off>, <&sdc2_data_off>, <&storage_cd>;
-	cd-gpios = <&tlmm>, <&vreg_hap_boost>, <0x00>;
-	pwr-gpios = <&tlmm 0x4b 0x00>;
+	pinctrl-0 = <&sdc2_clk_on &sdc2_cmd_on &sdc2_data_on &storage_cd>;
+	pinctrl-1 = <&sdc2_clk_off &sdc2_cmd_off &sdc2_data_off &storage_cd>;
+	cd-gpios = <&tlmm 14 GPIO_ACTIVE_HIGH>;
+	pwr-gpios = <&tlmm 75 GPIO_ACTIVE_HIGH>;
 	status = "ok";
 };
 
