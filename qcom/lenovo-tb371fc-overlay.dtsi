@@ -4438,7 +4438,7 @@ Fragments 12 - 38 were skipped
 };
 
 &va_cdc_dma_0_tx {
-	qcom,msm-dai-is-island-supported = <0x01>;
+	qcom,msm-dai-is-island-supported = <1>;
 };
 
 &bolero {
