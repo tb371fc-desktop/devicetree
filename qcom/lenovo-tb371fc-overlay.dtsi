@@ -7049,7 +7049,7 @@ Fragments 12 - 38 were skipped
 		#address-cells = <1>;
 		#size-cells = <0>;
 		interrupt-parent = <&spmi_bus>;
-		interrupts = <0x2 0xc5 0x0 0x08>;
+		interrupts = <0x2 0xc5 0x0 IRQ_TYPE_LEVEL_LOW>;
 		interrupt_names = "smb1390";
 		interrupt-controller;
 		#interrupt-cells = <3>;
@@ -7068,15 +7068,29 @@ Fragments 12 - 38 were skipped
 			qcom,pmic-revid = <&smb1390_revid>;
 			interrupt-parent = <&smb1390>;
 			status = "disabled";
-			io-channels = <&pm8150b_vadc 0xe>;
+			io-channels = <&pm8150b_vadc ADC_AMUX_THM2>;
 			io-channel-names = "cp_die_temp";
-			qcom,parallel-output-mode = <0x02>;
-			qcom,min-ilim-ua = <0xb71b0>;
-			qcom,parallel-input-mode = <0x01>;
+			qcom,parallel-output-mode = <2>;
+			qcom,min-ilim-ua = <750000>;
+			qcom,parallel-input-mode = <1>;
 
 			qcom,core {
-				interrupts = <0x10 0x00 0x03 0x10 0x01 0x03 0x10 0x02 0x03 0x10 0x03 0x03 0x10 0x04 0x03 0x10 0x05 0x01 0x10 0x06 0x01 0x10 0x07 0x01>;
-				interrupt-names = "switcher-off-window", "switcher-off-fault", "tsd-fault", "irev-fault", "vph-ov-hard", "vph-ov-soft", "ilim", "temp-alarm";
+				interrupts = <0x10 0x00 IRQ_TYPE_EDGE_BOTH>,
+						 <0x10 0x01 IRQ_TYPE_EDGE_BOTH>,
+						 <0x10 0x02 IRQ_TYPE_EDGE_BOTH>,
+						 <0x10 0x03 IRQ_TYPE_EDGE_BOTH>,
+						 <0x10 0x04 IRQ_TYPE_EDGE_BOTH>,
+						 <0x10 0x05 IRQ_TYPE_EDGE_RISING>,
+						 <0x10 0x06 IRQ_TYPE_EDGE_RISING>,
+						 <0x10 0x07 IRQ_TYPE_EDGE_RISING>;
+				interrupt-names = "switcher-off-window",
+						  "switcher-off-fault",
+						  "tsd-fault",
+						  "irev-fault",
+						  "vph-ov-hard",
+						  "vph-ov-soft",
+						  "ilim",
+						  "temp-alarm";
 			};
 		};
 	};
