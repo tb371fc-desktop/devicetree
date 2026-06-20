@@ -7764,6 +7764,8 @@ Fragments 12 - 38 were skipped
 	};
 };
 
+// Redefinition of `usb2_phy0`.
+// Should it be `usb2_phy1`?
 &usb2_phy0 {
 	qcom,param-override-seq = <0xc7 0x6c 0x03 0x70 0x03 0x74>;
 };
