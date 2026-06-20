@@ -6968,9 +6968,9 @@ Fragments 12 - 38 were skipped
 
 		vol_up {
 			label = "volume_up";
-			gpios = <&pm8150_gpios 0x6 0x1>;
-			linux,input-type = <1>;
-			linux,code = <115>;
+			gpios = <&pm8150_gpios 6 GPIO_ACTIVE_LOW>;
+			linux,input-type = <EV_KEY>;
+			linux,code = <KEY_VOLUMEUP>;
 			gpio-key,wakeup;
 			debounce-interval = <15>;
 			linux,can-disable;
