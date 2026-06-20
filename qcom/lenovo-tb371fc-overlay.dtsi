@@ -2361,7 +2361,7 @@ Fragments 12 - 38 were skipped
 };
 
 &mdss_mdp {
-	connectors = <&sde_dp 0x28 0x29 0x2a &sde_rscc>;
+	connectors = <&sde_dp &sde_wb &sde_dsi &sde_dsi1 &sde_rscc>;
 };
 
 &pm8150a_l2 {
