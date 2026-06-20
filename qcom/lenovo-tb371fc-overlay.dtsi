@@ -6981,9 +6981,9 @@ Fragments 12 - 38 were skipped
 		status = "okay";
 		compatible = "goodix,fingerprint";
 		interrupt-parent = <&tlmm>;
-		interrupts = <0x17 0x00>;
-		fp-gpio-irq = <&tlmm 0x17 0x0>;
-		fp-gpio-reset = <&tlmm 0x55 0x0>;
+		interrupts = <23 IRQ_TYPE_NONE>;
+		fp-gpio-irq = <&tlmm 23 GPIO_ACTIVE_HIGH>;
+		fp-gpio-reset = <&tlmm 85 GPIO_ACTIVE_HIGH>;
 		goodix_vdd-supply = <&pm8150a_l11>;
 	};
 
