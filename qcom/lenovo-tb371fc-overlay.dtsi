@@ -7742,7 +7742,7 @@ Fragments 12 - 38 were skipped
 
 &qupv3_se13_i2c {
 	status = "ok";
-	qcom,i2c-touch-active = <0x0>;
+	qcom,i2c-touch-active = "";
 
 	st_fts@49 {
 		st,x-flip;
