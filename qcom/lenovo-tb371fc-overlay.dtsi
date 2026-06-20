@@ -7751,7 +7751,7 @@ Fragments 12 - 38 were skipped
 };
 
 &kona_snd {
-	qcom,msm-mbhc-usbc-audio-supported = <0x00>;
+	qcom,msm-mbhc-usbc-audio-supported = <0>;
 	qcom,msm-mbhc-hphl-swh = <1>;
 	qcom,msm-mbhc-gnd-swh = <1>;
 };
