@@ -7020,10 +7020,26 @@ Fragments 12 - 38 were skipped
 		compatible = "onnn,redriver";
 		reg = <0x1c>;
 		extcon = <&pm8150b_pdphy>, <&pm8150b_pdphy>;
-		eq = <67372036 100926470>;
-		flat-gain = <50397443 33620226>;
-		output-comp = <50529027 50529027>;
-		loss-match = <16974593 50529027>;
+		eq = /bits/ 8 <
+				/* Parameters for USB */
+				0x4 0x4 0x4 0x4
+				/* Parameters for DP */
+				0x6 0x4 0x4 0x6>;
+		flat-gain = /bits/ 8 <
+				/* Parameters for USB */
+				0x3 0x1 0x1 0x3
+				/* Parameters for DP */
+				0x2 0x1 0x1 0x2>;
+		output-comp = /bits/ 8 <
+				/* Parameters for USB */
+				0x3 0x3 0x3 0x3
+				/* Parameters for DP */
+				0x3 0x3 0x3 0x3>;
+		loss-match = /bits/ 8 <
+				/* Parameters for USB */
+				0x1 0x3 0x3 0x1
+				/* Parameters for DP */
+				0x3 0x3 0x3 0x3>;
 		status = "disabled";
 	};
 
