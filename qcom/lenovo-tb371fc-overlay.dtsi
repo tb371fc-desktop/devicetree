@@ -7680,8 +7680,8 @@ Fragments 12 - 38 were skipped
 		compatible = "qca,qca6390";
 		pinctrl-names = "default";
 		pinctrl-0 = <&bt_en_sleep>;
-		qca,bt-reset-gpio = <&tlmm>, <&pm8150l_tz>, <0x00>;
-		qca,bt-sw-ctrl-gpio = <&tlmm 0x7c 0x00>;
+		qca,bt-reset-gpio = <&tlmm 21 GPIO_ACTIVE_HIGH>;
+		qca,bt-sw-ctrl-gpio = <&tlmm 124 GPIO_ACTIVE_HIGH>;
 		qca,bt-vdd-aon-supply = <&pm8150_s6>;
 		qca,bt-vdd-dig-supply = <&pm8150_s6>;
 		qca,bt-vdd-rfa1-supply = <&pm8150_s5>;
