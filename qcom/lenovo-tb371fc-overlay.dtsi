@@ -6990,10 +6990,10 @@ Fragments 12 - 38 were skipped
 	qcom,qbt_handler {
 		status = "disabled";
 		compatible = "qcom,qbt-handler";
-		qcom,ipc-gpio = <&tlmm>, <&pm8009_gpios>, <0x0>;
+		qcom,ipc-gpio = <&tlmm 23 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&key_home_default>;
-		qcom,finger-detect-gpio = <&pm8150_gpios 0x1 0x0>;
+		qcom,finger-detect-gpio = <&pm8150_gpios 1 GPIO_ACTIVE_HIGH>;
 	};
 };
 
