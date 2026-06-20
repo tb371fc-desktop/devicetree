@@ -5001,7 +5001,7 @@ Fragments 12 - 38 were skipped
 
 &vendor {
 	kona_qrd_batterydata: qcom,battery-data {
-		qcom,batt-id-range-pct = <0x0f>;
+		qcom,batt-id-range-pct = <15>;
 	};
 };
 
