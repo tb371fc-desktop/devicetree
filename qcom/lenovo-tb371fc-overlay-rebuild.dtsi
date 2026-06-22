@@ -1,0 +1,577 @@
+/dts-v1/;
+/plugin/;
+
+#include "kona-hdk.dtsi"
+
+#include "dsi-panel-spinel-boe-nt36532-dsc-3k-video.dtsi"
+#include "dsi-panel-spinel-tianma-nt36532-dsc-3k-video.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. kona HDK";
+	compatible = "qcom,kona-hdk", "qcom,kona", "qcom,hdk";
+	qcom,board-id = <0x1001f 0x01>;
+};
+
+&pm8150b_charger {
+    /delete-property/ qcom,sw-jeita-enable;
+    /delete-property/ qcom,suspend-input-on-debug-batt;
+    /delete-property/ qcom,fcc-stepping-enable;
+
+    device_type = "battery";
+	qcom,thermal-mitigation = <4000000 3900000 3800000 3600000 3200000 2800000 2400000 2000000 1800000 1600000 1400000 1200000 1000000 800000 600000 500000>;
+
+	/delete-property/ qcom,auto-recharge-soc;
+	qcom,auto-recharge-vbat-mv = <4380>;
+
+	io-channels = <&pm8150b_vadc ADC_MID_CHG_DIV6>,
+			 <&pm8150b_vadc ADC_USB_IN_I>,
+			 <&pm8150b_vadc ADC_AMUX_THM3_PU2>,
+			 <&pm8150b_vadc ADC_SBUx>,
+			 <&pm8150b_vadc ADC_VPH_PWR>,
+			 <&pm8150b_vadc ADC_CHG_TEMP>;
+	io-channel-names = "mid_voltage", "usb_in_current", "conn_temp", "sbux_res", "vph_voltage", "chg_temp";
+
+	qcom,pd-thermal-mitigation = <6000000 5450000 5300000 5000000 4600000 4200000 3800000 3400000 3200000 3000000 2800000 2600000 2400000 2400000 2200000 2100000>;
+	qcom,chg-control-gpio = <&pm8150_gpios 10 GPIO_ACTIVE_HIGH>;
+	lenovo,jeita_enable = <1>;
+	qcom,fv-max-uv = <4490000>;
+	qcom,fcc-max-ua = <6000000>;
+	qcom,max-voltage-uv = <4490000>;
+	qcom,fastchg-current-ma = <6000>;
+	qcom,jeita-fcc-ranges = <0 150 3000000>,
+			 <150 450 3000000>,
+			 <450 500 3000000>;
+	qcom,jeita-fv-ranges = <0 500 4450000>;
+	qcom,otg-cl-ua = <1800000>;
+	qcom,hvdcp2-max-icl-ua = <2000000>;
+};
+
+&pm8150b_fg {
+    status = "disabled";
+};
+
+&ibat_lvl1 {
+	temperature = <8000>;
+};
+
+&pm8150l_lcdb {
+	status = "ok";
+};
+
+&pm8150a_amoled {
+	status = "disabled";
+};
+
+&dsi_sharp_4k_dsc_video {
+    /delete-property/ qcom,adjust-timer-wakeup-ms;
+    /delete-property/ qcom,mdss-dsi-panel-hdr-enabled;
+    /delete-property/ qcom,mdss-dsi-panel-hdr-color-primaries;
+    /delete-property/ qcom,mdss-dsi-panel-peak-brightness;
+    /delete-property/ qcom,mdss-dsi-panel-blackness-level;
+
+    qcom,mdss-dsi-panel-name = "nt36532 boe 3k video mode dsi panel";
+	qcom,mdss-dsi-lp11-init;
+	qcom,mdss-dsi-underflow-color = <0xff>;
+	qcom,mdss-dsi-reset-sequence = <1 10>, <0 10>, <1 10>, <0 10>, <1 10>;
+	qcom,mdss-pan-physical-width-dimension = <274>;
+	qcom,mdss-pan-physical-height-dimension = <171>;
+	qcom,mdss-dsi-rx-eot-ignore;
+	qcom,cmd-sync-wait-broadcast;
+	qcom,mdss-dsi-panel-broadcast-mode;
+	qcom,mdss-dsi-pan-enable-dynamic-fps;
+	qcom,mdss-dsi-pan-fps-update = "dfps_immediate_porch_mode_vfp";
+	qcom,dsi-supported-dfps-list = <30 60 120>;
+	qcom,mdss-dsi-panel-count = <2>;
+	qcom,ulps-enabled;
+	qcom,esd-check-enabled;
+	qcom,dsi-ctrl-num = <0 1>;
+	qcom,dsi-phy-num = <0 1>;
+	qcom,mdss-dsi-panel-status-check-mode = "te_signal_check";
+	qcom,panel-supply-entries = <&dsi_panel_pwr_supply_lab_ibb>;
+	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_external";
+	qcom,mdss-dsi-bl-min-level = <1>;
+	qcom,mdss-dsi-bl-max-level = <2047>;
+	qcom,mdss-brightness-max-level = <2047>;
+	qcom,platform-reset-gpio = <&tlmm 69 GPIO_ACTIVE_HIGH>;
+	qcom,platform-te-gpio = <&tlmm 66 GPIO_ACTIVE_HIGH>;
+
+	qcom,mdss-dsi-display-timings {
+
+		timing@0 {
+		    qcom,mdss-dsi-panel-width = <1472>;
+    		qcom,mdss-dsi-panel-height = <1840>;
+    		qcom,mdss-dsi-h-front-porch = <201>;
+    		qcom,mdss-dsi-h-back-porch = <60>;
+    		qcom,mdss-dsi-h-pulse-width = <12>;
+            qcom,mdss-dsi-v-back-porch = <182>;
+			qcom,mdss-dsi-v-front-porch = <26>;
+			qcom,mdss-dsi-v-pulse-width = <2>;
+			qcom,mdss-dsi-panel-framerate = <120>;
+			qcom,mdss-dsi-h-left-border = <0>;
+			qcom,mdss-dsi-h-right-border = <0>;
+			qcom,mdss-dsi-v-top-border = <0>;
+			qcom,mdss-dsi-v-bottom-border = <0>;
+			qcom,mdss-dsi-panel-clockrate = <1130000000>;
+			qcom,mdss-dsi-on-command = [
+			    39 01 00 00 00 00 02 ff 20
+				39 01 00 00 00 00 02 fb 01
+				39 01 00 00 00 00 02 30 00
+				39 01 00 00 00 00 02 ff 10
+				39 01 00 00 00 00 02 fb 01
+				39 01 00 00 00 00 07 3b 03 b8 1a 0a 0a 00
+				39 01 00 00 00 00 02 ff 27
+				39 01 00 00 00 00 02 fb 01
+				39 01 00 00 00 00 02 d0 31
+				39 01 00 00 00 00 02 d1 84
+				39 01 00 00 00 00 02 d2 38
+				39 01 00 00 00 00 02 ff 10
+				39 01 00 00 00 00 02 fb 01
+				39 01 00 00 00 00 02 35 00
+				05 01 00 00 78 00 02 11 00
+				05 01 00 00 64 00 02 29 00
+			];
+			qcom,mdss-dsi-off-command = [
+			    05 01 00 00 00 00 02 28 00
+				05 01 00 00 3c 00 02 10 00
+			];
+			qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
+			qcom,mdss-dsi-off-command-state = "dsi_lp_mode";
+			qcom,mdss-dsc-version = <17>;
+			qcom,mdss-dsc-scr-version = <0>;
+			qcom,mdss-dsc-slice-height = <20>;
+			qcom,mdss-dsc-slice-width = <736>;
+			qcom,mdss-dsi-dispparam-pen-144hz-command = [
+			    39 00 00 00 00 00 02 ff 10
+				39 00 00 00 00 00 02 fb 01
+				39 01 00 00 00 00 02 b3 00
+			];
+			qcom,mdss-dsi-dispparam-pen-120hz-command = [
+			    39 00 00 00 00 00 02 ff 10
+				39 00 00 00 00 00 02 fb 01
+				39 01 00 00 00 00 02 b3 40
+			];
+			qcom,mdss-dsi-dispparam-pen-60hz-command = [
+			    39 00 00 00 00 00 02 ff 10
+				39 00 00 00 00 00 02 fb 01
+				39 01 00 00 00 00 02 b3 40
+			];
+			qcom,mdss-dsi-dispparam-pen-30hz-command = [
+			    39 00 00 00 00 00 02 ff 10
+				39 00 00 00 00 00 02 fb 01
+				39 01 00 00 00 00 02 b3 40
+			];
+			qcom,mdss-dsi-dispparam-pen-144hz-command-state = "dsi_lp_mode";
+			qcom,mdss-dsi-dispparam-pen-120hz-command-state = "dsi_lp_mode";
+			qcom,mdss-dsi-dispparam-pen-60hz-command-state = "dsi_lp_mode";
+			qcom,mdss-dsi-dispparam-pen-30hz-command-state = "dsi_lp_mode";
+			qcom,mdss-dsi-panel-phy-timings = [
+			    00 25 0a 0a 1b 18 0a
+				0a 0a 02 04 00 1f 0f
+			];
+        };
+    };
+};
+
+&dsi_panel_pwr_supply_lab_ibb {
+    qcom,panel-supply-entry@1 {
+        qcom,supply-min-voltage = <5800000>;
+        qcom,supply-max-voltage = <5800000>;
+    };
+
+    qcom,panel-supply-entry@2 {
+        qcom,supply-min-voltage = <5800000>;
+        qcom,supply-max-voltage = <5800000>;
+    };
+};
+
+&display_panel_avdd {
+	gpio = <&tlmm 62 0x00>;
+	/delete-property/ pinctrl-names;
+	/delete-property/ pinctrl-0;
+};
+
+&sde_dsi {
+    lab-supply = <&lcdb_ldo_vreg>;
+	ibb-supply = <&lcdb_ncp_vreg>;
+	/delete-property/ vddio-supply;
+	/delete-property/ vdd-supply;
+	/delete-property/ avdd-supply;
+};
+
+&sde_dsi1 {
+    pinctrl-0 = <&sde_te1_active>;
+	pinctrl-1 = <&sde_te1_suspend>;
+};
+
+&pm8150a_l2 {
+	regulator-min-microvolt = <1100000>;
+	regulator-max-microvolt = <1100000>;
+	qcom,init-voltage = <1100000>;
+	status = "ok";
+};
+
+&pm8150_l13 {
+	regulator-min-microvolt = <2800000>;
+	regulator-max-microvolt = <2800000>;
+	qcom,init-voltage = <2800000>;
+	status = "ok";
+};
+
+&pm8150a_l7 {
+	regulator-min-microvolt = <2800000>;
+	regulator-max-microvolt = <2800000>;
+	qcom,init-voltage = <2800000>;
+	status = "ok";
+};
+
+&soc {
+
+	led_flash_rear: qcom,camera-flash0 {
+		cell-index = <0>;
+		compatible = "qcom,camera-flash";
+		flash-source = <&pm8150l_flash0>;
+		torch-source = <&pm8150l_torch0>;
+		switch-source = <&pm8150l_switch0>;
+		status = "ok";
+	};
+
+	qcom,cam-res-mgr {
+		compatible = "qcom,cam-res-mgr";
+		status = "ok";
+	};
+};
+
+&tlmm {
+
+	cam_sensor_active_rst2: cam_sensor_active_rst2 {
+		mux {
+			pins = "gpio92";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio92";
+			bias-disable;
+			drive-strength = <2>;
+		};
+	};
+
+	cam_sensor_suspend_rst2: cam_sensor_suspend_rst2 {
+		mux {
+			pins = "gpio92";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio92";
+			bias-pull-down;
+			drive-strength = <2>;
+			output-low;
+		};
+	};
+};
+
+&cam_cci0 {
+
+	actuator_rear: qcom,actuator0 {
+		cell-index = <0>;
+		compatible = "qcom,actuator";
+		cci-master = <0>;
+		cam_vaf-supply = <&pm8150a_l7>;
+		regulator-names = "cam_vaf";
+		rgltr-cntrl-support;
+		rgltr-min-voltage = <2800000>;
+		rgltr-max-voltage = <2800000>;
+		rgltr-load-current = <2800000>;
+	};
+
+	eeprom_rear: qcom,eeprom0 {
+		cell-index = <0>;
+		compatible = "qcom,eeprom";
+		cam_vio-supply = <&pm8150a_l5>;
+		cam_vana-supply = <&pm8150_l13>;
+		cam_vdig-supply = <&pm8150a_l3>;
+		cam_clk-supply = <&titan_top_gdsc>;
+		regulator-names = "cam_vio", "cam_vana", "cam_vdig", "cam_clk";
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000 2800000 1200000 0>;
+		rgltr-max-voltage = <1800000 2800000 1200000 0>;
+		rgltr-load-current = <120000 80000 1200000 0>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_active>, <&cam_sensor_active_rear>;
+		pinctrl-1 = <&cam_sensor_mclk0_suspend>, <&cam_sensor_suspend_rear>;
+		gpios = <&tlmm 94 GPIO_ACTIVE_HIGH>, <&tlmm 93 GPIO_ACTIVE_HIGH>;
+		gpio-reset = <1>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags = <1 0>;
+		gpio-req-tbl-label = "CAMIF_MCLK0", "CAM_RESET0";
+		sensor-mode = <0>;
+		cci-master = <0>;
+		status = "ok";
+		clocks = <&clock_camcc>, <&wsa881x_0212>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "turbo";
+		clock-rates = <24000000>;
+	};
+
+	qcom,cam-sensor0 {
+		cell-index = <0>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <0>;
+		sensor-position-roll = <90>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		actuator-src = <&actuator_rear>;
+		led-flash-src = <&led_flash_rear>;
+		eeprom-src = <&eeprom_rear>;
+		cam_vio-supply = <&pm8150a_l5>;
+		cam_vana-supply = <&pm8150_l13>;
+		cam_vdig-supply = <&pm8150a_l3>;
+		cam_clk-supply = <&titan_top_gdsc>;
+		regulator-names = "cam_vio", "cam_vana", "cam_vdig", "cam_clk";
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000 2800000 1200000 0>;
+		rgltr-max-voltage = <1800000 2800000 1200000 0>;
+		rgltr-load-current = <120000 80000 1200000 0>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_active>, <&cam_sensor_active_rear>;
+		pinctrl-1 = <&cam_sensor_mclk0_suspend>, <&cam_sensor_suspend_rear>;
+		gpios = <&tlmm 94 GPIO_ACTIVE_HIGH>, <&tlmm 93 GPIO_ACTIVE_HIGH>;
+		gpio-reset = <1>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags = <1 0>;
+		gpio-req-tbl-label = "CAMIF_MCLK0", "CAM_RESET0";
+		sensor-mode = <0>;
+		cci-master = <0>;
+		status = "ok";
+		clocks = <&clock_camcc>, <&wsa881x_0212>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "turbo";
+		clock-rates = <24000000>;
+	};
+};
+
+&cam_cci1 {
+
+	eeprom_front: qcom,eeprom2 {
+		cell-index = <2>;
+		compatible = "qcom,eeprom";
+		cam_vio-supply = <&pm8150a_l5>;
+		cam_vana-supply = <&pm8150a_l4>;
+		cam_vdig-supply = <&pm8150a_l2>;
+		cam_clk-supply = <&titan_top_gdsc>;
+		regulator-names = "cam_vio", "cam_vana", "cam_vdig", "cam_clk";
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000 2800000 1100000 0>;
+		rgltr-max-voltage = <1800000 2800000 1100000 0>;
+		rgltr-load-current = <120000 80000 1200000 0>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk1_active>, <&cam_sensor_active_rst2>;
+		pinctrl-1 = <&cam_sensor_mclk1_suspend>, <&cam_sensor_suspend_rst2>;
+		gpios = <&tlmm 95 GPIO_ACTIVE_HIGH>, <&tlmm 92 GPIO_ACTIVE_HIGH>;
+		gpio-reset = <1>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags = <1 0>;
+		gpio-req-tbl-label = "CAMIF_MCLK1", "CAM_RESET2";
+		sensor-position = <1>;
+		sensor-mode = <0>;
+		cci-master = <0>;
+		status = "ok";
+		clocks = <&clock_camcc>, <&wsa881x_0214>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "turbo";
+		clock-rates = <24000000>;
+	};
+
+	qcom,cam-sensor2 {
+		cell-index = <2>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <1>;
+		sensor-position-roll = <270>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <0>;
+		eeprom-src = <&eeprom_front>;
+		cam_vio-supply = <&pm8150a_l5>;
+		cam_vana-supply = <&pm8150a_l4>;
+		cam_vdig-supply = <&pm8150a_l2>;
+		cam_clk-supply = <&titan_top_gdsc>;
+		regulator-names = "cam_vio", "cam_vana", "cam_vdig", "cam_clk";
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000 2800000 1100000 0>;
+		rgltr-max-voltage = <1800000 2800000 1100000 0>;
+		rgltr-load-current = <120000 80000 1200000 0>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk1_active>, <&cam_sensor_active_rst2>;
+		pinctrl-1 = <&cam_sensor_mclk1_suspend>, <&cam_sensor_suspend_rst2>;
+		gpios = <&tlmm 95 GPIO_ACTIVE_HIGH>, <&tlmm 92 GPIO_ACTIVE_HIGH>;
+		gpio-reset = <1>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags = <1 0>;
+		gpio-req-tbl-label = "CAMIF_MCLK1", "CAM_RESET2";
+		sensor-mode = <0>;
+		cci-master = <0>;
+		status = "ok";
+		clocks = <&clock_camcc>, <&wsa881x_0214>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "turbo";
+		clock-rates = <24000000>;
+	};
+};
+
+/*
+ * The nodes `soc_cpu4`, `soc_cpu5`, and `soc_cpu6` do not exist in the
+ * original DTB. Because runtime overlays cannot structurally
+ * delete nodes defined by the new base DTS, these nodes are explicitly
+ * disabled here to replicate the original hardware state.
+ */
+
+&thermal_zones {
+	soc {
+		cooling-maps {
+			soc_cpu4 {
+				status = "disabled";
+			};
+			soc_cpu5 {
+				status = "disabled";
+			};
+			soc_cpu6 {
+				status = "disabled";
+			};
+		};
+	};
+};
+
+&kona_qrd_batterydata {
+	/delete-node/ qcom,mlp466274_3650mah_averaged_masterslave_jan21st2019;
+    /delete-node/ qcom,atl466274_3650mah_averaged_masterslave_may14th2019;
+};
+
+&q6core {
+	cdc_pri_tdm_gpios: msm_cdc_pinctrl_pri {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&pri_tdm_clk_active>, <&pri_tdm_sync_active>, <&pri_tdm_din_active>, <&pri_tdm_dout_active>;
+		pinctrl-1 = <&pri_tdm_clk_sleep>, <&pri_tdm_sync_sleep>, <&pri_tdm_din_sleep>, <&pri_tdm_dout_sleep>;
+	};
+};
+
+&kona_snd {
+	qcom,audio-routing =
+		"AMIC1", "MIC BIAS1", "MIC BIAS1", "Analog Mic1",
+		"AMIC2", "MIC BIAS2", "MIC BIAS2", "Analog Mic2",
+		"AMIC5", "MIC BIAS3", "MIC BIAS3", "Analog Mic5",
+		"TX DMIC0", "MIC BIAS3", "MIC BIAS3", "Digital Mic0",
+		"TX DMIC1", "MIC BIAS3", "MIC BIAS3", "Digital Mic1",
+		"TX DMIC2", "MIC BIAS1", "MIC BIAS1", "Digital Mic2",
+		"TX DMIC3", "MIC BIAS1", "MIC BIAS1", "Digital Mic3",
+		"TX DMIC5", "MIC BIAS4", "MIC BIAS4", "Digital Mic5",
+		"IN1_HPHL", "HPHL_OUT",
+		"IN2_HPHR", "HPHR_OUT",
+		"IN3_AUX", "AUX_OUT",
+		"TX SWR_ADC0", "ADC1_OUTPUT",
+		"TX SWR_ADC1", "ADC2_OUTPUT",
+		"TX SWR_ADC2", "ADC3_OUTPUT",
+		"TX SWR_ADC3", "ADC4_OUTPUT",
+		"TX SWR_DMIC0", "DMIC1_OUTPUT",
+		"TX SWR_DMIC1", "DMIC2_OUTPUT",
+		"TX SWR_DMIC2", "DMIC3_OUTPUT",
+		"TX SWR_DMIC3", "DMIC4_OUTPUT",
+		"TX SWR_DMIC4", "DMIC5_OUTPUT",
+		"TX SWR_DMIC5", "DMIC6_OUTPUT",
+		"TX SWR_DMIC6", "DMIC7_OUTPUT",
+		"TX SWR_DMIC7", "DMIC8_OUTPUT",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"SpkrRight IN", "WSA_SPK2 OUT",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA MIC BIAS3", "Digital Mic0",
+		"VA MIC BIAS3", "Digital Mic1",
+		"VA MIC BIAS1", "Digital Mic2",
+		"VA MIC BIAS1", "Digital Mic3",
+		"VA MIC BIAS4", "Digital Mic5",
+		"VA DMIC0", "VA MIC BIAS3",
+		"VA DMIC1", "VA MIC BIAS3",
+		"VA DMIC2", "VA MIC BIAS1",
+		"VA DMIC3", "VA MIC BIAS1",
+		"VA DMIC5", "VA MIC BIAS4",
+		"VA SWR_ADC1", "VA_SWR_CLK",
+		"VA SWR_MIC0", "VA_SWR_CLK",
+		"VA SWR_MIC1", "VA_SWR_CLK",
+		"VA SWR_MIC2", "VA_SWR_CLK",
+		"VA SWR_MIC3", "VA_SWR_CLK",
+		"VA SWR_MIC4", "VA_SWR_CLK",
+		"VA SWR_MIC5", "VA_SWR_CLK",
+		"VA SWR_MIC6", "VA_SWR_CLK",
+		"VA SWR_MIC7", "VA_SWR_CLK",
+		"VA SWR_MIC0", "DMIC1_OUTPUT",
+		"VA SWR_MIC1", "DMIC2_OUTPUT",
+		"VA SWR_MIC2", "DMIC3_OUTPUT",
+		"VA SWR_MIC3", "DMIC4_OUTPUT",
+		"VA SWR_MIC4", "DMIC5_OUTPUT",
+		"VA SWR_MIC5", "DMIC6_OUTPUT",
+		"VA SWR_MIC6", "DMIC7_OUTPUT",
+		"VA SWR_MIC7", "DMIC8_OUTPUT",
+		"VA SWR_ADC1", "ADC2_OUTPUT";
+
+	qcom,tdm-max-slots = <4>;
+	qcom,pri-mi2s-gpios = <&cdc_pri_tdm_gpios>;
+
+	/*
+    * Note: /delete-property/ is not supported inside dynamic DTBO files
+    * processed by the bootloader. To match the original DTB, these properties
+    * are instead overridden with empty values (<> or ""), neutralizing them
+    * so the driver skips them.
+    */
+
+	qcom,wsa-max-devs = <0>;
+	qcom,wsa-devs = <>;
+	qcom,wsa-aux-dev-prefix = "";
+
+	qcom,tert-mi2s-gpios = <>;
+};
+
+&qupv3_se1_i2c {
+    /*
+     * Original DTB property is `#`-prefixed
+     * Is it like a commented out property?
+     *
+     * The driver defaults the value if the property is not found:
+     * ```
+     * 	if (of_property_read_u32(pdev->dev.of_node, "qcom,clk-freq-out",
+	 *			&gi2c->i2c_rsc.clk_freq_out)) {
+	 *      gi2c->i2c_rsc.clk_freq_out = KHz(400);
+	 *	}
+	 * ```
+	 *
+	 * Should it be set here explicit to `<400000>` ?
+	 */
+
+	qcom,clk-freq-out = <400000>;
+
+    nq@28 {
+        status = "disabled";
+    };
+
+	ctn730@28 {
+		compatible = "nxp,ctn730";
+		reg = <0x28>;
+		rst-gpios = <&tlmm 84 GPIO_ACTIVE_HIGH>;
+		enable-gpios = <&tlmm 160 GPIO_ACTIVE_HIGH>;
+		interrupt-gpios = <&tlmm 111 GPIO_ACTIVE_HIGH>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <&l_bcl_lvl1 IRQ_TYPE_NONE>;
+		interrupt-names = "nfc_irq";
+	};
+};
