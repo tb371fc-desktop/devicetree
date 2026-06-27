@@ -5135,9 +5135,9 @@ Fragments 12 - 38 were skipped
 		status = "okay";
 		compatible = "isentek,OCH8801-0";
 		reg = <0x18>;
-		data-range = <0x0>;
-		hall,bias_support = <0x0>;
-		hall,bias-ratio = <0x5a>;
+		data-range = <0>;
+		hall,bias_support = <0>;
+		hall,bias-ratio = <90>;
 		hall,irq-gpio = <&tlmm 0x9e 0x0>;
 	};
 };
