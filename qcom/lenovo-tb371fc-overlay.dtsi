@@ -2477,7 +2477,7 @@ Fragments 12 - 38 were skipped
 		sensor-mode = <0>;
 		cci-master = <0>;
 		status = "ok";
-		clocks = <&clock_camcc>, <&wsa881x_0212>;
+		clocks = <&clock_camcc CAM_CC_MCLK0_CLK>;
 		clock-names = "cam_clk";
 		clock-cntl-level = "turbo";
 		clock-rates = <24000000>;
@@ -2515,7 +2515,7 @@ Fragments 12 - 38 were skipped
 		sensor-mode = <0>;
 		cci-master = <0>;
 		status = "ok";
-		clocks = <&clock_camcc>, <&wsa881x_0212>;
+		clocks = <&clock_camcc CAM_CC_MCLK0_CLK>;
 		clock-names = "cam_clk";
 		clock-cntl-level = "turbo";
 		clock-rates = <24000000>;
@@ -2550,7 +2550,7 @@ Fragments 12 - 38 were skipped
 		sensor-mode = <0>;
 		cci-master = <0>;
 		status = "ok";
-		clocks = <&clock_camcc>, <&wsa881x_0214>;
+		clocks = <&clock_camcc CAM_CC_MCLK1_CLK>;
 		clock-names = "cam_clk";
 		clock-cntl-level = "turbo";
 		clock-rates = <24000000>;
@@ -2586,7 +2586,7 @@ Fragments 12 - 38 were skipped
 		sensor-mode = <0>;
 		cci-master = <0>;
 		status = "ok";
-		clocks = <&clock_camcc>, <&wsa881x_0214>;
+		clocks = <&clock_camcc CAM_CC_MCLK1_CLK>;
 		clock-names = "cam_clk";
 		clock-cntl-level = "turbo";
 		clock-rates = <24000000>;
