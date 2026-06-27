@@ -25,6 +25,10 @@
 #include "dsi-panel-nt36672e-fhd-plus-60hz-video.dtsi"
 #include "dsi-panel-arglass-seeya-dual-1080p-video.dtsi"
 #include "dsi-panel-arglass-seeya-dual-1080p-90hz-video.dtsi"
+
+#include "dsi-panel-spinel-boe-nt36532-dsc-3k-video.dtsi"
+#include "dsi-panel-spinel-tianma-nt36532-dsc-3k-video.dtsi"
+
 #include <dt-bindings/clock/mdss-7nm-pll-clk.h>
 
 &tlmm {
