@@ -7158,7 +7158,7 @@ Fragments 12 - 38 were skipped
 			compatible = "qcom,smb1396-div2-cp-master";
 			qcom,pmic-revid = <&smb1396_revid>;
 			qcom,parallel-input-mode = <1>;
-			qcom,parallel-output-mode = <1>;
+			qcom,parallel-output-mode = <2>;
 			qcom,div2-cp-min-ilim-ua = <750000>;
 			io-channels = <&pm8150b_vadc ADC_AMUX_THM2>;
 			io-channel-names = "die_temp";
