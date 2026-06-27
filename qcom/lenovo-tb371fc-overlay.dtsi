@@ -5138,7 +5138,7 @@ Fragments 12 - 38 were skipped
 		data-range = <0>;
 		hall,bias_support = <0>;
 		hall,bias-ratio = <90>;
-		hall,irq-gpio = <&tlmm 0x9e 0x0>;
+		hall,irq-gpio = <&tlmm 0x9e GPIO_ACTIVE_HIGH>;
 	};
 };
 
@@ -5149,10 +5149,10 @@ Fragments 12 - 38 were skipped
 	mouse@60 {
 		compatible = "hid-over-i2c";
 		reg = <0x60>;
-		mcu_rst_gpio = <&tlmm 0x72 0x00>;
-		mcu_resume_gpio = <&tlmm 0x6c 0x00>;
+		mcu_rst_gpio = <&tlmm 0x72 GPIO_ACTIVE_HIGH>;
+		mcu_resume_gpio = <&tlmm 0x6c GPIO_ACTIVE_HIGH>;
 		interrupt-parent = <&tlmm>;
-		interrupts = <0x6e 0x00>;
+		interrupts = <0x6e IRQ_TYPE_NONE>;
 		interrupt-names = "keyboard_irq";
 		hid-descr-addr = <0x1>;
 		post-power-on-delay-ms = <100>;
