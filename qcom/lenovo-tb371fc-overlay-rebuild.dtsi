@@ -221,7 +221,7 @@
 
 
 /*
- * The nodes `soc_cpu4`, `soc_cpu5`, and `soc_cpu6` do not exist in the
+ * The nodes `soc_cpu4`, `soc_cpu5`, and `soc_cpu6` are absent from the
  * original DTB. Because runtime overlays cannot structurally
  * delete nodes defined by the new base DTS, these nodes are explicitly
  * disabled here to replicate the original hardware state.
@@ -323,7 +323,7 @@
 	qcom,pri-mi2s-gpios = <&cdc_pri_tdm_gpios>;
 
 	/*
-	 * Note: /delete-property/ is not supported inside dynamic DTBO files
+	 * Note: `/delete-property/` is not supported in dynamic DTBOs
 	 * processed by the bootloader. To match the original DTB, these properties
 	 * are instead overridden with empty values (<> or ""), neutralizing them
 	 * so the driver skips them.
@@ -344,18 +344,8 @@
 	status = "ok";
 
 	/*
-	 * Original DTB property is `#`-prefixed, like `#qcom,clk-freq-out`
-	 * Is it an attempt to comment out the property?
-	 *
-	 * The driver defaults the value if the property is not found:
-	 * ```
-	 * 	if (of_property_read_u32(pdev->dev.of_node, "qcom,clk-freq-out",
-	 *			&gi2c->i2c_rsc.clk_freq_out)) {
-	 *      gi2c->i2c_rsc.clk_freq_out = KHz(400);
-	 *	}
-	 * ```
-	 *
-	 * Should it be set here explicit to `<400000>` ?
+	 * The original DTB property is prefixed with `#`, like `#qcom,clk-freq-out`.
+	 * This may indicate an attempt to comment out the property.
 	 */
 
 	#qcom,clk-freq-out = <1000000>;
@@ -426,8 +416,7 @@
 		spi-max-frequency = <9600000>;
 		novatek,reset-gpio = <&tlmm 56 IRQ_TYPE_NONE>;
 		/*
-		 * What is 0x2001?
-		 * In the driver context it is used as following:
+		 * The value `0x2001` is used as follows in the driver context:
 		 * ```
 		 * 	ts->irq_gpio = of_get_named_gpio_flags(np, "novatek,irq-gpio", 0, &ts->irq_flags);
 		 * ```
