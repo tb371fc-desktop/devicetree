@@ -350,6 +350,19 @@
 
 	#qcom,clk-freq-out = <1000000>;
 
+	/* The driver defaults the value if the property is not found:
+	 * ```
+	 * 	if (of_property_read_u32(pdev->dev.of_node, "qcom,clk-freq-out",
+	 *			&gi2c->i2c_rsc.clk_freq_out)) {
+	 *      gi2c->i2c_rsc.clk_freq_out = KHz(400);
+	 *	}
+	 * ```
+	 *
+	 * Redefine it to such value.
+	 */
+
+	qcom,clk-freq-out = <400000>;
+
 	#address-cells = <1>;
 	#size-cells = <0>;
 
