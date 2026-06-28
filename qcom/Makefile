@@ -460,10 +460,6 @@ dtbo-$(CONFIG_ARCH_SDM439) += sdm439-mtp-overlay.dtbo \
         sdm439-external-codec-mtp-overlay.dtbo \
         sdm439-rcm-overlay.dtbo
 
-dtbo-$(CONFIG_ARCH_SDM429) += sdm429-mtp-overlay.dtbo \
-	sdm429-cdp-overlay.dtbo \
-	sdm429-qrd-overlay.dtbo
-
 dtbo-$(CONFIG_ARCH_QM215) +=qm215-qrd-overlay.dtbo \
 	qcm2150-qrd-overlay.dtbo \
 	qm215-qrd-smb1360-overlay.dtbo
@@ -508,12 +504,6 @@ dtb-$(CONFIG_ARCH_SDM439) += sdm439-mtp.dtb \
 dtb-$(CONFIG_ARCH_QM215) += qm215-qrd.dtb \
 	qcm2150-qrd.dtb \
 	qm215-qrd-smb1360.dtb
-
-dtb-$(CONFIG_ARCH_SDM429) += sdm429-mtp.dtb \
-	sdm429-cdp.dtb \
-	sdm429-qrd.dtb \
-	sda429-mtp.dtb \
-	sda429-cdp.dtb
 endif
 
 always		:= $(dtb-y)
