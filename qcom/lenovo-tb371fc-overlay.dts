@@ -1,6 +1,8 @@
 /dts-v1/;
 /plugin/;
 
+#include <dt-bindings/clock/qcom,camcc-kona.h>
+
 #include "kona-qrd.dtsi"
 
 / {
