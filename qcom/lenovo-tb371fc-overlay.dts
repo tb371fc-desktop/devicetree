@@ -214,9 +214,9 @@
 	pinctrl-0 = <&sde_te_active &sde_bl_active>;
 	pinctrl-1 = <&sde_te_suspend &sde_bl_suspend>;
 
-	qcom,dsi-default-panel = <&mdss_dsi_panel_spinel_boe_nt36532_dsc_3k_video>,
-				 <&mdss_dsi_panel_spinel_tianma_nt36532_dsc_3k_video>,
-				 <&mdss_dsi_sharp_4k_dsc_video>;
+	qcom,dsi-default-panel = <&dsi_panel_spinel_boe_nt36532_dsc_3k_video>,
+				 <&dsi_panel_spinel_tianma_nt36532_dsc_3k_video>,
+				 <&dsi_sharp_4k_dsc_video>;
 };
 
 &sde_dsi1 {
