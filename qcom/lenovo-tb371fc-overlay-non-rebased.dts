@@ -12,6 +12,7 @@
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/sound/audio-codec-port-types.h>
 #include <dt-bindings/thermal/thermal.h>
+#include <dt-bindings/clock/qcom,camcc-kona.h>
 
 / {
 	model = "Qualcomm Technologies, Inc. kona QRD";
