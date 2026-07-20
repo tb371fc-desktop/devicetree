@@ -211,8 +211,8 @@
 				"shadow_cphybyte_clk1", "shadow_cphypixel_clk1";
 
 		pinctrl-names = "panel_active", "panel_suspend";
-		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
-		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
+		pinctrl-0 = <&sde_te_active>;  /* dropped `sde_dsi_active` (not defined in `kona-pinctrl.dtsi`) */
+		pinctrl-1 = <&sde_te_suspend>;  /* dropped `sde_dsi_suspend` (not defined in `kona-pinctrl.dtsi`) */
 
 		qcom,platform-te-gpio = <&tlmm 66 0>;
 		qcom,panel-te-source = <0>;
@@ -248,8 +248,8 @@
 			      "cphy_byte_clk1", "cphy_pixel_clk1";
 
 		pinctrl-names = "panel_active", "panel_suspend";
-		pinctrl-0 = <&sde_dsi1_active &sde_te1_active>;
-		pinctrl-1 = <&sde_dsi1_suspend &sde_te1_suspend>;
+		pinctrl-0 = <&sde_te1_active>;  /* dropped `sde_dsi1_active` (not defined in `kona-pinctrl.dtsi`) */
+		pinctrl-1 = <&sde_te1_suspend>; /* dropped `sde_dsi1_suspend` (not defined in `kona-pinctrl.dtsi`) */
 
 		qcom,platform-te-gpio = <&tlmm 67 0>;
 		qcom,panel-te-source = <1>;
