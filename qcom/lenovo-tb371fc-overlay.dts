@@ -19,7 +19,8 @@
 				   1800000 1600000 1400000 1200000 1000000
 				   800000 600000 500000>;
 
-	/delete-property/ qcom,auto-recharge-soc;
+	/* Deleted directly in `kona-qrd.dtsi` */
+	// /delete-property/ qcom,auto-recharge-soc;
 	qcom,auto-recharge-vbat-mv = <4380>;
 
 	io-channels = <&pm8150b_vadc ADC_MID_CHG_DIV6>,
@@ -36,9 +37,10 @@
 			   "vph_voltage",
 			   "chg_temp";
 
-	/delete-property/ qcom,sw-jeita-enable;
-	/delete-property/ qcom,suspend-input-on-debug-batt;
-	/delete-property/ qcom,fcc-stepping-enable;
+	/* Deleted directly in `kona-qrd.dtsi` */
+	// /delete-property/ qcom,sw-jeita-enable;
+	// /delete-property/ qcom,suspend-input-on-debug-batt;
+	// /delete-property/ qcom,fcc-stepping-enable;
 
 	qcom,pd-thermal-mitigation = <6000000
 				      5450000 5300000 5000000
@@ -84,11 +86,12 @@
 };
 
 &dsi_sharp_4k_dsc_video {
-	/delete-property/ qcom,adjust-timer-wakeup-ms;
-	/delete-property/ qcom,mdss-dsi-panel-hdr-enabled;
-	/delete-property/ qcom,mdss-dsi-panel-hdr-color-primaries;
-	/delete-property/ qcom,mdss-dsi-panel-peak-brightness;
-	/delete-property/ qcom,mdss-dsi-panel-blackness-level;
+    /* Deleted directly in `dsi-panel-sharp-dsc-4k-video.dtsi` */
+	// /delete-property/ qcom,adjust-timer-wakeup-ms;
+	// /delete-property/ qcom,mdss-dsi-panel-hdr-enabled;
+	// /delete-property/ qcom,mdss-dsi-panel-hdr-color-primaries;
+	// /delete-property/ qcom,mdss-dsi-panel-peak-brightness;
+	// /delete-property/ qcom,mdss-dsi-panel-blackness-level;
 
 	qcom,mdss-dsi-panel-name = "nt36532 boe 3k video mode dsi panel";
 	qcom,mdss-dsi-lp11-init;
@@ -206,19 +209,22 @@
 
 &display_panel_avdd {
 	gpio = <&tlmm 62 0x00>;
-	/delete-property/ pinctrl-names;
-	/delete-property/ pinctrl-0;
+	/* Deleted directly in `kona-sde-display.dtsi` */
+	// /delete-property/ pinctrl-names;
+	// /delete-property/ pinctrl-0;
 };
 
 &sde_dsi {
 	lab-supply = <&lcdb_ldo_vreg>;
 	ibb-supply = <&lcdb_ncp_vreg>;
-	/delete-property/ vddio-supply;
-	/delete-property/ vdd-supply;
-	/delete-property/ avdd-supply;
 
-	pinctrl-0 = <&sde_te_active &sde_bl_active>;
-	pinctrl-1 = <&sde_te_suspend &sde_bl_suspend>;
+	/* Deleted directly in `kona-sde-display.dtsi` */
+	// /delete-property/ vddio-supply;
+	// /delete-property/ vdd-supply;
+	// /delete-property/ avdd-supply;
+
+	pinctrl-0 = <&sde_te_active &sde_bl_active>; //
+	pinctrl-1 = <&sde_te_suspend &sde_bl_suspend>; //
 
 	qcom,dsi-default-panel = <&dsi_panel_spinel_boe_nt36532_dsc_3k_video>,
 				 <&dsi_panel_spinel_tianma_nt36532_dsc_3k_video>,
@@ -226,8 +232,18 @@
 };
 
 &sde_dsi1 {
-	pinctrl-0 = <&sde_te1_active>;
-	pinctrl-1 = <&sde_te1_suspend>;
+    /*
+     * Note: Originally, the property lists contains
+     * `sde_dsi1_active` in `pinctrl-0`, and
+     * `sde_dsi1_suspend` in `pinctrl-1`,
+     * that may leak in final bundled
+     * overlay even if overriden here.
+     *
+     * So, the properties are modified
+     * directly in `kona-sde-display.dtsi`
+     */
+	// pinctrl-0 = <&sde_te1_active>;
+	// pinctrl-1 = <&sde_te1_suspend>;
 };
 
 &pm8150a_l2 {
@@ -276,8 +292,9 @@
 };
 
 &kona_qrd_batterydata {
-	/delete-node/ qcom,mlp466274_3650mah_averaged_masterslave_jan21st2019;
-	/delete-node/ qcom,atl466274_3650mah_averaged_masterslave_may14th2019;
+    /* Deleted directly in `kona-qrd.dtsi` */
+	// /delete-node/ qcom,mlp466274_3650mah_averaged_masterslave_jan21st2019;
+	// /delete-node/ qcom,atl466274_3650mah_averaged_masterslave_may14th2019;
 };
 
 &q6core {
@@ -350,21 +367,14 @@
 			     "VA SWR_MIC7", "DMIC8_OUTPUT",
 			     "VA SWR_ADC1", "ADC2_OUTPUT";
 
+	qcom,wsa-max-devs = <0>;
 	qcom,tdm-max-slots = <4>;
 	qcom,pri-mi2s-gpios = <&cdc_pri_tdm_gpios>;
 
-	/*
-	 * Note: `/delete-property/` is not supported in dynamic DTBOs
-	 * processed by the bootloader. To match the original DTB, these properties
-	 * are instead overridden with empty values (<> or ""), neutralizing them
-	 * so the driver skips them.
-	 */
-
-	qcom,wsa-max-devs = <0>;
-	qcom,wsa-devs = <>;
-	qcom,wsa-aux-dev-prefix = "";
-
-	qcom,tert-mi2s-gpios = <>;
+	/* Deleted directly in `kona-qrd.dtsi` */
+	// /delete-property/ qcom,wsa-devs;
+	// /delete-property/ qcom,wsa-aux-dev-prefix;
+	// /delete-property/ qcom,tert-mi2s-gpios;
 };
 
 &cdc_dmic45_gpios {
@@ -397,9 +407,10 @@
 	#address-cells = <1>;
 	#size-cells = <0>;
 
-	nq@28 {
-		status = "disabled";
-	};
+	/* Deleted directly in `kona-qrd.dtsi` */
+	// nq@28 {
+	// 	status = "disabled";
+	// };
 
 	ctn730@28 {
 		compatible = "nxp,ctn730";
@@ -484,6 +495,10 @@
 		fp-gpio-irq = <&tlmm 23 GPIO_ACTIVE_HIGH>;
 		fp-gpio-reset = <&tlmm 85 GPIO_ACTIVE_HIGH>;
 		goodix_vdd-supply = <&pm8150a_l11>;
+	};
+
+	qcom,qbt_handler {
+	    status = "disabled";
 	};
 };
 
@@ -618,9 +633,10 @@
 	 * then redefine with the `camera-flash-temp` name.
 	 */
 
-	mmw-pa1-usr {
-		status = "disabled";
-	};
+	/* Deleted directly in `kona-qrd.dtsi` */
+	// mmw-pa1-usr {
+	// 	status = "disabled";
+	// };
 
 	camera-flash-temp {
 		polling-delay-passive = <0>;

@@ -167,8 +167,9 @@
 		gpio = <&tlmm 61 0>;
 		enable-active-high;
 		regulator-boot-on;
-		pinctrl-names = "default";
-		pinctrl-0 = <&display_panel_avdd_default>;
+		/* Deleted for tb371fc */
+		// pinctrl-names = "default";
+		// pinctrl-0 = <&display_panel_avdd_default>;
 	};
 
 	sde_dsi: qcom,dsi-display-primary {
@@ -217,9 +218,10 @@
 		qcom,platform-te-gpio = <&tlmm 66 0>;
 		qcom,panel-te-source = <0>;
 
-		vddio-supply = <&pm8150_l14>;
-		vdd-supply = <&pm8150a_l11>;
-		avdd-supply = <&display_panel_avdd>;
+		/* Deleted for tb371fc */
+		// vddio-supply = <&pm8150_l14>;
+		// vdd-supply = <&pm8150a_l11>;
+		// avdd-supply = <&display_panel_avdd>;
 		lab-supply = <&ab_vreg>;
 		ibb-supply = <&ibb_vreg>;
 
@@ -248,6 +250,7 @@
 			      "cphy_byte_clk1", "cphy_pixel_clk1";
 
 		pinctrl-names = "panel_active", "panel_suspend";
+		// Modified for tb371fc
 		pinctrl-0 = <&sde_te1_active>;  /* dropped `sde_dsi1_active` (not defined in `kona-pinctrl.dtsi`) */
 		pinctrl-1 = <&sde_te1_suspend>; /* dropped `sde_dsi1_suspend` (not defined in `kona-pinctrl.dtsi`) */
 

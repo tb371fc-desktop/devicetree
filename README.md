@@ -41,6 +41,26 @@ Key modifications include:
   - `sde_dsi_suspend`
   - `sde_dsi1_active`
   - `sde_dsi1_suspend`
+- Removing properties from `&dsi_sharp_4k_dsc_video` in `dsi-panel-sharp-dsc-4k-video.dtsi`:
+    - `qcom,adjust-timer-wakeup-ms`
+    - `qcom,mdss-dsi-panel-hdr-enabled`
+    - `qcom,mdss-dsi-panel-hdr-color-primaries`
+    - `qcom,mdss-dsi-panel-peak-brightness`
+    - `qcom,mdss-dsi-panel-blackness-level`
+- Removing properties from `&sde_dsi` in `kona-sde-display.dtsi`:
+    - `vddio-supply`
+    - `vdd-supply`
+    - `avdd-supply`
+- Modifying properties in `&sde_dsi1` in `kona-sde-display.dtsi`:
+    - `pinctrl-0`: Removed `&sde_dsi1_active`
+    - `pinctrl-1`: Removed `&sde_dsi1_suspend`
+- Removing properties from `&kona_snd` in `kona-qrd.dtsi`:
+    - `qcom,wsa-devs`
+    - `qcom,wsa-aux-dev-prefix`
+    - `qcom,tert-mi2s-gpios`
+- Removing subnodes from `kona-qrd.dtsi`:
+    - `nq@28` from `&qupv3_se1_i2c`
+    - `mmw-pa1-usr` from `&thermal_zones`
 
 ## Methodology
 

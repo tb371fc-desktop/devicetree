@@ -94,8 +94,44 @@
 };
 
 &tlmm {
-	/delete-node/ pmx_sde;
-		
+    /*
+     * Note:
+     *
+     * The original tb371fc base DTB does not contain `pmx_sde` node.
+     *
+     * To keep the inherited `kona-pinctrl.dtsi` untouched,
+     * the DTS could use `/delete-node/ pmx_sde;`,
+     * but this directive does not apply at runtime during DTBO merging.
+     *
+     * The overlay may inherit `kona-sde-display.dtsi`,
+     * containing the following default assignments:
+     *
+     *   pinctrl-0 = <&sde_dsi_active &sde_te_active>;
+     *   pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
+     *
+     * ...where `sde_dsi_active` and `sde_dsi_suspend` are defined in `pmx_sde`.
+     *
+     * Later files or fragments may override these assignments, e.g.:
+     *
+     *   pinctrl-0 = <&sde_te_active &sde_bl_active>;
+     *   pinctrl-1 = <&sde_te_suspend &sde_bl_suspend>;
+     *
+     * ...which no longer use `sde_dsi_active` and `sde_dsi_suspend`.
+     *
+     * However, because DTC evaluates all referenced labels when generating
+     * the overlay binary, the unused `sde_dsi_*` labels are still compiled
+     * into the `__fixups__` table.
+     *
+     * As a result, the compiled DTBO contains dangling phandle references
+     * to labels missing from the base DTB, causing the bootloader's overlay
+     * engine to fail during boot.
+     *
+     * So, instead of deleting the node here,
+     * the whole node is commented out from `kona-pinctrl.dtsi`
+     */
+
+	// /delete-node/ pmx_sde;
+
 	pmx_sde_bl {
 		sde_bl_active: sde_bl_active {
 			config {
