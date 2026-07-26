@@ -25,3 +25,8 @@
 		};
 	};
 };
+
+// `ioremap` fails at `simplefb_probe` without it
+&cont_splash_memory {
+	no-map;
+};
