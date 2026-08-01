@@ -58,9 +58,24 @@ Key modifications include:
     - `qcom,wsa-devs`
     - `qcom,wsa-aux-dev-prefix`
     - `qcom,tert-mi2s-gpios`
+- Removing properties from `&display_panel_avdd` in `kona-sde-display.dtsi`:
+    - `pinctrl-names`
+    - `pinctrl-0`
 - Removing subnodes from `kona-qrd.dtsi`:
     - `nq@28` from `&qupv3_se1_i2c`
     - `mmw-pa1-usr` from `&thermal_zones`
+- Moved from `kona-pmic-overlay.dtsi` into `pm8150b.dtsi`:
+  - under `pm8150b_qnovo`:
+    - `pinctrl-names`
+    - `pinctrl-0`
+    - `pinctrl-1`
+  - under `pm8150b_gpios`:
+    - `qnovo_fet_ctrl`
+    - `smb_stat` 
+  - under `pm8150b_pdphy`:
+    - `vdd-pdphy-supply`
+    - `vbus-supply`
+    - `vconn-supply`
 
 ## Methodology
 

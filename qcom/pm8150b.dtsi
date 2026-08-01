@@ -54,6 +54,15 @@
 			reg = <0xb000 0x100>;
 			interrupts = <0x2 0xb0 1 IRQ_TYPE_EDGE_RISING>;
 			interrupt-names = "ptrain-done";
+
+			/*
+			 * Moved from `kona-pmic-overlay.dtsi`
+			 * to keep original structure
+			 * and help boottloader merge overlay correctly
+			 */
+			pinctrl-names = "q_state1", "q_state2";
+			pinctrl-0 = <&qnovo_fet_ctrl_state1>;
+			pinctrl-1 = <&qnovo_fet_ctrl_state2>;
 		};
 
 		pm8150b_gpios: pinctrl@c000 {
@@ -76,6 +85,48 @@
 			gpio-controller;
 			#gpio-cells = <2>;
 			qcom,gpios-disallowed = <3 4 11>;
+
+			/*
+			 * Moved from `kona-pmic-overlay.dtsi`
+			 * to keep original structure
+			 * and help bootloader merge overlay correctly
+			 */
+			qnovo_fet_ctrl {
+				qnovo_fet_ctrl_state1: qnovo_fet_ctrl_state1 {
+					pins = "gpio8";
+					function = "normal";
+					input-enable;
+					output-disable;
+					bias-disable;
+					power-source = <0>;
+				};
+
+				qnovo_fet_ctrl_state2: qnovo_fet_ctrl_state2 {
+					pins = "gpio8";
+					function = "normal";
+					input-enable;
+					output-disable;
+					bias-pull-down;
+					power-source = <0>;
+				};
+			};
+
+
+			/*
+			 * Moved from `kona-pmic-overlay.dtsi`
+			 * to keep original structure
+			 * and help bootloader merge overlay correctly
+			 */
+			smb_stat {
+				smb_stat_default: smb_stat_default {
+					  pins = "gpio6";
+					  function = "normal";
+					  input-enable;
+					  bias-pull-up;
+					  qcom,pull-up-strength = <PMIC_GPIO_PULL_UP_30>;
+					  power-source = <0>;
+				  };
+			};
 		};
 
 		pm8150b_charger: qcom,qpnp-smb5 {
@@ -263,6 +314,15 @@
 			qcom,default-sink-caps = <5000 3000>, /* 5V @ 3A */
 						 <9000 3000>, /* 9V @ 3A */
 						 <12000 2250>; /* 12V @ 2.25A */
+
+			/*
+			 * Moved from `kona-pmic-overlay.dtsi`
+			 * to keep original structure
+			 * and help bootloader merge overlay correctly
+			 */
+			vdd-pdphy-supply = <&pm8150_l2>;
+			vbus-supply = <&smb5_vbus>;
+			vconn-supply = <&smb5_vconn>;
 		};
 
 		pm8150b_bcl: bcl@1d00 {

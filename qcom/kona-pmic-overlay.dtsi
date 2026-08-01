@@ -107,42 +107,50 @@
 };
 
 &pm8150b_gpios {
-	qnovo_fet_ctrl {
-		qnovo_fet_ctrl_state1: qnovo_fet_ctrl_state1 {
-			pins = "gpio8";
-			function = "normal";
-			input-enable;
-			output-disable;
-			bias-disable;
-			power-source = <0>;
-		};
+    /*
+     * Moved directly to `pm8150b.dtsi` to keep original structure
+     * and help bootlaoder merge overlay correctly
+     */
+	// qnovo_fet_ctrl {
+	// 	qnovo_fet_ctrl_state1: qnovo_fet_ctrl_state1 {
+	// 		pins = "gpio8";
+	// 		function = "normal";
+	// 		input-enable;
+	// 		output-disable;
+	// 		bias-disable;
+	// 		power-source = <0>;
+	// 	};
 
-		qnovo_fet_ctrl_state2: qnovo_fet_ctrl_state2 {
-			pins = "gpio8";
-			function = "normal";
-			input-enable;
-			output-disable;
-			bias-pull-down;
-			power-source = <0>;
-		};
-	};
+	// 	qnovo_fet_ctrl_state2: qnovo_fet_ctrl_state2 {
+	// 		pins = "gpio8";
+	// 		function = "normal";
+	// 		input-enable;
+	// 		output-disable;
+	// 		bias-pull-down;
+	// 		power-source = <0>;
+	// 	};
+	// };
 
-	smb_stat {
-		smb_stat_default: smb_stat_default {
-			  pins = "gpio6";
-			  function = "normal";
-			  input-enable;
-			  bias-pull-up;
-			  qcom,pull-up-strength = <PMIC_GPIO_PULL_UP_30>;
-			  power-source = <0>;
-		  };
-	};
+	// smb_stat {
+	// 	smb_stat_default: smb_stat_default {
+	// 		  pins = "gpio6";
+	// 		  function = "normal";
+	// 		  input-enable;
+	// 		  bias-pull-up;
+	// 		  qcom,pull-up-strength = <PMIC_GPIO_PULL_UP_30>;
+	// 		  power-source = <0>;
+	// 	  };
+	// };
 };
 
 &pm8150b_qnovo {
-	pinctrl-names = "q_state1", "q_state2";
-	pinctrl-0 = <&qnovo_fet_ctrl_state1>;
-	pinctrl-1 = <&qnovo_fet_ctrl_state2>;
+    /*
+    * Moved directly to `pm8150b.dtsi` to keep original structure
+    * and help bootlaoder merge overlay correctly
+    */
+	// pinctrl-names = "q_state1", "q_state2";
+	// pinctrl-0 = <&qnovo_fet_ctrl_state1>;
+	// pinctrl-1 = <&qnovo_fet_ctrl_state2>;
 };
 
 &pm8150b_fg {
@@ -162,9 +170,13 @@
 };
 
 &pm8150b_pdphy {
-	vdd-pdphy-supply = <&pm8150_l2>;
-	vbus-supply = <&smb5_vbus>;
-	vconn-supply = <&smb5_vconn>;
+    /*
+    * Moved directly to `pm8150b.dtsi` to keep original structure
+    * and help bootlaoder merge overlay correctly
+    */
+	// vdd-pdphy-supply = <&pm8150_l2>;
+	// vbus-supply = <&smb5_vbus>;
+	// vconn-supply = <&smb5_vconn>;
 };
 
 &pm8150b_gpios {
