@@ -76,6 +76,12 @@ Key modifications include:
     - `vdd-pdphy-supply`
     - `vbus-supply`
     - `vconn-supply`
+- Moved from `kona-qrd.dtsi` into `pm8150l.dtsi`:
+  - under `pm8150l_vadc`:
+    - `vph_pwr@83`
+		- `camera_flash_therm@4d`
+		- `skin_msm_therm@4e`
+		- `pa_therm2@4f`
 
 ## Methodology
 
